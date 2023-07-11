@@ -57,11 +57,16 @@ export const App = () => {
       if (exp > date) {
         auth(jwt);
       } else {
-        refreshToken(refresh);
-        const newJwt = localStorage.getItem("jwt");
-        if (newJwt) {
-          auth(newJwt);
-        }
+        refreshToken(refresh)
+          .then(() => {
+            const newJwt = localStorage.getItem("jwt");
+            if (newJwt) {
+              auth(newJwt);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
       }
     }
   }, [loggedIn]);
@@ -69,9 +74,8 @@ export const App = () => {
   async function refreshToken (token: string) {
     try {
       const response = await ApiAuth.refreshToken(token);
-      if(response.data.access && response.data.refresh) {
+      if(response.data.access) {
         localStorage.setItem("jwt", response.data.access);
-        localStorage.setItem("refresh", response.data.refresh);
       }
     } catch (err: any) {
       console.log(err);
@@ -260,7 +264,7 @@ export const App = () => {
       getAllUserConditions()
     }
   }, [loggedIn]);
-    
+
   async function handleEmployees() {
     try {
       if (role === "hr" || role === "chief") {
@@ -283,7 +287,7 @@ export const App = () => {
       )
     );
   }
-  
+
   //запрос мероприятий для вкладки мероприятия
   async function fetchEvents() {
     try {
