@@ -40,7 +40,7 @@ export const AboutSection = ({
         <div className={styles.about}>
           <h3 className={styles.contentAboutTitle}>Обо мне</h3>
           <textarea
-            className={styles.aboutTextarea}
+            className={!aboutError ? styles.aboutTextarea : `${styles.aboutTextarea} ${styles.aboutTextareaError}`}
             value={about}
             name={about}
             onChange={(e) => aboutHandler(e)}
