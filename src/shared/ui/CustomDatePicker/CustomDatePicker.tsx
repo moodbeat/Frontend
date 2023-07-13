@@ -11,9 +11,10 @@ registerLocale('ru', ru);
 interface Props {
   selectedDate: Date | null;
   handleDateChange: (date: Date | null) => void;
+  isMaxDateToday: boolean;
 }
 
-export const MeetingDatePicker = ({ selectedDate, handleDateChange }: Props): ReactElement => {
+export const MeetingDatePicker = ({ selectedDate, handleDateChange, isMaxDateToday }: Props): ReactElement => {
   const [isCalendarOpen, setCalendarOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -54,6 +55,8 @@ export const MeetingDatePicker = ({ selectedDate, handleDateChange }: Props): Re
     </div>
   );
 
+  const currentDate = new Date();
+
   return (
     <DatePicker
       placeholderText="__.__.____"
@@ -77,6 +80,8 @@ export const MeetingDatePicker = ({ selectedDate, handleDateChange }: Props): Re
       )}
       dayClassName={dayClassName}
       calendarClassName="custom-datepicker"
+      maxDate={isMaxDateToday ? currentDate : null}
+      minDate={!isMaxDateToday ? currentDate : null}
     />
   );
 };
