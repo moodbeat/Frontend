@@ -14,7 +14,7 @@ interface Props {
   isMaxDateToday: boolean;
 }
 
-export const MeetingDatePicker = ({ selectedDate, handleDateChange, isMaxDateToday }: Props): ReactElement => {
+export const CustomDatePicker = ({ selectedDate, handleDateChange, isMaxDateToday }: Props): ReactElement => {
   const [isCalendarOpen, setCalendarOpen] = useState<boolean>(false);
 
   useEffect(() => {

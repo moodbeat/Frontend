@@ -1,5 +1,5 @@
 import styles from './addmeetingform.module.scss';
-import {MeetingDatePicker} from "@/shared/ui/MeetingDatePicker/MeetingDatePicker";
+import {CustomDatePicker} from "@/shared/ui/CustomDatePicker/CustomDatePicker.tsx";
 import {CloseButton} from "@/shared/ui/CloseButton/CloseButton";
 import {ChangeEvent, ReactElement, useEffect, useRef, useState} from "react";
 import {MoodDropdown} from "@/pages/profile/components/MoodDropdown/MoodDropdown";
@@ -108,7 +108,7 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
       <div className={styles.inputArea}>
         <div className={styles.inputItem}>
           <label className={styles.formLabel}>Дата встречи</label>
-          <MeetingDatePicker selectedDate={selectedDate} handleDateChange={handleDateChange} isMaxDateToday={true}/>
+          <CustomDatePicker selectedDate={selectedDate} handleDateChange={handleDateChange} isMaxDateToday={true}/>
         </div>
         <div className={styles.inputItem}>
           <p className={styles.formLabel}>Оценка состояния</p>
