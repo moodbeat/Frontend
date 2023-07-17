@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./searchUseful.module.scss";
+import {useAppSelector} from "@/store/hooks.ts";
 
 interface Props {
   onSearch: any;
@@ -7,6 +8,10 @@ interface Props {
 
 const SearchUseful: React.FC<Props> = ({onSearch}) => {
   const [inputValue, setInputValue] = useState('');
+
+  const role = useAppSelector(
+    (state) => state.currentUserSlice.currentUser.role
+  );
 
   useEffect(() => {
     onSearch(inputValue);
@@ -20,7 +25,7 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
 
   return (
     <div>
-      <form className=""
+      <form className={styles.container}
         // onSubmit={handleSubmitSearch}
             noValidate>
         <input
@@ -30,7 +35,12 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        {/*<span className="search__error">{searchError.errorMessage}</span>*/}
+        {(role === "hr" || role === "chief") &&
+          <button
+            className={styles.button}
+            // onClick={}
+          >+ Добавить</button>
+        }
 
       </form>
     </div>
