@@ -3,11 +3,12 @@ import {Navbar} from "@/components/Navbar/Navbar";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import SearchUseful from "@/components/SearchUseful/SearchUseful";
 import TagsList from "@/components/TagsList/TagsList";
-import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
 import {useEffect, useState} from "react";
 import {Card, Category} from "@/types";
 import axios from 'axios';
+import UsefulCardList from "@/components/UsefulCardList/UsefulCardList.tsx";
+import Loading from "@/components/Loading/Loading.tsx";
 
 export const Useful = () => {
   const [entries, setEntries] = useState<Card[]>([]);
@@ -16,12 +17,13 @@ export const Useful = () => {
   const [chosenCardList, setChosenCardList] = useState(entries);
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState('');
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const isOnline = useOnlineCheck();
 
   useEffect(() => {
     fetchData().then(r => r);
+
   }, []);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export const Useful = () => {
       const headers = {Authorization: `Bearer ${token}`};
       const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
       setEntries(response.data.results);
-      // setIsLoading(true);
+      setIsLoading(false);
       // console.log(response.data.results)
       // console.log(chosenCardList)
 
@@ -54,6 +56,7 @@ export const Useful = () => {
 
 
   const fetchCategories = async () => {
+    // setIsLoading(true);
     try {
       const token = localStorage.getItem("jwt"); // Замените на ваш реальный JWT Bearer Token
 
@@ -64,6 +67,7 @@ export const Useful = () => {
       });
       // console.log(response.data)
       setCategories(response.data);
+      // setIsLoading(false);
     } catch (error) {
       console.error('Ошибка при загрузке категорий:', error);
     }
@@ -83,6 +87,7 @@ export const Useful = () => {
     // console.log(entries)
     setTempCards(entries)
     setTempCheckedCards(entries)
+
   }, [entries])
 
 
@@ -111,7 +116,6 @@ export const Useful = () => {
       )
     );
     setChosenCardList(ret);
-    // setIsLoading(false);
   }
 
   function handleCheckedList(tags: string[]) {
@@ -139,13 +143,14 @@ export const Useful = () => {
           <div className={styles.useful}>
             <h2 className={styles.title}>Полезные статьи и видео</h2>
             <SearchUseful onSearch={handleSearchCards}/>
-            <TagsList tags={categories}
-                      onChecked={handleCheckedList}
-            />
-            {/*{(isLoading) ? `Loading!!!!!` :*/}
-            <UsefulCardList cards={chosenCardList}
-                            searchValue={searchValue}
-                            allEntries={entries}/>
+            {isLoading ? <Loading/> :
+              <>
+                <TagsList tags={categories}
+                          onChecked={handleCheckedList}
+                />
+
+                <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
+              </>}
           </div>
         </div>
         : <BadInternetConnection/>}

@@ -1,11 +1,9 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import UsefulCard from "@/components/UsefulCard/UsefulCard";
 import styles from "./usefulCardList.module.scss";
 import {Card} from "@/types";
 import NoSearchResult from "@/components/NoSearchResult/NoSearchResult";
-// import {NavLink} from "react-router-dom";
-
-// import {Link} from "react-router-dom";
 
 export interface Props {
   cards: Card[];
@@ -16,11 +14,23 @@ export interface Props {
 
 const UsefulCardsList: React.FC<Props> = ({cards, searchValue, allEntries}) => {
 
+  const temp = cards.slice(0, 6);
+  const [displayedCards, setDisplayedCards] = useState(temp);
+  useEffect(() => {
+    setDisplayedCards(temp);
+  }, [cards])
+
+  const handleLoadMore = () => {
+    const lastDisplayedIndex = displayedCards.length;
+    const nextDisplayedIndex = lastDisplayedIndex + 3;
+    const nextGroup = cards.slice(lastDisplayedIndex, nextDisplayedIndex);
+    setDisplayedCards([...displayedCards, ...nextGroup]);
+  };
+
   return (
 
     <section className={styles.cards}>
-
-      {cards
+      {displayedCards
         .map((card) => (
 
           <UsefulCard
@@ -39,6 +49,13 @@ const UsefulCardsList: React.FC<Props> = ({cards, searchValue, allEntries}) => {
 
         ))
       }
+      {displayedCards.length < cards.length && (
+        <button className={styles.more}
+                onClick={handleLoadMore}
+        >
+          Загрузить еще
+        </button>
+      )}
       {cards.length === 0 ? <NoSearchResult searchValue={searchValue}/> : ""}
       {cards.length === 0
         ? allEntries.slice(0, 3)

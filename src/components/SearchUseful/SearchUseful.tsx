@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./searchUseful.module.scss";
+import {useAppSelector} from "@/store/hooks.ts";
+import AddUseful from "@/components/AddUseful/AddUseful.tsx";
 
 interface Props {
   onSearch: any;
@@ -7,6 +9,11 @@ interface Props {
 
 const SearchUseful: React.FC<Props> = ({onSearch}) => {
   const [inputValue, setInputValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const role = useAppSelector(
+    (state) => state.currentUserSlice.currentUser.role
+  );
 
   useEffect(() => {
     onSearch(inputValue);
@@ -14,13 +21,18 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
 
   function handleInputChange(evt: { target: HTMLInputElement; }) {
     setInputValue(evt.target.value);
-
   }
 
+  function openModal(event: any) {
+    event?.preventDefault();
+    setShowModal(true);
+    console.log('open modal')
+  }
 
   return (
     <div>
-      <form className=""
+      {showModal ? <AddUseful onClose={() => setShowModal(false)}/> : null}
+      <form className={styles.container}
         // onSubmit={handleSubmitSearch}
             noValidate>
         <input
@@ -30,7 +42,12 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        {/*<span className="search__error">{searchError.errorMessage}</span>*/}
+        {(role === "hr" || role === "employee") &&
+          <button
+            className={styles.button}
+            onClick={openModal}
+          >+ Добавить</button>
+        }
 
       </form>
     </div>
