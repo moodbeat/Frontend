@@ -1,0 +1,134 @@
+.container {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 680px;
+  height: 826px;
+  padding: 24px;
+  border-radius: 20px;
+  border: 0.33px solid var(--color-button-secondary, #EBEBEB);
+  background: var(--unnamed, #FFF);
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.03), 0px 0px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.add_article {
+  color: var(--light-text-text-primary, #000);
+  /* H2 */
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  color: var(--color-black, #2C2D2E);
+  /* H4 */
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 12px;
+  outline: none
+}
+
+.preview_image {
+  outline: none
+}
+
+.title {
+  display: flex;
+  padding: 12px;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 12px;
+  border: 0.5px solid var(--color-button-secondary, #EBEBEB);
+  background: var(--color-background, #EBF1F4);
+  outline: none
+}
+
+.description {
+  display: flex;
+  height: 80px;
+  padding: 12px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 12px;
+  border: 0.5px solid var(--color-button-secondary, #EBEBEB);
+  background: var(--color-background, #EBF1F4);
+  outline: none
+}
+
+.category {
+
+}
+
+.url {
+  display: flex;
+  height: 42px;
+  padding: 12px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 12px;
+  border: 0.5px solid var(--color-button-secondary, #EBEBEB);
+  background: var(--color-background, #EBF1F4);
+  outline: none
+}
+
+
+.text {
+  display: flex;
+  height: 186px;
+  padding: 12px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 12px;
+  border: 0.5px solid var(--color-button-secondary, #EBEBEB);
+  background: var(--color-background, #EBF1F4);
+  outline: none
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+
+}
+
+.submit {
+  display: flex;
+  height: 44px;
+  width: 110px;
+  padding: 12px 18px;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 16px;
+  background: var(--color-accent-violet-disabled, rgba(138, 50, 224, 0.60));
+  color: white;
+}
+
+.cancel {
+  height: 44px;
+  width: 98px;
+  color: var(--color-accent-purple, #8A32E0);
+  text-align: center;
+  border-style: none;
+  /* Button */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+  border-radius: 16px;
+  background: #EBEBEB;
+}

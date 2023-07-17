@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./searchUseful.module.scss";
 import {useAppSelector} from "@/store/hooks.ts";
+import AddUseful from "@/components/AddUseful/AddUseful.tsx";
 
 interface Props {
   onSearch: any;
@@ -8,6 +9,7 @@ interface Props {
 
 const SearchUseful: React.FC<Props> = ({onSearch}) => {
   const [inputValue, setInputValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const role = useAppSelector(
     (state) => state.currentUserSlice.currentUser.role
@@ -21,12 +23,15 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
     setInputValue(evt.target.value);
   }
 
-  function openModal() {
+  function openModal(event: any) {
+    event?.preventDefault();
+    setShowModal(true);
     console.log('open modal')
   }
 
   return (
     <div>
+      {showModal ? <AddUseful onClose={() => setShowModal(false)}/> : null}
       <form className={styles.container}
         // onSubmit={handleSubmitSearch}
             noValidate>
