@@ -19,9 +19,11 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
 
   function handleInputChange(evt: { target: HTMLInputElement; }) {
     setInputValue(evt.target.value);
-
   }
 
+  function openModal() {
+    console.log('open modal')
+  }
 
   return (
     <div>
@@ -35,10 +37,10 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        {(role === "hr" || role === "chief") &&
+        {(role === "hr" || role === "employee") &&
           <button
             className={styles.button}
-            // onClick={}
+            onClick={openModal}
           >+ Добавить</button>
         }
 
