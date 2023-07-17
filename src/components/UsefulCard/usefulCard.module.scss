@@ -9,6 +9,19 @@
   box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.03), 0 0 2px 0 rgba(0, 0, 0, 0.06);
 }
 
+.card_liked {
+  background-color: var(--color-card-hover);
+}
+
+.card:hover {
+  background-color: var(--color-card-hover);
+}
+
+.card:active {
+  background-color: var(--color-card-active);
+}
+
+
 .link {
   text-decoration: none;
   color: var(--color-black);

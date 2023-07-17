@@ -34,10 +34,10 @@ const UsefulCard: React.FC<Card> = ({
 
   const [isLikedTemp, setIsLiked] = useState(false);
 
+
   const handleLike = async () => {
 
     isLikedTemp ? setIsLiked(false) : setIsLiked(true);
-
     try {
       await Api.postUsefulLike(id)
         .then(() => {
@@ -56,7 +56,8 @@ const UsefulCard: React.FC<Card> = ({
 
   return (
 
-    <article className={styles.card} key={id}>
+
+    <article className={`${styles.card} ${isLikedTemp ? styles.card_liked : ''}`} key={id}>
       <div className={styles.like}><img onClick={handleLike} src={
         // liked !== null ? bookmarkSaved : bookmark
         isLikedTemp ? bookmarkSaved : bookmark
