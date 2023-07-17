@@ -116,7 +116,6 @@ export const Useful = () => {
       )
     );
     setChosenCardList(ret);
-    // setIsLoading(false);
   }
 
   function handleCheckedList(tags: string[]) {
@@ -144,12 +143,14 @@ export const Useful = () => {
           <div className={styles.useful}>
             <h2 className={styles.title}>Полезные статьи и видео</h2>
             <SearchUseful onSearch={handleSearchCards}/>
-            <TagsList tags={categories}
-                      onChecked={handleCheckedList}
-            />
             {isLoading ? <Loading/> :
-              <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>}
+              <>
+                <TagsList tags={categories}
+                          onChecked={handleCheckedList}
+                />
 
+                <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
+              </>}
           </div>
         </div>
         : <BadInternetConnection/>}
