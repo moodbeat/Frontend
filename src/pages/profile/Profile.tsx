@@ -2,7 +2,11 @@ import {Navbar} from "@/components/Navbar/Navbar.tsx";
 import styles from './profile.module.scss';
 import {useParams} from 'react-router-dom';
 import {useRequest} from "@/shared/hooks/useRequest.tsx";
-import {getEmployeeInfo, getEmployeeTestResults} from "@/shared/api/Api.ts";
+import {
+  getBalanceWheelPrioritiesForEmployee,
+  getEmployeeInfo,
+  getEmployeeTestResults
+} from "@/shared/api/Api.ts";
 import {Info} from "@/pages/profile/components/Info/Info.tsx";
 import {About} from "@/pages/profile/components/About/About.tsx";
 import {Hobbies} from "@/pages/profile/components/Hobbies/Hobbies.tsx";
@@ -11,7 +15,7 @@ import {TestResults} from "@/pages/profile/components/TestResults/TestResults.ts
 import {ReactElement, useEffect, useState} from "react";
 import {PopupWithBackground} from "@/shared/ui/PopupWithBackground/PopupWithBackground";
 import {AddMeetingForm} from "@/pages/profile/components/AddMeetingForm/AddMeetingForm";
-import {Data, MeetingInfo, MeetingInterface} from "@/types";
+import {Data, MeetingInfo, MeetingInterface, UserBurnoutLevel, UserConditionRecieved} from "@/types";
 import * as Api from "@/shared/api/Api";
 import {MoodGraph} from "@/components/CenterScreenMain/MoodGraph/MoodGraph";
 import {BurnoutLevel} from "@/components/CenterScreenMain/BurnoutLevel/BurnoutLevel";
@@ -28,16 +32,45 @@ export const Profile = ({handleAddMeetingInfo}: Props): ReactElement => {
   const [addPopupVisible, setAddPopupVisible] = useState(false);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [data, setData] = useState<Data[]>([]);
+  const [burnOutData, setBurnOutData] = useState<UserBurnoutLevel[]>([]);
+  const [conditionsData, setConditionsData] = useState<UserConditionRecieved[]>([]);
 
   useEffect( () => {
-    handleGetBalanceWheelValues();
-  }, [triggerUpdate]);
+    if(userId) {
+      getData(userId);
+      getEmployeeBurnout(userId);
+      getEmployeeConditions(userId);
+    }
+  }, [userId]);
 
-  async function handleGetBalanceWheelValues(): Promise<void> {
+  async function getData(id: string): Promise<void> {
     try {
-      const response = await Api.getBalanceWheelValues();
+      const response = await getBalanceWheelPrioritiesForEmployee(id);
       setData(response.data.results);
     } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getEmployeeBurnout(id: string | number) {
+    if (userId) {
+      try {
+        const response = await Api.getUserBurnoutsGraph(id);
+        if (response) {
+          setBurnOutData(response.data)
+        }
+      } catch (err: any) {
+        console.log(err);
+      }
+    }
+  }
+
+  async function getEmployeeConditions(id: string) {
+    try {
+      const response = await Api.getEmployeeConditions(id);
+      console.log(response.data.results);
+      setConditionsData(response.data.results);
+    } catch (err: any) {
       console.log(err);
     }
   }
@@ -58,7 +91,6 @@ export const Profile = ({handleAddMeetingInfo}: Props): ReactElement => {
     try {
       const response = await Api.getMeetingsInfo(userId);
       const meetings: MeetingInterface[] = response.data.results;
-      console.log(meetings);
       setMeetingsList(meetings);
     } catch (err) {
       console.log(err);
@@ -83,9 +115,9 @@ export const Profile = ({handleAddMeetingInfo}: Props): ReactElement => {
                 {testResults && <TestResults results={testResults.results}/>}
                 <div className={styles.statics}>
                   <h2 className={styles.staticsTitle}>Статистика</h2>
-                  <MoodGraph />
-                  <BurnoutLevel />
-                  <BalanceWheelResult step={2} data={data} />
+                  <MoodGraph conditionsData={conditionsData && conditionsData} />
+                  <BurnoutLevel burnOutData={burnOutData && burnOutData}/>
+                  {data.length !== 0 && <BalanceWheelResult step={2} data={data} />}
                 </div>
               </div>
             </div>

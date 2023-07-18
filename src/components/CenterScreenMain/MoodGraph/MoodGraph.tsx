@@ -13,14 +13,21 @@ import {
 } from "@/assets";
 
 import styles from "./MoodGraph.module.css";
+import {UserConditionRecieved} from "@/types.ts";
+import {useLocation} from "react-router";
 
 interface renderData {
   x: number,
   y: number
 }
 
-export const MoodGraph = () => {
+interface Props {
+  conditionsData?: UserConditionRecieved[];
+}
+
+export const MoodGraph = ({conditionsData}: Props) => {
   const [data, setData] = useState <renderData[]>([{ x: 0, y: 0 }]);
+  const [conditionValues, setConditionValues] = useState<UserConditionRecieved[]>([]);
   const [monthVisible, setMonthVisible] = useState <number>(0);
   const [currentYear, setCurrentYear] = useState<number>(2023);
   const [numberOfDays, setNumberOfDays] = useState<number>(30);
@@ -28,13 +35,14 @@ export const MoodGraph = () => {
 
   const conditionsRecieved = useAppSelector(selectConditions);
   const buttonConditions = useAppSelector(selectButtonConditions);
+  const { pathname } = useLocation();
 
   function generateData () {
 
     //conditionsRecieved currentYear monthVisible numberOfDays входящие переменные, функцию можно вынести
     const renderData: renderData[] = [];
 
-    const yearFilteredArray = conditionsRecieved?.filter(item => {
+    const yearFilteredArray = conditionValues?.filter(item => {
      const conditionYear = new Date(item.date).getFullYear();
      return conditionYear === currentYear;
     })
@@ -87,20 +95,28 @@ export const MoodGraph = () => {
   }
 
   useEffect(() => {
-    setNumberOfDays(getNumberOfVisibleMonth(currentYear, monthVisible + 1))
-    setData(generateData())
-  }, [monthVisible]);
-
-  useEffect(() => {
-    setData(generateData());
-  }, [buttonConditions, conditionsRecieved])
-
-  useEffect(() => {
-    setCalendar([]);
-    for (let i = 1; i <= numberOfDays; i++) {
-      setCalendar(prevSate => [...prevSate, i])
+    if (conditionsData) {
+      setConditionValues(conditionsData.slice(0));
+    } else if (pathname === "/" && conditionsRecieved) {
+      setConditionValues(conditionsRecieved.slice(0));
     }
-  }, [numberOfDays])
+
+    setData(generateData());
+  }, [buttonConditions, pathname, conditionsData, conditionsRecieved]);
+
+  useEffect(() => {
+    const newNumberOfDays = getNumberOfVisibleMonth(currentYear, monthVisible + 1);
+    setNumberOfDays(newNumberOfDays);
+    setData(generateData());
+  }, [monthVisible, currentYear]);
+
+  useEffect(() => {
+    const newCalendar = [];
+    for (let i = 1; i <= numberOfDays; i++) {
+      newCalendar.push(i);
+    }
+    setCalendar(newCalendar);
+  }, [numberOfDays]);
 
   useEffect(() => {
     const date = new Date();

@@ -26,8 +26,6 @@ export const BalanceWheelResult = ({ step, goToFirstQuestion, data }: BalanceWhe
     }
   }, [data]);
 
-  console.log(data);
-
   useEffect(() => {
     if ((priorityResults && priorityResults.results.length !== 0) && (currentResults && currentResults.results.length !== 0)) {
       setChartData([
@@ -98,16 +96,19 @@ export const BalanceWheelResult = ({ step, goToFirstQuestion, data }: BalanceWhe
             <p className={`${styles.text} ${styles.textLast}`}>Точки роста — там, где приоритет высокий, а удовлетворённость низкая. Но стоит помнить, что ваша цель — не стать отличником и получить десятку по всем критериям, а объективно взглянуть на свою жизнь.</p>
           </div>
           :
-          <ul className={styles.legend}>
-            <li className={styles.legendItem}>
-              <div className={`${styles.legendColor} ${styles.legendColorPriority}`}></div>
-              <p className={styles.text}>Приоритет жизненных сфер</p>
-            </li>
-            <li className={styles.legendItem}>
-              <div className={`${styles.legendColor} ${styles.legendColorCurrent}`}></div>
-              <p className={styles.text}>Оценка текущего состояния</p>
-            </li>
-          </ul>
+          <div className={styles.legendInfo}>
+            <h4 className={styles.title}>Колесо жизненного баланса</h4>
+            <ul className={styles.legend}>
+              <li className={styles.legendItem}>
+                <div className={`${styles.legendColor} ${styles.legendColorPriority}`}></div>
+                <p className={`${styles.text} ${styles.textProfile}`}>Приоритет жизненных сфер</p>
+              </li>
+              <li className={styles.legendItem}>
+                <div className={`${styles.legendColor} ${styles.legendColorCurrent}`}></div>
+                <p className={`${styles.text} ${styles.textProfile}`}>Оценка текущего состояния</p>
+              </li>
+            </ul>
+          </div>
         }
         <div className={pathname === "/balance-wheel" ? styles.chartArea : `${styles.chartArea} ${styles.chartAreaSmall}`}>
           {chartData.length !== 0 && priorityResults && currentResults && (

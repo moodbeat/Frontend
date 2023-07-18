@@ -2,7 +2,7 @@
 
 .profile {
   position: relative;
-  padding: 50px 0 0 52px;
+  padding: 50px 0 44px 52px;
   background-color: var(--color-background);
   &-title {
     font: var(--font-h1);
@@ -29,7 +29,7 @@
 .statics {
   @include flex-column;
   &-title {
-    margin: 32px 0 0;
+    margin: 32px 0 -15px;
     font: var(--font-h2);
     color: var(--color-black);
   }

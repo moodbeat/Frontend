@@ -342,3 +342,8 @@ export interface UserBurnoutLevel {
   month: string,
   percentage: number,
 }
+
+export interface DataBurnOutInterface {
+  [day: string]: number,
+  degress: number,
+}
