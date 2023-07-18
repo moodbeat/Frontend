@@ -18,8 +18,6 @@ const BalanceWheel = () => {
     handleGetBalanceWheelValues();
   }, [triggerUpdate]);
 
-  console.log(data);
-
   const updateMeetingsList = () => {
     setTriggerUpdate(!triggerUpdate);
   }

@@ -11,6 +11,10 @@
   background-size: cover; */
 }
 
+.container-place-profile {
+  margin-top: 16px;
+}
+
 .top-container {
   display: flex;
   justify-content: space-between;

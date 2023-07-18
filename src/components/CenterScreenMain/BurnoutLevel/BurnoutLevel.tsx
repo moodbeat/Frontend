@@ -3,37 +3,44 @@ import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/store/hooks";
 import { selectBurnoutLevel } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
+import { DataBurnOutInterface, UserBurnoutLevel } from "@/types.ts";
+import { useLocation } from "react-router";
 
-interface DataInreface {
-  [day: string]: number,
-  degress: number,
+interface Props {
+  burnOutData?: UserBurnoutLevel[];
 }
-export const BurnoutLevel = () => {
 
-  const [data, setData] = useState<DataInreface[]>([]);
+export const BurnoutLevel = ({ burnOutData }: Props) => {
+  const [data, setData] = useState<DataBurnOutInterface[]>([]);
+  const [burnoutValues, setBurnoutValues] = useState<UserBurnoutLevel[]>([]);
   const burnoutLevel = useAppSelector(selectBurnoutLevel);
+  const { pathname } = useLocation();
 
   const generateData = () => {
     setData([]);
-    burnoutLevel?.map((item, index) => {
-      const burnout: DataInreface = {
+    burnoutValues?.map((item, index) => {
+      const burnout: DataBurnOutInterface = {
         day: index + 1,
-        degress: item.percentage
-      }
-      setData(prevState => [...prevState, burnout])
-    })
+        degress: item.percentage,
+      };
+      setData((prevState) => [...prevState, burnout]);
+    });
   };
 
   useEffect(() => {
-    generateData();
-  }, []);
+    if (burnOutData) {
+      setBurnoutValues(burnOutData.slice(0));
+    } else if (pathname === "/" && burnoutLevel) {
+      setBurnoutValues(burnoutLevel.slice(0));
+    }
+  }, [pathname, burnOutData, burnoutLevel]);
 
   useEffect(() => {
     generateData();
-  }, [burnoutLevel]);
+  }, [burnoutValues]);
 
   return (
-    <div className={styles.container}>
+    <div className={pathname !== '/' ? `${styles.container} ${styles.containerPlaceProfile}` : styles.container}>
       <div className={styles.topContainer}>
         <h3 className={styles.heading}>Уровень выгорания</h3>
       </div>
@@ -51,11 +58,9 @@ export const BurnoutLevel = () => {
         animate={true}
         enableGridY={false}
         enableLabel={false}
-        // axisTop={null}
-        // axisRight={null}
         axisLeft={null}
         axisBottom={null}
-      />{" "}
+      />
     </div>
   );
 };

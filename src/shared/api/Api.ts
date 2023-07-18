@@ -243,6 +243,14 @@ export const getAllUserConditions = () => {
   });
 };
 
+export const getEmployeeConditions = (id: string) => {
+  return axios.get(`${BASE_URL_REQUEST}/metrics/conditions/?employee=${id}&limit=365`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+
 export const getBalanceWheelValues = () => {
   return axios.get(`${BASE_URL_REQUEST}/metrics/life_balance`, {
     headers: {
@@ -250,6 +258,14 @@ export const getBalanceWheelValues = () => {
     },
   });
 };
+
+export const getBalanceWheelPrioritiesForEmployee = (id: string | undefined) => {
+  return axios.get(`${BASE_URL_REQUEST}/metrics/life_balance?employee=${id}`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+}
 
 export const sendBalanceWheelResults = (results: WheelResults[], isPriority: boolean) => {
   return axios.post(`${BASE_URL_REQUEST}/metrics/life_balance`, {results: results, set_priority: isPriority}, {
@@ -276,7 +292,7 @@ export const sendUserCondition = (conditions: UserConditionForSend) => {
 };
 
 //id пользователя currentUser
-export const getUserBurnoutsGraph = (id: number) => {
+export const getUserBurnoutsGraph = (id: number | string) => {
   return axios.get(`${BASE_URL_REQUEST}/metrics/burnouts/graph_data/?employee=${id}`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
