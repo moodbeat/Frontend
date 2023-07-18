@@ -10,6 +10,9 @@ interface Props {
 }
 export const TestResults = ({results}: Props): ReactElement => {
   const { countCardPage, addCard } = usePagination(2);
+
+  console.log(countCardPage);
+  console.log(results.length);
   return (
     <div>
       <h2 className={styles.title}>Пройденные опросы за последние 12 месяцев</h2>
@@ -19,7 +22,7 @@ export const TestResults = ({results}: Props): ReactElement => {
             <ul className={styles.testsList}>
               {results.map((result, index) => (
                 index < countCardPage ?
-                  <li className={styles.testsListItem}>
+                  <li key={index} className={styles.testsListItem}>
                     <h4 className={styles.testsListItemName}>{result.survey.title}</h4>
                     <p className={styles.testsListItemDate}>{result.completion_date}</p>
                     <div className={styles.testsListItemMental}><WarningBall level={result.mental_state.level} title={result.mental_state.name} /></div>
@@ -27,7 +30,7 @@ export const TestResults = ({results}: Props): ReactElement => {
                   : null
               ))}
             </ul>
-            {countCardPage <= results.length &&
+            {countCardPage < results.length &&
               <Button mode="empty" title="Загрузить еще" handleClick={addCard}/>
             }
           </>
