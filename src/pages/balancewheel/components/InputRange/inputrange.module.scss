@@ -48,8 +48,10 @@
   height: 8px;
   background: var(--color-accent-purple);
   cursor: pointer;
+  border: none;
 }
 
 .slider-blue::-moz-range-thumb {
   background: #325EE0;
+  border: none;
 }
