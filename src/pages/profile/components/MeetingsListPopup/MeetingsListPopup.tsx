@@ -25,7 +25,7 @@ export const MeetingsListPopup = ({meetingsList, closePopup}: Props): ReactEleme
           </div>
           : null
         ))}
-      {countCardPage <= meetingsList.length &&
+      {countCardPage < meetingsList.length &&
         <Button mode="empty" title="Загрузить еще" handleClick={addCard}/>
       }
     </div>
