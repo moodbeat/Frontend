@@ -30,6 +30,8 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
   const [moodStates] = useRequest(() => getMentalStates());
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
 
+  const regex = /^[\w\s\d\x20-\x7EА-Яа-яЁё]{2,256}$/;
+
   useEffect(() => {
     if(value && selectedDate && comment && !commentError) {
       setDisabledButton(false);
@@ -51,6 +53,7 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
     setComment("");
     setSelectedDate(null);
     setDisabledButton(true);
+    setCommentError("");
   }
 
   const closeAndResetForm = () => {
@@ -67,15 +70,22 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
 
   const handleComment = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     const target = e.target as HTMLTextAreaElement;
-    setComment(target.value);
-    if (target.value.length < 2) {
+    const value = target.value;
+
+    setComment(value);
+
+    if (value.length < 2) {
       setCommentError("Минимальное количество символов: 2");
       setDisabledButton(true);
-    } else if (target.value.length > 256) {
+    } else if (value.length > 256) {
       setCommentError("Максимальное количество символов: 256");
+      setDisabledButton(true);
+    } else if (!regex.test(value)) {
+      setCommentError("");
       setDisabledButton(true);
     } else {
       setCommentError("");
+      setDisabledButton(false);
     }
   };
 
