@@ -23,7 +23,7 @@ export const InputRange = ({handleChange, value, color}: Props): ReactElement =>
   return (
     <div>
       <div className={styles.input}>
-        <input value={value} className={color === 'purple' ? styles.slider : `${styles.slider} ${styles.sliderBlue}`} onChange={(e) => handleChange(e)} type="range" min="1" max="10" step="1"/>
+        <input value={value} className={color === 'purple' ? styles.slider : `${styles.slider} ${styles.sliderYellow}`} onChange={(e) => handleChange(e)} type="range" min="1" max="10" step="1"/>
         <div style={valueStyle}>{value}</div>
       </div>
     </div>
