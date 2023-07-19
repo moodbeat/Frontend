@@ -251,15 +251,7 @@ export const getEmployeeConditions = (id: string) => {
   });
 };
 
-export const getBalanceWheelValues = () => {
-  return axios.get(`${BASE_URL_REQUEST}/metrics/life_balance`, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    },
-  });
-};
-
-export const getBalanceWheelPrioritiesForEmployee = (id: string | undefined) => {
+export const getBalanceWheelValues = (id: string | number) => {
   return axios.get(`${BASE_URL_REQUEST}/metrics/life_balance?employee=${id}`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
