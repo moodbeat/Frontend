@@ -39,8 +39,8 @@ export const Radar = ({ chartData, step }: Props) => {
         step === 0
           ? ['rgba(138, 50, 224, 1)']
           : step === 1
-            ? ['rgba(50, 94, 224, 1)']
-            : ['rgba(138, 50, 224, 1)', 'rgba(50, 94, 224, 1)']
+            ? ['rgba(252, 242, 2, 1)']
+            : ['rgba(138, 50, 224, 1)', 'rgba(252, 242, 2, 1)']
       }
       gridLevels={10}
     />

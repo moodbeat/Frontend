@@ -3,7 +3,7 @@ import styles from './profile.module.scss';
 import {useParams} from 'react-router-dom';
 import {useRequest} from "@/shared/hooks/useRequest.tsx";
 import {
-  getBalanceWheelPrioritiesForEmployee,
+  getBalanceWheelValues,
   getEmployeeInfo,
   getEmployeeTestResults
 } from "@/shared/api/Api.ts";
@@ -43,9 +43,9 @@ export const Profile = ({handleAddMeetingInfo}: Props): ReactElement => {
     }
   }, [userId]);
 
-  async function getData(id: string): Promise<void> {
+  async function getData(id: string | number): Promise<void> {
     try {
-      const response = await getBalanceWheelPrioritiesForEmployee(id);
+      const response = await getBalanceWheelValues(id);
       setData(response.data.results);
     } catch (err) {
       console.log(err);

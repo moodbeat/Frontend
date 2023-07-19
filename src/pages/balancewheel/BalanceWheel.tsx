@@ -7,24 +7,29 @@ import {ControlBalanceWheel} from "@/pages/balancewheel/components/ControlBalanc
 import * as Api from "@/shared/api/Api";
 import {BalanceWheelResult} from "@/pages/balancewheel/components/BalanceWheelResult/BalanceWheelResult";
 import {Data, WheelResults} from "@/types";
+import {useAppSelector} from "@/store/hooks.ts";
+import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts";
 
 const BalanceWheel = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
   const [data, setData] = useState<Data[]>([]);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
+  const currentUserInfo = useAppSelector(selectUserInfo);
+
+  console.log(currentUserInfo)
 
   useEffect( () => {
-    handleGetBalanceWheelValues();
+    handleGetBalanceWheelValues(currentUserInfo.id);
   }, [triggerUpdate]);
 
   const updateMeetingsList = () => {
     setTriggerUpdate(!triggerUpdate);
   }
 
-  async function handleGetBalanceWheelValues(): Promise<void> {
+  async function handleGetBalanceWheelValues(id: string | number): Promise<void> {
     try {
-      const response = await Api.getBalanceWheelValues();
+      const response = await Api.getBalanceWheelValues(id);
       setData(response.data.results);
     } catch (err) {
       console.log(err);
@@ -36,7 +41,7 @@ const BalanceWheel = () => {
   }
 
   const goToPreviousQuestion = async () => {
-    await handleGetBalanceWheelValues();
+    await handleGetBalanceWheelValues(currentUserInfo.id);
     setStep(step - 1);
   }
 
