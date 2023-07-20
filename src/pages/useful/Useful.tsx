@@ -9,6 +9,7 @@ import {Card, Category} from "@/types";
 import axios from 'axios';
 import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import Loading from "@/components/Loading/Loading";
+import {fetchData} from "@/shared/api/Api";
 
 export const Useful = () => {
   const [entries, setEntries] = useState<Card[]>([]);
@@ -22,33 +23,18 @@ export const Useful = () => {
   const isOnline = useOnlineCheck();
 
   useEffect(() => {
-    fetchData().then(r => r);
-
-  }, []);
+      fetchData().then(r => {
+          // @ts-ignore
+          setEntries(r.data.results)
+          setIsLoading(false);
+        }
+      );
+    }, []
+  );
 
   useEffect(() => {
     fetchCategories().then(r => r);
   }, []);
-
-
-  const fetchData = async () => {
-
-    try {
-      const token = localStorage.getItem("jwt");
-      const headers = {Authorization: `Bearer ${token}`};
-      const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
-      setEntries(response.data.results);
-      setIsLoading(false);
-      // console.log(response.data.results)
-      // console.log(chosenCardList)
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-
-    } finally {
-      // setIsLoading(false);
-    }
-  };
 
 
   //-------------------------------------

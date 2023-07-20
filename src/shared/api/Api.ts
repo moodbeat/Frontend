@@ -313,3 +313,40 @@ export const deleteUsefulLike = (id: number) => {
     }
   );
 };
+
+export const addUseful = (entry: any) => {
+  return axios.post(`${BASE_URL_REQUEST}/entries/`,
+    {
+      preview: entry.preview,
+      title: entry.name,
+      description: entry.description,
+      url: entry.url,
+      text: entry.text,
+      category: entry.category,
+
+    },
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      }
+    }
+  );
+};
+export const fetchData = async () => {
+
+  try {
+    const token = localStorage.getItem("jwt");
+    const headers = {Authorization: `Bearer ${token}`};
+    const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
+
+    console.log(response.data.results)
+    // console.log(chosenCardList)
+    return response
+  } catch (error) {
+    console.error('Error fetching data:', error);
+
+  } finally {
+    // setIsLoading(false);
+  }
+};
+

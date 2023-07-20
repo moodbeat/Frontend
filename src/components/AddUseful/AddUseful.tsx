@@ -1,6 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {Field, Form, Formik} from 'formik';
 import styles from "./addUseful.module.scss";
+import * as Api from "@/shared/api/Api";
 
 interface CardData {
   preview_image: string;
@@ -24,12 +25,33 @@ const initialValues: CardData = {
   text: '',
 };
 
-const AddUseful: React.FC<AddCardProps> = ({onClose}) => {
+
+const addCard = async (values: {}) => {
+  try {
+    await Api.addUseful(values)
+      .then(() => {
+
+          return;
+        }
+      )
+      .then(() => {
+
+        }
+      )
+  } catch (err: any) {
+
+    console.log(err);
+  }
+}
+
+
+const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
   const handleSubmit = (values: CardData, {setSubmitting}: any) => {
-    // Здесь вы можете отправить значения формы на бэкенд
+
     console.log(values);
+    addCard(values);
     setSubmitting(false);
-    onClose(); // Закрыть всплывающее окно после отправки
+    onClose();
   };
 
   return (
