@@ -7,9 +7,9 @@ import styles from "./usefulCard.module.scss";
 import {Card} from "@/types";
 // import {Link} from "react-router-dom";
 import * as Api from "@/shared/api/Api";
+import {fetchData} from "@/shared/api/Api";
 import {Link} from "react-router-dom";
-import {data} from "autoprefixer";
-import axios from "axios";
+
 
 export interface Category {
   id: number,
@@ -41,26 +41,26 @@ const UsefulCard: React.FC<Card> = ({
     setIsLiked(like)
   }, [liked])
 
-  useEffect(() => {
-    fetchData().then(() => {
+  // useEffect(() => {
+  //   fetchData().then(() => {
+  //
+  //   })
+  // }, [])
 
-    })
-  }, [isLikedTemp])
-
-  const fetchData = async () => {
-
-    try {
-      const token = localStorage.getItem("jwt");
-      const headers = {Authorization: `Bearer ${token}`};
-      const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
-      console.log(response.data.results);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-
-    } finally {
-      // setIsLoading(false);
-    }
-  };
+  // const fetchData = async () => {
+  //
+  //   try {
+  //     const token = localStorage.getItem("jwt");
+  //     const headers = {Authorization: `Bearer ${token}`};
+  //     const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
+  //     console.log(response.data.results);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //
+  //   } finally {
+  //     // setIsLoading(false);
+  //   }
+  // };
 
 
   const setLike = async (id: any) => {
@@ -70,11 +70,12 @@ const UsefulCard: React.FC<Card> = ({
       await Api.postUsefulLike(id)
         .then(() => {
           fetchData()
-          console.log(data);
+
           setIsLiked(true);
           return;
         })
         .then(() => {
+          fetchData()
           setIsLiked(true);
         })
       // }
@@ -94,6 +95,7 @@ const UsefulCard: React.FC<Card> = ({
           }
         )
         .then(() => {
+            fetchData()
             setIsLiked(false);
           }
         )
