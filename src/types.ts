@@ -235,7 +235,9 @@ export interface Card {
   text: string;
   url: string | null;
   created: string;
-  liked: {} | null;
+  liked: {
+    id: number;
+  } | null;
 }
 
 export interface Category {
@@ -345,5 +347,6 @@ export interface UserBurnoutLevel {
 
 export interface DataBurnOutInterface {
   [day: string]: number,
+
   degress: number,
 }

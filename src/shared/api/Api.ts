@@ -292,10 +292,10 @@ export const getUserBurnoutsGraph = (id: number | string) => {
   });
 };
 
-export const postUsefulLike = (event: number) => {
+export const postUsefulLike = (entry: number) => {
   return axios.post(`${BASE_URL_REQUEST}/socials/likes/`,
     {
-      "event": event
+      "entry": entry
     },
     {
       headers: {

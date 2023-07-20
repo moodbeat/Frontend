@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from "./searchUseful.module.scss";
-import {useAppSelector} from "@/store/hooks.ts";
-import AddUseful from "@/components/AddUseful/AddUseful.tsx";
+import {useAppSelector} from "@/store/hooks";
+import AddUseful from "@/components/AddUseful/AddUseful";
 
 interface Props {
   onSearch: any;
 }
 
-const SearchUseful: React.FC<Props> = ({onSearch}) => {
+const SearchUseful: React.FC<Props> = ({onSearch}: any) => {
   const [inputValue, setInputValue] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -42,7 +42,7 @@ const SearchUseful: React.FC<Props> = ({onSearch}) => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        {(role === "hr" || role === "employee") &&
+        {(role === "hr" || role === "chief") &&
           <button
             className={styles.button}
             onClick={openModal}
