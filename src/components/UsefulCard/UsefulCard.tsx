@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import bookmark from "../../../public/bookmark.svg";
 import bookmarkSaved from "../../../public/bookmark_saved.svg";
 import play from "../../../public/play.svg";
@@ -8,6 +8,8 @@ import {Card} from "@/types";
 // import {Link} from "react-router-dom";
 import * as Api from "@/shared/api/Api";
 import {Link} from "react-router-dom";
+import {data} from "autoprefixer";
+import axios from "axios";
 
 export interface Category {
   id: number,
@@ -24,7 +26,7 @@ const UsefulCard: React.FC<Card> = ({
                                       preview_image,
                                       // text,
                                       // created,
-                                      // liked,
+                                      liked,
                                       // author,
                                       description,
                                       // url,
@@ -34,18 +36,46 @@ const UsefulCard: React.FC<Card> = ({
 
   const [isLikedTemp, setIsLiked] = useState(false);
 
+  useEffect(() => {
+    const like = liked !== null
+    setIsLiked(like)
+  }, [liked])
 
-  const handleLike = async () => {
+  useEffect(() => {
+    fetchData().then(() => {
 
-    isLikedTemp ? setIsLiked(false) : setIsLiked(true);
+    })
+  }, [isLikedTemp])
+
+  const fetchData = async () => {
+
+    try {
+      const token = localStorage.getItem("jwt");
+      const headers = {Authorization: `Bearer ${token}`};
+      const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
+      console.log(response.data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+
+    } finally {
+      // setIsLoading(false);
+    }
+  };
+
+
+  const setLike = async (id: any) => {
+
+    setIsLiked(true);
     try {
       await Api.postUsefulLike(id)
         .then(() => {
-
+          fetchData()
+          console.log(data);
+          setIsLiked(true);
           return;
         })
         .then(() => {
-
+          setIsLiked(true);
         })
       // }
     } catch (err: any) {
@@ -54,16 +84,45 @@ const UsefulCard: React.FC<Card> = ({
     }
   }
 
+  const deleteLike = async (id: any) => {
+    try {
+      await Api.deleteUsefulLike(id)
+        .then(() => {
+            setIsLiked(false);
+            fetchData()
+            return;
+          }
+        )
+        .then(() => {
+            setIsLiked(false);
+          }
+        )
+    } catch (err: any) {
+
+      console.log(err);
+    }
+  }
+
+  const handleLike = (likedId: any) => {
+    if (isLikedTemp) {
+      console.log(likedId);
+      deleteLike(likedId);
+    } else {
+      console.log(id);
+      setLike(id);
+    }
+  }
+
   return (
 
 
     <article className={`${styles.card} ${isLikedTemp ? styles.card_liked : ''}`} key={id}>
-      <div className={styles.like}><img onClick={handleLike} src={
+      <button className={styles.like} onClick={() => handleLike(liked?.id)}><img src={
         // liked !== null ? bookmarkSaved : bookmark
         isLikedTemp ? bookmarkSaved : bookmark
       }
-                                        alt="heart"/>
-      </div>
+                                                                                 alt="heart"/>
+      </button>
       <Link key={id} to={`/useful/${id}`} className={styles.link}>
         <div className={styles.container}>
           <div className="">

@@ -7,8 +7,8 @@ import {BadInternetConnection} from "@/components/BadInternetConnection/BadInter
 import {useEffect, useState} from "react";
 import {Card, Category} from "@/types";
 import axios from 'axios';
-import UsefulCardList from "@/components/UsefulCardList/UsefulCardList.tsx";
-import Loading from "@/components/Loading/Loading.tsx";
+import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
+import Loading from "@/components/Loading/Loading";
 
 export const Useful = () => {
   const [entries, setEntries] = useState<Card[]>([]);
