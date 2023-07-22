@@ -11,3 +11,13 @@
   margin: 0 0 40px;
   font: var(--font-h1);
 }
+
+@media screen and (width > 1440px) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  .useful {
+    padding: 40px 0 0 0;
+  }
+}

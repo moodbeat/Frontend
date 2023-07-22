@@ -149,9 +149,20 @@
   padding: 0;
   border: none;
   background-color: var(--color-background-white);
-  background-image: url('@/assets/closeBtn.svg');
+  background-image: url("@/assets/closeBtn.svg");
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
   scale: 1.5;
+}
+
+@media screen and (width > 1440px) {
+  .burnout-container {
+    padding: 40px 0 0;
+  }
+
+  .test {
+    max-width: 1013px;
+    margin: 0 auto;
+  }
 }

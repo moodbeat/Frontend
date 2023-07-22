@@ -4,10 +4,17 @@
 
 .useful {
   padding: 40px 0 32px 52px;
-
 }
 
 .title {
   margin: 0 0 40px;
   font: var(--font-h1);
+}
+
+@media screen and (width > 1440px) {
+  .useful {
+    width: 1028px;
+    padding: 40px 0 0;
+    margin: 0 auto;
+  }
 }

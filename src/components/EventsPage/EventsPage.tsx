@@ -8,10 +8,10 @@ import { EventsCard } from "./EventsCard/EventsCard";
 interface Props {
   // valueInputSort: string;
   events: EventInterface[];
-  fetchEvents: ()=> void;
+  fetchEvents: () => void;
 }
 
-export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
+export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
   const date = new Date();
   const monthToday = date.getMonth();
   const yearToday = date.getFullYear();
@@ -29,41 +29,47 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
   const reduceMonth = () => {
     if (month === 0) {
       setMonth(11);
-      setYear(year-1);
+      setYear(year - 1);
     } else {
-      setMonth(month - 1)
+      setMonth(month - 1);
     }
-    (month <= (monthToday+1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
+    month <= monthToday + 1 && year <= yearToday
+      ? setIsArrowBack(false)
+      : setIsArrowBack(true);
     setTextInput("");
   };
   const increaseMonth = () => {
     if (month === 11) {
       setMonth(0);
-      setYear(year+1);
+      setYear(year + 1);
     } else {
-      setMonth(month + 1)
+      setMonth(month + 1);
     }
-    (month <= (monthToday-1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
+    month <= monthToday - 1 && year <= yearToday
+      ? setIsArrowBack(false)
+      : setIsArrowBack(true);
     setTextInput("");
-   };
+  };
 
   // function sortMonthEvents() {
   //   setEventsSortMonth(events.filter(item => new Date(item.start_time).getMonth() === month));
   // }
-  useEffect(()=>{
+  useEffect(() => {
     // console.log('сортировка мероприятий по месяцу');
     // console.log(events);
-    setEventsSortMonth(events.filter(item => new Date(item.start_time).getMonth() === month));
+    setEventsSortMonth(
+      events.filter((item) => new Date(item.start_time).getMonth() === month)
+    );
   }, [month, events]);
   // }, [month, events, isRenderEventPage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // console.log('сортировка по поисковой строке');
     // console.log(eventsSortMonth);
     setEventsSortFind(eventsSortMonth);
   }, [eventsSortMonth]);
 
-  const handleInputSort = (e: {target: { value: string }}) => {
+  const handleInputSort = (e: { target: { value: string } }) => {
     const value = e.target.value;
     // console.log(value.match(reg));
     // !(value.substring(value.length-2, value.length-1) === '-' && value.substring(value.length-1) === '-') &&
@@ -71,46 +77,52 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
     setTextInput(value);
   };
 
-  useEffect(()=>{
-    setEventsSortFind(eventsSortMonth.filter((event)=>
-      event.name.toLowerCase().includes(textInput.toLowerCase())
-      || event.text.toLowerCase().includes(textInput.toLowerCase())
-      // || employee.position.name.toLowerCase().includes(textInput.toLowerCase())
-    ));
-  },[textInput]);
+  useEffect(() => {
+    setEventsSortFind(
+      eventsSortMonth.filter(
+        (event) =>
+          event.name.toLowerCase().includes(textInput.toLowerCase()) ||
+          event.text.toLowerCase().includes(textInput.toLowerCase())
+        // || employee.position.name.toLowerCase().includes(textInput.toLowerCase())
+      )
+    );
+  }, [textInput]);
 
   // console.log(events);
   // console.log(eventsSortMonth);
   // console.log(eventsSortFind);
   return (
     <section className={styles.eventsPage}>
-      <EventsHeader
-        month={month}
-        reduceMonth={reduceMonth}
-        year={year}
-        increaseMonth={increaseMonth}
-        // monthToday={monthToday}
-        yearToday={yearToday}
-        isArrowBack={isArrowBack}
-      />
-      <EventsFunctional
-        textInput={textInput}
-        handleInputSort={(e)=>{handleInputSort(e)}}
-        fetchEvents={fetchEvents}
-      />
-      <ul className={styles.eventsContent}>
-        {eventsSortFind.length > 0 && eventsSortFind.map((item)=>
-          <EventsCard
-            key={item.id}
-            item={item}
-            fetchEvents={fetchEvents}
-            // isRenderEventPage={isRenderEventPage}
-            // setIsRenderEventPage={setIsRenderEventPage}
-          />
-
-        )}
-      </ul>
+      <div className={styles.eventsPageContainer}>
+        <EventsHeader
+          month={month}
+          reduceMonth={reduceMonth}
+          year={year}
+          increaseMonth={increaseMonth}
+          // monthToday={monthToday}
+          yearToday={yearToday}
+          isArrowBack={isArrowBack}
+        />
+        <EventsFunctional
+          textInput={textInput}
+          handleInputSort={(e) => {
+            handleInputSort(e);
+          }}
+          fetchEvents={fetchEvents}
+        />
+        <ul className={styles.eventsContent}>
+          {eventsSortFind.length > 0 &&
+            eventsSortFind.map((item) => (
+              <EventsCard
+                key={item.id}
+                item={item}
+                fetchEvents={fetchEvents}
+                // isRenderEventPage={isRenderEventPage}
+                // setIsRenderEventPage={setIsRenderEventPage}
+              />
+            ))}
+        </ul>
+      </div>
     </section>
-
   );
-}
+};

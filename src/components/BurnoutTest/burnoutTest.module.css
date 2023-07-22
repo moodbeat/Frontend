@@ -46,7 +46,6 @@
   margin: 10px 0;
   box-shadow: 0 0 2px rgb(0 0 0 / 6%), 0 4px 2px rgb(0 0 0 / 3%);
   transition: all 400ms ease-out;
-
 }
 
 .burnout-label {
@@ -76,7 +75,7 @@
 }
 
 .burnout-question:hover {
-  scale: 0.98
+  scale: 0.98;
 }
 
 .checkbox + .burnout-visible-checkbox::after {
@@ -123,7 +122,6 @@
   height: 18px;
   border-radius: 20px;
   background: var(--color-background);
-
 }
 
 .burnout-progress-indicator-blue {
@@ -185,10 +183,20 @@
   padding: 0;
   border: none;
   background-color: var(--color-background-white);
-  background-image: url('@/assets/closeBtn.svg');
+  background-image: url("@/assets/closeBtn.svg");
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
   scale: 1.5;
 }
 
+@media screen and (width > 1440px) {
+  .burnout-container {
+    padding: 40px 0 0;
+  }
+
+  .test {
+    max-width: 1013px;
+    margin: 0 auto;
+  }
+}

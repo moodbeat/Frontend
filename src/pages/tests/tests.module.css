@@ -3,7 +3,7 @@
 }
 
 .tests {
-  padding: 40px 10px 46px;
+  padding: 40px 50px 46px;
   gap: 28px;
 }
 
@@ -31,4 +31,21 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
+}
+
+@media screen and (width > 1440px) {
+  .container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tests {
+    max-width: 1097px;
+    padding: 40px 0 0;
+  }
+
+  .form {
+    background-color: aqua;
+  }
 }

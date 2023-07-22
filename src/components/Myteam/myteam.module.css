@@ -1,8 +1,7 @@
 .myteam {
   display: flex;
   width: 100%;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-start;
   padding: 44px 132px 42px 52px;
@@ -13,6 +12,7 @@
   position: relative;
   width: 68.8%;
   height: 100%;
+
   /* padding: 10px; */
   margin-right: 28px;
 }
@@ -20,6 +20,7 @@
 .right-screen {
   width: 33%;
   height: 100%;
+
   /* padding: 10px; */
   padding-top: 64px;
 }
@@ -33,7 +34,7 @@
   border-radius: 12px;
   margin-top: 24px;
   background-color: white;
-  background-image: url('@/assets/search_icon.svg');
+  background-image: url("@/assets/search_icon.svg");
   background-position: 10px 10px;
   background-repeat: no-repeat;
   color: var(--color-black);
@@ -68,14 +69,29 @@
   font-size: 50px;
 }
 
-@media(max-width: 1120px) {
+@media (width <= 1120px) {
   .myteam {
     padding: 42px;
   }
 }
 
-@media(max-width: 700px) {
+@media (width <= 700px) {
   .myteam {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (width> 1440px) {
+  .myteam {
+    justify-content: center;
+    padding: 44px;
+  }
+
+  .left-screen {
+    width: 665px;
+  }
+
+  .right-screen {
+    width: 320px;
   }
 }

@@ -1,4 +1,4 @@
-@import '@/shared/styles/mixins.scss';
+@import "@/shared/styles/mixins.scss";
 
 .balance-wheel {
   position: relative;
@@ -24,4 +24,13 @@
   font: var(--font-body);
   margin: 0 0 40px 0;
   max-width: 550px;
+}
+
+@media screen and (width > 1440px) {
+  .balance-wheel {
+    padding: 40px 0 0 0;
+    &-container {
+      margin: 0 auto;
+    }
+  }
 }
