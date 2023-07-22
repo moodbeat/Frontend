@@ -27,3 +27,9 @@
   margin: 8px 0;
   font: var(--font-body);
 }
+
+@media screen and (width > 1440px) {
+  .content {
+    margin: 0 auto;
+  }
+}

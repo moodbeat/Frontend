@@ -29,8 +29,8 @@ export const Test = ({
   onSendTestResult,
   resultOfPsychoTest,
   openTestAlertPopup,
-  // takeNewEmployeesList
-}: Test): JSX.Element => {
+}: // takeNewEmployeesList
+Test): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const testsResults = useAppSelector(selectTestResults);
@@ -85,21 +85,26 @@ export const Test = ({
   }
 
   function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(addTestResults({'question_id': +e.target.id, 'variant_value': +e.target.value}))
+    dispatch(
+      addTestResults({
+        question_id: +e.target.id,
+        variant_value: +e.target.value,
+      })
+    );
   }
 
-  function isCheckboxChecked (questionId: string, answerValue: number) {
+  function isCheckboxChecked(questionId: string, answerValue: number) {
     let res = false;
     const checkboxAnswerState = {
-      'question_id': +questionId,
-      'variant_value': +answerValue
-    }
+      question_id: +questionId,
+      variant_value: +answerValue,
+    };
 
     if (testsResults.length > 0) {
       testsResults.forEach((result) => {
-          if (result.question_id === checkboxAnswerState.question_id)
+        if (result.question_id === checkboxAnswerState.question_id)
           res = result.variant_value === checkboxAnswerState.variant_value;
-      })
+      });
     }
     return res;
   }
@@ -136,36 +141,45 @@ export const Test = ({
     <div className="page-container">
       <Navbar />
       <article className={styles.container}>
-        <form id='ExpressTestForm' onSubmit={handleSubmit} className={testFormClassname}>
-
+        <form
+          id="ExpressTestForm"
+          onSubmit={handleSubmit}
+          className={testFormClassname}
+        >
           <h1 className={styles.title}>{test.title}</h1>
 
-          {questions && questions.slice(0 + visibleIndex, 5 + visibleIndex).map((question) => (
-
-            <div className={styles.question} key={question.id}>
-
-                <p>{question.number}. {question.text}</p>
-                {test.variants && test.variants.map((variant) => (
-
-                  <fieldset key={variant.value} className={styles.question}>
-                    <label className={styles.label}>
-                      <input required
-                        id={question.id}
-                        name={question.id}
-                        type="radio"
-                        checked={isCheckboxChecked(question.id, variant.value)}
-                        onChange={handleChangeInput}
-                        className={styles.checkbox}
-                        value={variant.value}
-                      />
-                      <span className={styles.visibleCheckbox}></span>
-                      {variant.text}
-                    </label>
-                  </fieldset>
-
-                ))}
-            </div>
-          ))}
+          {questions &&
+            questions
+              .slice(0 + visibleIndex, 5 + visibleIndex)
+              .map((question) => (
+                <div className={styles.question} key={question.id}>
+                  <p>
+                    {question.number}. {question.text}
+                  </p>
+                  {test.variants &&
+                    test.variants.map((variant) => (
+                      <fieldset key={variant.value} className={styles.question}>
+                        <label className={styles.label}>
+                          <input
+                            required
+                            id={question.id}
+                            name={question.id}
+                            type="radio"
+                            checked={isCheckboxChecked(
+                              question.id,
+                              variant.value
+                            )}
+                            onChange={handleChangeInput}
+                            className={styles.checkbox}
+                            value={variant.value}
+                          />
+                          <span className={styles.visibleCheckbox}></span>
+                          {variant.text}
+                        </label>
+                      </fieldset>
+                    ))}
+                </div>
+              ))}
           <div className={styles.buttonContainer}>
             <button
               type="button"

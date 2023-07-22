@@ -10,3 +10,9 @@
   padding: 40px 10px 46px;
   gap: 28px;
 }
+
+@media screen and (width > 1440px) {
+  .main {
+    justify-content: center;
+  }
+}

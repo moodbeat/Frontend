@@ -1,6 +1,5 @@
 .records {
   position: relative;
-
 }
 
 .table-records {
@@ -11,16 +10,18 @@
   /* gap: 132px; */
 
   display: grid;
-  align-items: center;
-  justify-content: space-around;
+
+  /* align-items: center; */
 
   /* padding: 9px 20px; */
 
   /* border-radius: 20px; */
-  margin: 20px;
+  margin: 20px 0 0;
 
   /* background-color: #FFF; */
-  grid-template-columns: 30% 21% 16% 16%;
+
+  /* grid-template-columns: 30% 21% 16% 16%; */
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .plug {
@@ -60,7 +61,7 @@
   padding: 9px 20px;
   border-radius: 20px;
   margin: 8px 0 0;
-  background-color: #FFF;
+  background-color: #fff;
   grid-template-columns: 35% 16% 16% 16%;
 }
 

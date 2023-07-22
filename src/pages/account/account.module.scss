@@ -1,4 +1,4 @@
-@import '@/shared/styles/mixins.scss';
+@import "@/shared/styles/mixins.scss";
 
 .account {
   position: relative;
@@ -27,3 +27,11 @@
   }
 }
 
+@media screen and (width > 1440px) {
+  .account {
+    padding: 40px 0 0 0;
+    &-container {
+      margin: 0 auto;
+    }
+  }
+}
