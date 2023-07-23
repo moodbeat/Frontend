@@ -9,15 +9,33 @@ import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
 import articleBookmarks from "@/assets/article_bookmarks.png";
 import imageHero from "@/assets/section_hero.png";
-
-// import { Formik, Form } from "formik";
-// import { Link } from "react-router-dom";
-// import { basicSchema } from "@/schemas/validationSchema";
-// import { LogoImg } from "@/shared/ui/Logo/LogoImg";
-// import { MyFormValues } from "@/types";
-// import { Button } from "@/shared/ui/Button/Button";
-// import { Input } from "@/shared/ui/Input/Input";
 import { Accordion } from "@/components/Accordion/Accordion";
+import { FormikErrors, useFormik } from "formik";
+
+interface FormValues {
+  name: string;
+  comment: string;
+  email: string;
+}
+
+const validate = (values: FormValues) => {
+  const errors: FormikErrors<FormValues> = {};
+  if (!values.name) {
+    errors.name = "Укажите Ваше имя";
+  }
+
+  if (!values.comment) {
+    errors.comment = 'Напишите Ваш вопрос в поле "Комментарий"';
+  }
+
+  if (!values.email) {
+    errors.email = "Укажите адрес электронной почты";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Указанный корректный адрес электронной почты";
+  }
+
+  return errors;
+};
 
 export const LandingPage: React.FC = () => {
   const faqItems = [
@@ -29,6 +47,18 @@ export const LandingPage: React.FC = () => {
     { question: "Вопрос 3", answer: "Ответ 3" },
     { question: "Вопрос 4", answer: "Ответ 4" },
   ];
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      comment: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
 
   return (
     <div className={styles.landing}>
@@ -238,11 +268,49 @@ export const LandingPage: React.FC = () => {
 
         <section id="form" className={styles.sectionForm}>
           {/* @TODO: Валидация и сабмит формы */}
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <h2>Остались еще вопросы? Напишите нам!</h2>
-            <input placeholder="Имя" name="name" />
-            <input placeholder="E-mail" name="email" />
-            <textarea placeholder="Комментарий" name="comment" />
+            <input
+              id="name"
+              placeholder="Имя"
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+              onBlur={formik.handleBlur}
+            />
+
+            <input
+              id="email"
+              placeholder="E-mail"
+              name="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              onBlur={formik.handleBlur}
+            />
+
+            <textarea
+              id="comment"
+              placeholder="Комментарий"
+              name="comment"
+              onChange={formik.handleChange}
+              value={formik.values.comment}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.name && formik.errors.name ? (
+              <div className={styles.sectionFormError}>
+                {formik.errors.name}
+              </div>
+            ) : null}
+            {formik.touched.email && formik.errors.email ? (
+              <div className={styles.sectionFormError}>
+                {formik.errors.email}
+              </div>
+            ) : null}
+            {formik.touched.comment && formik.errors.comment ? (
+              <div className={styles.sectionFormError}>
+                {formik.errors.comment}
+              </div>
+            ) : null}
             <button
               type="submit"
               className={`${styles.button} ${styles.sectionFormButton}`}
