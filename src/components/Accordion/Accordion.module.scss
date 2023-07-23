@@ -1,0 +1,16 @@
+.accordion {
+  width: 32px;
+  height: 32px;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.accordionUp {
+  background-image: url("../../assets/accordion_up.svg");
+}
+
+.accordionUp {
+  background-image: url("../../assets/accordion_down.svg");
+}

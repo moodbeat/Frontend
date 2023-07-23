@@ -1,0 +1,28 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 40px 60px 0;
+  background-color: var(--color-accent-purple);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerList {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-white);
+}
+
+.sectionForm {
+}
