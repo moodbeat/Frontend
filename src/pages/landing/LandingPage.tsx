@@ -10,13 +10,13 @@ import articleProfile from "@/assets/article_profile.png";
 import articleBookmarks from "@/assets/article_bookmarks.png";
 import imageHero from "@/assets/section_hero.png";
 
-import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
-import { basicSchema } from "@/schemas/validationSchema";
-import { LogoImg } from "@/shared/ui/Logo/LogoImg";
-import { MyFormValues } from "@/types";
-import { Button } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
+// import { Formik, Form } from "formik";
+// import { Link } from "react-router-dom";
+// import { basicSchema } from "@/schemas/validationSchema";
+// import { LogoImg } from "@/shared/ui/Logo/LogoImg";
+// import { MyFormValues } from "@/types";
+// import { Button } from "@/shared/ui/Button/Button";
+// import { Input } from "@/shared/ui/Input/Input";
 import { Accordion } from "@/components/Accordion/Accordion";
 
 export const LandingPage: React.FC = () => {
