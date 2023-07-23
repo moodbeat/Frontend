@@ -5,7 +5,7 @@
 :root {
   /* overflow: scroll; */
   font-family: Roboto, Montserrat, system-ui, Avenir, Helvetica, Arial,
-  sans-serif;
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
@@ -20,7 +20,7 @@
   --color-background-white: #fff;
   --color-white: #fff;
   --color-background-secondary: #ebebeb;
-  --color-background-accent: #F7EBFF;
+  --color-background-accent: #f7ebff;
   --color-icon-secondary: #99a2ad;
   --color-button-secondary: #ebebeb;
   --color-accent-secondary: #4c239d;
@@ -28,16 +28,18 @@
   --color-accent-blue: #325ee0;
   --color-accent-violet: #a632e0;
   --color-accent-gray: #99a2ad;
+  --color-accent-lightgray: #ebebeb;
   --color-black: #2c2d2e;
   --color-error: #e64646;
-  --color-main-background: #EBF1F4;
+  --color-main-background: #ebf1f4;
   --color-burnout-banner-background: #d5d0ef;
-  --color-disabled: #B6C1CF;
-  --color-card-hover: #FCF5FF;
-  --color-card-active: #ECE2FF;
+  --color-disabled: #b6c1cf;
+  --color-card-hover: #fcf5ff;
+  --color-card-active: #ece2ff;
 
   /* Shadows */
   --shadow-medium: 0 15px 20px 0 rgb(88 81 94 / 10%);
+  --shadow-small: 0 2px 12px 0 rgb(88 81 94 / 10%);
 
   /* Fonts */
   --font-size-xs: 12px;
@@ -62,7 +64,6 @@
   --font-search-input: 400 16px/20px "Roboto", sans-serif;
   --font-more: 500 15px/18px "Roboto", sans-serif;
 }
-
 
 body {
   height: 100%;

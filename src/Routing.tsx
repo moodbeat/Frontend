@@ -1,22 +1,23 @@
-import {Route, Routes} from "react-router-dom";
-import {ProtectedRoutes} from "@/components/ProtectedRoutes.js";
-import {Main} from "@/pages/main/Main.js";
-import {Tests} from "@/pages/tests/Tests.js";
-import {Useful} from "@/pages/useful/Useful.js";
-import {Test} from "@/components/Test/Test.js";
-import {BurnoutTest} from "./components/BurnoutTest/BurnoutTest";
-import {Advices} from "@/pages/advices/Advices.js";
-import {Events} from "@/pages/events/Events.js";
-import {Bookmarks} from "@/pages/bookmarks/Bookmarks.js";
-import {Pagenotfound} from "./pages/pagenotfound/Pagenotfound";
-import {Account} from "@/pages/account/Account.js";
-import {Myteam} from "@/components/Myteam/Myteam.js";
-import {LoginPage} from "@/pages/login/LoginPage.js";
-import {RegisterPage} from "@/pages/register/RegisterPage.js";
-import {RefreshPasswordPage} from "@/pages/refreshpassword/RefreshPasswordPage.js";
-import {Profile} from "@/pages/profile/Profile";
+import { Route, Routes } from "react-router-dom";
+import { ProtectedRoutes } from "@/components/ProtectedRoutes.js";
+import { Main } from "@/pages/main/Main.js";
+import { Tests } from "@/pages/tests/Tests.js";
+import { Useful } from "@/pages/useful/Useful.js";
+import { Test } from "@/components/Test/Test.js";
+import { BurnoutTest } from "./components/BurnoutTest/BurnoutTest";
+import { Advices } from "@/pages/advices/Advices.js";
+import { Events } from "@/pages/events/Events.js";
+import { Bookmarks } from "@/pages/bookmarks/Bookmarks.js";
+import { Pagenotfound } from "./pages/pagenotfound/Pagenotfound";
+import { Account } from "@/pages/account/Account.js";
+import { Myteam } from "@/components/Myteam/Myteam.js";
+import { LandingPage } from "@/pages/landing/LandingPage";
+import { LoginPage } from "@/pages/login/LoginPage.js";
+import { RegisterPage } from "@/pages/register/RegisterPage.js";
+import { RefreshPasswordPage } from "@/pages/refreshpassword/RefreshPasswordPage.js";
+import { Profile } from "@/pages/profile/Profile";
 import BalanceWheel from "@/pages/balancewheel/BalanceWheel";
-import {UsefulItem} from "@/pages/usefulItem/UsefulItem";
+import { UsefulItem } from "@/pages/usefulItem/UsefulItem";
 
 interface Props {
   loggedIn: any;
@@ -35,42 +36,44 @@ interface Props {
   handleSendResetCode: any;
   handleResetPassword: any;
   openTestAlertPopup: any;
-  takeNewEmployeesList: any
+  takeNewEmployeesList: any;
   handleAddMeetingInfo: any;
   fetchEvents: any;
 }
 
 export const Routing: React.FC<Props> = ({
-                                           loggedIn,
-                                           handleSignOut,
-                                           allTestsResults,
-                                           expressTest,
-                                           burnoutTest,
-                                           handleSendTestResult,
-                                           resultOfPsychoTest,
-                                           handleChangeUserInfo,
-                                           employees,
-                                           events, fetchEvents,
-                                           handleSendInviteCode,
-                                           handleLogin,
-                                           handleRegister,
-                                           handleSendResetCode,
-                                           handleResetPassword,
-                                           openTestAlertPopup,
-                                           takeNewEmployeesList, handleAddMeetingInfo
-                                         }) => {
+  loggedIn,
+  handleSignOut,
+  allTestsResults,
+  expressTest,
+  burnoutTest,
+  handleSendTestResult,
+  resultOfPsychoTest,
+  handleChangeUserInfo,
+  employees,
+  events,
+  fetchEvents,
+  handleSendInviteCode,
+  handleLogin,
+  handleRegister,
+  handleSendResetCode,
+  handleResetPassword,
+  openTestAlertPopup,
+  takeNewEmployeesList,
+  handleAddMeetingInfo,
+}) => {
   return (
     <Routes>
       <Route
         element={
-          <ProtectedRoutes loggedIn={loggedIn} handleSignOut={handleSignOut}/>
+          <ProtectedRoutes loggedIn={loggedIn} handleSignOut={handleSignOut} />
         }
       >
-        <Route path="/" element={<Main events={events}/>}/>
+        <Route path="/" element={<Main events={events} />} />
 
         <Route
           path="tests"
-          element={<Tests allTestsResults={allTestsResults}/>}
+          element={<Tests allTestsResults={allTestsResults} />}
         />
 
         <Route
@@ -99,35 +102,27 @@ export const Routing: React.FC<Props> = ({
           }
         />
 
-        <Route
-          path="balance-wheel"
-          element={
-            <BalanceWheel/>
-          }
-        >
-        </Route>
+        <Route path="balance-wheel" element={<BalanceWheel />}></Route>
 
-        <Route path="advices" element={<Advices/>}/>
+        <Route path="advices" element={<Advices />} />
 
         <Route
           path="events"
-          element={
-            <Events events={events} fetchEvents={fetchEvents}/>
-          }
+          element={<Events events={events} fetchEvents={fetchEvents} />}
         />
 
-        <Route path="bookmarks" element={<Bookmarks/>}/>
+        <Route path="bookmarks" element={<Bookmarks />} />
 
-        <Route path="useful" element={<Useful/>}/>
-        <Route path="useful/:id" element={<UsefulItem/>}/>
+        <Route path="useful" element={<Useful />} />
+        <Route path="useful/:id" element={<UsefulItem />} />
 
         <Route
           path="account"
-          element={<Account handleChangeUserInfo={handleChangeUserInfo}/>}
+          element={<Account handleChangeUserInfo={handleChangeUserInfo} />}
         />
         <Route
           path="myteam/:userId"
-          element={<Profile handleAddMeetingInfo={handleAddMeetingInfo}/>}
+          element={<Profile handleAddMeetingInfo={handleAddMeetingInfo} />}
         />
         <Route
           path="myteam"
@@ -140,12 +135,13 @@ export const Routing: React.FC<Props> = ({
           }
         />
 
-        <Route path="*" element={<Pagenotfound/>}/>
+        <Route path="*" element={<Pagenotfound />} />
       </Route>
-      <Route path="login" element={<LoginPage handleLogin={handleLogin}/>}/>
+      <Route path="landing" element={<LandingPage />} />
+      <Route path="login" element={<LoginPage handleLogin={handleLogin} />} />
       <Route
         path="register"
-        element={<RegisterPage handleRegister={handleRegister}/>}
+        element={<RegisterPage handleRegister={handleRegister} />}
       />
       <Route
         path="password-reset"
