@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { basicSchema } from "@/schemas/validationSchema";
 import { LogoImg } from "@/shared/ui/Logo/LogoImg";
 import { MyFormValues } from "@/types";
+import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
 import { Accordion } from "@/components/Accordion/Accordion";
 
@@ -26,7 +27,7 @@ export const LandingPage: React.FC = () => {
     },
     { question: "Вопрос 2", answer: "Ответ 2" },
     { question: "Вопрос 3", answer: "Ответ 3" },
-    { question: "Вопрос 3", answer: "Ответ 4" },
+    { question: "Вопрос 4", answer: "Ответ 4" },
   ];
 
   return (
@@ -38,73 +39,103 @@ export const LandingPage: React.FC = () => {
         <nav className={styles.headerNav}>
           <li className={styles.headerList}>
             <ul>
-              <a href="#audience">Для кого?</a>
+              <a className={styles.headerLink} href="#audience">
+                Для кого?
+              </a>
             </ul>
             <ul>
-              <a href="#features">Возможности</a>
+              <a className={styles.headerLink} href="#features">
+                Возможности
+              </a>
             </ul>
             <ul>
-              <a href="#faq">FAQ</a>
+              <a className={styles.headerLink} href="#faq">
+                FAQ
+              </a>
             </ul>
           </li>
         </nav>
-        <Link to="#form">Заказать демо</Link>
+        <a className={`${styles.button} ${styles.headerButton}`} href="#form">
+          Заказать демо
+        </a>
       </header>
 
       <main>
         <section className={styles.sectionHero}>
-          <div>
-            <h1>Хотите защитить сотрудников от выгорания?</h1>
-            <p>
-              Установите наше инновационное приложение для профилактики
-              профессионального выгорания сотрудников MoodBeat.
+          <div className={styles.heroCol}>
+            <h1 className={styles.heroTitle}>
+              Хотите защитить сотрудников от&nbsp;выгорания?
+            </h1>
+            <p className={styles.heroText}>
+              Установите наше инновационное приложение для&nbsp;профилактики
+              профессионального выгорания&nbsp;сотрудников MoodBeat.
             </p>
-            <Link to="#audience">Узнать больше</Link>
+            <a
+              className={`${styles.button} ${styles.heroButton}`}
+              href="#audience"
+            >
+              Узнать больше
+            </a>
           </div>
-          <img src={imageHero} alt="Скриншот главного экрана приложения" />
+          <img
+            className={styles.heroImage}
+            src={imageHero}
+            alt="Скриншот главного экрана приложения"
+          />
         </section>
 
         <section id="audience" className={styles.sectionAudience}>
           <h2>Кому будет полезен MoodBeat?</h2>
-          <div>
+          <div className={styles.audienceCards}>
             <article>
               <div>
                 <span>01</span>
               </div>
               <h3>Сотрудникам</h3>
-              <p>
-                Как инструмент для оценки и мониторинга своего эмоционального
-                состояния
-              </p>
-              <p>
-                Ресурс с рекомендациями по управлению стрессом и поддержке
-                своего психического здоровья
-              </p>
+              <div>
+                <p>
+                  Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
+                  эмоционального состояния
+                </p>
+                <p>
+                  Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
+                  поддержке своего&nbsp;психического здоровья
+                </p>
+              </div>
             </article>
             <article>
               <div>
                 <span>02</span>
               </div>
-              <h3>руководителям и менеджерам</h3>
-              <p>
-                Для оценки состояния выгорания участников своей команды и
-                предоставления необходимой поддержки.
-              </p>
-              <p>
-                Для получения информации о состоянии сотрудников для правильного
-                распределения задач и нагрузки и улучшению рабочей среды
-              </p>
+              <h3>руководителям и&nbsp;менеджерам</h3>
+              <div>
+                <p>
+                  Для оценки состояния выгорания участников&nbsp;своей команды
+                  и&nbsp;предоставления&nbsp;необходимой
+                  <br />
+                  поддержки.
+                </p>
+                <p>
+                  Для получения информации о&nbsp;состоянии&nbsp;сотрудников
+                  для&nbsp;правильного&nbsp;распределения задач и&nbsp;нагрузки
+                  и улучшению рабочей
+                  <br />
+                  среды
+                </p>
+              </div>
             </article>
             <article>
               <div>
                 <span>03</span>
               </div>
-              <h3>работодателям и HR специалистам</h3>
-              <p>
-                Для отслеживания уровня выгорания, выявления проблемных областей
-                и принятия мер для предотвращения и управления выгоранием среди
-                своих сотрудников
-              </p>
+              <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
+              <div>
+                <p>
+                  Для отслеживания уровня выгорания, выявления проблемных
+                  областей и&nbsp;принятия мер для предотвращения
+                  и&nbsp;управления выгоранием среди своих сотрудников
+                </p>
+              </div>
             </article>
           </div>
         </section>
@@ -115,11 +146,16 @@ export const LandingPage: React.FC = () => {
               <span>Сотрудникам</span>
               <h2>Экспресс-тесты настроения и рабочих задач</h2>
               <p>
-                Оценивайте регулярно свое настроение и загрузку по работе и
+                Оценивайте регулярно свое настроение и загрузку по&nbsp;работе и
                 формируйте данные для аналитики. Это поможет отрефлексировать
                 свой рабочий опыт и эмоциональное сосотояние
               </p>
-              <Link to="#form">Заказать демо</Link>
+              <a
+                className={`${styles.button} ${styles.featuresButton}`}
+                href="#form"
+              >
+                Заказать демо
+              </a>
             </div>
             <img
               src={articleTests}
@@ -132,11 +168,16 @@ export const LandingPage: React.FC = () => {
               <span>HR специалистам</span>
               <h2>Опросы сотрудников</h2>
               <p>
-                Проводите регулярные опросы своих сотрудников для оценки их
-                состояния. Используйте предустановленные опросы или добавляйте
-                свои благодаря конструктору опросов
+                Проводите регулярные опросы своих сотрудников для&nbsp;оценки их
+                состояния. Используйте предустановленные&nbsp;опросы или
+                добавляйте свои благодаря конструктору опросов
               </p>
-              <Link to="#form">Заказать демо</Link>
+              <a
+                className={`${styles.button} ${styles.featuresButton}`}
+                href="#form"
+              >
+                Заказать демо
+              </a>
             </div>
             <img
               src={articleQueries}
@@ -149,11 +190,17 @@ export const LandingPage: React.FC = () => {
               <span>Руководителям</span>
               <h2>Страница сотрудника</h2>
               <p>
-                Получайте всю необходимую информацию о состоянии каждого
-                сотрудника в приложении, сохраняйте и отслеживайте информацию о
-                проведенных встречах, вовремя реагируйте на тревожные сигналы
+                Получайте всю необходимую информацию о состоянии&nbsp;каждого
+                сотрудника в приложении, сохраняйте&nbsp;и отслеживайте
+                информацию о проведенных&nbsp;встречах, вовремя реагируйте на
+                тревожные&nbsp;сигналы
               </p>
-              <Link to="#form">Заказать демо</Link>
+              <a
+                className={`${styles.button} ${styles.featuresButton}`}
+                href="#form"
+              >
+                Заказать демо
+              </a>
             </div>
             <img
               src={articleProfile}
@@ -166,10 +213,16 @@ export const LandingPage: React.FC = () => {
               <span>Сотрудникам</span>
               <h2>Раздел с полезными ресурсами</h2>
               <p>
-                Используйте ресурсы из раздела Полезное для улучшения
-                эмоционального состояния, уменьшения стресса и саморазвития
+                Используйте ресурсы из раздела Полезное для
+                улучшения&nbsp;эмоционального состояния, уменьшения&nbsp;стресса
+                и саморазвития
               </p>
-              <Link to="#form">Заказать демо</Link>
+              <a
+                className={`${styles.button} ${styles.featuresButton}`}
+                href="#form"
+              >
+                Заказать демо
+              </a>
             </div>
             <img
               src={articleBookmarks}
@@ -184,12 +237,18 @@ export const LandingPage: React.FC = () => {
         </section>
 
         <section id="form" className={styles.sectionForm}>
+          {/* @TODO: Валидация и сабмит формы */}
           <form>
             <h2>Остались еще вопросы? Напишите нам!</h2>
-            <input />
-            <input />
-            <textarea />
-            <button>Отправить</button>
+            <input placeholder="Имя" name="name" />
+            <input placeholder="E-mail" name="email" />
+            <textarea placeholder="Комментарий" name="comment" />
+            <button
+              type="submit"
+              className={`${styles.button} ${styles.sectionFormButton}`}
+            >
+              Отправить
+            </button>
           </form>
           <img
             src={sectionFormImage}
@@ -200,7 +259,10 @@ export const LandingPage: React.FC = () => {
 
       <footer>
         <img src={logo} alt="Логотип" />
-        <p>Защита для ваших сотрудников &copy; 2023 MoodBeat</p>
+        <p>
+          Защита для ваших сотрудников
+          &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
+        </p>
       </footer>
     </div>
   );

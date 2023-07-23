@@ -11,7 +11,8 @@ interface AccordionProps {
 }
 
 export const Accordion: React.FC<AccordionProps> = ({ faqItems }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  // Если установить setActiveIndex = null, все элементы будут collapsed
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     if (activeIndex === index) {
@@ -22,23 +23,17 @@ export const Accordion: React.FC<AccordionProps> = ({ faqItems }) => {
   };
 
   return (
-    <div>
+    <div className={styles.accordion}>
       {faqItems.map((item, index) => (
         <div key={index}>
           <div
+            className={`${styles.element} ${
+              activeIndex === index ? `${styles.elementActive}` : ""
+            }`}
             onClick={() => toggleAccordion(index)}
             style={{ cursor: "pointer" }}
           >
             {item.question}
-            {activeIndex === index ? (
-              <span
-                className={`${styles.accordion} ${styles.accordionUp}`}
-              ></span>
-            ) : (
-              <span
-                className={`${styles.accordion} ${styles.accordionDown}`}
-              ></span>
-            )}
           </div>
           {activeIndex === index && <p>{item.answer}</p>}
         </div>
