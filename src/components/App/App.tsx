@@ -9,9 +9,18 @@ import * as Api from "@/shared/api/Api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer";
 import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer";
-import {resetAllCurrentUserData, setAllCurrentUserData, selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer";
+import {
+  resetAllCurrentUserData,
+  setAllCurrentUserData,
+  selectUserInfo,
+} from "@/store/reducers/currentUser/currentUserReducer";
 import { addNotifications } from "@/store/reducers/notifications/notificationsReducer";
-import { addConditions, selectButtonConditions, addButtonCondition, addBurnoutLevet } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
+import {
+  addConditions,
+  selectButtonConditions,
+  addButtonCondition,
+  addBurnoutLevet,
+} from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
 
 import {
   ExpressDiagnoseResponse,
@@ -20,7 +29,8 @@ import {
   TestInterface,
   SubmitArguments,
   UserInfo,
-  WebSocketMessage, MeetingInfo
+  WebSocketMessage,
+  MeetingInfo,
 } from "@/types";
 
 import { BASE_URL_WSS } from "@/shared/constants";
@@ -29,17 +39,21 @@ import { AlertPopup } from "@/shared/ui/AlertPopup/AlertPopup";
 
 export const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [resultOfPsychoTest, setResultOfPsychoTest] = useState<ExpressDiagnoseResponse>();
+  const [resultOfPsychoTest, setResultOfPsychoTest] =
+    useState<ExpressDiagnoseResponse>();
   const [expressTest, setExpressTest] = useState<TestInterface | null>(null);
   const [burnoutTest, setBurnoutTest] = useState<TestInterface | null>(null);
-  const [allTestsResults, setallTestsResults] = useState<ExpressDiagnoseResponse[]>();
+  const [allTestsResults, setallTestsResults] =
+    useState<ExpressDiagnoseResponse[]>();
   const [isLoading, setIsLoading] = useState(false);
   const [employees, setEmployees] = useState([]);
   const [events, setEvents] = useState([]);
 
   const currentUserInfo = useAppSelector(selectUserInfo);
   const buttonCondition = useAppSelector(selectButtonConditions);
-  const role = useAppSelector((state) => state.currentUserSlice.currentUser.role);
+  const role = useAppSelector(
+    (state) => state.currentUserSlice.currentUser.role
+  );
 
   const dispatch = useAppDispatch();
 
@@ -66,15 +80,15 @@ export const App = () => {
           })
           .catch((err) => {
             console.log(err);
-          })
+          });
       }
     }
   }, [loggedIn]);
 
-  async function refreshToken (token: string) {
+  async function refreshToken(token: string) {
     try {
       const response = await ApiAuth.refreshToken(token);
-      if(response.data.access) {
+      if (response.data.access) {
         localStorage.setItem("jwt", response.data.access);
       }
     } catch (err: any) {
@@ -82,7 +96,7 @@ export const App = () => {
     }
   }
 
-  async function auth (jwt: string) {
+  async function auth(jwt: string) {
     setIsLoading(true);
     try {
       const response = await ApiAuth.checkToken(jwt);
@@ -145,7 +159,7 @@ export const App = () => {
     }
   }
 
-  function handleSignOut () {
+  function handleSignOut() {
     setLoggedIn(false);
     dispatch(resetAllCurrentUserData());
     navigate("/login");
@@ -183,8 +197,9 @@ export const App = () => {
       if (response) {
         dispatch(setSuccessMessage("Приглашение отправлено!"));
       }
-    } catch (err) {
-      dispatch(setErrorMessage("Пользователь с таким e-mail уже существует"));
+    } catch (err: any) {
+      const errObject: any = JSON.parse(err.request.response);
+      dispatch(setErrorMessage(errObject.email));
     }
   }
 
@@ -199,7 +214,6 @@ export const App = () => {
     }
   }
 
-
   async function handleSendTestResult(result: SubmitArguments) {
     try {
       const response = await Api.sendTestResults(result);
@@ -207,12 +221,14 @@ export const App = () => {
 
       // отправка GET запроса с ID пройденного теста, чтобы сделать уведомление неактивным
       try {
-        const res = await Api.checkTestNotificationIsActive(result.survey.toString());
-        if (res.data.results) Api.makeEventNotificationUnactive(res.data.results[0].id);
+        const res = await Api.checkTestNotificationIsActive(
+          result.survey.toString()
+        );
+        if (res.data.results)
+          Api.makeEventNotificationUnactive(res.data.results[0].id);
       } catch (err: any) {
         console.log(err);
       }
-
     } catch (err: any) {
       console.log(err);
     }
@@ -261,7 +277,7 @@ export const App = () => {
       getAllTestsResult();
       getTestsQuestions();
       getTestsBurnoutQuestions();
-      getAllUserConditions()
+      getAllUserConditions();
     }
   }, [loggedIn]);
 
@@ -280,7 +296,7 @@ export const App = () => {
   }, [role]);
   //
 
-  function openTestAlertPopup () {
+  function openTestAlertPopup() {
     dispatch(
       setErrorMessage(
         `Для перехода на следующий шаг нужно ответить на все вопросы`
@@ -317,7 +333,12 @@ export const App = () => {
   //   }
   // }
 
-  async function handleAddMeetingInfo ({userId, formattedDate, comment, level}: MeetingInfo) {
+  async function handleAddMeetingInfo({
+    userId,
+    formattedDate,
+    comment,
+    level,
+  }: MeetingInfo) {
     try {
       await Api.sendMeetingInfo(userId, formattedDate, comment, level);
     } catch (err: any) {
@@ -330,7 +351,7 @@ export const App = () => {
       try {
         const response = await Api.getUserBurnoutsGraph(currentUserInfo.id);
         if (response) {
-          dispatch(addBurnoutLevet(response.data))
+          dispatch(addBurnoutLevet(response.data));
         }
       } catch (err: any) {
         console.log(err);
@@ -343,7 +364,7 @@ export const App = () => {
       try {
         const response = await Api.sendUserCondition(buttonCondition);
         if (response) {
-          dispatch(addButtonCondition(buttonCondition))
+          dispatch(addButtonCondition(buttonCondition));
         }
       } catch (err: any) {
         console.log(err);
@@ -352,35 +373,36 @@ export const App = () => {
   }
 
   useEffect(() => {
-    handleButtonConditionClick()
-  }, [buttonCondition])
+    handleButtonConditionClick();
+  }, [buttonCondition]);
 
-   // получение уведомлений о тестах и мероприятиях с помощью WebSocket
-   useEffect(() => {
+  // получение уведомлений о тестах и мероприятиях с помощью WebSocket
+  useEffect(() => {
     const socket = new WebSocket(`${BASE_URL_WSS}/notifications?2`);
 
     socket.onmessage = (event) => {
       const newEvent = JSON.parse(event.data) as WebSocketMessage;
-      dispatch(addNotifications(newEvent))
-    }
+      dispatch(addNotifications(newEvent));
+    };
     return () => {
       if (socket.readyState === WebSocket.OPEN) {
         socket.close();
-      }};
+      }
+    };
   }, []);
 
   useEffect(() => {
     if (currentUserInfo.id !== 0) {
-      handleSetUserBurnout()
+      handleSetUserBurnout();
     }
-  }, [currentUserInfo])
+  }, [currentUserInfo]);
 
   useEffect(() => {
     if (loggedIn) {
       getAllTestsResult();
       getTestsQuestions();
       getTestsBurnoutQuestions();
-      getAllUserConditions()
+      getAllUserConditions();
     }
   }, [loggedIn]);
 
