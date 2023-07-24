@@ -317,8 +317,8 @@ export const deleteUsefulLike = (id: number) => {
 export const addUseful = (entry: any) => {
   return axios.post(`${BASE_URL_REQUEST}/entries/`,
     {
-      preview: entry.preview,
-      title: entry.name,
+      preview: entry.preview_image,
+      title: entry.title,
       description: entry.description,
       url: entry.url,
       text: entry.text,
