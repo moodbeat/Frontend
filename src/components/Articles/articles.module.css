@@ -6,8 +6,8 @@
   /* flex-wrap: wrap; */
   align-items: center;
   margin: 16px 0 0;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr;
+  gap: 17.33px;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .title {

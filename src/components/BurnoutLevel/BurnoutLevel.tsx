@@ -1,8 +1,8 @@
 import styles from "./BurnoutLevel.module.css";
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
-import { useAppSelector } from "@/store/hooks";
-import { selectBurnoutLevel } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
+import { useAppSelector } from "@/store/hooks.ts";
+import { selectBurnoutLevel } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
 import { DataBurnOutInterface, UserBurnoutLevel } from "@/types.ts";
 import { useLocation } from "react-router";
 

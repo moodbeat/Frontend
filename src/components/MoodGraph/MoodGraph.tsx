@@ -1,7 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useState, useEffect } from "react";
-import { selectConditions, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
-import { useAppSelector } from "@/store/hooks";
+import { selectConditions, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
+import { useAppSelector } from "@/store/hooks.ts";
 import { arrowLeft, arrowRight } from "@/assets";
 
 import {
@@ -159,13 +159,13 @@ export const MoodGraph = ({conditionsData}: Props) => {
         margin={{ top: 50, right: 0, bottom: 40, left: 33 }}
         // xScale={{ type: "point" }}
         curve="basis"
-        lineWidth={1}
+        lineWidth={1.5}
         enablePoints={false}
         enableGridX={false}
         enableGridY={false}
         enableArea={true}
         areaOpacity={0.1}
-        colors={{ scheme: 'purple_orange' }}
+        colors={'#8A32E0'}
         animate={true}
         defs={[
           {

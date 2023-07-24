@@ -1,5 +1,5 @@
 import styles from "./eventsMain.module.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { EventInterface } from "@/types";
 import { EventsMainCard } from "./EventsMainCard/EventsMainCard";
 
@@ -14,10 +14,7 @@ export const EventsMain: React.FC<Props> = ({events}) => {
     setEventsSort(events.slice(0,2))
   },[events]);
 
-  // useEffect(()=>{
-  //   console.log(events);
-  //   console.log(eventsSort);
-  // },[eventsSort]);
+  console.log(eventsSort);
 
   return (
     <div className={styles.events}>

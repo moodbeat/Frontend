@@ -1,9 +1,9 @@
 import styles from "./MoodButton.module.css";
 import cn from "classnames";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer";
-import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer";
-import { sendButtonCondition, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer";
+import { useAppDispatch, useAppSelector } from "@/store/hooks.ts";
+import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer.ts";
+import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer.ts";
+import { sendButtonCondition, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
 
 type Moods = "bad" | "so-so" | "normal" | "good" | "perfect";
 interface MoodsProps {

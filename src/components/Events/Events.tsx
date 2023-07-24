@@ -9,7 +9,7 @@ export const EventsMain = () => {
           <img className={styles.img} src={image} />
           <div className={styles.pointContent}>
             <p className={styles.text}>Тимбилдинг</p>
-            <time className={styles.time}>18 мая 2023</time>
+            <time className={styles.time}>18 ма 2023</time>
           </div>
         </li>
         <li className={styles.point}>
@@ -17,6 +17,13 @@ export const EventsMain = () => {
           <div className={styles.pointContent}>
             <p className={styles.text}>Тимбилдинг</p>
             <time className={styles.time}>18 мая 2023</time>
+          </div>
+        </li>
+        <li className={styles.point}>
+          <img className={styles.img} src={image} />
+          <div className={styles.pointContent}>
+            <p className={styles.text}>Тимбилдинг</p>
+            <time className={styles.time}>18 августbhmgmjа 2023</time>
           </div>
         </li>
       </ul>

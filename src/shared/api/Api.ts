@@ -350,3 +350,11 @@ export const fetchData = async () => {
   }
 };
 
+export const getActivityTypes = () => {
+  return axios.get(`${BASE_URL_REQUEST}/metrics/activity_types`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+
