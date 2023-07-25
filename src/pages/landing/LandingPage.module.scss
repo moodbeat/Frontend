@@ -1,3 +1,5 @@
+// @TODO: Add pink background svg figure
+
 .landing {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,8 @@
   font-size: var(--font-size-m);
   line-height: var(--font-line-m);
 }
+
+// HEADER
 
 .header {
   padding: 40px 60px 0;
@@ -51,10 +55,14 @@
   color: var(--color-accent-purple);
 }
 
+// HERO
+
 .sectionHero {
-  padding: 182px 60px 0;
+  padding: 128px 60px 80px;
   display: flex;
   background: linear-gradient(rgba(138, 50, 224, 1), rgba(138, 50, 224, 0.2));
+  justify-content: space-between;
+  align-items: center;
 }
 .heroCol {
   max-width: 705px;
@@ -78,14 +86,17 @@
   background-color: var(--color-accent-purple);
   color: var(--color-white);
 }
-.heroImage {
+.sectionHero img {
   display: block;
   object-fit: cover;
-  max-width: 720px;
+  max-width: 600px;
+  max-height: 645px;
 }
 
+// AUDIENCE
+
 .sectionAudience {
-  padding: 140px 60px 0;
+  padding: 82px 60px 0;
   color: var(--color-black);
 }
 .sectionAudience h2 {
@@ -104,8 +115,15 @@
   gap: 20px;
   max-width: 467px;
   min-height: 550px;
+  border-radius: 20px;
   padding: 40px 36px;
   box-shadow: var(--shadow-small);
+  transition: all 0.5s ease-in;
+}
+.audienceCards article:hover {
+  border: 1px solid var(--color-accent-purple);
+  box-shadow: var(--shadow-small-purple);
+  cursor: pointer;
 }
 .audienceCards article span {
   display: flex;
@@ -145,6 +163,8 @@
   margin-bottom: 13px;
 }
 
+// FEATURES
+
 .sectionFeatures {
   padding: 140px 60px;
   display: flex;
@@ -162,6 +182,15 @@
   display: block;
   max-width: 740px;
   object-fit: contain;
+  border-radius: 12px;
+  transition: all 0.3s ease-in;
+}
+.sectionFeatures article img:nth-of-type(1) {
+  max-width: 680px;
+}
+.sectionFeatures article img:hover {
+  scale: 1.05;
+  box-shadow: var(--shadow-small-purple);
 }
 .sectionFeatures article div {
   max-width: 550px;
@@ -189,6 +218,14 @@
   color: var(--color-black);
 }
 .featuresButton {
+  color: var(--color-white);
+  width: 0px;
+  font-size: 0px;
+  transition: all 0.3s ease-in;
+}
+.sectionFeatures article div:hover .featuresButton {
+  width: 220px;
+  font-size: var(--font-size-m);
   background-color: var(--color-accent-lightgray);
   color: var(--color-accent-purple);
 }
@@ -203,8 +240,16 @@
   line-height: 60px;
 }
 
+// FORM
+
 .sectionForm {
-  padding: 0 60px;
+  padding: 112px 0 165px;
+  width: 100%;
+  background: linear-gradient(rgba(138, 50, 224, 1), rgba(138, 50, 224, 0.2));
+}
+.sectionFormContainer {
+  width: 657px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   gap: 83px;
@@ -214,7 +259,7 @@
   font-weight: 600;
   font-size: 50px;
   line-height: 60px;
-  color: var(--color-black);
+  color: var(--color-white);
 }
 .sectionForm form {
   display: flex;
@@ -228,13 +273,13 @@
 .sectionForm textarea {
   width: 100%;
   min-height: 186px;
+  resize: none;
 }
 .sectionForm input,
 .sectionForm textarea {
   padding: 16px 12px;
   border-radius: 8px;
   border: 0.5px solid var(--color-accent-gray);
-  resize: none;
 }
 .sectionForm input::placeholder,
 .sectionForm textarea::placeholder {
@@ -249,10 +294,9 @@
   color: var(--color-error);
 }
 .sectionFormButton {
-  margin: 30px 0 0;
-  background-color: var(--color-accent-purple);
+  background-color: transparent;
   color: var(--color-white);
-  border: none;
+  border: 1px solid var(--color-white);
   cursor: pointer;
 }
 .sectionForm img {
@@ -260,14 +304,29 @@
   object-fit: cover;
   max-width: 740px;
 }
+.sectionFormCheckbox {
+  margin: 0 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  color: var(--color-white);
+}
+.sectionFormCheckbox input {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--color-accent-purple);
+}
 
 footer {
-  padding: 140px 60px 40px;
+  margin-top: -100px;
+  padding: 0 60px 40px;
   display: flex;
   justify-content: space-between;
 }
 footer p {
-  max-width: 300px;
+  max-width: 305px;
   text-align: right;
   font-weight: 500;
   font-size: 18px;

@@ -40,6 +40,7 @@
   /* Shadows */
   --shadow-medium: 0 15px 20px 0 rgb(88 81 94 / 10%);
   --shadow-small: 0 2px 12px 0 rgb(88 81 94 / 10%);
+  --shadow-small-purple: 0 2px 12px 0 rgb(138 50 224);
 
   /* Fonts */
   --font-size-xs: 12px;
@@ -63,6 +64,10 @@
   --font-button: 500 16px/20px "Roboto", sans-serif;
   --font-search-input: 400 16px/20px "Roboto", sans-serif;
   --font-more: 500 15px/18px "Roboto", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
