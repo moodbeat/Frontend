@@ -16,6 +16,7 @@ interface FormValues {
   name: string;
   comment: string;
   email: string;
+  eula: boolean;
 }
 
 const validate = (values: FormValues) => {
@@ -32,6 +33,10 @@ const validate = (values: FormValues) => {
     errors.email = "Укажите адрес электронной почты";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = "Указанный корректный адрес электронной почты";
+  }
+
+  if (!values.eula) {
+    errors.eula = "Подтвердите согласие на обработку персональных данных";
   }
 
   return errors;
@@ -53,6 +58,7 @@ export const LandingPage: React.FC = () => {
       name: "",
       email: "",
       comment: "",
+      eula: false,
     },
     validate,
     onSubmit: (values) => {
@@ -94,11 +100,12 @@ export const LandingPage: React.FC = () => {
         <section className={styles.sectionHero}>
           <div className={styles.heroCol}>
             <h1 className={styles.heroTitle}>
-              Хотите защитить сотрудников от&nbsp;выгорания?
+              Держите руку на&nbsp;пульсе эффективности
             </h1>
             <p className={styles.heroText}>
-              Установите наше инновационное приложение для&nbsp;профилактики
-              профессионального выгорания&nbsp;сотрудников MoodBeat.
+              Поможем HR и руководителям установить&nbsp;эмоциональный контакт с
+              командой, вовремя заметить тревожные сигналы и&nbsp;остановить
+              выгорание.
             </p>
             <a
               className={`${styles.button} ${styles.heroButton}`}
@@ -107,11 +114,7 @@ export const LandingPage: React.FC = () => {
               Узнать больше
             </a>
           </div>
-          <img
-            className={styles.heroImage}
-            src={imageHero}
-            alt="Скриншот главного экрана приложения"
-          />
+          <img src={imageHero} alt="Скриншот главного экрана приложения" />
         </section>
 
         <section id="audience" className={styles.sectionAudience}>
@@ -119,20 +122,18 @@ export const LandingPage: React.FC = () => {
           <div className={styles.audienceCards}>
             <article>
               <div>
-                <span>01</span>
+                <span>03</span>
               </div>
-              <h3>Сотрудникам</h3>
+              <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
               <div>
                 <p>
-                  Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
-                  эмоционального состояния
-                </p>
-                <p>
-                  Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                  поддержке своего&nbsp;психического здоровья
+                  Для отслеживания уровня выгорания, выявления проблемных
+                  областей и&nbsp;принятия мер для предотвращения
+                  и&nbsp;управления выгоранием среди своих сотрудников
                 </p>
               </div>
             </article>
+
             <article>
               <div>
                 <span>02</span>
@@ -154,16 +155,20 @@ export const LandingPage: React.FC = () => {
                 </p>
               </div>
             </article>
+
             <article>
               <div>
-                <span>03</span>
+                <span>01</span>
               </div>
-              <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
+              <h3>Сотрудникам</h3>
               <div>
                 <p>
-                  Для отслеживания уровня выгорания, выявления проблемных
-                  областей и&nbsp;принятия мер для предотвращения
-                  и&nbsp;управления выгоранием среди своих сотрудников
+                  Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
+                  эмоционального состояния
+                </p>
+                <p>
+                  Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
+                  поддержке своего&nbsp;психического здоровья
                 </p>
               </div>
             </article>
@@ -217,6 +222,28 @@ export const LandingPage: React.FC = () => {
 
           <article>
             <div>
+              <span>Сотрудникам</span>
+              <h2>Раздел с полезными ресурсами</h2>
+              <p>
+                Используйте ресурсы из раздела Полезное для
+                улучшения&nbsp;эмоционального состояния, уменьшения&nbsp;стресса
+                и саморазвития
+              </p>
+              <a
+                className={`${styles.button} ${styles.featuresButton}`}
+                href="#form"
+              >
+                Заказать демо
+              </a>
+            </div>
+            <img
+              src={articleBookmarks}
+              alt="Скриншот приложения со страницей сохраненных полезных материалов"
+            />
+          </article>
+
+          <article>
+            <div>
               <span>Руководителям</span>
               <h2>Страница сотрудника</h2>
               <p>
@@ -237,28 +264,6 @@ export const LandingPage: React.FC = () => {
               alt="Скриншот приложения со страницей профиля сотрудника"
             />
           </article>
-
-          <article>
-            <div>
-              <span>Сотрудникам</span>
-              <h2>Раздел с полезными ресурсами</h2>
-              <p>
-                Используйте ресурсы из раздела Полезное для
-                улучшения&nbsp;эмоционального состояния, уменьшения&nbsp;стресса
-                и саморазвития
-              </p>
-              <a
-                className={`${styles.button} ${styles.featuresButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <img
-              src={articleBookmarks}
-              alt="Скриншот приложения со страницей сохраненных полезных материалов"
-            />
-          </article>
         </section>
 
         <section id="faq" className={styles.sectionFaq}>
@@ -268,60 +273,76 @@ export const LandingPage: React.FC = () => {
 
         <section id="form" className={styles.sectionForm}>
           {/* @TODO: Валидация и сабмит формы */}
-          <form onSubmit={formik.handleSubmit}>
-            <h2>Остались еще вопросы? Напишите нам!</h2>
-            <input
-              id="name"
-              placeholder="Имя"
-              name="name"
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              onBlur={formik.handleBlur}
-            />
-
-            <input
-              id="email"
-              placeholder="E-mail"
-              name="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              onBlur={formik.handleBlur}
-            />
-
-            <textarea
-              id="comment"
-              placeholder="Комментарий"
-              name="comment"
-              onChange={formik.handleChange}
-              value={formik.values.comment}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <div className={styles.sectionFormError}>
-                {formik.errors.name}
+          <div className={styles.sectionFormContainer}>
+            <form onSubmit={formik.handleSubmit}>
+              <h2>Остались еще вопросы? Напишите нам!</h2>
+              <input
+                id="name"
+                placeholder="Имя"
+                name="name"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                onBlur={formik.handleBlur}
+              />
+              <input
+                id="email"
+                placeholder="E-mail"
+                name="email"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                onBlur={formik.handleBlur}
+              />
+              <textarea
+                id="comment"
+                placeholder="Комментарий"
+                name="comment"
+                onChange={formik.handleChange}
+                value={formik.values.comment}
+                onBlur={formik.handleBlur}
+              />
+              <div className={styles.sectionFormCheckbox}>
+                <input
+                  id="eula"
+                  name="eula"
+                  type="checkbox"
+                  onChange={formik.handleChange}
+                  checked={formik.values.eula}
+                  onBlur={formik.handleBlur}
+                />{" "}
+                Согласие на обработку персональных данных
               </div>
-            ) : null}
-            {formik.touched.email && formik.errors.email ? (
-              <div className={styles.sectionFormError}>
-                {formik.errors.email}
-              </div>
-            ) : null}
-            {formik.touched.comment && formik.errors.comment ? (
-              <div className={styles.sectionFormError}>
-                {formik.errors.comment}
-              </div>
-            ) : null}
-            <button
-              type="submit"
-              className={`${styles.button} ${styles.sectionFormButton}`}
-            >
-              Отправить
-            </button>
-          </form>
-          <img
+              {formik.touched.name && formik.errors.name ? (
+                <div className={styles.sectionFormError}>
+                  {formik.errors.name}
+                </div>
+              ) : null}
+              {formik.touched.email && formik.errors.email ? (
+                <div className={styles.sectionFormError}>
+                  {formik.errors.email}
+                </div>
+              ) : null}
+              {formik.touched.comment && formik.errors.comment ? (
+                <div className={styles.sectionFormError}>
+                  {formik.errors.comment}
+                </div>
+              ) : null}
+              {formik.touched.eula && formik.errors.eula ? (
+                <div className={styles.sectionFormError}>
+                  {formik.errors.eula}
+                </div>
+              ) : null}
+              <button
+                type="submit"
+                className={`${styles.button} ${styles.sectionFormButton}`}
+              >
+                Отправить
+              </button>
+            </form>
+          </div>
+          {/* <img
             src={sectionFormImage}
             alt="Фотография счастливых офисных работников на фоне розовой стены"
-          />
+          /> */}
         </section>
       </main>
 
