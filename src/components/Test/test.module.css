@@ -157,8 +157,8 @@
 }
 
 @media screen and (width > 1440px) {
-  .burnout-container {
-    padding: 40px 0 0;
+  .container {
+    padding: 40px 52px 46px;
   }
 
   .test {
