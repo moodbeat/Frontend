@@ -308,7 +308,7 @@ export const LandingPage: React.FC = () => {
                   onChange={formik.handleChange}
                   checked={formik.values.eula}
                   onBlur={formik.handleBlur}
-                />{" "}
+                />
                 Согласие на обработку персональных данных
               </div>
               {formik.touched.name && formik.errors.name ? (

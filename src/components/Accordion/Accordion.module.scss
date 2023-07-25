@@ -1,6 +1,9 @@
 .element {
   display: block;
+  box-sizing: border-box;
+  border: 1px solid transparent;
   padding: 20px 40px;
+  margin-bottom: 4px;
   border-radius: 16px;
   background-color: var(--color-main-background);
   color: var(--color-black);
@@ -11,6 +14,10 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
+  transition: all 0.3s ease-in;
+}
+.element:hover {
+  border: 1px solid var(--color-accent-purple);
 }
 .elementActive {
   background-color: var(--color-accent-purple);
@@ -20,7 +27,7 @@
 .accordion p {
   display: block;
   padding: 20px 40px;
-  margin: 0;
+  margin: 0 0 4px;
   border-radius: 16px;
   background-color: var(--color-main-background);
   font-weight: 400;
