@@ -3,7 +3,7 @@ import "@/shared/styles/styles.css";
 import styles from "./LandingPage.module.scss";
 import logo from "@/assets/logo.svg";
 import logoWhiteText from "@/assets/logo_whiteText.svg";
-import sectionFormImage from "@/assets/sectionForm_image.png";
+// import sectionFormImage from "@/assets/sectionForm_image.png";
 import articleTests from "@/assets/article_tests.png";
 import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
