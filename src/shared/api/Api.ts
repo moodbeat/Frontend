@@ -1,5 +1,12 @@
 import axios from "axios";
-import {EventInterface, SubmitArguments, UserConditionForSend, UserInfo, WheelResults} from "@/types";
+import {
+  ActivityInterface,
+  EventInterface,
+  SubmitArguments,
+  UserConditionForSend,
+  UserInfo,
+  WheelResults
+} from "@/types";
 import {BASE_URL_REQUEST, BASE_URL_WSS} from "../constants";
 
 // const BASE_URL = "https://em-dev.usolcev.com/api/v1";
@@ -356,5 +363,26 @@ export const getActivityTypes = () => {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   });
+};
+
+export const getActivities = (id: string | number) => {
+  return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+
+export const sendActivities = (activities: ActivityInterface[]) => {
+  return axios.post(
+    `${BASE_URL_REQUEST}/metrics/activities`, {
+      activity_rates: activities
+    },
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
 };
 

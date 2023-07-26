@@ -350,3 +350,16 @@ export interface DataBurnOutInterface {
 
   degress: number,
 }
+
+export interface ActivityInterface {
+  type: number;
+  percentage: number;
+}
+
+export interface TagsInterface {
+  id: number;
+  name: string;
+  description: string;
+  key: number;
+  color: string;
+}

@@ -1,35 +1,49 @@
-import { useEffect, useRef, useState } from 'react';
-import { useRequest } from "@/shared/hooks/useRequest.tsx";
-import { getActivityTypes } from "@/shared/api/Api.ts";
+import {ReactElement, useEffect, useRef, useState} from 'react';
 import { RoutineSection } from "@/components/RoutineSlider/components/RoutineSection/RoutineSection.tsx";
 import { getPercentage, limitNumberWithinRange, nearestN } from "@/components/RoutineSlider/RoutineSlider.helpers.ts";
 import classes from './routineslider.module.scss';
 import {ButtonsList} from "@/components/RoutineSlider/components/ButtonsList/ButtonsList.tsx";
+import * as Api from "@/shared/api/Api.ts";
+import {TagsInterface} from "@/types.ts";
 
-interface TagsInterface {
-  id: number;
-  name: string;
-  description: string;
-  key: number;
-  color: string;
+interface Props {
+  data: TagsInterface[];
+  handleTags: (data: TagsInterface[]) => void;
+  handleWidths: (data: number[]) => void;
+  tags: TagsInterface[];
+  widths: number[];
 }
 
-export const RoutineSlider = () => {
-  const [data] = useRequest(getActivityTypes);
-  const [widths, setWidths] = useState<number[]>([]);
+export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Props): ReactElement => {
   const RoutineSliderRef = useRef<HTMLDivElement>(null);
-  const [tags, setTags] = useState<TagsInterface[]>([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     if (data) {
-      setWidths(new Array(data.length).fill(100 / data.length));
-      setTags(data);
+      handleWidths(new Array(data.length).fill(100 / data.length));
+      handleTags(data);
     }
   }, [data]);
 
   const handleCancelButton = () => {
-    setTags(data)
-    setWidths(new Array(data.length).fill(100 / data.length))
+    handleTags(data)
+    handleWidths(new Array(data.length).fill(100 / data.length))
+  }
+
+  async function handleSendActivities() {
+    const activities = tags.map((item, index) => ({
+      type: item.id,
+      percentage: widths[index]
+    }));
+    const emptyActivities = data.filter(item => !tags.includes(item)).map((item) => ({
+      type: item.id,
+      percentage: 0
+    }));
+    try {
+      await Api.sendActivities(activities.concat(emptyActivities));
+    } catch (err: any) {
+      console.log(err);
+    }
   }
 
   return (
@@ -87,18 +101,19 @@ export const RoutineSlider = () => {
                   if (_widths[index] === 0) {
                     _widths[nextSectionIndex] = maxPercent;
                     _widths.splice(index, 1);
-                    setTags(tags.filter((_, i) => i !== index));
+                    handleTags(tags.filter((_, i) => i !== index));
                     removeEventListener();
                   }
                   if (_widths[nextSectionIndex] === 0) {
                     _widths[index] = maxPercent;
                     _widths.splice(nextSectionIndex, 1);
-                    setTags(tags.filter((_, i) => i !== nextSectionIndex));
+                    handleTags(tags.filter((_, i) => i !== nextSectionIndex));
                     removeEventListener();
                   }
                 }
 
-                setWidths(_widths);
+                handleWidths(_widths);
+                setIsButtonDisabled(false);
               };
 
               window.addEventListener("pointermove", resize);
@@ -122,7 +137,7 @@ export const RoutineSlider = () => {
           />
         ))}
       </div>
-      <ButtonsList handleCancelButton={handleCancelButton}/>
+      <ButtonsList disabled={isButtonDisabled} handleCancelButton={handleCancelButton} handleSendActivities={handleSendActivities}/>
     </div>
   );
 };

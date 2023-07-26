@@ -14,8 +14,6 @@ export const EventsMain: React.FC<Props> = ({events}) => {
     setEventsSort(events.slice(0,2))
   },[events]);
 
-  console.log(eventsSort);
-
   return (
     <div className={styles.events}>
       <h3 className={styles.title}>Предстоящие мероприятия</h3>

@@ -15,6 +15,8 @@ export const RoutineSection = ({
                       width,
                      onSliderSelect
                     }: RoutineSectionProps) => {
+
+
   return (
     <div
       className={classes.tag}

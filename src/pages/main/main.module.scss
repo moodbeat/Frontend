@@ -31,10 +31,17 @@
 }
 
 .pie-chart {
-  width: 324px;
-  height: 328px;
-  border-radius: 20px;
-  background-color: white;
+  &-container {
+    width: 324px;
+    height: 328px;
+    border-radius: 20px;
+    background-color: white;
+    padding: 16px 20px;
+  }
+  &-title {
+    margin: 0 0 25px 0;
+    font: var(--font-h3);
+  }
 }
 
 .analytics {
