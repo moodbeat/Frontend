@@ -4,9 +4,12 @@ import { EventInterface } from "@/types";
 import { EventsHeader } from "./EventsHeader/EventsHeader";
 import { EventsFunctional } from "./EventsFunctional/EventsFunctional";
 import { EventsCard } from "./EventsCard/EventsCard";
+import {
+  getNotifications,
+  makeEventNotificationUnactive,
+} from "@/shared/api/Api";
 
 interface Props {
-  // valueInputSort: string;
   events: EventInterface[];
   fetchEvents: () => void;
 }
@@ -21,9 +24,6 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
   const [eventsSortMonth, setEventsSortMonth] = useState<EventInterface[]>([]);
   const [eventsSortFind, setEventsSortFind] = useState<EventInterface[]>([]);
   const [textInput, setTextInput] = useState<string>(""); // поисковая строка
-  // const [isRenderEventPage, setIsRenderEventPage] = useState(false);
-
-  // const reg = /[a-zA-Zа-яА-Я0-9-\ ]/;
 
   // переключение месяца в хедере страницы
   const reduceMonth = () => {
@@ -51,29 +51,35 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
     setTextInput("");
   };
 
-  // function sortMonthEvents() {
-  //   setEventsSortMonth(events.filter(item => new Date(item.start_time).getMonth() === month));
-  // }
+  // сортировка мероприятий по месяцу
   useEffect(() => {
-    // console.log('сортировка мероприятий по месяцу');
-    // console.log(events);
     setEventsSortMonth(
       events.filter((item) => new Date(item.start_time).getMonth() === month)
     );
   }, [month, events]);
-  // }, [month, events, isRenderEventPage]);
 
+  // сортировка мероприятий по поисковой строке
   useEffect(() => {
-    // console.log('сортировка по поисковой строке');
-    // console.log(eventsSortMonth);
     setEventsSortFind(eventsSortMonth);
+  }, [eventsSortMonth]);
+
+  // уменьшение счетчика уведомлений при открытии страницы месяца
+  useEffect(() => {
+    getNotifications().then((res) => {
+      eventsSortMonth.forEach((element) => {
+        res.data.results.forEach(
+          (n: { incident_id: number | undefined; id: number }) => {
+            if (n.incident_id === element.id) {
+              makeEventNotificationUnactive(String(n.id));
+            }
+          }
+        );
+      });
+    });
   }, [eventsSortMonth]);
 
   const handleInputSort = (e: { target: { value: string } }) => {
     const value = e.target.value;
-    // console.log(value.match(reg));
-    // !(value.substring(value.length-2, value.length-1) === '-' && value.substring(value.length-1) === '-') &&
-    // (value === '' || value.substring(value.length-1).match(reg) !== null) &&
     setTextInput(value);
   };
 
@@ -83,14 +89,10 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
         (event) =>
           event.name.toLowerCase().includes(textInput.toLowerCase()) ||
           event.text.toLowerCase().includes(textInput.toLowerCase())
-        // || employee.position.name.toLowerCase().includes(textInput.toLowerCase())
       )
     );
   }, [textInput]);
 
-  // console.log(events);
-  // console.log(eventsSortMonth);
-  // console.log(eventsSortFind);
   return (
     <section className={styles.eventsPage}>
       <div className={styles.eventsPageContainer}>
@@ -99,7 +101,6 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
           reduceMonth={reduceMonth}
           year={year}
           increaseMonth={increaseMonth}
-          // monthToday={monthToday}
           yearToday={yearToday}
           isArrowBack={isArrowBack}
         />
@@ -113,13 +114,7 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
         <ul className={styles.eventsContent}>
           {eventsSortFind.length > 0 &&
             eventsSortFind.map((item) => (
-              <EventsCard
-                key={item.id}
-                item={item}
-                fetchEvents={fetchEvents}
-                // isRenderEventPage={isRenderEventPage}
-                // setIsRenderEventPage={setIsRenderEventPage}
-              />
+              <EventsCard key={item.id} item={item} fetchEvents={fetchEvents} />
             ))}
         </ul>
       </div>

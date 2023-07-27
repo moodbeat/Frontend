@@ -1,10 +1,10 @@
-import {ResponsivePie} from "@nivo/pie";
-import styles from './PieChart.module.scss';
-import {TagsInterface, DateObject} from "@/types.ts";
-import {ReactElement, useEffect, useState} from 'react';
-import {getActivities} from "@/shared/api/Api.ts";
-import {getCurrentDateAndFutureDate} from "@/pages/main/components/PieChart/PieChart.helpers.ts";
-import {PeriodPicker} from "@/pages/main/components/PieChart/components/PeriodPicker.tsx";
+import { ResponsivePie } from "@nivo/pie";
+import styles from "./PieChart.module.scss";
+import { TagsInterface, DateObject } from "@/types.ts";
+import { ReactElement, useEffect, useState } from "react";
+import { getActivities } from "@/shared/api/Api.ts";
+import { getCurrentDateAndFutureDate } from "@/pages/main/components/PieChart/PieChart.helpers.ts";
+import { PeriodPicker } from "@/pages/main/components/PieChart/components/PeriodPicker.tsx";
 
 interface Props {
   data: TagsInterface[];
@@ -34,47 +34,45 @@ const MyResponsivePie = ({ data, colors }: PieDataProps): ReactElement => (
     valueFormat={(value) => `${value}%`}
     legends={[
       {
-        anchor: 'bottom',
-        direction: 'column',
+        anchor: "bottom",
+        direction: "column",
         justify: false,
         translateX: -86,
         translateY: 70,
         itemsSpacing: 0,
         itemWidth: 100,
         itemHeight: 18,
-        itemTextColor: '#000',
-        itemDirection: 'left-to-right',
+        itemTextColor: "#000",
+        itemDirection: "left-to-right",
         itemOpacity: 1,
         symbolSize: 12,
-        symbolShape: 'circle',
-      }
+        symbolShape: "circle",
+      },
     ]}
   />
 );
 
-export const PieChart = ({data, id, widths}: Props): ReactElement => {
+export const PieChart = ({ data, id, widths }: Props): ReactElement => {
   const [activities, setActivities] = useState<any>([]);
   const [pieChartData, setPieChartData] = useState<PieChartDataInterface[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [datesArray, setDatesArray] = useState<DateObject[]>([]);
   const [valueOfDatePicker, setValueOfDatePicker] = useState("");
 
-  console.log(activities);
-
   useEffect(() => {
     const dates = getCurrentDateAndFutureDate(valueOfDatePicker);
-    console.log(dates);
     setDatesArray(dates);
   }, [valueOfDatePicker]);
 
   useEffect(() => {
-    getPieChartActivities(id, datesArray)
+    getPieChartActivities(id, datesArray);
   }, [datesArray]);
 
   useEffect(() => {
     const colorsArr: string[] = [];
     if (activities && activities.length > 0 && data) {
-      setPieChartData(data.map((item: TagsInterface, index: number) => ({
+      setPieChartData(
+        data.map((item: TagsInterface, index: number) => ({
           id: item.name,
           label: item.name,
           value: Number(widths[index]),
@@ -83,19 +81,21 @@ export const PieChart = ({data, id, widths}: Props): ReactElement => {
 
       data.forEach((item) => {
         colorsArr.push(item.color);
-      })
+      });
       setColors(colorsArr);
     }
   }, [activities, data, widths, datesArray]);
 
   const handleChooseOption = (option: string) => {
     setValueOfDatePicker(option);
-  }
+  };
 
-  async function getPieChartActivities(id: string | number, datesArray: DateObject[]) {
+  async function getPieChartActivities(
+    id: string | number,
+    datesArray: DateObject[]
+  ) {
     try {
       const response = await getActivities(id, datesArray);
-      console.log(response.data.results);
       setActivities(response.data.results);
     } catch (err: any) {
       console.log(err);
@@ -104,8 +104,13 @@ export const PieChart = ({data, id, widths}: Props): ReactElement => {
 
   return (
     <div className={styles.container}>
-      {pieChartData.length !== 0 && colors.length !== 0 && <MyResponsivePie data={pieChartData} colors={colors}/>}
-      <PeriodPicker handleChooseOption={handleChooseOption} value={valueOfDatePicker} />
+      {pieChartData.length !== 0 && colors.length !== 0 && (
+        <MyResponsivePie data={pieChartData} colors={colors} />
+      )}
+      <PeriodPicker
+        handleChooseOption={handleChooseOption}
+        value={valueOfDatePicker}
+      />
     </div>
   );
 };
