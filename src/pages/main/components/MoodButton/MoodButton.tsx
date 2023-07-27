@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import styles from "./MoodButton.module.scss";
 import cn from "classnames";
-import { useAppDispatch, useAppSelector } from "@/store/hooks.ts";
+import { useAppDispatch } from "@/store/hooks.ts";
 import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer.ts";
-import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer.ts";
-import { sendButtonCondition, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
+import { sendButtonCondition } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
 
 type Moods = "bad" | "so-so" | "normal" | "good" | "perfect";
 interface MoodsProps {
   mood: Moods;
+  index: number;
 }
 
-export const MoodButton: React.FC<MoodsProps> = ({ mood }) => {
+export const MoodButton: React.FC<MoodsProps> = ({ mood, index }) => {
   const dispatch = useAppDispatch();
-  const buttonCondition = useAppSelector(selectButtonConditions);
-
   const [isHovered, setIsHovered] = useState(false);
 
   let caption: string;
@@ -62,9 +60,6 @@ export const MoodButton: React.FC<MoodsProps> = ({ mood }) => {
   }
 
   function handleSendMood(e: React.MouseEvent<HTMLButtonElement>) {
-    if (buttonCondition) {
-      dispatch(setErrorMessage('Можно голосовать только один раз в день'))
-    } else {
       const condition = +(e.currentTarget as HTMLButtonElement).value;
       const note = "Моё состояние сегодня";
       const date = new Date().toISOString()
@@ -75,11 +70,11 @@ export const MoodButton: React.FC<MoodsProps> = ({ mood }) => {
         date: date
       }))
       dispatch(setSuccessMessage('Вы молодец!'))
-    }
   }
 
   return (
     <button
+      key={index}
       onClick={(e) => handleSendMood(e)}
       value={condition}
       className={cn(styles.container, colorClass)}

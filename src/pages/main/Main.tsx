@@ -4,7 +4,6 @@ import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { Navbar } from "@/components/Navbar/Navbar";
 import {RoutineSlider} from "@/pages/main/components/RoutineSlider/RoutineSlider.tsx";
-import {MoodButton} from "@/pages/main/components/MoodButton/MoodButton.tsx";
 import {BurnoutTestBanner} from "@/components/BurnoutTestBanner/BurnoutTestBanner.tsx";
 import {MoodGraph} from "@/components/MoodGraph/MoodGraph.tsx";
 import {BurnoutLevel} from "@/components/BurnoutLevel/BurnoutLevel.tsx";
@@ -14,10 +13,12 @@ import {EventsMain} from "@/components/EventsMain/EventsMain.tsx";
 import {PieChart} from "@/pages/main/components/PieChart/PieChart.tsx";
 import {useRequest} from "@/shared/hooks/useRequest.tsx";
 import {getActivityTypes} from "@/shared/api/Api.ts";
-import {ReactElement, useState} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import {useAppSelector} from "@/store/hooks.ts";
 import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts";
 import {Report} from "@/pages/main/components/Report/Report.tsx";
+import {MoodButtonsSection} from "@/pages/main/components/MoodButtonsSection/MoodButtonsSection.tsx";
+import {isTenHoursPassed} from "@/pages/main/Main.helpers.ts";
 
 interface Props {
   events: EventInterface[];
@@ -28,6 +29,7 @@ export const Main = ({events}: Props): ReactElement | null => {
   const currentUser = useAppSelector(selectUserInfo);
   const [tagsOfPieChart, setTagsOfPieChart] = useState<TagsInterface[]>([]);
   const [widthsOfPieChart, setWidthsOfPieChart] = useState<number[]>([]);
+  const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
 
   const articles: ArticleInterface[] = [
     {
@@ -50,6 +52,16 @@ export const Main = ({events}: Props): ReactElement | null => {
     },
   ];
 
+  useEffect(() => {
+    if(currentUser.latest_condition) {
+      const result = isTenHoursPassed(currentUser.latest_condition.date);
+      setMoodButtonsVisible(result);
+    } else {
+      setMoodButtonsVisible(false);
+    }
+  }, [currentUser.latest_condition])
+
+
   const handleTagsOfPieChart = (data: TagsInterface[]) => {
     setTagsOfPieChart(data);
   }
@@ -70,14 +82,7 @@ export const Main = ({events}: Props): ReactElement | null => {
                 <PsychologistInfo/>
               </section>
               <section className={styles.moodTracker}>
-                <h2 className={styles.moodTrackerHeading}>Оцените свое настроение сегодня</h2>
-                <div className={styles.moodButtons}>
-                  <MoodButton mood="bad" />
-                  <MoodButton mood="so-so" />
-                  <MoodButton mood="normal" />
-                  <MoodButton mood="good" />
-                  <MoodButton mood="perfect" />
-                </div>
+                <MoodButtonsSection isMoodButtonsVisible={isMoodButtonsVisible}/>
               </section>
               <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart}/>
               <section className={styles.section}>
