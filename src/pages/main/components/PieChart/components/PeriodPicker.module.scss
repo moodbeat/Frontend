@@ -1,6 +1,6 @@
-@import '@/shared/styles/mixins';
+@import "@/shared/styles/mixins";
 
-.period-picker{
+.period-picker {
   width: 156px;
   position: absolute;
   top: -46px;
@@ -18,13 +18,13 @@
     border-radius: 12px 12px 0 0;
   }
   &-button {
-    @include size (24px, 24px);
+    @include size(24px, 24px);
     @include background-no-repeat-center-cover;
     border: none;
     background-color: var(--color-background);
-    background-image: url('../assets/chevron_down_24.svg');
+    background-image: url("chevron_down_24.svg");
     &-opened {
-      background-image: url('../assets/chevron_up_24.svg');
+      background-image: url("chevron_up_24.svg");
     }
   }
 }
@@ -42,8 +42,7 @@
     font: var(--font-body);
     cursor: pointer;
     &:hover {
-      background-color: #F4F9FC;
+      background-color: #f4f9fc;
     }
   }
 }
-

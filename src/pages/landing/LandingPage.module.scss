@@ -17,6 +17,7 @@
   font-weight: 500;
   font-size: var(--font-size-m);
   line-height: var(--font-line-m);
+  font-family: Roboto, sans-serif;
 }
 
 // @TODO: Единообразная подложка
@@ -361,6 +362,7 @@
 }
 .sectionForm p a {
   text-decoration: none;
+  color: var(--color-accent-secondary);
   border-bottom: 0.5px solid var(--color-accent-secondary);
 }
 

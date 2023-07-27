@@ -6,11 +6,9 @@ import {
   UserConditionForSend,
   UserInfo,
   WheelResults,
-  DateObject
+  DateObject,
 } from "@/types";
-import {BASE_URL_REQUEST, BASE_URL_WSS} from "../constants";
-
-// const BASE_URL = "https://em-dev.usolcev.com/api/v1";
+import { BASE_URL_REQUEST, BASE_URL_WSS } from "../constants";
 
 export const getUser = () => {
   return axios.get(`${BASE_URL_REQUEST}/users/current_user`, {
@@ -144,15 +142,19 @@ export const getEvents = () => {
 };
 
 export const checkTestNotificationIsActive = (id: string) => {
-  return axios.get(`${BASE_URL_REQUEST}/notifications?incident_id=${id}&incident_type=Опрос`, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    },
-  });
+  return axios.get(
+    `${BASE_URL_REQUEST}/notifications?incident_id=${id}&incident_type=Опрос`,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
 };
 
 export const postEvent = (event: EventInterface) => {
-  return axios.post(`${BASE_URL_REQUEST}/events/`,
+  return axios.post(
+    `${BASE_URL_REQUEST}/events/`,
     {
       name: event.name,
       for_all: true,
@@ -169,30 +171,40 @@ export const postEvent = (event: EventInterface) => {
     {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
+      },
     }
   );
 };
 export const postEventLike = (event: number) => {
-  return axios.post(`${BASE_URL_REQUEST}/socials/likes/`,
+  return axios.post(
+    `${BASE_URL_REQUEST}/socials/likes/`,
     {
-      "event": event
+      event: event,
     },
     {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
+      },
     }
   );
 };
 export const deleteEventLike = (id: number) => {
-  return axios.delete(`${BASE_URL_REQUEST}/socials/likes/${id}`,
-    {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
-    }
-  );
+  return axios.delete(`${BASE_URL_REQUEST}/socials/likes/${id}`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+export const getNotifications = () => {
+  return axios.get(`${BASE_URL_REQUEST}/notifications/`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+    params: {
+      // default limit=10
+      limit: 100,
+    },
+  });
 };
 export const makeEventNotificationUnactive = (id: string) => {
   return axios.get(`${BASE_URL_REQUEST}/notifications/${id}/viewed`, {
@@ -218,13 +230,19 @@ export const getMeetingsInfo = (id: string | undefined) => {
   });
 };
 
-export const sendMeetingInfo = (userId: string, formattedDate: string, comment: string, level: number) => {
+export const sendMeetingInfo = (
+  userId: string,
+  formattedDate: string,
+  comment: string,
+  level: number
+) => {
   return axios.post(
-    `${BASE_URL_REQUEST}/meeting_results`, {
+    `${BASE_URL_REQUEST}/meeting_results`,
+    {
       date: formattedDate,
       comment: comment,
       employee: userId,
-      mental_state: level
+      mental_state: level,
     },
     {
       headers: {
@@ -234,29 +252,34 @@ export const sendMeetingInfo = (userId: string, formattedDate: string, comment: 
   );
 };
 
-
 export const getLifeDirections = () => {
   return axios.get(`${BASE_URL_REQUEST}/metrics/life_directions`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   });
-}
+};
 
 export const getAllUserConditions = () => {
-  return axios.get(`${BASE_URL_REQUEST}/metrics/conditions/?my_conditions=true&limit=365`, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    },
-  });
+  return axios.get(
+    `${BASE_URL_REQUEST}/metrics/conditions/?my_conditions=true&limit=365`,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
 };
 
 export const getEmployeeConditions = (id: string) => {
-  return axios.get(`${BASE_URL_REQUEST}/metrics/conditions/?employee=${id}&limit=365`, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    },
-  });
+  return axios.get(
+    `${BASE_URL_REQUEST}/metrics/conditions/?employee=${id}&limit=365`,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
 };
 
 export const getBalanceWheelValues = (id: string | number) => {
@@ -265,18 +288,26 @@ export const getBalanceWheelValues = (id: string | number) => {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   });
-}
+};
 
-export const sendBalanceWheelResults = (results: WheelResults[], isPriority: boolean) => {
-  return axios.post(`${BASE_URL_REQUEST}/metrics/life_balance`, {results: results, set_priority: isPriority}, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+export const sendBalanceWheelResults = (
+  results: WheelResults[],
+  isPriority: boolean
+) => {
+  return axios.post(
+    `${BASE_URL_REQUEST}/metrics/life_balance`,
+    { results: results, set_priority: isPriority },
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }
-  });
+  );
 };
 
 export const sendUserCondition = (conditions: UserConditionForSend) => {
-  return axios.post(`${BASE_URL_REQUEST}/metrics/conditions/`,
+  return axios.post(
+    `${BASE_URL_REQUEST}/metrics/conditions/`,
     // return axios.post(`${BASE_URL_REQUEST}/metrics/conditions/?infinity_freq=true`,
     {
       mood: conditions.mood,
@@ -286,44 +317,47 @@ export const sendUserCondition = (conditions: UserConditionForSend) => {
     {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
+      },
     }
   );
 };
 
 //id пользователя currentUser
 export const getUserBurnoutsGraph = (id: number | string) => {
-  return axios.get(`${BASE_URL_REQUEST}/metrics/burnouts/graph_data/?employee=${id}`, {
+  return axios.get(
+    `${BASE_URL_REQUEST}/metrics/burnouts/graph_data/?employee=${id}`,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
+};
+
+export const postUsefulLike = (entry: number) => {
+  return axios.post(
+    `${BASE_URL_REQUEST}/socials/likes/`,
+    {
+      entry: entry,
+    },
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
+};
+export const deleteUsefulLike = (id: number) => {
+  return axios.delete(`${BASE_URL_REQUEST}/socials/likes/${id}`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   });
 };
 
-export const postUsefulLike = (entry: number) => {
-  return axios.post(`${BASE_URL_REQUEST}/socials/likes/`,
-    {
-      "entry": entry
-    },
-    {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
-    }
-  );
-};
-export const deleteUsefulLike = (id: number) => {
-  return axios.delete(`${BASE_URL_REQUEST}/socials/likes/${id}`,
-    {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
-    }
-  );
-};
-
 export const addUseful = (entry: any) => {
-  return axios.post(`${BASE_URL_REQUEST}/entries/`,
+  return axios.post(
+    `${BASE_URL_REQUEST}/entries/`,
     {
       preview: entry.preview_image,
       title: entry.title,
@@ -331,28 +365,28 @@ export const addUseful = (entry: any) => {
       url: entry.url,
       text: entry.text,
       category: entry.category,
-
     },
     {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      }
+      },
     }
   );
 };
 export const fetchData = async () => {
-
   try {
     const token = localStorage.getItem("jwt");
-    const headers = {Authorization: `Bearer ${token}`};
-    const response = await axios.get('https://em-dev.usolcev.com/api/v1/entries/', {headers});
+    const headers = { Authorization: `Bearer ${token}` };
+    const response = await axios.get(
+      "https://em-dev.usolcev.com/api/v1/entries/",
+      { headers }
+    );
 
-    console.log(response.data.results)
+    console.log(response.data.results);
     // console.log(chosenCardList)
-    return response
+    return response;
   } catch (error) {
-    console.error('Error fetching data:', error);
-
+    console.error("Error fetching data:", error);
   } finally {
     // setIsLoading(false);
   }
@@ -366,13 +400,19 @@ export const getActivityTypes = () => {
   });
 };
 
-export const getActivities = (id: string | number, datesArray: DateObject[]) => {
-  if(datesArray.length !== 0) {
-    return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}&before_date=${datesArray[0].before_date}&after_date=${datesArray[0].after_date}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    });
+export const getActivities = (
+  id: string | number,
+  datesArray: DateObject[]
+) => {
+  if (datesArray.length !== 0) {
+    return axios.get(
+      `${BASE_URL_REQUEST}/metrics/activities/?employee=${id}&before_date=${datesArray[0].before_date}&after_date=${datesArray[0].after_date}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
   } else {
     return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}`, {
       headers: {
@@ -384,8 +424,9 @@ export const getActivities = (id: string | number, datesArray: DateObject[]) => 
 
 export const sendActivities = (activities: ActivityInterface[]) => {
   return axios.post(
-    `${BASE_URL_REQUEST}/metrics/activities`, {
-      activity_rates: activities
+    `${BASE_URL_REQUEST}/metrics/activities`,
+    {
+      activity_rates: activities,
     },
     {
       headers: {
@@ -394,4 +435,3 @@ export const sendActivities = (activities: ActivityInterface[]) => {
     }
   );
 };
-

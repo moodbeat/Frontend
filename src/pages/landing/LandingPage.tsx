@@ -154,7 +154,7 @@ export const LandingPage: React.FC = () => {
             <div className={styles.audienceCards}>
               <article>
                 <div>
-                  <span>03</span>
+                  <span>01</span>
                 </div>
                 <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
                 <div>
@@ -190,7 +190,7 @@ export const LandingPage: React.FC = () => {
 
               <article>
                 <div>
-                  <span>01</span>
+                  <span>03</span>
                 </div>
                 <h3>Сотрудникам</h3>
                 <div>

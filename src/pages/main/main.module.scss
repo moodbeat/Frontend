@@ -5,6 +5,7 @@
 }
 
 .main {
+  margin: 0 auto;
   width: 1029px;
   box-sizing: border-box;
   padding: 40px 0 46px;
@@ -19,7 +20,7 @@
 
 .pie-chart {
   &-container {
-    @include size (324px, 328px);
+    @include size(324px, 328px);
     border-radius: 20px;
     background-color: white;
     padding: 14px 10px 16px 20px;
