@@ -1,0 +1,15 @@
+
+
+.mood {
+  margin: 0 0 32px;
+  &-tracker-heading {
+    margin: 0;
+    color: var(--color-black);
+    font: var(--font-h2);
+  }
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0 32px;
+  }
+}
