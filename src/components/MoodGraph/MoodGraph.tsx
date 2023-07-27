@@ -3,14 +3,11 @@ import { useState, useEffect } from "react";
 import { selectConditions, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
 import { useAppSelector } from "@/store/hooks.ts";
 import { arrowLeft, arrowRight } from "@/assets";
-
-import {
-  simpleSmileIcon,
-  slightlySmileIcon,
-  expressionlessIcon,
-  confusedIcon,
-  worriedIcon,
-} from "@/assets";
+import confusedIcon from '../../../public/confused.svg';
+import simpleSmileIcon from '../../../public/simple-smile.svg';
+import slightlySmileIcon from '../../../public/slightly-smile.svg';
+import expressionlessIcon from '../../../public/expressionless.svg';
+import worriedIcon from '../../../public/worried.svg';
 
 import styles from "./MoodGraph.module.css";
 import {UserConditionRecieved} from "@/types.ts";
@@ -147,11 +144,11 @@ export const MoodGraph = ({conditionsData}: Props) => {
       </div>
 
       <div className={styles.stackedSmiles}>
-        <div>{simpleSmileIcon}</div>
-        <div>{slightlySmileIcon}</div>
-        <div>{expressionlessIcon}</div>
-        <div>{confusedIcon}</div>
-        <div>{worriedIcon}</div>
+        <img src={simpleSmileIcon} alt="смайлик отличного настроения"/>
+        <img src={slightlySmileIcon} alt="смайлик хорошего настроения"/>
+        <img src={expressionlessIcon} alt="смайлик нормального настроения"/>
+        <img src={confusedIcon} alt="смайлик так себе настроения"/>
+        <img src={worriedIcon} alt="смайлик плохого настроения"/>
       </div>
 
       <ResponsiveLine
