@@ -38,6 +38,7 @@ export const App = () => {
   const [events, setEvents] = useState([]);
 
   const currentUserInfo = useAppSelector(selectUserInfo);
+
   const buttonCondition = useAppSelector(selectButtonConditions);
   const role = useAppSelector((state) => state.currentUserSlice.currentUser.role);
 

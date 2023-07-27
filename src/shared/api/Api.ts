@@ -1,5 +1,13 @@
 import axios from "axios";
-import {EventInterface, SubmitArguments, UserConditionForSend, UserInfo, WheelResults} from "@/types";
+import {
+  ActivityInterface,
+  EventInterface,
+  SubmitArguments,
+  UserConditionForSend,
+  UserInfo,
+  WheelResults,
+  DateObject
+} from "@/types";
 import {BASE_URL_REQUEST, BASE_URL_WSS} from "../constants";
 
 // const BASE_URL = "https://em-dev.usolcev.com/api/v1";
@@ -348,5 +356,42 @@ export const fetchData = async () => {
   } finally {
     // setIsLoading(false);
   }
+};
+
+export const getActivityTypes = () => {
+  return axios.get(`${BASE_URL_REQUEST}/metrics/activity_types`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+
+export const getActivities = (id: string | number, datesArray: DateObject[]) => {
+  if(datesArray.length !== 0) {
+    return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}&before_date=${datesArray[0].before_date}&after_date=${datesArray[0].after_date}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+  } else {
+    return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+  }
+};
+
+export const sendActivities = (activities: ActivityInterface[]) => {
+  return axios.post(
+    `${BASE_URL_REQUEST}/metrics/activities`, {
+      activity_rates: activities
+    },
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }
+  );
 };
 

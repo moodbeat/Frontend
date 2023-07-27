@@ -1,0 +1,51 @@
+@import "@/shared/styles/mixins";
+
+.container {
+  background-color: var(--color-main-background);
+}
+
+.main {
+  width: 1029px;
+  box-sizing: border-box;
+  padding: 40px 0 46px;
+  position: relative;
+}
+
+.section {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.mood {
+  margin: 0 0 32px;
+  &-tracker-heading {
+    margin: 0;
+    color: var(--color-black);
+    font: var(--font-h2);
+  }
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0 32px;
+  }
+}
+
+.pie-chart {
+  &-container {
+    @include size (324px, 328px);
+    border-radius: 20px;
+    background-color: white;
+    padding: 14px 10px 16px 20px;
+  }
+  &-title {
+    margin: 0 0 25px 0;
+    font: var(--font-h3);
+  }
+}
+
+@media screen and (width > 1440px) {
+  .main {
+    margin: 0 auto;
+  }
+}

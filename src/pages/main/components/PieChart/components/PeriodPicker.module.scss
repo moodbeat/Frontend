@@ -1,0 +1,49 @@
+@import '@/shared/styles/mixins';
+
+.period-picker{
+  width: 156px;
+  position: absolute;
+  top: -46px;
+  right: 34px;
+}
+
+.select {
+  @include flex-space-between;
+  height: 30px;
+  border-radius: 12px;
+  padding: 0 5px 0 12px;
+  background-color: var(--color-background);
+  font: var(--font-body);
+  &-options-opened {
+    border-radius: 12px 12px 0 0;
+  }
+  &-button {
+    @include size (24px, 24px);
+    @include background-no-repeat-center-cover;
+    border: none;
+    background-color: var(--color-background);
+    background-image: url('chevron_down_24.svg');
+    &-opened {
+      background-image: url('chevron_up_24.svg');
+    }
+  }
+}
+
+.options-list {
+  width: 100%;
+  @include list-initial-style;
+  background-color: var(--color-background-white);
+  border-radius: 0 0 12px 12px;
+  box-shadow: var(--shadow-medium);
+  margin: 0;
+  &-item {
+    padding: 8px 0 8px 14px;
+    height: 36px;
+    font: var(--font-body);
+    cursor: pointer;
+    &:hover {
+      background-color: #F4F9FC;
+    }
+  }
+}
+

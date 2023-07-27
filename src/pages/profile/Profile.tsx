@@ -23,8 +23,8 @@ import {
   UserConditionRecieved,
 } from "@/types";
 import * as Api from "@/shared/api/Api";
-import { MoodGraph } from "@/components/CenterScreenMain/MoodGraph/MoodGraph";
-import { BurnoutLevel } from "@/components/CenterScreenMain/BurnoutLevel/BurnoutLevel";
+import { MoodGraph } from "@/components/MoodGraph/MoodGraph";
+import { BurnoutLevel } from "@/components/BurnoutLevel/BurnoutLevel";
 import { BalanceWheelResult } from "@/pages/balancewheel/components/BalanceWheelResult/BalanceWheelResult";
 
 interface Props {
