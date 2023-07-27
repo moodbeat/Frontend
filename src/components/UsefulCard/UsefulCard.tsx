@@ -125,7 +125,7 @@ const UsefulCard: React.FC<Card> = ({
       }
                                                                                  alt="heart"/>
       </button>
-      <Link key={id} to={`/useful/${id}`} className={styles.link}>
+      <Link key={id} to={`/entries/${id}`} className={styles.link}>
         <div className={styles.container}>
           <div className="">
             <img className={styles.image} src={preview_image} height={175} width={292}

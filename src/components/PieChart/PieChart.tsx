@@ -5,7 +5,6 @@ import {ReactElement, useEffect, useState} from 'react';
 import {getActivities} from "@/shared/api/Api.ts";
 import {getCurrentDateAndFutureDate} from "@/components/PieChart/PieChart.helpers.ts";
 import {PeriodPicker} from "@/components/PieChart/components/PeriodPicker.tsx";
-import {useRequest} from "@/shared/hooks/useRequest.tsx";
 
 interface Props {
   data: TagsInterface[];
@@ -54,15 +53,17 @@ const MyResponsivePie = ({ data, colors }: PieDataProps): ReactElement => (
 );
 
 export const PieChart = ({data, id, widths}: Props): ReactElement => {
-  const [activities, setActivities] = useState();
+  const [activities, setActivities] = useState<any>([]);
   const [pieChartData, setPieChartData] = useState<PieChartDataInterface[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [datesArray, setDatesArray] = useState<DateObject[]>([]);
   const [valueOfDatePicker, setValueOfDatePicker] = useState("");
-  const [act] = useRequest(() => getActivities(id, datesArray));
+
+  console.log(activities);
 
   useEffect(() => {
     const dates = getCurrentDateAndFutureDate(valueOfDatePicker);
+    console.log(dates);
     setDatesArray(dates);
   }, [valueOfDatePicker]);
 
