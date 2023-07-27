@@ -1,12 +1,12 @@
 import {ReactElement, useEffect, useRef, useState} from 'react';
-import { RoutineSection } from "@/components/RoutineSlider/components/RoutineSection/RoutineSection.tsx";
-import { getPercentage, limitNumberWithinRange, nearestN } from "@/components/RoutineSlider/RoutineSlider.helpers.ts";
+import { RoutineSection } from "@/pages/main/components/RoutineSlider/components/RoutineSection/RoutineSection.tsx";
+import { getPercentage, limitNumberWithinRange, nearestN } from "@/pages/main/components/RoutineSlider/RoutineSlider.helpers.ts";
 import classes from './routineslider.module.scss';
-import {ButtonsList} from "@/components/RoutineSlider/components/ButtonsList/ButtonsList.tsx";
+import {ButtonsList} from "@/pages/main/components/RoutineSlider/components/ButtonsList/ButtonsList.tsx";
 import * as Api from "@/shared/api/Api.ts";
 import {TagsInterface} from "@/types.ts";
-import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer";
-import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer";
+import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer.ts";
+import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer.ts";
 import {useAppDispatch} from "@/store/hooks.ts";
 
 interface Props {

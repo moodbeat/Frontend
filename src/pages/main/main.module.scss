@@ -1,3 +1,5 @@
+@import "@/shared/styles/mixins";
+
 .container {
   background-color: var(--color-main-background);
 }
@@ -15,26 +17,23 @@
   margin-bottom: 32px;
 }
 
-.mood-tracker {
+.mood {
   margin: 0 0 32px;
-}
-
-.mood-tracker-heading {
-  margin: 0;
-  color: var(--color-black);
-  font: var(--font-h2);
-}
-
-.mood-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 24px 0 0;
+  &-tracker-heading {
+    margin: 0;
+    color: var(--color-black);
+    font: var(--font-h2);
+  }
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0 32px;
+  }
 }
 
 .pie-chart {
   &-container {
-    width: 324px;
-    height: 328px;
+    @include size (324px, 328px);
     border-radius: 20px;
     background-color: white;
     padding: 14px 10px 16px 20px;

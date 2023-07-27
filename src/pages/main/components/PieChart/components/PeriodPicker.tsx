@@ -1,6 +1,6 @@
 import { ReactElement, useRef, useState } from "react";
 import styles from "./PeriodPicker.module.scss";
-import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
+import { useOutsideClick } from "@/shared/hooks/useOutsideClick.tsx";
 
 interface Props {
   handleChooseOption: (value: string) => void;

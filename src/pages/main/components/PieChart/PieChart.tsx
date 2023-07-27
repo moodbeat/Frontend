@@ -3,8 +3,8 @@ import styles from './PieChart.module.scss';
 import {TagsInterface, DateObject} from "@/types.ts";
 import {ReactElement, useEffect, useState} from 'react';
 import {getActivities} from "@/shared/api/Api.ts";
-import {getCurrentDateAndFutureDate} from "@/components/PieChart/PieChart.helpers.ts";
-import {PeriodPicker} from "@/components/PieChart/components/PeriodPicker.tsx";
+import {getCurrentDateAndFutureDate} from "@/pages/main/components/PieChart/PieChart.helpers.ts";
+import {PeriodPicker} from "@/pages/main/components/PieChart/components/PeriodPicker.tsx";
 
 interface Props {
   data: TagsInterface[];
