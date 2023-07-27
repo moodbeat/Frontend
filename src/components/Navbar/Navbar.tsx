@@ -71,7 +71,7 @@ export const Navbar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
-          to="/useful"
+          to="/entries"
         >
           <div className={styles.logoContainer}>
             {advicesIcon}

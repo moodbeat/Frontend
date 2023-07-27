@@ -1,0 +1,50 @@
+
+.tag:last-of-type>.slider-button {
+  display:none !important;
+}
+
+.tag {
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  padding: 10px 0 15px;
+  border-right: 4px solid white;
+  &:first-of-type {
+    border-radius: 20px 0 0 20px;
+  }
+  &:last-of-type {
+    border-radius: 0 20px 20px 0;
+    border-right: none;
+  }
+  &-text {
+    color: white;
+    user-select: none;
+    display: block;
+    overflow: hidden;
+    &-name {
+      font: var(--font-button);
+    }
+    &-percentage {
+      font: var(--font-caption);
+    }
+  }
+}
+
+.slider-button {
+  width: 2em;
+  height: 2em;
+  background-color: white;
+  position: absolute;
+  border-radius: 50%;
+  right: calc(-1.1em);
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  margin: auto;
+  z-index: 10;
+  cursor: ew-resize;
+  user-select: none;
+}
+

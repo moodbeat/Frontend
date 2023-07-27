@@ -113,8 +113,8 @@ export const Routing: React.FC<Props> = ({
 
         <Route path="bookmarks" element={<Bookmarks />} />
 
-        <Route path="useful" element={<Useful />} />
-        <Route path="useful/:id" element={<UsefulItem />} />
+        <Route path="entries" element={<Useful />} />
+        <Route path="entries/:id" element={<UsefulItem />} />
 
         <Route
           path="account"

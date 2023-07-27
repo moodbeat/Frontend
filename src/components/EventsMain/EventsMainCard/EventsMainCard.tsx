@@ -14,6 +14,8 @@ export const EventsMainCard: React.FC<Props> = ({item}) => {
   const hoursEnd = dataEnd.getHours() < 10 ? `0${dataEnd.getHours()}` : `${dataEnd.getHours()}`;
   const minutesEnd = dataEnd.getMinutes() < 10 ? `0${dataEnd.getMinutes()}` : `${dataEnd.getMinutes()}`;
 
+  console.log()
+
   return (
     <li className={styles.point}>
       <div className={styles.leftBlock}>
@@ -21,18 +23,12 @@ export const EventsMainCard: React.FC<Props> = ({item}) => {
         <p className={styles.month}>{monthNames[dataStart.getMonth()]}</p>
       </div>
       <div className={styles.rightBlock}>
-        <p className={styles.typeActivity}>Тимбилдинг</p>
+        <p className={styles.typeActivity}>{item.name}</p>
         <p className={styles.time}>
           <span>{`${hoursStart}:${minutesStart}`}&mdash;</span>
           <span>{`${hoursEnd}:${minutesEnd}`}</span>
         </p>
       </div>
-
-      {/* <img className={styles.img} src={image} />
-      <div className={styles.pointContent}>
-        <p className={styles.text}>Тимбилдинг</p>
-        <time className={styles.time}>18 мая 2023</time>
-      </div> */}
     </li>
   );
 }
