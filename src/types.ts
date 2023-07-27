@@ -363,3 +363,8 @@ export interface TagsInterface {
   key: number;
   color: string;
 }
+
+export interface DateObject {
+  before_date: string;
+  after_date: string;
+}

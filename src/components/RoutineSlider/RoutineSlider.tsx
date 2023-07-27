@@ -5,6 +5,9 @@ import classes from './routineslider.module.scss';
 import {ButtonsList} from "@/components/RoutineSlider/components/ButtonsList/ButtonsList.tsx";
 import * as Api from "@/shared/api/Api.ts";
 import {TagsInterface} from "@/types.ts";
+import { setErrorMessage } from "@/store/reducers/alertError/alertErrorReducer";
+import { setSuccessMessage } from "@/store/reducers/alertSuccess/alertSuccessReducer";
+import {useAppDispatch} from "@/store/hooks.ts";
 
 interface Props {
   data: TagsInterface[];
@@ -17,6 +20,7 @@ interface Props {
 export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Props): ReactElement => {
   const RoutineSliderRef = useRef<HTMLDivElement>(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (data) {
@@ -40,9 +44,12 @@ export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Pr
       percentage: 0
     }));
     try {
-      await Api.sendActivities(activities.concat(emptyActivities));
+      const response = await Api.sendActivities(activities.concat(emptyActivities));
+      if(response) {
+        dispatch(setSuccessMessage("Данные сохранены"));
+      }
     } catch (err: any) {
-      console.log(err);
+      dispatch(setErrorMessage("Что-то пошло не так. Попробуйте еще раз."));
     }
   }
 

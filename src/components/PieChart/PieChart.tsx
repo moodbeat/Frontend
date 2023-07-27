@@ -1,14 +1,16 @@
 import {ResponsivePie} from "@nivo/pie";
 import styles from './PieChart.module.scss';
-import {TagsInterface} from "@/types.ts";
+import {TagsInterface, DateObject} from "@/types.ts";
 import {ReactElement, useEffect, useState} from 'react';
-import {useRequest} from "@/shared/hooks/useRequest.tsx";
 import {getActivities} from "@/shared/api/Api.ts";
+import {getCurrentDateAndFutureDate} from "@/components/PieChart/PieChart.helpers.ts";
+import {PeriodPicker} from "@/components/PieChart/components/PeriodPicker.tsx";
+import {useRequest} from "@/shared/hooks/useRequest.tsx";
 
 interface Props {
   data: TagsInterface[];
   id: string | number;
-  widths: any;
+  widths: number[];
 }
 
 interface PieChartDataInterface {
@@ -52,13 +54,25 @@ const MyResponsivePie = ({ data, colors }: PieDataProps): ReactElement => (
 );
 
 export const PieChart = ({data, id, widths}: Props): ReactElement => {
-  const [activities] = useRequest(() => getActivities(id));
+  const [activities, setActivities] = useState();
   const [pieChartData, setPieChartData] = useState<PieChartDataInterface[]>([]);
   const [colors, setColors] = useState<string[]>([]);
+  const [datesArray, setDatesArray] = useState<DateObject[]>([]);
+  const [valueOfDatePicker, setValueOfDatePicker] = useState("");
+  const [act] = useRequest(() => getActivities(id, datesArray));
+
+  useEffect(() => {
+    const dates = getCurrentDateAndFutureDate(valueOfDatePicker);
+    setDatesArray(dates);
+  }, [valueOfDatePicker]);
+
+  useEffect(() => {
+    getPieChartActivities(id, datesArray)
+  }, [datesArray]);
 
   useEffect(() => {
     const colorsArr: string[] = [];
-    if (activities && activities.results.length > 0 && data) {
+    if (activities && activities.length > 0 && data) {
       setPieChartData(data.map((item: TagsInterface, index: number) => ({
           id: item.name,
           label: item.name,
@@ -71,11 +85,26 @@ export const PieChart = ({data, id, widths}: Props): ReactElement => {
       })
       setColors(colorsArr);
     }
-  }, [activities, data, widths]);
+  }, [activities, data, widths, datesArray]);
+
+  const handleChooseOption = (option: string) => {
+    setValueOfDatePicker(option);
+  }
+
+  async function getPieChartActivities(id: string | number, datesArray: DateObject[]) {
+    try {
+      const response = await getActivities(id, datesArray);
+      console.log(response.data.results);
+      setActivities(response.data.results);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className={styles.container}>
       {pieChartData.length !== 0 && colors.length !== 0 && <MyResponsivePie data={pieChartData} colors={colors}/>}
+      <PeriodPicker handleChooseOption={handleChooseOption} value={valueOfDatePicker} />
     </div>
   );
 };

@@ -6,6 +6,7 @@
   width: 1029px;
   box-sizing: border-box;
   padding: 40px 0 46px;
+  position: relative;
 }
 
 .section {
@@ -36,7 +37,7 @@
     height: 328px;
     border-radius: 20px;
     background-color: white;
-    padding: 16px 20px;
+    padding: 14px 10px 16px 20px;
   }
   &-title {
     margin: 0 0 25px 0;
