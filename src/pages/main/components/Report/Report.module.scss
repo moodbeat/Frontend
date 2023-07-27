@@ -1,0 +1,24 @@
+@import "@/shared/styles/mixins";
+
+.report {
+  @include size (324px, 188px);
+  padding: 12px 20px 16px;
+  border-radius: 20px;
+  background-color: white;
+  background-image: url('./assets/document.svg');
+  background-repeat: no-repeat;
+  background-position: top 12px right 20px;
+}
+
+
+.title {
+  margin: 0 0 8px 0;
+  font: var(--font-h3);
+}
+
+.subtitle {
+  margin: 0 0 40px 0;
+  font: var(--font-body);
+  color: var(--color-black);
+  max-width: 192px;
+}

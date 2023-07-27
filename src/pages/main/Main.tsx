@@ -17,6 +17,7 @@ import {getActivityTypes} from "@/shared/api/Api.ts";
 import {ReactElement, useState} from "react";
 import {useAppSelector} from "@/store/hooks.ts";
 import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts";
+import {Report} from "@/pages/main/components/Report/Report.tsx";
 
 interface Props {
   events: EventInterface[];
@@ -88,7 +89,7 @@ export const Main = ({events}: Props): ReactElement | null => {
               </section>
               <section className={styles.section}>
                 <BurnoutLevel />
-                <div className={styles.analytics}>здесь будет кнопка для скачивания аналитики</div>
+                <Report />
               </section>
               <section className={styles.section}>
                 <Articles
