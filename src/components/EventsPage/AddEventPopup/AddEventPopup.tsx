@@ -9,7 +9,7 @@ import {ClosePopup} from "../img/closePopup";
 import dash from "../img/dash.svg"
 import { useEscapeKeyEvent } from "@/shared/hooks/useEscapeKey";
 import { PopupRequest } from "../PopupRequest/PopupRequest";
-import { date } from "yup";
+// import { date } from "yup";
 
 interface Props {
   closePopupAddEvent: (e: any) => void;
@@ -72,13 +72,13 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
     const minuteStart = e.target.elements.timeStart.value.slice(-2);
     const hourEnd = e.target.elements.timeEnd.value.slice(0,2);
     const minuteEnd = e.target.elements.timeEnd.value.slice(-2);
-    console.log(year);
-    console.log(month);
-    console.log(day);
-    console.log(hourStart);
-    console.log(minuteStart);
-    console.log(hourEnd);
-    console.log(minuteEnd);
+    // console.log(year);
+    // console.log(month);
+    // console.log(day);
+    // console.log(hourStart);
+    // console.log(minuteStart);
+    // console.log(hourEnd);
+    // console.log(minuteEnd);
     const event = {
       // start_time: (valueData !== null) ? (valueData.setHours(hourStart, minuteStart)) : valueData,
 
@@ -94,7 +94,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
       // expiration: e.target.elements.expiration.value,
       for_all: true,
     }
-    console.log(event)
+    // console.log(event)
     // setValues({
     //   // date: e.target.elements.date.value,
     //   start_time: new Date(year, month, day, hourStart, minuteStart),
