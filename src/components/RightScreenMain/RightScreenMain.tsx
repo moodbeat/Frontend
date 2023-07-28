@@ -1,14 +1,10 @@
 import styles from "./rightScreenMain.module.css";
-import { EventInterface } from "@/types";
-import {PsychologistInfo} from "../PsychologistInfo/PsychologistInfo";
-import { Articles } from "./Articles/Articles";
-import { EventsMain } from "../EventsMain/EventsMain";
-import {ArticleInterface} from "@/types";
+import { PsychologistInfo } from "../PsychologistInfo/PsychologistInfo";
+import { Articles } from "../Articles/Articles";
+import { Events } from "../Events/Events";
+import { ArticleInterface } from "@/types";
 
-interface Props {
-  events: EventInterface[];
-}
-export const RightScreenMain: React.FC<Props> = ({events}) => {
+export const RightScreenMain = () => {
   const articles: ArticleInterface[] = [
     {
       type: "видео",
@@ -17,7 +13,7 @@ export const RightScreenMain: React.FC<Props> = ({events}) => {
       banner: "/image.png",
     },
     {
-      type: "статья",
+      type: "видео",
       title: "Как понять, что у вас профессиональное выгорание",
       length: "5 минут",
       banner: "/image.png",
@@ -32,12 +28,12 @@ export const RightScreenMain: React.FC<Props> = ({events}) => {
 
   return (
     <div className={styles.container}>
-      <PsychologistInfo/>
+      <PsychologistInfo />
       <Articles
         articles={articles}
         title={'Как улучшить ментальное здоровье'}
       />
-      <EventsMain  events={events}/>
+      <Events />
     </div>
   );
 };

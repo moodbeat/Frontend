@@ -1,28 +1,29 @@
-import "@/shared/styles/styles.css";
-import classes from "./emailformrefresh.module.scss";
+import "@/shared/styles.css";
+import classes from "./emailformrefresh.module.css";
 import { Button } from "@/shared/ui/Button/Button";
 import { Formik, Form } from "formik";
 import { refreshEmailSchema } from "@/schemas/validationSchema";
 import { Input } from "@/shared/ui/Input/Input";
 import React from "react";
-import { useNavigate } from "react-router";
+import { InfoPopup } from "@/shared/ui/infoPopup/InfoPopup";
 
 interface ComponentProps {
   handleSendResetCode: (email: string) => void;
+  success: string;
+  error: string;
+  closeErrorPopup: () => void;
+  popupOpened: boolean;
 }
 
 export const EmailFormRefresh: React.FC<ComponentProps> = ({
   handleSendResetCode,
+  success,
+  error,
+  closeErrorPopup,
+  popupOpened,
 }) => {
-  const navigate = useNavigate();
-
-  const returnToLogin = () => {
-    navigate("/login");
-  };
-
   return (
-    <div className={classes.form}>
-      <button className={classes.backButton} onClick={returnToLogin} />
+    <>
       <Formik
         initialValues={{
           email: "",
@@ -33,25 +34,34 @@ export const EmailFormRefresh: React.FC<ComponentProps> = ({
         }}
         validationSchema={refreshEmailSchema}
       >
-        {({ isValid, dirty }) => (
-          <Form noValidate>
-            <h2 className={classes.title}>Восстановление пароля</h2>
-            <p className={classes.info}>
-              Укажите адрес электронной почты, и мы вышлем инструкцию по
-              восстановлению пароля.
-            </p>
-            <div className={classes.inputContainer}>
-              <Input label="Введите email" name="email" type="text" />
-            </div>
-            <Button
-              title="Воcстановить"
-              type="submit"
-              mode="primary"
-              disabled={!(isValid && dirty)}
-            />
-          </Form>
-        )}
+        <Form noValidate className={classes.form}>
+          <h2 className={classes.title}>Восстановление пароля</h2>
+          <p className={classes.info}>
+            Укажите адрес электронной почты, и мы вышлем инструкцию по
+            восстановлению пароля.
+          </p>
+          <div className={classes.inputContainer}>
+            <Input label="Введите email" name="email" type="text" />
+          </div>
+          <Button title="Воcстановить" type="submit" mode="primary" />
+        </Form>
       </Formik>
-    </div>
+      {success && (
+        <InfoPopup
+          closeErrorPopup={closeErrorPopup}
+          popupOpened={popupOpened}
+          popupMessage={success}
+          isPositive={true}
+        />
+      )}
+      {error && (
+        <InfoPopup
+          closeErrorPopup={closeErrorPopup}
+          popupOpened={popupOpened}
+          popupMessage={error}
+          isPositive={false}
+        />
+      )}
+    </>
   );
 };

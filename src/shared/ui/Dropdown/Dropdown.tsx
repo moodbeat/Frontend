@@ -1,9 +1,10 @@
 import { useField, FieldHookConfig } from "formik";
 import Select, { StylesConfig } from "react-select";
+import "@/shared/styles.css";
 import React, { useEffect, useState } from "react";
 import { SelectOption } from "@/types";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage/ErrorMessage";
-import styles from "./dropdown.module.scss";
+import styles from "./dropdown.module.css";
 
 interface DropdownProps {
   label: string;
@@ -43,7 +44,7 @@ export const DropDown: React.FC<DropdownProps & FieldHookConfig<string>> = ({
       fontWeight: "400",
       border: 0,
       boxShadow: "none",
-      marginTop: "5px",
+      marginTop: "10px",
     }),
     option: (styles, { isDisabled, isFocused, isSelected }) => {
       return {

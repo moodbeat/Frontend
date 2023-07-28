@@ -34,10 +34,6 @@ export const resetPassword = (values: FormikValues, resetCode: string) => {
   });
 };
 
-export const checkToken = (token: any) => {
+export const checkToken = (token: string) => {
   return axios.post(`${BASE_URL}/auth/jwt/verify`, { token });
-};
-
-export const refreshToken = (token: string) => {
-  return axios.post(`${BASE_URL}/auth/jwt/refresh`, { refresh: token });
 };
