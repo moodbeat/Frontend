@@ -12,7 +12,7 @@ import { selectRole } from "@/store/reducers/currentUser/currentUserReducer";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import {AddEmployeeForm} from "@/components/AddEmployeeForm/AddEmployeeForm";
 import {useNavigate} from "react-router-dom";
-
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   handleSendInviteCode: (email: string) => Promise<void>;
@@ -133,6 +133,7 @@ export const Myteam: React.FC<Props> = ({
             title={"Как помочь сотрудникам справиться со стрессом"}
           />
         </div>
+        <ButtonTelegramm />
       </div>
       : <BadInternetConnection/>}
       <PopupWithBackground

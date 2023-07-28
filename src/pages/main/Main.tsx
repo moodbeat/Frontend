@@ -19,6 +19,7 @@ import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts
 import {Report} from "@/pages/main/components/Report/Report.tsx";
 import {MoodButtonsSection} from "@/pages/main/components/MoodButtonsSection/MoodButtonsSection.tsx";
 import {isTenHoursPassed} from "@/pages/main/Main.helpers.ts";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   events: EventInterface[];
@@ -103,6 +104,7 @@ export const Main = ({events}: Props): ReactElement | null => {
                 />
                 <EventsMain  events={events}/>
               </section>
+              <ButtonTelegramm />
             </main>
           </div>
           : <BadInternetConnection/>}

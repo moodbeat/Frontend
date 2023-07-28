@@ -9,6 +9,7 @@ import { ExpressDiagnoseResponse } from "@/types";
 import React from "react";
 import {Button} from "@/shared/ui/Button/Button";
 import {useNavigate} from "react-router-dom";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Tests {
   allTestsResults?: ExpressDiagnoseResponse[]
@@ -35,6 +36,7 @@ export const Tests: React.FC<Tests> = ({allTestsResults}) => {
               <h3 className={styles.subtitle}>Пройденные тесты</h3>
               <Records allTestsResults={allTestsResults}/>
             </div>
+            <ButtonTelegramm />
         </div>
       </div>
       : <BadInternetConnection/>}

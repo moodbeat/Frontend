@@ -4,6 +4,7 @@ import { EventInterface } from "@/types";
 import { EventsHeader } from "./EventsHeader/EventsHeader";
 import { EventsFunctional } from "./EventsFunctional/EventsFunctional";
 import { EventsCard } from "./EventsCard/EventsCard";
+import { ButtonTelegramm } from "../ButtonTelegramm/ButtonTelegramm";
 import {
   getNotifications,
   makeEventNotificationUnactive,
@@ -11,10 +12,10 @@ import {
 
 interface Props {
   events: EventInterface[];
-  fetchEvents: () => void;
+  fetchEvents: ()=> void;
 }
 
-export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
+export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
   const date = new Date();
   const monthToday = date.getMonth();
   const yearToday = date.getFullYear();
@@ -29,27 +30,24 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
   const reduceMonth = () => {
     if (month === 0) {
       setMonth(11);
-      setYear(year - 1);
+      setYear(year-1);
     } else {
-      setMonth(month - 1);
+      setMonth(month - 1)
     }
-    month <= monthToday + 1 && year <= yearToday
-      ? setIsArrowBack(false)
-      : setIsArrowBack(true);
+    (month <= (monthToday+1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
     setTextInput("");
   };
   const increaseMonth = () => {
     if (month === 11) {
       setMonth(0);
-      setYear(year + 1);
+      setYear(year+1);
     } else {
-      setMonth(month + 1);
+      setMonth(month + 1)
     }
-    month <= monthToday - 1 && year <= yearToday
-      ? setIsArrowBack(false)
-      : setIsArrowBack(true);
+    (month <= (monthToday-1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
     setTextInput("");
-  };
+   };
+
 
   // сортировка мероприятий по месяцу
   useEffect(() => {
@@ -57,6 +55,7 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
       events.filter((item) => new Date(item.start_time).getMonth() === month)
     );
   }, [month, events]);
+
 
   // сортировка мероприятий по поисковой строке
   useEffect(() => {
@@ -112,12 +111,22 @@ export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
           fetchEvents={fetchEvents}
         />
         <ul className={styles.eventsContent}>
-          {eventsSortFind.length > 0 &&
-            eventsSortFind.map((item) => (
-              <EventsCard key={item.id} item={item} fetchEvents={fetchEvents} />
-            ))}
+          {eventsSortFind.length > 0 ?
+            eventsSortFind.map((item)=>
+              <EventsCard
+                key={item.id}
+                item={item}
+                fetchEvents={fetchEvents}
+                // isRenderEventPage={isRenderEventPage}
+                // setIsRenderEventPage={setIsRenderEventPage}
+              />
+            ) :
+            <p className={styles.eventsContentNull}>В этом месяце пока ничего не запланировано...</p>
+          }
         </ul>
+        <ButtonTelegramm />
       </div>
     </section>
+
   );
-};
+}
