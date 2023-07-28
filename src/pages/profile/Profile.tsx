@@ -26,6 +26,7 @@ import * as Api from "@/shared/api/Api";
 import { MoodGraph } from "@/components/MoodGraph/MoodGraph";
 import { BurnoutLevel } from "@/components/BurnoutLevel/BurnoutLevel";
 import { BalanceWheelResult } from "@/pages/balancewheel/components/BalanceWheelResult/BalanceWheelResult";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   handleAddMeetingInfo: ({
@@ -153,6 +154,7 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                   </div>
                 </div>
               </div>
+              <ButtonTelegramm />
             </div>
             <PopupWithBackground
               popupVisible={addPopupVisible}

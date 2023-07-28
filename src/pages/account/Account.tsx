@@ -21,6 +21,7 @@ import {
 } from "@/pages/account/helpers/handleHobbiesSettings";
 import { useNavigate } from "react-router-dom";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   handleChangeUserInfo: (userInfo: UserInfo, toDeletePhoto: string) => void;
@@ -158,6 +159,7 @@ export const Account = ({ handleChangeUserInfo }: Props): ReactElement => {
               cancelSettings={cancelSettings}
               disabled={isButtonDisabled}
             />
+            <ButtonTelegramm />
           </div>
         </div>
       : <BadInternetConnection/>}

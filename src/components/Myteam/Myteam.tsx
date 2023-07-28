@@ -127,12 +127,12 @@ export const Myteam: React.FC<Props> = ({
           />
           <Employees valueInputSort={textInput} employees={employees} openEmployeeInfo={openEmployeeInfo} isChief={isChief}/>
         </div>
-        <div className={styles.rightScreen}>
+        {/* <div className={styles.rightScreen}>
           <Articles
             articles={articles}
             title={"Как помочь сотрудникам справиться со стрессом"}
           />
-        </div>
+        </div> */}
         <ButtonTelegramm />
       </div>
       : <BadInternetConnection/>}
