@@ -1,9 +1,12 @@
 import styles from "./myteam.module.css";
 import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar/Navbar";
-import { Articles } from "@/components/Articles/Articles";
+// import { Articles } from "@/components/Articles/Articles";
 import { Employees } from "../Employees/Employees";
-import { ArticleInterface, EmployeeInterface } from "@/types";
+import {
+  // ArticleInterface,
+  EmployeeInterface
+} from "@/types";
 import { Button } from "@/shared/ui/Button/Button";
 import { PopupWithBackground } from "@/shared/ui/PopupWithBackground/PopupWithBackground";
 import { BadInternetConnection } from "../BadInternetConnection/BadInternetConnection";
@@ -24,38 +27,38 @@ export const Myteam: React.FC<Props> = ({
   employees,
   takeNewEmployeesList
 }) => {
-  const articles: ArticleInterface[] = [
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-  ];
+  // const articles: ArticleInterface[] = [
+  //   {
+  //     type: "видео",
+  //     title: "Как понять, что у вас профессиональное выгорание",
+  //     length: "5 минут",
+  //     banner: "/image.png",
+  //   },
+  //   {
+  //     type: "видео",
+  //     title: "Как понять, что у вас профессиональное выгорание",
+  //     length: "5 минут",
+  //     banner: "/image.png",
+  //   },
+  //   {
+  //     type: "видео",
+  //     title: "Как понять, что у вас профессиональное выгорание",
+  //     length: "5 минут",
+  //     banner: "/image.png",
+  //   },
+  //   {
+  //     type: "видео",
+  //     title: "Как понять, что у вас профессиональное выгорание",
+  //     length: "5 минут",
+  //     banner: "/image.png",
+  //   },
+  //   {
+  //     type: "видео",
+  //     title: "Как понять, что у вас профессиональное выгорание",
+  //     length: "5 минут",
+  //     banner: "/image.png",
+  //   },
+  // ];
 
   const isOnline = useOnlineCheck();
   const navigate = useNavigate();
@@ -127,12 +130,12 @@ export const Myteam: React.FC<Props> = ({
           />
           <Employees valueInputSort={textInput} employees={employees} openEmployeeInfo={openEmployeeInfo} isChief={isChief}/>
         </div>
-        <div className={styles.rightScreen}>
+        {/* <div className={styles.rightScreen}>
           <Articles
             articles={articles}
             title={"Как помочь сотрудникам справиться со стрессом"}
           />
-        </div>
+        </div> */}
         <ButtonTelegramm />
       </div>
       : <BadInternetConnection/>}

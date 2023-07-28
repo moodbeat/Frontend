@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   flex-flow: row nowrap;
-  align-items: center;
+  /* align-items: center; */
   justify-content: flex-start;
   padding: 44px 132px 42px 52px;
   background-color: var(--color-main-background);
@@ -10,11 +10,12 @@
 
 .left-screen {
   position: relative;
-  width: 68.8%;
-  height: 100%;
+  width: 100%;
+  /* width: 68.8%; */
+  /* height: 100%; */
 
   /* padding: 10px; */
-  margin-right: 28px;
+  /* margin-right: 28px; */
 }
 
 .right-screen {
