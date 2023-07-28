@@ -1,49 +1,34 @@
 import styles from "./header.module.css";
 import { NavLink } from "react-router-dom";
-import { LogoImg } from "@/shared/ui/Logo/LogoImg";
+import { LogoSideMenu } from "@/shared/ui/LogoSideMenu/LogoImg";
 import { AccountPopup } from "@/components/AccountPopup/AccountPopup";
-import React, { useEffect, useState } from "react";
-import { useAppSelector } from "@/store/hooks";
-import {
-  selectAvatar,
-  selectFirstName,
-  selectLastName,
-} from "@/store/reducers/currentUser/currentUserReducer";
-import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
-
-const BASE_URL = "https://em-dev.usolcev.com";
+import { useState } from "react";
 
 interface Props {
   handleSignOut: () => void;
 }
 
 export const Header: React.FC<Props> = ({ handleSignOut }) => {
-
-  const firstName = useAppSelector(selectFirstName);
-  const lastName = useAppSelector(selectLastName);
-  const allNotification = useAppSelector(selectNotifications);
-  const photoLink = useAppSelector(selectAvatar);
-  const initialPhoto = photoLink !== null ? `${BASE_URL}${photoLink}` : "";
-
-  const [photo, setPhoto] = useState(initialPhoto);
   const [isAccountPopupOpened, setIsAccountPopupOpened] = useState(false);
 
-  const handleNotificationClick = () => {
-    alert('Выполнен умопомрачительный переход на вкладку "События, люди, явления')
-  }
-
-  const closeAccountPopup = () => {
-    setIsAccountPopupOpened(false);
+  const openAccountPopup = () => {
+    if (!isAccountPopupOpened) {
+      setIsAccountPopupOpened(true);
+    } else {
+      setIsAccountPopupOpened(false);
+    }
   };
 
-  useEffect(() => {
-    setPhoto(initialPhoto);
-  }, [initialPhoto]);
+  const closeAccountPopup = () => {
+    if (isAccountPopupOpened) {
+      setIsAccountPopupOpened(false);
+    }
+  };
 
   return (
     <header className={styles.header}>
       <NavLink className={styles.logo} to="/">
-        <LogoImg />
+        <LogoSideMenu />
       </NavLink>
       <input
         className={styles.input}
@@ -51,25 +36,11 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
         placeholder="Поиск"
       />
       <div className={styles.profileAndNotify}>
-        <div onClick={handleNotificationClick} className={styles.notify}>
-          {(allNotification && allNotification?.length > 0) ?
-            <div className={styles.notificationNumber}>
-              {allNotification?.length}
-            </div>
-          : null}
-        </div>
-        <div
-          onClick={() => setIsAccountPopupOpened(!isAccountPopupOpened)}
+        <div className={styles.notify}></div>
+        <button
+          onClick={() => openAccountPopup()}
           className={styles.profileBtn}
-        >
-          {photo ? (
-            <img className={styles.profilePhoto} src={photo || initialPhoto} />
-          ) : (
-            <div className={`${styles.profileBtn} ${styles.noPhoto}`}>
-              {`${firstName[0]}${lastName[0]}`}
-            </div>
-          )}
-        </div>
+        ></button>
       </div>
       <AccountPopup
         isAccountPopupOpened={isAccountPopupOpened}

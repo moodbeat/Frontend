@@ -1,16 +1,13 @@
-@import "modern-normalize/modern-normalize.css";
-@import "assets/fonts/Roboto/roboto.css";
-@import "assets/fonts/Montserrat/Montserrat.css";
+@import url("modern-normalize/modern-normalize.css");
+@import url("assets/fonts/Roboto/roboto.css");
+@import url("assets/fonts/Montserrat/Montserrat.css");
 
 :root {
-  /* overflow: scroll; */
   font-family: Roboto, Montserrat, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
-
-  /* overflow-x: hidden; */
   text-rendering: optimizelegibility;
   text-size-adjust: 100%;
 
@@ -20,7 +17,7 @@
   --color-background-white: #fff;
   --color-white: #fff;
   --color-background-secondary: #ebebeb;
-  --color-background-accent: #f7ebff;
+  --color-background-accent: #F7EBFF;
   --color-icon-secondary: #99a2ad;
   --color-button-secondary: #ebebeb;
   --color-accent-secondary: #4c239d;
@@ -28,19 +25,14 @@
   --color-accent-blue: #325ee0;
   --color-accent-violet: #a632e0;
   --color-accent-gray: #99a2ad;
-  --color-accent-lightgray: #ebebeb;
   --color-black: #2c2d2e;
   --color-error: #e64646;
-  --color-main-background: #ebf1f4;
+  --color-main-background: #EBF1F4;
   --color-burnout-banner-background: #d5d0ef;
-  --color-disabled: #b6c1cf;
-  --color-card-hover: #fcf5ff;
-  --color-card-active: #ece2ff;
+  --color-background-accent: #F7EBFF;
 
   /* Shadows */
   --shadow-medium: 0 15px 20px 0 rgb(88 81 94 / 10%);
-  --shadow-small: 0 2px 12px 0 rgb(88 81 94 / 10%);
-  --shadow-small-purple: 0 2px 12px 0 rgb(138 50 224);
 
   /* Fonts */
   --font-size-xs: 12px;
@@ -54,26 +46,17 @@
   --font-line-l: 24px;
   --font-line-xl: 28px;
   --font-h1: 600 24px/28px "Montserrat", sans-serif;
+  --font-h1-form: 600 24px/28px "Roboto", sans-serif;
   --font-h2: 600 20px/24px "Montserrat", sans-serif;
   --font-h3: 600 16px/18px "Montserrat", sans-serif;
-  --font-h4-alert: 500 15px/18px "Roboto", sans-serif;
   --font-text: 400 13px/16px "Roboto", sans-serif;
   --font-caption: 400 12px/14px "Roboto", sans-serif;
-  --font-caption-2: 400 11px/13.2px "Roboto", sans-serif;
   --font-body: 400 14px/18px "Roboto", sans-serif;
   --font-button: 500 16px/20px "Roboto", sans-serif;
   --font-search-input: 400 16px/20px "Roboto", sans-serif;
-  --font-more: 500 15px/18px "Roboto", sans-serif;
-}
 
-html {
-  scroll-behavior: smooth;
 }
 
 body {
   height: 100%;
-}
-
-.root {
-  overflow: scroll;
 }

@@ -3,25 +3,23 @@ import { NavLink } from "react-router-dom";
 import styles from "./navbar.module.css";
 import { useAppSelector } from "@/store/hooks";
 import { selectRole } from "@/store/reducers/currentUser/currentUserReducer";
-import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
 import cn from "classnames";
 
 import {
   homeIcon,
+  calendarIcon,
   advicesIcon,
   eventsIcon,
   bookmarkIcon,
   questionIcon,
+
   myTeamIcon
+
 } from "@/assets";
 
 export const Navbar = () => {
-  const [isChief, setIsChief] = useState(false);
-  const [testsNumber, setTestsNumber] = useState(0);
-  const [eventsNumber, setEventsNumber] = useState(0);
-
+  const [isChief, setIsChief] = useState(false)
   const user = useAppSelector(selectRole);
-  const notifications = useAppSelector(selectNotifications);
 
   const notificationClassname = cn(styles.logoContainer, styles.notification )
 
@@ -34,17 +32,6 @@ export const Navbar = () => {
   useEffect (() => {
     setIsChief(user !== 'employee')
   }, [user])
-
-  useEffect(() => {
-    let evt = 0;
-    let tst = 0;
-    notifications?.forEach(notification => {
-      if (notification.incident_type === 'Событие') evt++;
-      if (notification.incident_type === 'Опрос') tst++;
-    })
-    setEventsNumber(evt);
-    setTestsNumber(tst);
-  }, [notifications])
 
   return (
     <aside className={styles.aside}>
@@ -63,20 +50,18 @@ export const Navbar = () => {
             {questionIcon}
           </div>
           Тесты
-          {(testsNumber > 0) ?
-            <div className={notificationClassname}>
-              {testsNumber}
-            </div>
-          : null}
+          <div className={notificationClassname}>
+            {3}
+          </div>
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
-          to="/useful"
+          to="/advices"
         >
           <div className={styles.logoContainer}>
             {advicesIcon}
           </div>
-          Полезное
+          Советы
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
@@ -86,11 +71,6 @@ export const Navbar = () => {
             {eventsIcon}
           </div>
           Мероприятия
-          {(eventsNumber > 0) ?
-            <div className={notificationClassname}>
-              {eventsNumber}
-            </div>
-          : null}
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
@@ -99,7 +79,16 @@ export const Navbar = () => {
           <div className={styles.logoContainer}>
             {bookmarkIcon}
           </div>
-          Сохранённое
+          Закладки
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => linkClassName(isActive)}
+          to="/calendar"
+        >
+          <div className={styles.logoContainer}>
+            {calendarIcon}
+          </div>
+         Календарь
         </NavLink>
 
         {isChief && (

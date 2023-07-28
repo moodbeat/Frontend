@@ -1,16 +1,14 @@
-import classes from "./button.module.scss";
+import classes from "./button.module.css";
 import cl from "classnames";
 import React from "react";
-import AddIcon from "./ui/add_20.svg";
+import AddIcon from "./add_20.svg";
 interface ButtonProps {
   title: string;
-  mode: 'primary' | 'secondary' | 'outline' | 'empty';
-  type?: 'submit' | 'reset' | 'button' | undefined;
+  mode: string;
+  type?: "submit" | "reset" | "button" | undefined;
   width?: string;
   height?: string;
-  padding?: string;
-  disabled?: boolean;
-  handleClick?: () => void;
+  openAddPopup?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -19,23 +17,20 @@ export const Button: React.FC<ButtonProps> = ({
   type,
   width,
   height,
-  padding,
-  disabled,
-  handleClick,
+  openAddPopup,
 }) => {
   const className = cl(classes.button, {
     [classes.buttonPrimary]: mode === "primary",
     [classes.buttonSecondary]: mode === "secondary",
     [classes.buttonOutline]: mode === "outline",
-    [classes.buttonEmpty]: mode === "empty",
   });
 
   if (title === "Добавить сотрудника") {
     return (
       <button
-        onClick={handleClick}
+        onClick={openAddPopup}
         className={className}
-        style={{ width: width, height: height, padding: padding }}
+        style={{ width: width, height: height }}
         type={type}
       >
         <img className={classes.addIcon} src={AddIcon} />
@@ -45,10 +40,8 @@ export const Button: React.FC<ButtonProps> = ({
   } else {
     return (
       <button
-        onClick={handleClick}
-        disabled={disabled}
-        className={disabled && mode !== 'empty' ? `${className} ${classes.disabled}` : className}
-        style={{ width: width, height: height, padding: padding }}
+        className={className}
+        style={{ width: width, height: height }}
         type={type}
       >
         {title}

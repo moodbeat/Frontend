@@ -1,31 +1,20 @@
 import styles from "./main.module.css";
-import { EventInterface } from "@/types";
-import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { CenterScreenMain } from "@/components/CenterScreenMain/centerScreenMain";
 import { RightScreenMain } from "@/components/RightScreenMain/RightScreenMain";
-import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
+// import { Header } from "@/components/Header/Header";
 import { Navbar } from "@/components/Navbar/Navbar";
-import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
-interface Props {
-  events: EventInterface[];
-}
-export const Main: React.FC<Props> = ({events}) => {
-  const isOnline = useOnlineCheck();
-
-  return  (
+export const Main = () => {
+  return (
     <div className="page-container">
       <Navbar />
-      {isOnline ?
-        <div className={styles.container}>
-          {/* <Header /> */}
-          <main className={styles.main}>
-            <CenterScreenMain />
-            <RightScreenMain events={events}/>
-            <ButtonTelegramm />
-          </main>
-        </div>
-      : <BadInternetConnection/>}
+      <div className={styles.container}>
+        {/* <Header /> */}
+        <main className={styles.main}>
+          <CenterScreenMain />
+          <RightScreenMain />
+        </main>
+      </div>
     </div>
-  )
+  );
 };

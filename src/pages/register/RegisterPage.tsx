@@ -7,15 +7,24 @@ import { Button } from "@/shared/ui/Button/Button";
 import { LogoImg } from "@/shared/ui/Logo/LogoImg";
 import { Input } from "@/shared/ui/Input/Input";
 import { DropDown } from "@/shared/ui/Dropdown/Dropdown";
-import "@/shared/styles/styles.css";
-import classes from "./registerpage.module.scss";
+import "@/shared/styles.css";
+import classes from "./registerpage.module.css";
+import { InfoPopup } from "@/shared/ui/infoPopup/InfoPopup";
 import { useSearchParams } from "react-router-dom";
 
 interface RegisterProps {
   handleRegister: (formikValues: FormikValues, invite_code: string) => void;
+  closeErrorPopup: () => void;
+  popupOpened: boolean;
+  registerError: string;
 }
 
-export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
+export const RegisterPage: React.FC<RegisterProps> = ({
+  handleRegister,
+  closeErrorPopup,
+  popupOpened,
+  registerError,
+}) => {
   // получение инвайт-кода для регистрации и декодирование
   const [searchParams] = useSearchParams();
   const invite_code = searchParams.get("invite_code");
@@ -81,7 +90,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
 
   return (
     <div className={classes.registerPage}>
-      <div className={classes.logoContainer}>
+      <div className="logo-container">
         <LogoImg />
       </div>
       {!departments ? (
@@ -102,16 +111,14 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
           }}
           validationSchema={advancedSchema}
         >
-          {({ values, isValid, dirty }) => (
+          {({ values }) => (
             <Form noValidate className={classes.registerForm}>
               <h2 className={classes.registerTitle}>
-                Добро пожаловать в службу заботы о сотрудниках MoodBeat
+                Добро пожаловать в службу заботы о сотрудниках CareFor
               </h2>
               <ul className={classes.registerFormList}>
                 <li className={classes.registerFormListItem}>
                   <Input label="Имя" name="firstName" type="text" />
-                </li>
-                <li className={classes.registerFormListItem}>
                   <Input label="Фамилия" name="lastName" type="text" />
                 </li>
                 <li className={classes.registerFormListItem}>
@@ -122,8 +129,6 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
                     iid="department"
                     placeholder="Выбрать отдел"
                   />
-                </li>
-                <li className={classes.registerFormListItem}>
                   <DropDown
                     label="Должность"
                     name="position"
@@ -139,11 +144,6 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
                 </li>
                 <li className={classes.registerFormListItem}>
                   <Input label="Пароль" name="password" type="password" />
-                  <p className={classes.registerPasswordInfo}>
-                    Пароль должен содержать не менее 8 символов
-                  </p>
-                </li>
-                <li className={classes.registerFormListItem}>
                   <Input
                     label="Подтверждение пароля"
                     name="confirmPassword"
@@ -151,19 +151,25 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
                   />
                 </li>
               </ul>
+              <p className={classes.registerPasswordInfo}>
+                Пароль должен содержать не менее 8 символов
+              </p>
               <p className={classes.registerAgreement}>
                 Регистрируясь, вы принимаете Пользовательское соглашение и даете
                 Согласие на обработку персональных данных.
               </p>
-              <Button
-                title="Зарегистрироваться"
-                mode="primary"
-                width="360px"
-                disabled={!(isValid && dirty)}
-              />
+              <Button title="Зарегистрироваться" mode="primary" width="360px" />
             </Form>
           )}
         </Formik>
+      )}
+      {registerError && (
+        <InfoPopup
+          closeErrorPopup={closeErrorPopup}
+          popupOpened={popupOpened}
+          popupMessage={registerError}
+          isPositive={false}
+        />
       )}
     </div>
   );

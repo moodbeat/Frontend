@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  max-width: 324px;
-  flex-flow: column wrap;
+  flex-direction: column;
   gap: 32px;
 }
