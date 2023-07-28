@@ -8,6 +8,7 @@ import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Card} from "@/types";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 export const Bookmarks = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -95,6 +96,7 @@ export const Bookmarks = () => {
               <>
                 <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
               </>}
+            <ButtonTelegramm />
           </div>
         </div>
         : <BadInternetConnection/>}

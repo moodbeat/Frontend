@@ -10,6 +10,7 @@ import axios from 'axios';
 import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import Loading from "@/components/Loading/Loading";
 import {fetchData} from "@/shared/api/Api";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 export const Useful = () => {
   const [entries, setEntries] = useState<Card[]>([]);
@@ -137,6 +138,7 @@ export const Useful = () => {
 
                 <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
               </>}
+              <ButtonTelegramm />
           </div>
         </div>
         : <BadInternetConnection/>}

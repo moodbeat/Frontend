@@ -96,7 +96,7 @@ export const EventsCard: React.FC<Props> = ({item, fetchEvents}) => {
           <Like isLike={isLike}/>
         </button>
       </div>
-      <p className={styles.eventsCard__typeActivity}>категория мероприятия</p>
+      {/* <p className={styles.eventsCard__typeActivity}>категория мероприятия</p> */}
       <h3 className={styles.eventsCard__heading}>{item.name}</h3>
       <p className={styles.eventsCard__content}>{item.text}</p>
       <div className={styles.eventsCard__footer}>

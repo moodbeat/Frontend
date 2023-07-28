@@ -5,6 +5,7 @@ import { CenterScreenMain } from "@/components/CenterScreenMain/centerScreenMain
 import { RightScreenMain } from "@/components/RightScreenMain/RightScreenMain";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   events: EventInterface[];
@@ -21,6 +22,7 @@ export const Main: React.FC<Props> = ({events}) => {
           <main className={styles.main}>
             <CenterScreenMain />
             <RightScreenMain events={events}/>
+            <ButtonTelegramm />
           </main>
         </div>
       : <BadInternetConnection/>}
