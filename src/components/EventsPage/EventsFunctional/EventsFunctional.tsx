@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import styles from "./eventsFunctional.module.css";
-// import cn from "classnames";
 import { AddEventPopup } from "../AddEventPopup/AddEventPopup";
+// import cn from "classnames";
 
 interface Props {
   textInput: string;
