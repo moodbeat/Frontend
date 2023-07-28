@@ -1,10 +1,12 @@
+@import "@/shared/styles/mixins";
 
 .tag:last-of-type>.slider-button {
   display:none !important;
 }
 
 .tag {
-  text-align: center;
+  @include flex-center;
+  flex-direction: column;
   position: relative;
   box-sizing: border-box;
   padding: 10px 0 15px;
@@ -17,6 +19,7 @@
     border-right: none;
   }
   &-text {
+    margin: 0;
     color: white;
     user-select: none;
     display: block;
@@ -31,20 +34,55 @@
 }
 
 .slider-button {
-  width: 2em;
-  height: 2em;
+  @include size (2em, 2em);
+  @include flex-center;
   background-color: white;
   position: absolute;
   border-radius: 50%;
   right: calc(-1.1em);
   top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   bottom: 0;
   margin: auto;
   z-index: 10;
   cursor: ew-resize;
   user-select: none;
+}
+
+.text-wrapper {
+  @include flex-space-between;
+  gap: 4px;
+}
+
+.tooltip {
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  z-index: 100;
+  background: #fff;
+  width: 245px;
+  position: absolute;
+  bottom: -70px;
+  padding: 12px;
+  border-radius: 8px;
+  &-text {
+    margin: 0;
+    font: var(--font-body);
+    color: var(--color-black);
+  }
+  &-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: -8px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid #fff;
+  }
+}
+
+.question-btn {
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+  border: none;
 }
 
