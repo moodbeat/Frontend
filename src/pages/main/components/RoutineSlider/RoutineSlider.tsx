@@ -65,6 +65,7 @@ export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Pr
             width={widths[index]}
             key={index}
             name={tag.name}
+            tooltipMessage={tag.description}
             onSliderSelect={(e) => {
               e.preventDefault();
               document.body.style.cursor = "ew-resize";

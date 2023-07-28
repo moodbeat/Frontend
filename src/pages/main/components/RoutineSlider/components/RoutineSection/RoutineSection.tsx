@@ -6,11 +6,13 @@ interface RoutineSectionProps {
   name: string;
   color: string;
   width: number;
+  tooltipMessage: string;
   onSliderSelect: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const RoutineSection = ({
                       name,
+                      tooltipMessage,
                       color,
                       width,
                      onSliderSelect
@@ -51,7 +53,7 @@ export const RoutineSection = ({
       {isTooltipOpened &&
         <div className={classes.tooltip}>
           <div className={classes.tooltipArrow}></div>
-          <p className={classes.tooltipText}>Доля времени или влияние рутины на текущий рабочий день</p>
+          <p className={classes.tooltipText}>{tooltipMessage}</p>
         </div>
       }
     </div>
