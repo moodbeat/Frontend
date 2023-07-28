@@ -1,16 +1,10 @@
-// @TODO: Add pink background svg figure
-
 .landing {
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  max-width: 1600px;
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Montserrat, sans-serif;
-  background-image: url("../../assets/landing_bg_diag.png");
-  background-repeat: no-repeat;
-  background-position: 0 832px;
 }
 .button {
   display: flex;
@@ -23,13 +17,21 @@
   font-weight: 500;
   font-size: var(--font-size-m);
   line-height: var(--font-line-m);
+  font-family: Roboto, sans-serif;
+}
+
+// @TODO: Единообразная подложка
+.landing main {
+  width: 100%;
 }
 
 // HEADER
 
 .header {
+  width: 100%;
+  max-width: 1600px;
   padding: 40px 60px 0;
-  margin-bottom: -112px;
+  margin: 0 auto -112px;
   background: transparent;
   display: flex;
   justify-content: space-between;
@@ -51,7 +53,7 @@
   font-size: var(--font-size-m);
   line-height: var(--font-line-l);
   text-decoration: none;
-  color: var(--color-white);
+  color: var(--color-black);
 }
 .headerButton {
   background-color: var(--color-background-white);
@@ -61,46 +63,68 @@
 // HERO
 
 .sectionHero {
-  padding: 128px 60px 80px;
+  width: 100%;
+  background: var(--color-accent-lightpink);
+}
+.sectionHeroContainer {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 183px 60px 133px;
   display: flex;
-  background: linear-gradient(rgba(138, 50, 224, 1), rgba(138, 50, 224, 0.2));
+  gap: 10px;
   justify-content: space-between;
-  align-items: center;
 }
 .heroCol {
   max-width: 705px;
 }
 .heroTitle {
-  margin: 0;
+  margin: 47px 0 0;
+  font-weight: 600;
   font-size: 60px;
   line-height: 60px;
   letter-spacing: 0.5px;
-  color: var(--color-white);
+  color: var(--color-accent-secondary);
 }
 .heroText {
-  max-width: 473px;
+  max-width: 720px;
   margin: 20px 0;
+  font-weight: 500;
   font-size: 18px;
   line-height: --font-line-l;
   letter-spacing: 0.3px;
-  color: var(--color-white);
+  color: var(--color-black);
 }
 .heroButton {
   background-color: var(--color-accent-purple);
   color: var(--color-white);
 }
-.sectionHero img {
+.heroImages {
+  position: relative;
+}
+.heroImages img {
   display: block;
   object-fit: cover;
-  max-width: 600px;
-  max-height: 645px;
+  max-width: 740px;
+}
+.heroImages img:last-of-type {
+  position: absolute;
+  bottom: -82px;
+  right: -25px;
+  width: 290px;
 }
 
 // AUDIENCE
 
 .sectionAudience {
-  padding: 82px 60px 0;
+  width: 100%;
   color: var(--color-black);
+}
+.sectionAudienceContainer {
+  padding: 82px 60px 0;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 .sectionAudience h2 {
   margin: 0 0 60px;
@@ -121,6 +145,7 @@
   border-radius: 20px;
   padding: 40px 36px;
   border: 1px solid transparent;
+  background-color: var(--color-white);
   box-shadow: var(--shadow-small);
   transition: all 0.5s ease-in;
 }
@@ -145,13 +170,13 @@
   background-position: right;
 }
 .audienceCards article:nth-of-type(1) span {
-  background-image: url("../../assets/audience_1.png");
+  background-image: url("../../assets/audience_hr.png");
 }
 .audienceCards article:nth-of-type(2) span {
-  background-image: url("../../assets/audience_2.png");
+  background-image: url("../../assets/audience_chef.png");
 }
 .audienceCards article:nth-of-type(3) span {
-  background-image: url("../../assets/audience_3.png");
+  background-image: url("../../assets/audience_employee.png");
 }
 .audienceCards article h3 {
   margin: 0;
@@ -172,20 +197,26 @@
 // FEATURES
 
 .sectionFeatures {
+  width: 100%;
+  background-image: url("../../assets/landing_bg_diag.png");
+  background-position: center;
+  background-size: cover;
+}
+.sectionFeaturesContainer {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 140px 60px;
   display: flex;
   flex-direction: column;
   gap: 140px;
-  background-image: url("../../assets/landing_bg_straight.png");
-  background-repeat: no-repeat;
-  background-size: 100% 800px;
-  background-position: 0 1590px;
 }
 .sectionFeatures article {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
-.sectionFeatures article:nth-of-type(2n + 2) {
+.sectionFeatures article:nth-of-type(2n + 2):not(:last-of-type) {
   flex-direction: row-reverse;
 }
 .sectionFeatures article img {
@@ -200,7 +231,6 @@
 }
 .sectionFeatures article img:hover {
   border-radius: 20px;
-  scale: 1.05;
   box-shadow: var(--shadow-medium);
 }
 .sectionFeatures article div {
@@ -209,6 +239,7 @@
 .sectionFeatures span {
   padding: 12px 32px;
   border-radius: 40px;
+  background-color: var(--color-white);
   box-shadow: var(--shadow-small);
   font-weight: 400;
   font-size: var(--font-size-l);
@@ -222,7 +253,7 @@
   color: var(--color-black);
 }
 .sectionFeatures p {
-  margin: 0 0 120px;
+  margin: 0 0 60px;
   font-weight: 400;
   font-size: var(--font-size-l);
   line-height: 26px;
@@ -237,16 +268,20 @@
 .sectionFeatures article div:hover .featuresButton {
   width: 220px;
   font-size: var(--font-size-m);
-  background-color: var(--color-accent-lightgray);
-  color: var(--color-accent-purple);
+  background-color: var(--color-accent-purple);
+  color: var(--color-white);
 }
 
 // FAQ
 
 .sectionFaq {
+  width: 100%;
+}
+.sectionFaqContainer {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 80px 60px 140px;
-  background-image: url("../../assets/landing_bg_straight.png");
-  background-repeat: no-repeat;
 }
 .sectionFaq h2 {
   margin: 0 0 60px;
@@ -260,21 +295,21 @@
 .sectionForm {
   padding: 112px 0 165px;
   width: 100%;
-  background: linear-gradient(rgba(138, 50, 224, 1), rgba(138, 50, 224, 0.2));
+  background: var(--color-accent-lightpink);
 }
 .sectionFormContainer {
-  width: 657px;
+  width: 720px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   gap: 83px;
 }
 .sectionForm h2 {
-  margin: 0 0 50px;
+  margin: 0 0 20px;
   font-weight: 600;
   font-size: 50px;
   line-height: 60px;
-  color: var(--color-white);
+  color: var(--color-accent-secondary);
 }
 .sectionForm form {
   display: flex;
@@ -294,7 +329,7 @@
 .sectionForm textarea {
   padding: 16px 12px;
   border-radius: 8px;
-  border: 0.5px solid var(--color-accent-gray);
+  border: 0.5px solid var(--color-icon-secondary);
 }
 .sectionForm input::placeholder,
 .sectionForm textarea::placeholder {
@@ -309,29 +344,26 @@
   color: var(--color-error);
 }
 .sectionFormButton {
-  background-color: transparent;
+  margin-top: 8px;
+  display: block;
+  background-color: var(--color-accent-purple);
   color: var(--color-white);
-  border: 1px solid var(--color-white);
+  border: none;
   cursor: pointer;
 }
-.sectionForm img {
-  display: flex;
-  object-fit: cover;
-  max-width: 740px;
-}
-.sectionFormCheckbox {
-  margin: 0 0 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.sectionForm p {
+  display: block;
+  margin: -8px 0 0;
   width: 100%;
-  gap: 10px;
-  color: var(--color-white);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--color-accent-secondary);
 }
-.sectionFormCheckbox input {
-  width: 24px;
-  height: 24px;
-  accent-color: var(--color-accent-purple);
+.sectionForm p a {
+  text-decoration: none;
+  color: var(--color-accent-secondary);
+  border-bottom: 0.5px solid var(--color-accent-secondary);
 }
 
 footer {
@@ -346,4 +378,5 @@ footer p {
   font-weight: 500;
   font-size: 18px;
   line-height: 30px;
+  color: var(--color-accent-secondary);
 }

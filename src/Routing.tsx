@@ -18,6 +18,7 @@ import { RefreshPasswordPage } from "@/pages/refreshpassword/RefreshPasswordPage
 import { Profile } from "@/pages/profile/Profile";
 import BalanceWheel from "@/pages/balancewheel/BalanceWheel";
 import { UsefulItem } from "@/pages/usefulItem/UsefulItem";
+import { EventInterface } from "./types";
 
 interface Props {
   loggedIn: any;
@@ -29,7 +30,7 @@ interface Props {
   resultOfPsychoTest: any;
   handleChangeUserInfo: any;
   employees: any;
-  events: any;
+  events: EventInterface[];
   handleSendInviteCode: any;
   handleLogin: any;
   handleRegister: any;
@@ -66,7 +67,11 @@ export const Routing: React.FC<Props> = ({
     <Routes>
       <Route
         element={
-          <ProtectedRoutes loggedIn={loggedIn} handleSignOut={handleSignOut} />
+          <ProtectedRoutes
+            loggedIn={loggedIn}
+            handleSignOut={handleSignOut}
+            events={events}
+          />
         }
       >
         <Route path="/" element={<Main events={events} />} />
@@ -113,8 +118,8 @@ export const Routing: React.FC<Props> = ({
 
         <Route path="bookmarks" element={<Bookmarks />} />
 
-        <Route path="useful" element={<Useful />} />
-        <Route path="useful/:id" element={<UsefulItem />} />
+        <Route path="entries" element={<Useful />} />
+        <Route path="entries/:id" element={<UsefulItem />} />
 
         <Route
           path="account"

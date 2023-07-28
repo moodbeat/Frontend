@@ -2,13 +2,13 @@ import React from "react";
 import "@/shared/styles/styles.css";
 import styles from "./LandingPage.module.scss";
 import logo from "@/assets/logo.svg";
-import logoWhiteText from "@/assets/logo_whiteText.svg";
-// import sectionFormImage from "@/assets/sectionForm_image.png";
+import logoHeader from "@/assets/logo_MoodBeat_bl.svg";
 import articleTests from "@/assets/article_tests.png";
 import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
 import articleBookmarks from "@/assets/article_bookmarks.png";
-import imageHero from "@/assets/section_hero.png";
+import heroScreenshot from "@/assets/hero_screenshot.png";
+import heroWheel from "@/assets/hero_wheel.png";
 import { Accordion } from "@/components/Accordion/Accordion";
 import { FormikErrors, useFormik } from "formik";
 
@@ -16,7 +16,6 @@ interface FormValues {
   name: string;
   comment: string;
   email: string;
-  eula: boolean;
 }
 
 const validate = (values: FormValues) => {
@@ -32,11 +31,7 @@ const validate = (values: FormValues) => {
   if (!values.email) {
     errors.email = "Укажите адрес электронной почты";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Указанный корректный адрес электронной почты";
-  }
-
-  if (!values.eula) {
-    errors.eula = "Подтвердите согласие на обработку персональных данных";
+    errors.email = "Укажите корректный адрес электронной почты";
   }
 
   return errors;
@@ -45,12 +40,41 @@ const validate = (values: FormValues) => {
 export const LandingPage: React.FC = () => {
   const faqItems = [
     {
-      question: "На какую команду расчитано приложение?",
-      answer: "Интересный ответ",
+      question: "Как сервис поможет в борьбе с выгоранием?",
+      answer:
+        "Выявление и предупреждение выгорания требует индивидуального подхода к каждому сотруднику. Наш сервис в первую очередь служит инструментом для предупреждения выгорания на основе построенной аналитики, исходя из собираемых с сотрудников данных.",
     },
-    { question: "Вопрос 2", answer: "Ответ 2" },
-    { question: "Вопрос 3", answer: "Ответ 3" },
-    { question: "Вопрос 4", answer: "Ответ 4" },
+    {
+      question:
+        "Какая функция позволяет сотрудникам оценивать своё настроение?",
+      answer:
+        'В сервисе есть функция "Оценка настроения", которая позволяет сотрудникам регулярно отслеживать свои эмоциональные состояния и выявлять тревожные тенденции.',
+    },
+    {
+      question: "Какие преимущества прохождения опросов в сервисе?",
+      answer:
+        "Регулярное прохождение опросов помогает сотрудникам более осознанно подходить к своему состоянию, а также предоставляет HR ценную информацию для дальнейшего анализа и предпринятия необходимых мер по предотвращению выгорания.",
+    },
+    {
+      question: "Как функция оценки прошедшего дня может помочь сотрудникам?",
+      answer:
+        "Оценка прошедшего дня позволяет сотрудникам рефлексировать и анализировать свои действия, успехи и неудачи, что способствует лучшему пониманию собственных эмоций и поведения",
+    },
+    {
+      question: "Что представляют собой полезные статьи в сервисе?",
+      answer:
+        'В разделе "Полезные статьи" вы найдете информацию о психологическом благополучии, стратегиях противостояния стрессу и выгоранию, а также практические советы для повышения эффективности и удовлетворенности работой.',
+    },
+    {
+      question: "Что такое мероприятия в контексте вашего сервиса?",
+      answer:
+        "Мероприятия – это различные события, организованные в рамках сервиса, например, вебинары, тренинги или групповые занятия, которые помогают сотрудникам научиться справляться с нагрузкой и стрессом",
+    },
+    {
+      question: "Как HR может оценить состояние сотрудника с помощью сервиса?",
+      answer:
+        "HR имеет возможность просматривать обобщенные данные о состоянии сотрудников, полученные из опросов и оценок, что помогает выявить общие тенденции и поддерживать тех, кто может нуждаться в дополнительной помощи.",
+    },
   ];
 
   const formik = useFormik({
@@ -58,7 +82,6 @@ export const LandingPage: React.FC = () => {
       name: "",
       email: "",
       comment: "",
-      eula: false,
     },
     validate,
     onSubmit: (values) => {
@@ -70,7 +93,7 @@ export const LandingPage: React.FC = () => {
     <div className={styles.landing}>
       <header className={styles.header}>
         <a href="#">
-          <img src={logoWhiteText} alt="Логотип" />
+          <img src={logoHeader} alt="Логотип" />
         </a>
         <nav className={styles.headerNav}>
           <li className={styles.headerList}>
@@ -98,177 +121,191 @@ export const LandingPage: React.FC = () => {
 
       <main>
         <section className={styles.sectionHero}>
-          <div className={styles.heroCol}>
-            <h1 className={styles.heroTitle}>
-              Держите руку на&nbsp;пульсе эффективности
-            </h1>
-            <p className={styles.heroText}>
-              Поможем HR и руководителям установить&nbsp;эмоциональный контакт с
-              командой, вовремя заметить тревожные сигналы и&nbsp;остановить
-              выгорание.
-            </p>
-            <a
-              className={`${styles.button} ${styles.heroButton}`}
-              href="#audience"
-            >
-              Узнать больше
-            </a>
+          <div className={styles.sectionHeroContainer}>
+            <div className={styles.heroCol}>
+              <h1 className={styles.heroTitle}>
+                Держите руку на&nbsp;пульсе эффективности
+              </h1>
+              <p className={styles.heroText}>
+                Поможем HR и руководителям установить&nbsp;эмоциональный контакт
+                с&nbsp;командой, вовремя заметить тревожные сигналы
+                и&nbsp;остановить выгорание.
+              </p>
+              <a
+                className={`${styles.button} ${styles.heroButton}`}
+                href="#audience"
+              >
+                Установить MoodBeat
+              </a>
+            </div>
+            <div className={styles.heroImages}>
+              <img
+                src={heroScreenshot}
+                alt="Скриншот главного экрана приложения"
+              />
+              <img src={heroWheel} alt="Скриншот колеса баланса" />
+            </div>
           </div>
-          <img src={imageHero} alt="Скриншот главного экрана приложения" />
         </section>
 
         <section id="audience" className={styles.sectionAudience}>
-          <h2>Кому будет полезен MoodBeat?</h2>
-          <div className={styles.audienceCards}>
-            <article>
-              <div>
-                <span>03</span>
-              </div>
-              <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
-              <div>
-                <p>
-                  Для отслеживания уровня выгорания, выявления проблемных
-                  областей и&nbsp;принятия мер для предотвращения
-                  и&nbsp;управления выгоранием среди своих сотрудников
-                </p>
-              </div>
-            </article>
+          <div className={styles.sectionAudienceContainer}>
+            <h2>Кому будет полезен MoodBeat?</h2>
+            <div className={styles.audienceCards}>
+              <article>
+                <div>
+                  <span>01</span>
+                </div>
+                <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
+                <div>
+                  <p>
+                    Для отслеживания уровня выгорания, выявления проблемных
+                    областей и&nbsp;принятия мер для предотвращения
+                    и&nbsp;управления выгоранием среди своих сотрудников
+                  </p>
+                </div>
+              </article>
 
-            <article>
-              <div>
-                <span>02</span>
-              </div>
-              <h3>руководителям и&nbsp;менеджерам</h3>
-              <div>
-                <p>
-                  Для оценки состояния выгорания участников&nbsp;своей команды
-                  и&nbsp;предоставления&nbsp;необходимой
-                  <br />
-                  поддержки.
-                </p>
-                <p>
-                  Для получения информации о&nbsp;состоянии&nbsp;сотрудников
-                  для&nbsp;правильного&nbsp;распределения задач и&nbsp;нагрузки
-                  и улучшению рабочей
-                  <br />
-                  среды
-                </p>
-              </div>
-            </article>
+              <article>
+                <div>
+                  <span>02</span>
+                </div>
+                <h3>руководителям и&nbsp;менеджерам</h3>
+                <div>
+                  <p>
+                    Для оценки состояния выгорания участников&nbsp;своей команды
+                    и&nbsp;предоставления&nbsp;необходимой
+                    <br />
+                    поддержки.
+                  </p>
+                  <p>
+                    Для получения информации о&nbsp;состоянии&nbsp;сотрудников
+                    для&nbsp;правильного&nbsp;распределения задач
+                    и&nbsp;нагрузки и улучшению рабочей
+                    <br />
+                    среды
+                  </p>
+                </div>
+              </article>
 
-            <article>
-              <div>
-                <span>01</span>
-              </div>
-              <h3>Сотрудникам</h3>
-              <div>
-                <p>
-                  Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
-                  эмоционального состояния
-                </p>
-                <p>
-                  Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                  поддержке своего&nbsp;психического здоровья
-                </p>
-              </div>
-            </article>
+              <article>
+                <div>
+                  <span>03</span>
+                </div>
+                <h3>Сотрудникам</h3>
+                <div>
+                  <p>
+                    Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
+                    эмоционального состояния
+                  </p>
+                  <p>
+                    Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
+                    поддержке своего&nbsp;психического здоровья
+                  </p>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
         <section id="features" className={styles.sectionFeatures}>
-          <article>
-            <div>
-              <span>Сотрудникам</span>
-              <h2>Экспресс-тесты настроения и рабочих задач</h2>
-              <p>
-                Оценивайте регулярно свое настроение и загрузку по&nbsp;работе и
-                формируйте данные для аналитики. Это поможет отрефлексировать
-                свой рабочий опыт и эмоциональное сосотояние
-              </p>
-              <a
-                className={`${styles.button} ${styles.featuresButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <img
-              src={articleTests}
-              alt="Скриншот приложения со страницей тестирования"
-            />
-          </article>
+          <div className={styles.sectionFeaturesContainer}>
+            <article>
+              <div>
+                <span>Сотрудникам</span>
+                <h2>Экспресс-тесты настроения и рабочих задач</h2>
+                <p>
+                  Оценивайте регулярно свое настроение и загрузку по&nbsp;работе
+                  и формируйте данные для аналитики. Это поможет
+                  отрефлексировать свой рабочий опыт и эмоциональное сосотояние
+                </p>
+                <a
+                  className={`${styles.button} ${styles.featuresButton}`}
+                  href="#form"
+                >
+                  Заказать демо
+                </a>
+              </div>
+              <img
+                src={articleTests}
+                alt="Скриншот приложения со страницей тестирования"
+              />
+            </article>
 
-          <article>
-            <div>
-              <span>HR специалистам</span>
-              <h2>Опросы сотрудников</h2>
-              <p>
-                Проводите регулярные опросы своих сотрудников для&nbsp;оценки их
-                состояния. Используйте предустановленные&nbsp;опросы или
-                добавляйте свои благодаря конструктору опросов
-              </p>
-              <a
-                className={`${styles.button} ${styles.featuresButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <img
-              src={articleQueries}
-              alt="Скриншот приложения со страницей опросов"
-            />
-          </article>
+            <article>
+              <div>
+                <span>HR специалистам</span>
+                <h2>Опросы сотрудников</h2>
+                <p>
+                  Проводите регулярные опросы своих сотрудников для&nbsp;оценки
+                  их состояния. Используйте предустановленные&nbsp;опросы или
+                  добавляйте свои благодаря конструктору опросов
+                </p>
+                <a
+                  className={`${styles.button} ${styles.featuresButton}`}
+                  href="#form"
+                >
+                  Заказать демо
+                </a>
+              </div>
+              <img
+                src={articleQueries}
+                alt="Скриншот приложения со страницей опросов"
+              />
+            </article>
 
-          <article>
-            <div>
-              <span>Сотрудникам</span>
-              <h2>Раздел с полезными ресурсами</h2>
-              <p>
-                Используйте ресурсы из раздела Полезное для
-                улучшения&nbsp;эмоционального состояния, уменьшения&nbsp;стресса
-                и саморазвития
-              </p>
-              <a
-                className={`${styles.button} ${styles.featuresButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <img
-              src={articleBookmarks}
-              alt="Скриншот приложения со страницей сохраненных полезных материалов"
-            />
-          </article>
+            <article>
+              <div>
+                <span>Сотрудникам</span>
+                <h2>Раздел с полезными ресурсами</h2>
+                <p>
+                  Используйте ресурсы из раздела Полезное для
+                  улучшения&nbsp;эмоционального состояния,
+                  уменьшения&nbsp;стресса и саморазвития
+                </p>
+                <a
+                  className={`${styles.button} ${styles.featuresButton}`}
+                  href="#form"
+                >
+                  Заказать демо
+                </a>
+              </div>
+              <img
+                src={articleBookmarks}
+                alt="Скриншот приложения со страницей сохраненных полезных материалов"
+              />
+            </article>
 
-          <article>
-            <div>
-              <span>Руководителям</span>
-              <h2>Страница сотрудника</h2>
-              <p>
-                Получайте всю необходимую информацию о состоянии&nbsp;каждого
-                сотрудника в приложении, сохраняйте&nbsp;и отслеживайте
-                информацию о проведенных&nbsp;встречах, вовремя реагируйте на
-                тревожные&nbsp;сигналы
-              </p>
-              <a
-                className={`${styles.button} ${styles.featuresButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <img
-              src={articleProfile}
-              alt="Скриншот приложения со страницей профиля сотрудника"
-            />
-          </article>
+            <article>
+              <div>
+                <span>Руководителям</span>
+                <h2>Страница сотрудника</h2>
+                <p>
+                  Получайте всю необходимую информацию о состоянии&nbsp;каждого
+                  сотрудника в приложении, сохраняйте&nbsp;и отслеживайте
+                  информацию о проведенных&nbsp;встречах, вовремя реагируйте на
+                  тревожные&nbsp;сигналы
+                </p>
+                <a
+                  className={`${styles.button} ${styles.featuresButton}`}
+                  href="#form"
+                >
+                  Заказать демо
+                </a>
+              </div>
+              <img
+                src={articleProfile}
+                alt="Скриншот приложения со страницей профиля сотрудника"
+              />
+            </article>
+          </div>
         </section>
 
         <section id="faq" className={styles.sectionFaq}>
-          <h2>FAQ</h2>
-          <Accordion faqItems={faqItems} />
+          <div className={styles.sectionFaqContainer}>
+            <h2>FAQ</h2>
+            <Accordion faqItems={faqItems} />
+          </div>
         </section>
 
         <section id="form" className={styles.sectionForm}>
@@ -300,17 +337,6 @@ export const LandingPage: React.FC = () => {
                 value={formik.values.comment}
                 onBlur={formik.handleBlur}
               />
-              <div className={styles.sectionFormCheckbox}>
-                <input
-                  id="eula"
-                  name="eula"
-                  type="checkbox"
-                  onChange={formik.handleChange}
-                  checked={formik.values.eula}
-                  onBlur={formik.handleBlur}
-                />
-                Согласие на обработку персональных данных
-              </div>
               {formik.touched.name && formik.errors.name ? (
                 <div className={styles.sectionFormError}>
                   {formik.errors.name}
@@ -326,23 +352,18 @@ export const LandingPage: React.FC = () => {
                   {formik.errors.comment}
                 </div>
               ) : null}
-              {formik.touched.eula && formik.errors.eula ? (
-                <div className={styles.sectionFormError}>
-                  {formik.errors.eula}
-                </div>
-              ) : null}
               <button
                 type="submit"
                 className={`${styles.button} ${styles.sectionFormButton}`}
               >
                 Отправить
               </button>
+              <p>
+                Нажимая на кнопку, я соглашаюсь на{" "}
+                <a href="#">обработку персональных данных.</a>
+              </p>
             </form>
           </div>
-          {/* <img
-            src={sectionFormImage}
-            alt="Фотография счастливых офисных работников на фоне розовой стены"
-          /> */}
         </section>
       </main>
 

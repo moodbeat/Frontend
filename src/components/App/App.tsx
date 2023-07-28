@@ -50,6 +50,7 @@ export const App = () => {
   const [events, setEvents] = useState([]);
 
   const currentUserInfo = useAppSelector(selectUserInfo);
+
   const buttonCondition = useAppSelector(selectButtonConditions);
   const role = useAppSelector(
     (state) => state.currentUserSlice.currentUser.role
@@ -294,7 +295,6 @@ export const App = () => {
   useEffect(() => {
     handleEmployees();
   }, [role]);
-  //
 
   function openTestAlertPopup() {
     dispatch(
@@ -304,12 +304,11 @@ export const App = () => {
     );
   }
 
-  //запрос мероприятий для вкладки мероприятия
+  // запрос мероприятий для вкладки мероприятия
   async function fetchEvents() {
     try {
       if (role === "hr" || role === "chief" || role === "employee") {
         const response = await Api.getEvents();
-        // console.log(response)
         setEvents(response.data.results);
       }
     } catch (err: any) {
@@ -319,7 +318,7 @@ export const App = () => {
   useEffect(() => {
     fetchEvents();
   }, [role]);
-  //
+
   // отпрвка мероприятия
   // async function postEvent() {
   //   try {
@@ -378,8 +377,9 @@ export const App = () => {
 
   // получение уведомлений о тестах и мероприятиях с помощью WebSocket
   useEffect(() => {
-    const socket = new WebSocket(`${BASE_URL_WSS}/notifications?2`);
-
+    const socket = new WebSocket(
+      `${BASE_URL_WSS}/notifications?${String(currentUserInfo.id)}`
+    );
     socket.onmessage = (event) => {
       const newEvent = JSON.parse(event.data) as WebSocketMessage;
       dispatch(addNotifications(newEvent));
@@ -389,7 +389,7 @@ export const App = () => {
         socket.close();
       }
     };
-  }, []);
+  }, [currentUserInfo]);
 
   useEffect(() => {
     if (currentUserInfo.id !== 0) {

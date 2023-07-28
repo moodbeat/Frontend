@@ -51,6 +51,11 @@
       border-color: var(--color-accent-secondary);
       color: var(--color-accent-secondary);
     }
+    &:disabled {
+      border-color: var(--color-accent-purple);
+      color: var(--color-accent-purple);
+    }
+
   }
 
   &-empty {
@@ -72,6 +77,7 @@
     &:disabled {
       cursor: auto;
       opacity: 0.64;
+      color: var(--color-accent-purple);
     }
   }
 
@@ -87,8 +93,4 @@
 .disabled {
   cursor: auto;
   opacity: 0.64;
-
-  &:hover {
-    background-color: var(--color-accent-purple)
-  }
 }

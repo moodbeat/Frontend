@@ -1,6 +1,6 @@
 .point {
   display: flex;
-  width: 100%;
+  width: 324px;
   justify-content: space-between;
   padding: 12px 16px;
   border-radius: 20px;
@@ -14,10 +14,11 @@
   flex-direction: column;
 }
 
-.rightBlock {
+.right-block {
   display:flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-end;
   gap: 8px;
 }
 
@@ -40,7 +41,8 @@
 .typeActivity {
   margin: 0;
   color: var(--color-accent-purple);
-  font: var(--font-body)
+  font: var(--font-body);
+  text-align: right;
 }
 
 .time {
