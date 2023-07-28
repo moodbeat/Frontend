@@ -4,6 +4,15 @@
 
 .main {
   display: flex;
-  padding: 40px 132px 46px 52px;
+  box-sizing: border-box;
+
+  /* padding: 40px 132px 46px 52px; */
+  padding: 40px;
   gap: 28px;
+}
+
+@media screen and (width > 1440px) {
+  .main {
+    justify-content: center;
+  }
 }
