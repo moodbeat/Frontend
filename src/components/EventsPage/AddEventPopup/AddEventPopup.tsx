@@ -22,7 +22,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
   const [isPopupRequest, setIsPopupRequest] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
   const [valueData, setValueData] = useState<Date | null>(null);
-  const [isEnterData, setIsEnterData] = useState(false);
+  // const [isEnterData, setIsEnterData] = useState(false);
   const [headingEvent, setHeadingEvent] = useState('');
   const [reviewPost, setReviewPost] = useState('');
   const [valueTimeStart, setValueTimeStart] = useState('00:00');
@@ -58,8 +58,8 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
   // const [values, setValues] = useState(valuesStart);
 
   const onSubmit = (e: any) => {
-    console.log(e.target.elements);
-    console.log(valueData);
+    // console.log(e.target.elements);
+    // console.log(valueData);
     e.preventDefault();
     setIsRequest(false);
     const year = (valueData !== null) ? (valueData.getFullYear()) : new Date().getFullYear();
@@ -132,7 +132,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
 
   const resetForm = () => {
     setValueData(null);
-    setIsEnterData(false);
+    // setIsEnterData(false);
     setValueTimeStart('00:00');
     setIsEnterTimeStart(false);
     setValueTimeEnd('00:00');

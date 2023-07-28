@@ -31,7 +31,7 @@ const MyResponsivePie = ({ data, colors }: PieDataProps): ReactElement => (
     margin={{ top: 0, right: 50, bottom: 90, left: 0 }}
     innerRadius={0.55}
     enableArcLinkLabels={false}
-    valueFormat={(value) => `${value}%`}
+    valueFormat={(value: number) => `${value}%`}
     legends={[
       {
         anchor: "bottom",
