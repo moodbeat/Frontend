@@ -1,5 +1,5 @@
 import styles from "./NotificationPopup.module.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import SettingsIcon from "./settings_20.svg";
 import NotificationIcon from "./notification_28.svg";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ export const NotificationPopup: React.FC<Props> = ({
   events,
 }) => {
   const notifications = useAppSelector(selectNotifications);
-  const [displayedDate, setDisplayedDate] = useState({ date: new Date() });
   const [displayedDateText, setDisplayedDateText] = useState("");
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -38,7 +37,7 @@ export const NotificationPopup: React.FC<Props> = ({
   useEscapeKey(closeNotificationPopup);
   useOutsideClick(closeNotificationPopup, ref);
 
-  useEffect(() => {
+  const handleNotificationChange = useCallback(() => {
     if (
       notifications &&
       notifications.filter((x) => x.incident_type === "Событие").length > 0
@@ -55,32 +54,28 @@ export const NotificationPopup: React.FC<Props> = ({
       });
 
       // Определяем дату ближайшего непросмотренного мероприятия
+      let tempDate = new Date(0);
       eventsToCheck.map((x, i) => {
-        if (i === 0) setDisplayedDate({ date: x.start_time });
-        if (x.start_time < displayedDate.date)
-          setDisplayedDate({ date: x.start_time });
+        if (i === 0) tempDate = x.start_time;
+        if (x.start_time < tempDate) tempDate = x.start_time;
       });
 
-      if (typeof displayedDate.date === "string") {
+      if (typeof tempDate === "string") {
         setDisplayedDateText(
-          new Date(displayedDate.date).toLocaleDateString("ru-RU", {
+          new Date(tempDate).toLocaleDateString("ru-RU", {
             day: "numeric",
             month: "long",
             hour: "2-digit",
             minute: "2-digit",
           })
         );
-        console.log(
-          `${new Date(displayedDate.date).toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}`
-        );
       }
     }
-  }, [events, notifications, displayedDate.date]);
+  }, [events, notifications]);
+
+  useEffect(() => {
+    handleNotificationChange();
+  }, [handleNotificationChange]);
 
   return (
     <ul

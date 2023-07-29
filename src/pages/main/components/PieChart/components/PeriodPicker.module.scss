@@ -22,9 +22,9 @@
     @include background-no-repeat-center-cover;
     border: none;
     background-color: var(--color-background);
-    background-image: url("chevron_down_24.svg");
+    background-image: url("../assets/chevron_down_24.svg");
     &-opened {
-      background-image: url("chevron_up_24.svg");
+      background-image: url("../assets/chevron_up_24.svg");
     }
   }
 }
