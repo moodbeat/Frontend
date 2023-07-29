@@ -23,7 +23,7 @@
 
 // @TODO: Единообразная подложка
 
-.landing main {
+.main {
   width: 100%;
   background-image: url("../../assets/landing_bg_diag.png");
   background-position: center 860px;
@@ -43,12 +43,12 @@
   align-items: center;
   z-index: 1;
 }
-.header li {
+.headerList {
   display: flex;
   justify-content: center;
   gap: 30px;
 }
-.header li ul {
+.headerListItem {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -108,12 +108,12 @@
 .heroImages {
   position: relative;
 }
-.heroImages img {
+.heroImage {
   display: block;
   object-fit: cover;
   max-width: 740px;
 }
-.heroImages img:last-of-type {
+.heroImage:last-of-type {
   position: absolute;
   bottom: -82px;
   right: -25px;
@@ -132,7 +132,7 @@
   max-width: 1600px;
   margin: 0 auto;
 }
-.sectionAudience h2 {
+.sectionAudienceTitle {
   margin: 0 0 60px;
   font-weight: 600;
   font-size: 50px;
@@ -142,7 +142,7 @@
   display: flex;
   gap: 40px;
 }
-.audienceCards article {
+.audienceCard {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -154,7 +154,7 @@
   background-color: var(--color-white);
   box-shadow: var(--shadow-small);
 }
-.audienceCards article span {
+.audienceCardLabel {
   display: flex;
   align-items: flex-end;
   width: 100%;
@@ -167,22 +167,22 @@
   background-repeat: no-repeat;
   background-position: right;
 }
-.audienceCards article:nth-of-type(1) span {
+.audienceCard:nth-of-type(1) .audienceCardLabel {
   background-image: url("../../assets/audience_hr.png");
 }
-.audienceCards article:nth-of-type(2) span {
+.audienceCard:nth-of-type(2) .audienceCardLabel {
   background-image: url("../../assets/audience_chef.png");
 }
-.audienceCards article:nth-of-type(3) span {
+.audienceCard:nth-of-type(3) .audienceCardLabel {
   background-image: url("../../assets/audience_employee.png");
 }
-.audienceCards article h3 {
+.audienceCardTitle {
   margin: 0;
   font-weight: 600;
   font-size: 32px;
   line-height: 36px;
 }
-.audienceCards article p {
+.audienceCardText {
   margin: 0;
   max-width: 378px;
   font-weight: 400;
@@ -205,32 +205,32 @@
   flex-direction: column;
   gap: 140px;
 }
-.sectionFeatures article {
+.feature {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
-.sectionFeatures article:nth-of-type(1),
-.sectionFeatures article:nth-of-type(4) {
+.feature:nth-of-type(1),
+.feature:nth-of-type(4) {
   flex-direction: row-reverse;
 }
-.sectionFeatures article img {
+.featureImage {
   display: block;
   max-width: 740px;
   object-fit: contain;
   border-radius: 12px;
   transition: all 0.3s ease-in;
 }
-.sectionFeatures article img:nth-of-type(1) {
+.featureImage:nth-of-type(1) {
   max-width: 680px;
 }
-.sectionFeatures article div {
+.featureTextCol {
   max-width: 590px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-.sectionFeatures span {
+.featureLabel {
   width: fit-content;
   padding: 12px 32px;
   border-radius: 40px;
@@ -240,14 +240,14 @@
   font-size: var(--font-size-l);
   line-height: var--font-line-l;
 }
-.sectionFeatures h2 {
+.featureTitle {
   margin: 60px 0 30px;
   font-weight: 600;
   font-size: 38px;
   line-height: 44px;
   color: var(--color-black);
 }
-.sectionFeatures p {
+.featureText {
   margin: 0 0 26px;
   font-weight: 400;
   font-size: var(--font-size-l);
@@ -266,7 +266,7 @@
   margin: 0 auto;
   padding: 80px 60px 140px;
 }
-.sectionFaq h2 {
+.sectionFaqTitle {
   margin: 0 0 60px;
   font-weight: 600;
   font-size: 50px;
@@ -287,7 +287,7 @@
   justify-content: space-between;
   gap: 83px;
 }
-.sectionForm h2 {
+.sectionFormTitle {
   margin: 0 0 20px;
   font-weight: 600;
   font-size: 50px;
@@ -308,7 +308,7 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-footer p {
+.footerText {
   max-width: 305px;
   text-align: right;
   font-weight: 500;

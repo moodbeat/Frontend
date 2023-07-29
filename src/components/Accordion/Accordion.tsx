@@ -35,7 +35,9 @@ export const Accordion: React.FC<AccordionProps> = ({ faqItems }) => {
           >
             {item.question}
           </div>
-          {activeIndex === index && <p>{item.answer}</p>}
+          {activeIndex === index && (
+            <p className={styles.text}>{item.answer}</p>
+          )}
         </div>
       ))}
     </div>
