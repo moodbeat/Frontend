@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "@/shared/styles/styles.css";
 import styles from "./LandingPage.module.scss";
 import logo from "@/assets/logo.svg";
@@ -7,87 +7,15 @@ import articleTests from "@/assets/article_tests.png";
 import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
 import articleBookmarks from "@/assets/article_bookmarks.png";
+import articleTelegram from "@/assets/article_telegram.png";
 import heroScreenshot from "@/assets/hero_screenshot.png";
 import heroWheel from "@/assets/hero_wheel.png";
 import { Accordion } from "@/components/Accordion/Accordion";
-import { FormikErrors, useFormik } from "formik";
-
-interface FormValues {
-  name: string;
-  comment: string;
-  email: string;
-}
-
-const validate = (values: FormValues) => {
-  const errors: FormikErrors<FormValues> = {};
-  if (!values.name) {
-    errors.name = "Укажите Ваше имя";
-  }
-
-  if (!values.comment) {
-    errors.comment = 'Напишите Ваш вопрос в поле "Комментарий"';
-  }
-
-  if (!values.email) {
-    errors.email = "Укажите адрес электронной почты";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Укажите корректный адрес электронной почты";
-  }
-
-  return errors;
-};
+import { FeedbackForm } from "./components/FeedbackForm/FeedbackForm";
+import { faqItems } from "@/shared/constants";
 
 export const LandingPage: React.FC = () => {
-  const faqItems = [
-    {
-      question: "Как сервис поможет в борьбе с выгоранием?",
-      answer:
-        "Выявление и предупреждение выгорания требует индивидуального подхода к каждому сотруднику. Наш сервис в первую очередь служит инструментом для предупреждения выгорания на основе построенной аналитики, исходя из собираемых с сотрудников данных.",
-    },
-    {
-      question:
-        "Какая функция позволяет сотрудникам оценивать своё настроение?",
-      answer:
-        'В сервисе есть функция "Оценка настроения", которая позволяет сотрудникам регулярно отслеживать свои эмоциональные состояния и выявлять тревожные тенденции.',
-    },
-    {
-      question: "Какие преимущества прохождения опросов в сервисе?",
-      answer:
-        "Регулярное прохождение опросов помогает сотрудникам более осознанно подходить к своему состоянию, а также предоставляет HR ценную информацию для дальнейшего анализа и предпринятия необходимых мер по предотвращению выгорания.",
-    },
-    {
-      question: "Как функция оценки прошедшего дня может помочь сотрудникам?",
-      answer:
-        "Оценка прошедшего дня позволяет сотрудникам рефлексировать и анализировать свои действия, успехи и неудачи, что способствует лучшему пониманию собственных эмоций и поведения",
-    },
-    {
-      question: "Что представляют собой полезные статьи в сервисе?",
-      answer:
-        'В разделе "Полезные статьи" вы найдете информацию о психологическом благополучии, стратегиях противостояния стрессу и выгоранию, а также практические советы для повышения эффективности и удовлетворенности работой.',
-    },
-    {
-      question: "Что такое мероприятия в контексте вашего сервиса?",
-      answer:
-        "Мероприятия – это различные события, организованные в рамках сервиса, например, вебинары, тренинги или групповые занятия, которые помогают сотрудникам научиться справляться с нагрузкой и стрессом",
-    },
-    {
-      question: "Как HR может оценить состояние сотрудника с помощью сервиса?",
-      answer:
-        "HR имеет возможность просматривать обобщенные данные о состоянии сотрудников, полученные из опросов и оценок, что помогает выявить общие тенденции и поддерживать тех, кто может нуждаться в дополнительной помощи.",
-    },
-  ];
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      comment: "",
-    },
-    validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
     <div className={styles.landing}>
@@ -114,11 +42,10 @@ export const LandingPage: React.FC = () => {
             </ul>
           </li>
         </nav>
-        <a className={`${styles.button} ${styles.headerButton}`} href="#form">
-          Заказать демо
+        <a className={`${styles.button} ${styles.headerButton}`} href="/login">
+          Войти
         </a>
       </header>
-
       <main>
         <section className={styles.sectionHero}>
           <div className={styles.sectionHeroContainer}>
@@ -133,9 +60,9 @@ export const LandingPage: React.FC = () => {
               </p>
               <a
                 className={`${styles.button} ${styles.heroButton}`}
-                href="#audience"
+                href="#form"
               >
-                Установить MoodBeat
+                Заказать демо
               </a>
             </div>
             <div className={styles.heroImages}>
@@ -156,12 +83,11 @@ export const LandingPage: React.FC = () => {
                 <div>
                   <span>01</span>
                 </div>
-                <h3>работодателям и&nbsp;HR&nbsp;специалистам</h3>
+                <h3>Работодателям и&nbsp;HR&nbsp;специалистам</h3>
                 <div>
                   <p>
                     Для отслеживания уровня выгорания, выявления проблемных
-                    областей и&nbsp;принятия мер для предотвращения
-                    и&nbsp;управления выгоранием среди своих сотрудников
+                    областей и профилактики выгорания среди сотрудников.
                   </p>
                 </div>
               </article>
@@ -170,7 +96,7 @@ export const LandingPage: React.FC = () => {
                 <div>
                   <span>02</span>
                 </div>
-                <h3>руководителям и&nbsp;менеджерам</h3>
+                <h3>Руководителям и&nbsp;менеджерам</h3>
                 <div>
                   <p>
                     Для оценки состояния выгорания участников&nbsp;своей команды
@@ -179,9 +105,9 @@ export const LandingPage: React.FC = () => {
                     поддержки.
                   </p>
                   <p>
-                    Для получения информации о&nbsp;состоянии&nbsp;сотрудников
-                    для&nbsp;правильного&nbsp;распределения задач
-                    и&nbsp;нагрузки и улучшению рабочей
+                    Для получения информации о&nbsp;состоянии&nbsp;сотрудников,
+                    правильного распределения задач и&nbsp;нагрузки
+                    и&nbsp;улучшению рабочей
                     <br />
                     среды
                   </p>
@@ -216,15 +142,10 @@ export const LandingPage: React.FC = () => {
                 <h2>Экспресс-тесты настроения и рабочих задач</h2>
                 <p>
                   Оценивайте регулярно свое настроение и загрузку по&nbsp;работе
-                  и формируйте данные для аналитики. Это поможет
-                  отрефлексировать свой рабочий опыт и эмоциональное сосотояние
+                  и формируйте данные для аналитики. Это&nbsp;поможет
+                  отрефлексировать свой рабочий опыт и&nbsp;эмоциональное
+                  сосотояние
                 </p>
-                <a
-                  className={`${styles.button} ${styles.featuresButton}`}
-                  href="#form"
-                >
-                  Заказать демо
-                </a>
               </div>
               <img
                 src={articleTests}
@@ -241,12 +162,6 @@ export const LandingPage: React.FC = () => {
                   их состояния. Используйте предустановленные&nbsp;опросы или
                   добавляйте свои благодаря конструктору опросов
                 </p>
-                <a
-                  className={`${styles.button} ${styles.featuresButton}`}
-                  href="#form"
-                >
-                  Заказать демо
-                </a>
               </div>
               <img
                 src={articleQueries}
@@ -259,16 +174,10 @@ export const LandingPage: React.FC = () => {
                 <span>Сотрудникам</span>
                 <h2>Раздел с полезными ресурсами</h2>
                 <p>
-                  Используйте ресурсы из раздела Полезное для
-                  улучшения&nbsp;эмоционального состояния,
-                  уменьшения&nbsp;стресса и саморазвития
+                  Используйте ресурсы из раздела Полезное для&nbsp;улучшения
+                  эмоционального состояния, уменьшения&nbsp;стресса и
+                  саморазвития
                 </p>
-                <a
-                  className={`${styles.button} ${styles.featuresButton}`}
-                  href="#form"
-                >
-                  Заказать демо
-                </a>
               </div>
               <img
                 src={articleBookmarks}
@@ -281,21 +190,35 @@ export const LandingPage: React.FC = () => {
                 <span>Руководителям</span>
                 <h2>Страница сотрудника</h2>
                 <p>
-                  Получайте всю необходимую информацию о состоянии&nbsp;каждого
-                  сотрудника в приложении, сохраняйте&nbsp;и отслеживайте
+                  Получайте всю необходимую информацию о&nbsp;состоянии каждого
+                  сотрудника в приложении, сохраняйте и&nbsp;отслеживайте
                   информацию о проведенных&nbsp;встречах, вовремя реагируйте на
                   тревожные&nbsp;сигналы
                 </p>
-                <a
-                  className={`${styles.button} ${styles.featuresButton}`}
-                  href="#form"
-                >
-                  Заказать демо
-                </a>
               </div>
               <img
                 src={articleProfile}
                 alt="Скриншот приложения со страницей профиля сотрудника"
+              />
+            </article>
+
+            <article>
+              <div>
+                <span>Для всех</span>
+                <h2>Чат-бот в Telegram</h2>
+                <p>
+                  Получайте всю необходимую информацию о состоянии каждого
+                  сотрудника не только в приложении, но&nbsp;удобным для вас
+                  способом на смартфон.
+                </p>
+                <p>
+                  Сохраняйте и отслеживайте информацию о&nbsp;проведенных
+                  встречах, вовремя реагируйте на&nbsp;тревожные сигналы
+                </p>
+              </div>
+              <img
+                src={articleTelegram}
+                alt="Скриншот использования Телеграм-бота"
               />
             </article>
           </div>
@@ -311,68 +234,26 @@ export const LandingPage: React.FC = () => {
         <section id="form" className={styles.sectionForm}>
           {/* @TODO: Валидация и сабмит формы */}
           <div className={styles.sectionFormContainer}>
-            <form onSubmit={formik.handleSubmit}>
-              <h2>Остались еще вопросы? Напишите нам!</h2>
-              <input
-                id="name"
-                placeholder="Имя"
-                name="name"
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                onBlur={formik.handleBlur}
-              />
-              <input
-                id="email"
-                placeholder="E-mail"
-                name="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-              />
-              <textarea
-                id="comment"
-                placeholder="Комментарий"
-                name="comment"
-                onChange={formik.handleChange}
-                value={formik.values.comment}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.name && formik.errors.name ? (
-                <div className={styles.sectionFormError}>
-                  {formik.errors.name}
-                </div>
-              ) : null}
-              {formik.touched.email && formik.errors.email ? (
-                <div className={styles.sectionFormError}>
-                  {formik.errors.email}
-                </div>
-              ) : null}
-              {formik.touched.comment && formik.errors.comment ? (
-                <div className={styles.sectionFormError}>
-                  {formik.errors.comment}
-                </div>
-              ) : null}
-              <button
-                type="submit"
-                className={`${styles.button} ${styles.sectionFormButton}`}
-              >
-                Отправить
-              </button>
-              <p>
-                Нажимая на кнопку, я соглашаюсь на{" "}
-                <a href="#">обработку персональных данных.</a>
-              </p>
-            </form>
+            {isSubmitted ? (
+              <h2>
+                Спасибо!
+                <br />
+                Мы получили Ваше&nbsp;сообщение.
+              </h2>
+            ) : (
+              <FeedbackForm setIsSubmitted={setIsSubmitted} />
+            )}
           </div>
         </section>
       </main>
-
       <footer>
-        <img src={logo} alt="Логотип" />
-        <p>
-          Защита для ваших сотрудников
-          &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
-        </p>
+        <div className={styles.footerContainer}>
+          <img src={logo} alt="Логотип" />
+          <p>
+            Защита для ваших сотрудников
+            &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
+          </p>
+        </div>
       </footer>
     </div>
   );
