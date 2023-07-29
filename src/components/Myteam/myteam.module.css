@@ -82,7 +82,7 @@
   }
 }
 
-@media screen and (width> 1440px) {
+/* @media screen and (width> 1440px) {
   .myteam {
     justify-content: center;
     padding: 44px;
@@ -95,4 +95,4 @@
   .right-screen {
     width: 320px;
   }
-}
+} */
