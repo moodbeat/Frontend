@@ -18,8 +18,8 @@ const validate = (values: FormValues) => {
   if (!values.name) {
     errors.name = "Укажите Ваше имя";
   }
-  if (values.name.length < 2 || values.name.length > 64) {
-    errors.name = "Введите имя от 2 до 64 символов";
+  if (values.name.length < 2 || values.name.length > 32) {
+    errors.name = "Введите имя от 2 до 32 символов";
   }
 
   if (!values.email) {
@@ -53,25 +53,38 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <h2>Остались еще вопросы? Напишите нам!</h2>
-      <input
-        id="name"
-        placeholder="Имя"
-        name="name"
-        onChange={formik.handleChange}
-        value={formik.values.name}
-        onBlur={formik.handleBlur}
-      />
-      <input
-        id="email"
-        placeholder="E-mail"
-        name="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-        onBlur={formik.handleBlur}
-      />
+    <form className={styles.form} onSubmit={formik.handleSubmit}>
+      <h2 className={styles.title}>Остались еще вопросы? Напишите нам!</h2>
+      <div className={styles.div}>
+        <input
+          className={styles.input}
+          id="name"
+          placeholder="Имя"
+          name="name"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.name && formik.errors.name ? (
+          <div className={styles.error}>{formik.errors.name}</div>
+        ) : null}
+      </div>
+      <div className={styles.div}>
+        <input
+          className={styles.input}
+          id="email"
+          placeholder="E-mail"
+          name="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <div className={styles.error}>{formik.errors.email}</div>
+        ) : null}
+      </div>
       <textarea
+        className={styles.textarea}
         id="comment"
         placeholder="Комментарий"
         name="comment"
@@ -79,15 +92,15 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
         value={formik.values.comment}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.name && formik.errors.name ? (
-        <div className={styles.error}>{formik.errors.name}</div>
+      {formik.touched.comment && formik.errors.comment ? (
+        <div className={styles.error}>{formik.errors.comment}</div>
       ) : null}
-      {formik.touched.email && formik.errors.email ? (
-        <div className={styles.error}>{formik.errors.email}</div>
-      ) : null}
-      <button type="submit">Отправить</button>
-      <p>
-        Нажимая на кнопку, я соглашаюсь на <a>обработку персональных данных.</a>
+      <button className={styles.button} type="submit">
+        Отправить
+      </button>
+      <p className={styles.p}>
+        Нажимая на кнопку, я соглашаюсь на{" "}
+        <a className={styles.a}>обработку персональных данных.</a>
       </p>
     </form>
   );
