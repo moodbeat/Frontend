@@ -22,8 +22,12 @@
 }
 
 // @TODO: Единообразная подложка
+
 .landing main {
   width: 100%;
+  background-image: url("../../assets/landing_bg_diag.png");
+  background-position: center 860px;
+  background-size: contain;
 }
 
 // HEADER
@@ -191,9 +195,6 @@
 
 .sectionFeatures {
   width: 100%;
-  background-image: url("../../assets/landing_bg_diag.png");
-  background-position: center;
-  background-size: cover;
 }
 .sectionFeaturesContainer {
   width: 100%;

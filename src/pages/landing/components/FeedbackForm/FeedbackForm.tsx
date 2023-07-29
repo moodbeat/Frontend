@@ -1,6 +1,7 @@
 import "@/shared/styles/styles.css";
 import styles from "./FeedbackForm.module.scss";
 import { FormikErrors, useFormik } from "formik";
+import { sendFeedback } from "@/shared/api/Api";
 
 interface FormValues {
   name: string;
@@ -45,8 +46,7 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
     },
     validate,
     onSubmit: (values, { resetForm }) => {
-      // sendFeedback(values);
-      console.log(values);
+      sendFeedback(values);
       resetForm();
       setIsSubmitted(true);
     },
