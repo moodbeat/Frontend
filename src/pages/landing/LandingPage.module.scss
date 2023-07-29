@@ -8,6 +8,7 @@
 }
 .button {
   display: flex;
+  padding: 12px 18px;
   width: 220px;
   height: 44px;
   border-radius: 16px;
@@ -96,6 +97,7 @@
   color: var(--color-black);
 }
 .heroButton {
+  align-self: flex-start;
   background-color: var(--color-accent-purple);
   color: var(--color-white);
 }
@@ -147,14 +149,6 @@
   border: 1px solid transparent;
   background-color: var(--color-white);
   box-shadow: var(--shadow-small);
-  transition: all 0.5s ease-in;
-}
-.audienceCards article:hover {
-  border: 1px solid var(--color-accent-purple);
-  box-shadow: var(--shadow-medium);
-  cursor: pointer;
-  color: var(--color-white);
-  background-color: var(--color-black);
 }
 .audienceCards article span {
   display: flex;
@@ -183,7 +177,6 @@
   font-weight: 600;
   font-size: 32px;
   line-height: 36px;
-  text-transform: uppercase;
 }
 .audienceCards article p {
   margin: 0;
@@ -216,7 +209,8 @@
   justify-content: space-between;
   gap: 20px;
 }
-.sectionFeatures article:nth-of-type(2n + 2):not(:last-of-type) {
+.sectionFeatures article:nth-of-type(1),
+.sectionFeatures article:nth-of-type(4) {
   flex-direction: row-reverse;
 }
 .sectionFeatures article img {
@@ -229,14 +223,14 @@
 .sectionFeatures article img:nth-of-type(1) {
   max-width: 680px;
 }
-.sectionFeatures article img:hover {
-  border-radius: 20px;
-  box-shadow: var(--shadow-medium);
-}
 .sectionFeatures article div {
-  max-width: 550px;
+  max-width: 590px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .sectionFeatures span {
+  width: fit-content;
   padding: 12px 32px;
   border-radius: 40px;
   background-color: var(--color-white);
@@ -253,23 +247,11 @@
   color: var(--color-black);
 }
 .sectionFeatures p {
-  margin: 0 0 60px;
+  margin: 0 0 26px;
   font-weight: 400;
   font-size: var(--font-size-l);
   line-height: 26px;
   color: var(--color-black);
-}
-.featuresButton {
-  color: var(--color-white);
-  width: 0px;
-  font-size: 0px;
-  transition: all 0.3s ease-in;
-}
-.sectionFeatures article div:hover .featuresButton {
-  width: 220px;
-  font-size: var(--font-size-m);
-  background-color: var(--color-accent-purple);
-  color: var(--color-white);
 }
 
 // FAQ
@@ -311,62 +293,15 @@
   line-height: 60px;
   color: var(--color-accent-secondary);
 }
-.sectionForm form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.sectionForm input {
-  width: calc((100% - 20px) / 2);
-  height: 52px;
-}
-.sectionForm textarea {
-  width: 100%;
-  min-height: 186px;
-  resize: none;
-}
-.sectionForm input,
-.sectionForm textarea {
-  padding: 16px 12px;
-  border-radius: 8px;
-  border: 0.5px solid var(--color-icon-secondary);
-}
-.sectionForm input::placeholder,
-.sectionForm textarea::placeholder {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: var(--color-accent-gray);
-}
-.sectionFormError {
-  display: block;
-  width: 100%;
-  color: var(--color-error);
-}
-.sectionFormButton {
-  margin-top: 8px;
-  display: block;
-  background-color: var(--color-accent-purple);
-  color: var(--color-white);
-  border: none;
-  cursor: pointer;
-}
-.sectionForm p {
-  display: block;
-  margin: -8px 0 0;
-  width: 100%;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  color: var(--color-accent-secondary);
-}
-.sectionForm p a {
-  text-decoration: none;
-  color: var(--color-accent-secondary);
-  border-bottom: 0.5px solid var(--color-accent-secondary);
-}
+
+// FOOTER
 
 footer {
+  width: 100%;
+}
+.footerContainer {
+  margin: 0 auto;
+  max-width: 1600px;
   margin-top: -100px;
   padding: 0 60px;
   display: flex;

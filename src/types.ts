@@ -21,14 +21,14 @@ export interface EmployeeInterface {
 }
 
 export interface EventInterface {
-  author?: { id: number, first_name: string, last_name: string };
+  author?: { id: number; first_name: string; last_name: string };
   created?: string;
   end_time: Date;
   start_time: Date;
   id?: number;
   name: string;
   text: string;
-  liked?: { id?: number }
+  liked?: { id?: number };
 }
 
 export interface SelectOption {
@@ -90,13 +90,19 @@ export interface AnswerResult {
 }
 
 export interface TestResults {
-  results: AnswerResult[]
-  survey: number
+  results: AnswerResult[];
+  survey: number;
 }
 
 export interface SubmitArguments {
   results: AnswerResult[];
   survey: number;
+}
+
+export interface FeedbackArguments {
+  name: string;
+  email: string;
+  comment: string;
 }
 
 export interface ExpressDiagnoseEmployee {
@@ -125,26 +131,26 @@ export interface ExpressDiagnoseMentalState {
 }
 
 export interface Graph {
-  title: string,
-  text: string,
-  size: string,
-  color: string,
-  value: number,
-  min_value: number,
-  max_value: number
+  title: string;
+  text: string;
+  size: string;
+  color: string;
+  value: number;
+  min_value: number;
+  max_value: number;
 }
 
 export interface ExpressDiagnoseSummaryGraphs {
-  graphs: Graph[]
+  graphs: Graph[];
 }
 
 export interface ExpressDiagnoseResponse {
   id: number;
   employee: ExpressDiagnoseEmployee;
   survey: ExpressDiagnoseSurvey;
-  mental_state: ExpressDiagnoseMentalState,
-  summary: null | ExpressDiagnoseSummaryGraphs,
-  results: AnswerResult[]
+  mental_state: ExpressDiagnoseMentalState;
+  summary: null | ExpressDiagnoseSummaryGraphs;
+  results: AnswerResult[];
   completion_date: string;
   next_attempt_date: string;
 }
@@ -224,11 +230,10 @@ export interface jwtTypes {
   user_id: number;
 }
 
-
 export interface Card {
   id: number;
   category: Category[];
-  author?: {}
+  author?: NonNullable<unknown>;
   title: string;
   preview_image: string;
   description: string;
@@ -241,9 +246,9 @@ export interface Card {
 }
 
 export interface Category {
-  id: number,
-  name: string,
-  slug: string,
+  id: number;
+  name: string;
+  slug: string;
   description: string;
 }
 
@@ -257,13 +262,13 @@ export interface Meeting {
 }
 
 export interface WebSocketActiveEvent {
-  id: number,
-  incident_type: string,
-  incident_id: number
+  id: number;
+  incident_type: string;
+  incident_id: number;
 }
 
 export interface WebSocketNotifications {
-  notifications: WebSocketActiveEvent[]
+  notifications: WebSocketActiveEvent[];
 }
 
 export interface WebSocketMessage {
@@ -271,19 +276,19 @@ export interface WebSocketMessage {
 }
 
 export interface MeetingInfo {
-  userId: string,
-  formattedDate: string,
-  comment: string,
+  userId: string;
+  formattedDate: string;
+  comment: string;
   level: number;
 }
 
 export interface MeetingInterface {
   //id: number | undefined,
-  comment: string,
-  date: string,
-  employee?: EmployeeInterface,
-  organizer?: EmployeeInterface,
-  mental_state: UserMentalState
+  comment: string;
+  date: string;
+  employee?: EmployeeInterface;
+  organizer?: EmployeeInterface;
+  mental_state: UserMentalState;
 }
 
 export interface Data {
@@ -299,13 +304,13 @@ export interface Data {
 
 export interface WheelResultItem {
   "life-direction": string;
-  "Приоритет"?: number;
+  Приоритет?: number;
   "Текущее состояние"?: number;
-  "Результат"?: number;
+  Результат?: number;
 }
 
 export interface WheelResults {
-  num: number,
+  num: number;
   result: number;
 }
 
@@ -321,34 +326,34 @@ export interface WheelResultsInfo {
 }
 
 export interface UserConditionForSend {
-  mood: number,
-  note?: string | null,
-  date: string,
+  mood: number;
+  note?: string | null;
+  date: string;
 }
 
 export interface UserConditionRecieved {
-  id: number,
-  mood: number,
-  note?: string | null,
-  date: string,
-  employee: number
+  id: number;
+  mood: number;
+  note?: string | null;
+  date: string;
+  employee: number;
 }
 
 export interface UserConditionButtonSent {
-  mood: number,
-  note: string,
-  date: string
+  mood: number;
+  note: string;
+  date: string;
 }
 
 export interface UserBurnoutLevel {
-  month: string,
-  percentage: number,
+  month: string;
+  percentage: number;
 }
 
 export interface DataBurnOutInterface {
-  [day: string]: number,
+  [day: string]: number;
 
-  degress: number,
+  degress: number;
 }
 
 export interface ActivityInterface {
