@@ -3,11 +3,13 @@ import { ReactElement, useState } from "react";
 import { UserHobby } from "@/types";
 import { Interest } from "@/pages/account/components/Interest/Interest";
 import { CustomDropDown } from "@/pages/account/components/CustomDropdown/CustomDropDown";
+
 interface Props {
   interests: UserHobby[];
   removeInterest: (index: number) => void;
   handleSelectChange: (selectedOption: any) => void;
 }
+
 export const Interests = ({
   interests,
   removeInterest,
@@ -21,7 +23,7 @@ export const Interests = ({
         <ul className={styles.interestsList}>
           {interests &&
             interests.map((interest, index) => (
-              <li>
+              <li key={index}>
                 <Interest
                   interest={interest}
                   removeInterest={removeInterest}
