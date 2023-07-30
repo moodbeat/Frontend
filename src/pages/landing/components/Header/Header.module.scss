@@ -1,0 +1,44 @@
+.header {
+  width: 100%;
+  max-width: 1600px;
+  padding: 40px 60px 0;
+  margin: 0 auto -112px;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.headerList {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.headerListItem {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.headerLink {
+  font-weight: 600;
+  font-size: var(--font-size-m);
+  line-height: var(--font-line-l);
+  text-decoration: none;
+  color: var(--color-black);
+}
+.headerButton {
+  display: flex;
+  padding: 12px 18px;
+  width: 220px;
+  height: 44px;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-m);
+  line-height: var(--font-line-m);
+  font-family: Roboto, sans-serif;
+  background-color: var(--color-background-white);
+  color: var(--color-accent-purple);
+}
