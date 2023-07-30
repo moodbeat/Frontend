@@ -47,7 +47,7 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
               customStyle={true}
             />
           </div>
-          <Textarea label="" placeholder="Комментарий" name="comment" />
+          <Textarea label="" placeholder="Оставьте ваш вопрос" name="comment" />
           <Button
             type="submit"
             title="Отправить"
