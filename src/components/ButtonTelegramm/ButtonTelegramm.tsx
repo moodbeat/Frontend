@@ -5,7 +5,7 @@ import iconTelegramm from "./icon-telegramm.svg";
 export const ButtonTelegramm = () => {
   return (
     <Link to='http://t.me/moodbeatbot' className={styles.buttonTelegramm} target="_blank">
-      <img src={iconTelegramm}/>
+      <img src={iconTelegramm} className={styles.buttonTelegramm__icon}/>
     </Link>
   )
 }

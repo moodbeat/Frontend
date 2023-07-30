@@ -3,3 +3,8 @@
   right: 35px;
   bottom: 50px;
 }
+
+.buttonTelegramm__icon {
+  background-color: var(--color-background);
+  border-radius: 50%;
+}

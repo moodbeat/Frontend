@@ -198,7 +198,8 @@
 .formAddEvent__countSymbolTextarea {
   width: 100%;
   position: relative;
-  top: -25px;
+  /* top: -25px; */
+  bottom: 25px;
   left: 85%;
   /* margin-left: auto; */
   /* text-align: end; */
@@ -211,7 +212,8 @@
 .formAddEvent__countSymbolTextareaRed {
   width: 100%;
   position: relative;
-  top: -25px;
+  /* top: -25px; */
+  bottom: 25px;
   left: 85%;
   font: var(--font-caption);
   color: var(--color-error);
