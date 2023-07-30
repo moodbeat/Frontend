@@ -1,10 +1,10 @@
 .notification-settings-list {
   position: absolute;
   right: 130px;
-  bottom: -121px;
+  top: 70px;
   display: none;
-  width: 236px;
-  height: 120px;
+  width: 262px;
+  max-height: 120px;
   padding: 8px 0;
   border: 0.5px solid var(--color-button-secondary);
   border-radius: 12px;
@@ -48,4 +48,11 @@
   margin: 6px 0 0;
   font: var(--font-text);
   color: var(--color-accent-gray);
+}
+
+.notificationSettingsSpan {
+  margin: 0;
+  font: var(--font-search-input);
+  color: var(--color-accent-purple);
+  text-decoration: underline;
 }
