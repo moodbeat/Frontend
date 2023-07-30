@@ -6,7 +6,7 @@
 
 .containerContent__content {
   width: 100%;
-  padding: 40px 132px 90px 52px;
+  padding: 40px 52px 90px 52px;
 }
 
 @media screen and (width > 1440px) {
