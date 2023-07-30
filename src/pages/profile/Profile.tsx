@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar/Navbar.tsx";
-import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
+// import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import styles from "./profile.module.scss";
 import { useParams } from "react-router-dom";
 import { useRequest } from "@/shared/hooks/useRequest.tsx";
@@ -117,8 +117,8 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
       <>
         <div className="page-container">
           <Navbar />
-          {/* <div className={styles.profile}> */}
-          <ContainerContent>
+          <div className={styles.profile}>
+          {/* <ContainerContent> */}
             <div className={styles.profileContainer}>
               <h1 className={styles.profileTitle}>Профиль сотрудника</h1>
               <div className={styles.innerContainer}>
@@ -169,8 +169,8 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                 handleAddMeetingInfo={handleAddMeetingInfo}
               />
             </PopupWithBackground>
-          </ContainerContent>
-          {/* </div> */}
+          {/* </ContainerContent> */}
+          </div>
         </div>
       </>
     );
