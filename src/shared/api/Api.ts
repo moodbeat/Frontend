@@ -6,7 +6,6 @@ import {
   UserConditionForSend,
   UserInfo,
   WheelResults,
-  DateObject,
 } from "@/types";
 import { BASE_URL_REQUEST, BASE_URL_WSS } from "../constants";
 
@@ -402,23 +401,28 @@ export const getActivityTypes = () => {
 
 export const getActivities = (
   id: string | number,
-  datesArray: DateObject[]
+  days: number,
+  after_date: string,
+  before_date: string
 ) => {
-  if (datesArray.length !== 0) {
+  if(days !== 0) {
     return axios.get(
-      `${BASE_URL_REQUEST}/metrics/activities/?employee=${id}&before_date=${datesArray[0].before_date}&after_date=${datesArray[0].after_date}`,
+      `${BASE_URL_REQUEST}/metrics/activities/average/?employee=${id}&days=${days}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       }
     );
-  } else {
-    return axios.get(`${BASE_URL_REQUEST}/metrics/activities/?employee=${id}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    });
+  } else if (after_date && before_date) {
+    return axios.get(
+      `${BASE_URL_REQUEST}/metrics/activities/average/?employee=${id}&after_date=${after_date}&before_date=${before_date}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
   }
 };
 

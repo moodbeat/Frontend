@@ -23,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   handleClick,
 }) => {
+
   const className = cl(classes.button, {
     [classes.buttonPrimary]: mode === "primary",
     [classes.buttonSecondary]: mode === "secondary",

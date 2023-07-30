@@ -30,6 +30,7 @@ export const Main = ({events}: Props): ReactElement | null => {
   const [tagsOfPieChart, setTagsOfPieChart] = useState<TagsInterface[]>([]);
   const [widthsOfPieChart, setWidthsOfPieChart] = useState<number[]>([]);
   const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
+  const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
 
   const articles: ArticleInterface[] = [
     {
@@ -84,12 +85,14 @@ export const Main = ({events}: Props): ReactElement | null => {
               <section className={styles.moodTracker}>
                 <MoodButtonsSection isMoodButtonsVisible={isMoodButtonsVisible}/>
               </section>
-              <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart}/>
+              { isRoutineSliderVisible &&
+                <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart} closeRoutineSlider={() => setIsRoutineSliderVisible(false)}/>
+              }
               <section className={styles.section}>
                 <MoodGraph />
                 <div className={styles.pieChartContainer}>
                   <h3 className={styles.pieChartTitle}>Деятельность</h3>
-                  <PieChart widths={widthsOfPieChart} data={tagsOfPieChart} id={currentUser.id} />
+                  <PieChart initialData={activitiesData} widths={widthsOfPieChart} data={tagsOfPieChart} id={currentUser.id} isRoutingSliderVisible={isRoutineSliderVisible}/>
                 </div>
               </section>
               <section className={styles.section}>
