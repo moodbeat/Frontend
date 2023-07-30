@@ -145,7 +145,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
   //  валидация формы
   useEffect(() => {
     (valueData !== null && valueTimeErr.length === 0 &&
-      headingEvent.length > 0 && headingEvent.length <= 8 &&
+      headingEvent.length > 0 && headingEvent.length <= 64 &&
       reviewPost.length > 8 && reviewPost.length <= 130
     ) ? setIsValidForm(true) : setIsValidForm(false);
   });
@@ -155,7 +155,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
   useEffect(()=>{
     if (isPopupAddEvent) {
       setIsEnterTimeStart(true);
-      (headingEvent.length <= 0 || headingEvent.length > 8) && setHeadingEventErr('Обязательное поле');
+      (headingEvent.length <= 0 || headingEvent.length > 64) && setHeadingEventErr('Обязательное поле');
       (reviewPost.length <= 8 || reviewPost.length > 130) && setReviewPostErr('Обязательное поле');
     }
   }, [clickSubmit])
@@ -259,6 +259,7 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
               name="name"
               placeholder="Введите название"
               minLength={2}
+              maxLength={64}
               value={headingEvent}
               onChange={handleValueHeading}
               required
