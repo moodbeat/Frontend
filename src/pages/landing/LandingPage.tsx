@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "@/shared/styles/styles.css";
 import styles from "./LandingPage.module.scss";
-import logo from "@/assets/logo.svg";
-import logoHeader from "@/assets/logo_MoodBeat_bl.svg";
 import articleTests from "@/assets/article_tests.png";
 import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
@@ -13,39 +11,15 @@ import heroWheel from "@/assets/hero_wheel.png";
 import { Accordion } from "@/components/Accordion/Accordion";
 import { FeedbackForm } from "./components/FeedbackForm/FeedbackForm";
 import { faqItems } from "@/shared/constants";
+import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
 
 export const LandingPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
     <div className={styles.landing}>
-      <header className={styles.header}>
-        <a href="#">
-          <img src={logoHeader} alt="Логотип" />
-        </a>
-        <nav className={styles.headerNav}>
-          <li className={styles.headerList}>
-            <ul className={styles.headerListItem}>
-              <a className={styles.headerLink} href="#audience">
-                Для кого?
-              </a>
-            </ul>
-            <ul className={styles.headerListItem}>
-              <a className={styles.headerLink} href="#features">
-                Возможности
-              </a>
-            </ul>
-            <ul className={styles.headerListItem}>
-              <a className={styles.headerLink} href="#faq">
-                FAQ
-              </a>
-            </ul>
-          </li>
-        </nav>
-        <a className={`${styles.button} ${styles.headerButton}`} href="/login">
-          Войти
-        </a>
-      </header>
+      <Header />
       <main className={styles.main}>
         <section className={styles.sectionHero}>
           <div className={styles.sectionHeroContainer}>
@@ -252,7 +226,6 @@ export const LandingPage: React.FC = () => {
         </section>
 
         <section id="form" className={styles.sectionForm}>
-          {/* @TODO: Валидация и сабмит формы */}
           <div className={styles.sectionFormContainer}>
             {isSubmitted ? (
               <h2 className={styles.sectionFormTitle}>
@@ -266,15 +239,7 @@ export const LandingPage: React.FC = () => {
           </div>
         </section>
       </main>
-      <footer>
-        <div className={styles.footerContainer}>
-          <img src={logo} alt="Логотип" />
-          <p className={styles.footerText}>
-            Защита для ваших сотрудников
-            &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

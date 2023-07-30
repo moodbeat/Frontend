@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: 20px;
-  row-gap: 24px;
+  row-gap: 20px;
 }
 .title {
   margin: 0 0 16px;
@@ -13,11 +13,16 @@
 }
 .div {
   width: calc((100% - 20px) / 2);
-  height: 52px;
+  min-height: 44px;
+}
+.buttonBox {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
 }
 .p {
   display: block;
-  margin: -8px 0 0;
+  margin: 0;
   width: 100%;
   font-weight: 400;
   font-size: 12px;
@@ -28,4 +33,21 @@
   text-decoration: none;
   color: var(--color-accent-secondary);
   border-bottom: 0.5px solid var(--color-accent-secondary);
+}
+@media screen and (width < 768px) {
+  .form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .title {
+    max-width: 280px;
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .div {
+    width: 100%;
+  }
+  .a {
+    border-bottom: none;
+  }
 }
