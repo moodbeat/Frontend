@@ -41,8 +41,8 @@
   }
 }
 
-.customInputStyle {
-  @include size(100%, 44px);
+.textarea {
+  @include size(100%, 186px);
   padding: 16px 12px;
   border-radius: 8px;
   border: 0.5px solid var(--color-icon-secondary);
@@ -50,6 +50,7 @@
   color: var(--color-text-primary);
   font: var(--font-body);
   outline: none;
+  resize: none;
   &-area {
     @include flex-column;
     width: 100%;

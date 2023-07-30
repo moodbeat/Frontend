@@ -14,6 +14,7 @@ const minLengthPassword = "Минимальное количество симв�
 const maxLengthPassword = "Максимальное количество символов: 254";
 const minLengthName = "Минимальное количество символов: 2";
 const maxLengthName = "Максимальное количество символов: 32";
+const maxLengthComment = "Максимальное количество символов: 500";
 
 export const advancedSchema = yup.object().shape({
   password: yup
@@ -98,4 +99,25 @@ export const refreshPasswordSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password")], "Пароли не совпадают")
     .required(requiredMessage),
+});
+
+export const feedbackSchema = yup.object().shape({
+  name: yup
+    .string()
+    .min(2, minLengthName)
+    .max(32, maxLengthName)
+    .matches(nameRules, {
+      message: nameErrorMessage,
+    })
+    .required(requiredMessage),
+  email: yup
+    .string()
+    .min(8, minLengthPassword)
+    .max(254, maxLengthPassword)
+    .matches(emailRules, {
+      message: emailMessage,
+    })
+    .email(emailMessage)
+    .required(emailMessage),
+  comment: yup.string().max(500, maxLengthComment),
 });
