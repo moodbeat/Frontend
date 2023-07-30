@@ -1,0 +1,34 @@
+@import "@/shared/styles/mixins";
+
+.custom-header {
+  @include flex-space-between;
+  padding: 20px 20px 10px;
+}
+
+.prev-month {
+  width: 10px;
+  height: 18px;
+  background-image: url('../../assets/arrow-left.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.next-month {
+  width: 10px;
+  height: 18px;
+  background-image: url('../../assets/arrow-right.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.current-month-year {
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+}

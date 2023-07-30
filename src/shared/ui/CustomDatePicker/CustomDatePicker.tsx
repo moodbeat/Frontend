@@ -1,10 +1,12 @@
-import {ReactElement, useState, forwardRef, Ref, useEffect} from 'react';
+import {ReactElement, useState, useEffect} from 'react';
 import DatePicker from 'react-datepicker';
 import { isSameDay } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.scss';
 import ru from 'date-fns/locale/ru';
 import { registerLocale } from 'react-datepicker';
+import {CustomInput} from "@/shared/ui/CustomDatePicker/components/CustomInput/CustomInput.tsx";
+import {CustomHeader} from "@/shared/ui/CustomDatePicker/components/CustomHeader/CustomHeader.tsx";
 
 registerLocale('ru', ru);
 
@@ -27,33 +29,6 @@ export const CustomDatePicker = ({ selectedDate, handleDateChange, isMaxDateToda
     }
     return '';
   };
-
-  const CustomInput = forwardRef(({ selectedDate, onClick }: any, ref: Ref<HTMLInputElement>) => (
-    <div className="custom-input">
-      <input
-        ref={ref}
-        type="text"
-        value={selectedDate ? selectedDate.toLocaleDateString('ru') : ''}
-        placeholder="__.__.____"
-        readOnly
-        onClick={onClick}
-      />
-      {!selectedDate && <div className="custom-icon" onClick={onClick}></div>}
-    </div>
-  ));
-
-  const CustomHeader = ({ date, decreaseMonth, increaseMonth }: any) => (
-    <div className="custom-header">
-      <div className="prev-month" onClick={decreaseMonth}></div>
-      <div className="current-month-year">
-        {date.toLocaleString('ru', {
-          month: 'long',
-          year: 'numeric',
-        })}
-      </div>
-      <div className="next-month" onClick={increaseMonth}></div>
-    </div>
-  );
 
   const currentDate = new Date();
 

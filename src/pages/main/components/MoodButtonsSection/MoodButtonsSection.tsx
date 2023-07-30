@@ -17,7 +17,7 @@ export const MoodButtonsSection = ({isMoodButtonsVisible}: Props): ReactElement 
         <h2 className={styles.moodTrackerHeading}>Оцените свое настроение сегодня</h2>
         <div className={styles.moodButtons}>
           {moodOptions.map((mood: Moods,  index: number) => (
-            <MoodButton index={index} mood={mood} />
+            <MoodButton index={index} mood={mood} key={Date.now() * Math.random()}/>
           ))}
         </div>
       </div>

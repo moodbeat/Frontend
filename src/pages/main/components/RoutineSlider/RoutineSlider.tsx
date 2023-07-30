@@ -15,9 +15,10 @@ interface Props {
   handleWidths: (data: number[]) => void;
   tags: TagsInterface[];
   widths: number[];
+  closeRoutineSlider: () => void;
 }
 
-export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Props): ReactElement => {
+export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags, closeRoutineSlider}: Props): ReactElement => {
   const RoutineSliderRef = useRef<HTMLDivElement>(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const dispatch = useAppDispatch();
@@ -65,6 +66,7 @@ export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Pr
             width={widths[index]}
             key={index}
             name={tag.name}
+            tooltipMessage={tag.description}
             onSliderSelect={(e) => {
               e.preventDefault();
               document.body.style.cursor = "ew-resize";
@@ -144,7 +146,7 @@ export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags}: Pr
           />
         ))}
       </div>
-      <ButtonsList disabled={isButtonDisabled} handleCancelButton={handleCancelButton} handleSendActivities={handleSendActivities}/>
+      <ButtonsList closeRoutineSlider={closeRoutineSlider} disabled={isButtonDisabled} handleCancelButton={handleCancelButton} handleSendActivities={handleSendActivities}/>
     </div>
   );
 };
