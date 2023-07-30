@@ -17,15 +17,15 @@
 }
 
 .contacts-section {
-  // width: 324px;
-  width: 31.5%;
+  width: 324px;
+  // width: 31.5%;
   @include flex-column;
   gap: 16px;
 }
 
 .analytics-section {
-  // width: 676px;
-  width: 65.7%;
+  width: 676px;
+  // width: 65.7%;
 }
 
 .statics {
