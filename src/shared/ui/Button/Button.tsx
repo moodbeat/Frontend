@@ -10,7 +10,6 @@ interface ButtonProps {
   height?: string;
   padding?: string;
   disabled?: boolean;
-  alignSelf?: string | undefined;
   handleClick?: () => void;
 }
 
@@ -22,7 +21,6 @@ export const Button: React.FC<ButtonProps> = ({
   height,
   padding,
   disabled,
-  alignSelf,
   handleClick,
 }) => {
   const className = cl(classes.button, {
@@ -58,7 +56,6 @@ export const Button: React.FC<ButtonProps> = ({
           width: width,
           height: height,
           padding: padding,
-          alignSelf: alignSelf,
         }}
         type={type}
       >
