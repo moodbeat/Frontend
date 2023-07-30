@@ -5,20 +5,17 @@ import NotificationIcon from "./notification_28.svg";
 import { useNavigate } from "react-router-dom";
 import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
 import { useEscapeKey } from "@/shared/hooks/useEscapeKey";
-import { EventInterface } from "@/types";
 import { useAppSelector } from "@/store/hooks";
 import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
 
 interface Props {
   isNotificationPopupOpened: boolean;
   closeNotificationPopup: () => void;
-  events: EventInterface[];
 }
 
 export const NotificationPopup: React.FC<Props> = ({
   isNotificationPopupOpened,
   closeNotificationPopup,
-  events,
 }) => {
   const notifications = useAppSelector(selectNotifications);
   const navigate = useNavigate();
