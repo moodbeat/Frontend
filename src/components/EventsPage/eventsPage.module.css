@@ -1,13 +1,5 @@
 .eventsPage {
-
   background-color: var(--color-main-background);
-}
-
-.eventsPageContainer {
-  width: 100%;
-  max-width: 1028px;
-  margin: 0 auto;
-  padding: 40px 132px 162px 50px;
 }
 
 .eventsContent {

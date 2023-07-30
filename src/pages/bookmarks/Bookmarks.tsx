@@ -1,5 +1,6 @@
 import styles from "./bookmarks.module.css";
 import {Navbar} from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import SearchUseful from "@/components/SearchUseful/SearchUseful";
@@ -88,7 +89,8 @@ export const Bookmarks = () => {
     <div className="page-container">
       <Navbar/>
       {isOnline ?
-        <div className={styles.container}>
+        <ContainerContent>
+        {/* <div className={styles.container}> */}
           <div className={styles.useful}>
             <h2 className={styles.title}>Сохраненное</h2>
             <SearchUseful onSearch={handleSearchCards}/>
@@ -98,7 +100,8 @@ export const Bookmarks = () => {
               </>}
             <ButtonTelegramm />
           </div>
-        </div>
+        {/* </div> */}
+        </ContainerContent>
         : <BadInternetConnection/>}
     </div>
   );

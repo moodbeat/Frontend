@@ -1,14 +1,14 @@
 @import "@/shared/styles/mixins.scss";
 
 .account {
-  position: relative;
-  padding: 40px 0 0 52px;
-  background-color: var(--color-background);
+  // position: relative;
+  // padding: 40px 0 0 52px;
+  // background-color: var(--color-background);
   &-container {
     background-color: var(--color-background-white);
     border-radius: 20px;
     min-height: 568px;
-    width: 1028px;
+    // width: 1028px;
     padding: 40px;
   }
 }

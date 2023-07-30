@@ -1,6 +1,7 @@
 import styles from "./tests.module.css";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import { BurnoutTestBanner } from "@/components/BurnoutTestBanner/BurnoutTestBanner";
 import { PsychologistInfo } from "@/components/PsychologistInfo/PsychologistInfo";
 import { Records } from "@/components/Records/Records";
@@ -24,7 +25,8 @@ export const Tests: React.FC<Tests> = ({allTestsResults}) => {
     <div className="page-container">
       <Navbar />
       {isOnline ?
-      <div className={styles.container}>
+      <ContainerContent>
+      {/* <div className={styles.container}> */}
         <div className={styles.tests}>
           <h2 className={styles.title}>Тесты</h2>
             <div className={styles.banerblock}>
@@ -38,7 +40,8 @@ export const Tests: React.FC<Tests> = ({allTestsResults}) => {
             </div>
             <ButtonTelegramm />
         </div>
-      </div>
+      {/* </div> */}
+      </ContainerContent>
       : <BadInternetConnection/>}
     </div>
   );

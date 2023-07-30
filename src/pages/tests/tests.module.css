@@ -1,11 +1,11 @@
-.container {
+/* .container {
   background-color: var(--color-main-background);
-}
+} */
 
-.tests {
+/* .tests {
   padding: 40px 50px 46px;
   gap: 28px;
-}
+} */
 
 .title {
   margin: 0 0 20px;
@@ -17,6 +17,7 @@
 
 .banerblock {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 30px;
   gap: 28px;
 }
@@ -33,7 +34,7 @@
   line-height: 24px;
 }
 
-@media screen and (width > 1440px) {
+/* @media screen and (width > 1440px) {
   .container {
     display: flex;
     width: 100%;
@@ -48,4 +49,4 @@
   .form {
     background-color: aqua;
   }
-}
+} */

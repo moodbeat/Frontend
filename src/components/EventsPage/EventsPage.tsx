@@ -1,5 +1,8 @@
 import styles from "./eventsPage.module.css";
 import React, { useState, useEffect } from "react";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
+import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
+import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import { EventInterface } from "@/types";
 import { EventsHeader } from "./EventsHeader/EventsHeader";
 import { EventsFunctional } from "./EventsFunctional/EventsFunctional";
@@ -16,6 +19,7 @@ interface Props {
 }
 
 export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
+  const isOnline = useOnlineCheck();
   const date = new Date();
   const monthToday = date.getMonth();
   const yearToday = date.getFullYear();
@@ -94,38 +98,40 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
 
   return (
     <section className={styles.eventsPage}>
-      <div className={styles.eventsPageContainer}>
-        <EventsHeader
-          month={month}
-          reduceMonth={reduceMonth}
-          year={year}
-          increaseMonth={increaseMonth}
-          yearToday={yearToday}
-          isArrowBack={isArrowBack}
-        />
-        <EventsFunctional
-          textInput={textInput}
-          handleInputSort={(e) => {
-            handleInputSort(e);
-          }}
-          fetchEvents={fetchEvents}
-        />
-        <ul className={styles.eventsContent}>
-          {eventsSortFind.length > 0 ?
-            eventsSortFind.map((item)=>
-              <EventsCard
-                key={item.id}
-                item={item}
-                fetchEvents={fetchEvents}
-                // isRenderEventPage={isRenderEventPage}
-                // setIsRenderEventPage={setIsRenderEventPage}
-              />
-            ) :
-            <p className={styles.eventsContentNull}>В этом месяце пока ничего не запланировано...</p>
-          }
-        </ul>
-        <ButtonTelegramm />
-      </div>
+      {isOnline ?
+        <ContainerContent>
+          <EventsHeader
+            month={month}
+            reduceMonth={reduceMonth}
+            year={year}
+            increaseMonth={increaseMonth}
+            yearToday={yearToday}
+            isArrowBack={isArrowBack}
+          />
+          <EventsFunctional
+            textInput={textInput}
+            handleInputSort={(e) => {
+              handleInputSort(e);
+            }}
+            fetchEvents={fetchEvents}
+          />
+          <ul className={styles.eventsContent}>
+            {eventsSortFind.length > 0 ?
+              eventsSortFind.map((item)=>
+                <EventsCard
+                  key={item.id}
+                  item={item}
+                  fetchEvents={fetchEvents}
+                  // isRenderEventPage={isRenderEventPage}
+                  // setIsRenderEventPage={setIsRenderEventPage}
+                />
+              ) :
+              <p className={styles.eventsContentNull}>В этом месяце пока ничего не запланировано...</p>
+            }
+          </ul>
+          <ButtonTelegramm />
+        </ContainerContent>
+      : <BadInternetConnection/>}
     </section>
 
   );

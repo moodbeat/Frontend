@@ -3,6 +3,7 @@ import {ArticleInterface, EventInterface, TagsInterface} from "@/types";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {RoutineSlider} from "@/pages/main/components/RoutineSlider/RoutineSlider.tsx";
 import {BurnoutTestBanner} from "@/components/BurnoutTestBanner/BurnoutTestBanner.tsx";
 import {MoodGraph} from "@/components/MoodGraph/MoodGraph.tsx";
@@ -76,7 +77,8 @@ export const Main = ({events}: Props): ReactElement | null => {
       <div className="page-container">
         <Navbar />
         {isOnline ?
-          <div className={styles.container}>
+          <ContainerContent>
+          {/* <div className={styles.container}> */}
             <main className={styles.main}>
               <section className={styles.section}>
                 <BurnoutTestBanner id='express'/>
@@ -106,7 +108,8 @@ export const Main = ({events}: Props): ReactElement | null => {
               </section>
               <ButtonTelegramm />
             </main>
-          </div>
+          {/* </div> */}
+          </ContainerContent>
           : <BadInternetConnection/>}
       </div>
     )

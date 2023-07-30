@@ -1,5 +1,6 @@
 import styles from "./useful.module.scss";
 import {Navbar} from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import SearchUseful from "@/components/SearchUseful/SearchUseful";
 import TagsList from "@/components/TagsList/TagsList";
@@ -126,7 +127,8 @@ export const Useful = () => {
     <div className="page-container">
       <Navbar/>
       {isOnline ?
-        <div className={styles.container}>
+        <ContainerContent>
+        {/* <div className={styles.container}> */}
           <div className={styles.useful}>
             <h2 className={styles.title}>Полезные статьи и видео</h2>
             <SearchUseful onSearch={handleSearchCards}/>
@@ -140,7 +142,8 @@ export const Useful = () => {
               </>}
               <ButtonTelegramm />
           </div>
-        </div>
+        {/* </div> */}
+        </ContainerContent>
         : <BadInternetConnection/>}
     </div>
   );
