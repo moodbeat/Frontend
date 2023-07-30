@@ -1,6 +1,7 @@
 import styles from "./myteam.module.css";
 import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 // import { Articles } from "@/components/Articles/Articles";
 import { Employees } from "../Employees/Employees";
 import {
@@ -104,40 +105,42 @@ export const Myteam: React.FC<Props> = ({
     <div className="page-container">
       <Navbar />
       {isOnline ?
-      <div className={styles.myteam}>
-        <div className={styles.leftScreen}>
-          <div className={styles.topContent}>
-            <h2 className={styles.title}>Моя команда</h2>
-            {isChief && (
-              <Button
-                title="Добавить сотрудника"
-                mode="primary"
-                width="236px"
-                height="36px"
-                padding="0"
-                handleClick={openAddPopup}
-              />
-            )}
-          </div>
-          <input
-            className={styles.input}
-            name="myteam-search-input"
-            minLength={2}
-            maxLength={32}
-            placeholder="Начните вводить имя"
-            value={textInput}
-            onChange={handleInputSort}
-          />
-          <Employees valueInputSort={textInput} employees={employees} openEmployeeInfo={openEmployeeInfo} isChief={isChief}/>
-        </div>
-        {/* <div className={styles.rightScreen}>
-          <Articles
-            articles={articles}
-            title={"Как помочь сотрудникам справиться со стрессом"}
-          />
-        </div> */}
-        <ButtonTelegramm />
-      </div>
+        // <div className={styles.myteam}>
+        <ContainerContent>
+          {/* <div className={styles.leftScreen}> */}
+            <div className={styles.topContent}>
+              <h2 className={styles.title}>Моя команда</h2>
+              {isChief && (
+                <Button
+                  title="Добавить сотрудника"
+                  mode="primary"
+                  width="236px"
+                  height="36px"
+                  padding="0"
+                  handleClick={openAddPopup}
+                />
+              )}
+            </div>
+            <input
+              className={styles.input}
+              name="myteam-search-input"
+              minLength={2}
+              maxLength={32}
+              placeholder="Начните вводить имя"
+              value={textInput}
+              onChange={handleInputSort}
+            />
+            <Employees valueInputSort={textInput} employees={employees} openEmployeeInfo={openEmployeeInfo} isChief={isChief}/>
+          {/* </div> */}
+          {/* <div className={styles.rightScreen}>
+            <Articles
+              articles={articles}
+              title={"Как помочь сотрудникам справиться со стрессом"}
+            />
+          </div> */}
+          <ButtonTelegramm />
+        </ContainerContent>
+        // {/* </div> */}
       : <BadInternetConnection/>}
       <PopupWithBackground
         closePopup={() => setAddPopupVisible(false)}

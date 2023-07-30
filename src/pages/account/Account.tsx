@@ -13,6 +13,7 @@ import { UserInfo } from "@/types";
 import { BASE_URL_MEDIA } from "@/shared/constants";
 import { useEscapeKey } from "@/shared/hooks/useEscapeKey";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { ButtonsList } from "@/pages/account/components/ButtonsList/ButtonsList";
 import {
@@ -107,7 +108,8 @@ export const Account = ({ handleChangeUserInfo }: Props): ReactElement => {
       <div className="page-container">
         <Navbar />
         {isOnline ?
-        <div className={styles.account}>
+        <ContainerContent>
+        {/* <div className={styles.account}> */}
           <div className={styles.accountContainer}>
             <h1 className={styles.title}>Контактная информация</h1>
             <div className={styles.content}>
@@ -161,7 +163,8 @@ export const Account = ({ handleChangeUserInfo }: Props): ReactElement => {
             />
             <ButtonTelegramm />
           </div>
-        </div>
+        {/* </div> */}
+        </ContainerContent>
       : <BadInternetConnection/>}
       </div>
     </>

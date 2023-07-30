@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  width: 676px;
+  width: 65.7%;
+  /* max-width: 676px; */
   height: 148px;
   padding: 16px 16px 16px 20px;
   border-radius: 20px;
