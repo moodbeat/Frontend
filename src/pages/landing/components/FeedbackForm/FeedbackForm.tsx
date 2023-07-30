@@ -81,14 +81,15 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
           </div>
           <Textarea label="" placeholder="Оставьте ваш вопрос" name="comment" />
           <div className={styles.buttonBox}>
-            <Button
-              type="submit"
-              title="Отправить"
-              mode="primary"
-              width={getButtonWidth()}
-              alignSelf={getAlignSelf()}
-              disabled={!(isValid && dirty)}
-            />
+            <div style={{ alignSelf: getAlignSelf() }}>
+              <Button
+                type="submit"
+                title="Отправить"
+                mode="primary"
+                width={getButtonWidth()}
+                disabled={!(isValid && dirty)}
+              />
+            </div>
 
             <p className={styles.p}>
               Нажимая на кнопку, я соглашаюсь на&nbsp;
