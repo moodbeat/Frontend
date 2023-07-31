@@ -1,7 +1,7 @@
-.psychologist-info {
+.wheelbanner {
   display: flex;
-  width: 31.5%;
-  /* max-width: 324px; */
+  width: 29%;
+
   height: 148px;
   flex-direction: column;
   padding: 12px 20px;
@@ -12,28 +12,29 @@
 .container {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 }
 
 .title {
   margin: 0;
 }
 
-.avatar {
-  width: 60px;
-  height: 60px;
+.wheel {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .name {
-  margin: 0 0 4px;
-  font: var(--font-h3);
+  margin: 0;
+  font: var(--font-more);
+  margin-bottom: 4px;
 }
 
 .text {
   margin: 0;
-  font: var(--font-body);
+  font: var(--font-caption);
 }
 
 .button {
@@ -43,6 +44,7 @@
   background: none;
   color: var(--color-accent-purple);
   font: var(--font-button);
+  padding: 0;
 }
 
 .button:hover {

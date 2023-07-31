@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {useState} from 'react';
-import {Field, Form, Formik} from 'formik';
+import {ChangeEvent, useState} from 'react';
+import {Field, Form, Formik, useFormik} from 'formik';
 import styles from "./addUseful.module.scss";
 import * as Api from "@/shared/api/Api";
 import Select from "react-select";
 import {ClosePopup} from "@/components/EventsPage/img/closePopup";
+import CloseIcon from "@/assets/closeIcon.png";
 
 
 interface CardData {
@@ -14,6 +15,10 @@ interface CardData {
   category: [];
   url: string;
   text: string;
+}
+
+interface FormValues {
+  preview_image: File | null;
 }
 
 const CustomStyles = {
@@ -93,6 +98,7 @@ const addCard = async (values: {}) => {
 const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
   // const [allOptions, setAllOptions] = useState(options);
   const [selectedOptions, setSelectedOptions] = useState<OptionType[]>();
+  const [picture, setPicture] = useState<string | null>(null);
   // const [isLinkActive, setIsLinkActive] = useState(false);
   // const [isTextActive, setIsTextActive] = useState(false);
 
@@ -117,10 +123,25 @@ const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
     onClose();
   };
 
-  // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
+
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      preview_image: null,
+    },
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files) {
+      formik.setFieldValue("preview_image", event.currentTarget.files[0]);
+      setPicture(event.currentTarget.files[0].name);
+      console.log(event.currentTarget.files[0]);
+    }
+
+  };
+
   return (
     <div className={styles.container}>
       <h3 className={styles.add_article}>Добавить публикацию материала
@@ -130,9 +151,27 @@ const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
         {({isSubmitting}) => (
           <Form>
             <div className={styles.input_container}>
-              <label htmlFor="preview_image" className={styles.subtitle}>Обложка</label>
-              <Field type="text" name="preview_image" placeholder="Введите ссылку на картинку"
-                     className={styles.preview_image}/>
+              <label className={styles.subtitle}>Обложка</label>
+              <div className={styles.upload_container}>
+                <label htmlFor="preview_image"
+                       className={styles.preview_image}>+</label>
+                <Field id="preview_image" type="file" name="preview_image"
+                       onChange={handleFileChange}
+                       accept="image/*"
+                       style={{display: "none"}}/>
+                {
+                  picture ? <div className={styles.upload}>{picture}
+                      <button className={styles.delete_picture}
+                              onClick={() => setPicture(null)}><img src={CloseIcon} alt="CloseIcon"/></button>
+                    </div>
+                    : null
+                }
+
+
+                {/*<span className={styles.upload}>{*/}
+                {/*  picture ? picture && <button onClick={() => setPicture(null)} */}
+                {/*  : null>X</button>}</span>*/}
+              </div>
             </div>
             <div className={styles.input_container}>
               <label htmlFor="title" className={styles.subtitle}>Название</label>
@@ -143,7 +182,7 @@ const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
               <Field as="textarea" placeholder="Введите описание" name="description" className={styles.description}/>
             </div>
             <div className={styles.input_container}>
-              <label htmlFor="category" className={styles.subtitle}>Выберете теги</label>
+              <label htmlFor="category" className={styles.subtitle} style={{marginBottom: 0}}>Выберете теги</label>
               <div className={styles.select_container}>
                 <Select
                   className={styles.select}
@@ -175,13 +214,13 @@ const AddUseful: React.FC<AddCardProps> = ({onClose}: any) => {
               </div>
             </div>
             <div className={styles.input_container}>
-              <label htmlFor="url" className={styles.subtitle}>Ссылка</label>
+              <label htmlFor="url" className={styles.subtitle} style={{marginBottom: 8}}>Ссылка</label>
               <Field type="text" placeholder="Вставьте ссылку на ресурс" name="url" className={styles.url}
                 // onChange={handleLinkChange}
               />
             </div>
             <div className={styles.input_container}>
-              <label htmlFor="text" className={styles.subtitle}>Содержание</label>
+              <label htmlFor="text" className={styles.subtitle} style={{marginBottom: 8}}>Содержание</label>
               <Field as="textarea" placeholder="Введите текст" name="text" className={styles.text}
                 // onChange={handleTextChange}
               />

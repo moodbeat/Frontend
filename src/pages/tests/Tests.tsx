@@ -1,16 +1,14 @@
 import styles from "./tests.module.css";
-import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
-import { Navbar } from "@/components/Navbar/Navbar";
-import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
-import { BurnoutTestBanner } from "@/components/BurnoutTestBanner/BurnoutTestBanner";
-import { PsychologistInfo } from "@/components/PsychologistInfo/PsychologistInfo";
-import { Records } from "@/components/Records/Records";
-import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
-import { ExpressDiagnoseResponse } from "@/types";
+import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
+import {Navbar} from "@/components/Navbar/Navbar";
+import {ContainerContent} from "@/shared/components/ContainerContent/ContainerContent";
+import {BurnoutTestBanner} from "@/components/BurnoutTestBanner/BurnoutTestBanner";
+import {Records} from "@/components/Records/Records";
+import {WheelBanner} from "@/components/WheelBanner/WheelBanner";
+import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
+import {ExpressDiagnoseResponse} from "@/types";
 import React from "react";
-import {Button} from "@/shared/ui/Button/Button";
-import {useNavigate} from "react-router-dom";
-import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
+import {ButtonTelegramm} from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Tests {
   allTestsResults?: ExpressDiagnoseResponse[]
@@ -19,30 +17,30 @@ interface Tests {
 export const Tests: React.FC<Tests> = ({allTestsResults}) => {
 
   const isOnline = useOnlineCheck();
-  const navigate = useNavigate();
 
   return (
     <div className="page-container">
-      <Navbar />
+      <Navbar/>
       {isOnline ?
-      <ContainerContent>
-      {/* <div className={styles.container}> */}
-        <div className={styles.tests}>
-          <h2 className={styles.title}>Тесты</h2>
+        <ContainerContent>
+          {/* <div className={styles.container}> */}
+          <div className={styles.tests}>
+            <h2 className={styles.title}>Тесты</h2>
             <div className={styles.banerblock}>
               <BurnoutTestBanner id='burnout'/>
-              <PsychologistInfo />
+              <WheelBanner/>
             </div>
-            <Button width="250px" mode="primary" title="Заполнить колесо баланса" handleClick={() => navigate("/balance-wheel")}/>
+            {/*<Button width="250px" mode="primary" title="Заполнить колесо баланса"*/}
+            {/*        handleClick={() => navigate("/balance-wheel")}/>*/}
             <div className={styles.records}>
               <h3 className={styles.subtitle}>Пройденные тесты</h3>
               <Records allTestsResults={allTestsResults}/>
             </div>
-            <ButtonTelegramm />
-        </div>
-      {/* </div> */}
-      </ContainerContent>
-      : <BadInternetConnection/>}
+            <ButtonTelegramm/>
+          </div>
+          {/* </div> */}
+        </ContainerContent>
+        : <BadInternetConnection/>}
     </div>
   );
 };

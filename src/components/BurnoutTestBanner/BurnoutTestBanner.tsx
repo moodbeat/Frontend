@@ -8,7 +8,7 @@ interface BurnoutTestProps {
   id?: string;
 }
 
-export const BurnoutTestBanner = ({ id }: BurnoutTestProps): JSX.Element=> {
+export const BurnoutTestBanner = ({id}: BurnoutTestProps): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -27,7 +27,7 @@ export const BurnoutTestBanner = ({ id }: BurnoutTestProps): JSX.Element=> {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={image} alt="burnout image" />
+        <img className={styles.image} src={image} alt="burnout image"/>
       </div>
     </div>
   );
