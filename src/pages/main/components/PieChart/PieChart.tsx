@@ -33,7 +33,6 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
   useEffect(() => {
     if(userSelectedPeriod && !isLoading && activities.length === 0) {
       setEmptyMessageVisible(true);
-      setValueOfDatePicker('Выбрать период');
     } else {
       setEmptyMessageVisible(false);
     }
@@ -125,10 +124,12 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
     }
   }
 
+  console.log(activities);
+
   return (
     <div ref={ref} onClick={() => setEmptyMessageVisible(false)} className={styles.container}>
       {pieChartData.length !== 0 && colors.length !== 0 &&
-        <MyResponsivePie data={pieChartData} colors={colors} />
+        <MyResponsivePie data={userSelectedPeriod && activities.length === 0 ? [] : pieChartData} colors={colors} />
       }
       {
         !isRoutingSliderVisible &&

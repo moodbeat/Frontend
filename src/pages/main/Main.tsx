@@ -34,6 +34,13 @@ export const Main = ({events}: Props): ReactElement | null => {
   const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
   const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
 
+  useEffect(() => {
+    if(currentUser.latest_condition) {
+      const result = isTenHoursPassed(currentUser.latest_condition.date);
+      setMoodButtonsVisible(result);
+    }
+  }, [currentUser.latest_condition])
+
   const articles: ArticleInterface[] = [
     {
       type: "видео",
@@ -54,15 +61,6 @@ export const Main = ({events}: Props): ReactElement | null => {
       banner: "/image.png",
     },
   ];
-
-  useEffect(() => {
-    if(currentUser.latest_condition) {
-      const result = isTenHoursPassed(currentUser.latest_condition.date);
-      setMoodButtonsVisible(result);
-    } else {
-      setMoodButtonsVisible(false);
-    }
-  }, [currentUser.latest_condition])
 
 
   const handleTagsOfPieChart = (data: TagsInterface[]) => {
@@ -86,7 +84,7 @@ export const Main = ({events}: Props): ReactElement | null => {
                 <PsychologistInfo/>
               </section>
               <section className={styles.moodTracker}>
-                <MoodButtonsSection isMoodButtonsVisible={isMoodButtonsVisible}/>
+                <MoodButtonsSection closeMoodButtons={() => setMoodButtonsVisible(false)} isMoodButtonsVisible={isMoodButtonsVisible}/>
               </section>
               { isRoutineSliderVisible &&
                 <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart} closeRoutineSlider={() => setIsRoutineSliderVisible(false)}/>
