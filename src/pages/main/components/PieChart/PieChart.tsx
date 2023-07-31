@@ -124,7 +124,7 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
     }
   }
 
-  console.log(activities);
+  // console.log(activities);
 
   return (
     <div ref={ref} onClick={() => setEmptyMessageVisible(false)} className={styles.container}>

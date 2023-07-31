@@ -77,7 +77,7 @@ export const RoutineSlider = ({data, handleTags, handleWidths, widths, tags, clo
               if (!startDragX || sliderWidth === 0) return;
 
               const resize = (e: any) => {
-                e.preventDefault();
+                // e.preventDefault();
                 const endDragX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
                 const distanceMoved = endDragX - startDragX;
                 const maxPercent = widths[index] + widths[index + 1];
