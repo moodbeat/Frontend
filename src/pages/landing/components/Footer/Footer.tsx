@@ -8,7 +8,9 @@ export const Footer: React.FC = () => {
     <footer className={styles.footerContainer}>
       <img src={logo} alt="Логотип" className={styles.footerLogo} />
       <p className={styles.footerText}>
-        Защита для ваших сотрудников &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
+        Защита для ваших сотрудников
+        <br />
+        &copy;&nbsp;&nbsp;2023&nbsp;&nbsp;MoodBeat
       </p>
     </footer>
   );
