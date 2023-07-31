@@ -4,6 +4,7 @@ import styles from "./profile.module.scss";
 import { useParams } from "react-router-dom";
 import { useRequest } from "@/shared/hooks/useRequest.tsx";
 import {
+  getActivityTypes,
   getBalanceWheelValues,
   getEmployeeInfo,
   getEmployeeTestResults,
@@ -28,6 +29,7 @@ import { MoodGraph } from "@/components/MoodGraph/MoodGraph";
 import { BurnoutLevel } from "@/components/BurnoutLevel/BurnoutLevel";
 import { BalanceWheelResult } from "@/pages/balancewheel/components/BalanceWheelResult/BalanceWheelResult";
 import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
+import {PieChart} from "@/pages/main/components/PieChart/PieChart.tsx";
 
 interface Props {
   handleAddMeetingInfo: ({
@@ -38,6 +40,7 @@ interface Props {
   }: MeetingInfo) => void;
 }
 export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
+  const [activitiesData] = useRequest(getActivityTypes);
   const { userId } = useParams();
   const [userInfo] = useRequest(() => getEmployeeInfo(userId));
   const [testResults] = useRequest(() => getEmployeeTestResults(userId));
@@ -83,12 +86,13 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
   async function getEmployeeConditions(id: string) {
     try {
       const response = await Api.getEmployeeConditions(id);
-      console.log(response.data.results);
       setConditionsData(response.data.results);
     } catch (err: any) {
       console.log(err);
     }
   }
+
+  console.log(userInfo);
 
   const openAddPopup = () => {
     setAddPopupVisible(true);
@@ -153,6 +157,18 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                     {data.length !== 0 && (
                       <BalanceWheelResult step={2} data={data} />
                     )}
+                    <div className={styles.circleChartsSection}>
+                      <div className={styles.pieChartContainer}>
+                        <h3 className={styles.pieChartTitle}>Деятельность</h3>
+                        {
+                          userInfo.latest_activity !== null
+                            ?
+                            <PieChart initialData={activitiesData} id={userId && userId} isRoutingSliderVisible={false}/>
+                            :
+                            <p className={styles.noDataMessage}>Нет данных</p>
+                        }
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
