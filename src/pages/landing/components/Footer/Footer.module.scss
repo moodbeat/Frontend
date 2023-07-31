@@ -16,7 +16,7 @@
   color: var(--color-accent-secondary);
 }
 
-@media screen and (width < 768px) {
+@media screen and (max-width: 767px) {
   .footerContainer {
     width: 100%;
     margin: 0 auto;

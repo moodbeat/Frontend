@@ -45,7 +45,8 @@
 .buttonMenu {
   display: none;
 }
-@media screen and (width < 900px) {
+
+@media screen and (max-width: 899px) {
   .headerLogo {
     width: 168px;
     height: 60px;
@@ -66,7 +67,7 @@
   }
 }
 
-@media screen and (width < 768px) {
+@media screen and (max-width: 767px) {
   .header {
     padding: 0 16px 0 0;
   }

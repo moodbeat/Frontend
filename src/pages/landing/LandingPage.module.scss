@@ -31,7 +31,7 @@
   background-size: contain;
 }
 
-@media screen and (width < 768px) {
+@media screen and (max-width: 767px) {
   .main {
     background: none;
   }
@@ -55,7 +55,7 @@
   line-height: 60px;
 }
 
-@media screen and (width < 768px) {
+@media screen and (max-width: 767px) {
   .sectionFaqContainer {
     padding: 40px 16px 32px;
   }
@@ -85,7 +85,8 @@
   line-height: 60px;
   color: var(--color-accent-secondary);
 }
-@media screen and (width < 768px) {
+
+@media screen and (max-width: 767px) {
   .sectionForm {
     padding: 40px 16px 16px;
     background-color: #fbfbfb;

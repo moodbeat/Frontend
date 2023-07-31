@@ -60,7 +60,7 @@
   display: none;
 }
 
-@media screen and (width < 1386px) {
+@media screen and (max-width: 1385px) {
   .sectionHeroContainer {
     padding: 111px 60px 133px;
     justify-content: center;
@@ -78,7 +78,7 @@
   }
 }
 
-@media screen and (width < 768px) {
+@media screen and (max-width: 767px) {
   .sectionHero {
     background: var(--color-white);
   }
