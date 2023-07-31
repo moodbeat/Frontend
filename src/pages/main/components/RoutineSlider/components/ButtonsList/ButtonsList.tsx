@@ -6,8 +6,14 @@ interface Props {
   handleCancelButton: () => void;
   handleSendActivities: () => void;
   disabled: boolean;
+  closeRoutineSlider: () => void;
 }
-export const ButtonsList = ({handleCancelButton, handleSendActivities, disabled}: Props): ReactElement => {
+export const ButtonsList = ({closeRoutineSlider, handleCancelButton, handleSendActivities, disabled}: Props): ReactElement => {
+
+  const sendResultsAndClose = () => {
+    handleSendActivities();
+    closeRoutineSlider();
+  }
 
   return (
     <div className={styles.buttonsList}>
@@ -21,7 +27,7 @@ export const ButtonsList = ({handleCancelButton, handleSendActivities, disabled}
         mode="outline"
         title="Применить"
         width="242px"
-        handleClick={handleSendActivities}
+        handleClick={sendResultsAndClose}
         disabled={disabled}
       />
     </div>

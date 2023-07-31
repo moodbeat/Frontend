@@ -1,7 +1,8 @@
-import styles from "./BurnoutTestBanner.module.css";
-import image from "./burnout-image.png";
-import {Link} from "react-router-dom";
+import styles from "./BurnoutTestBanner.module.scss";
+import image from "./assets/banner-background.png";
+import { Link } from "react-router-dom";
 import {JSX} from "react";
+import {Button} from "@/shared/ui/Button/Button.tsx";
 
 interface BurnoutTestProps {
   id?: string;
@@ -13,7 +14,7 @@ export const BurnoutTestBanner = ({id}: BurnoutTestProps): JSX.Element => {
       <div className={styles.textContainer}>
         <div className={styles.textTop}>
           <h1 className={styles.textHeading}>Пройдите тест о выгорании</h1>
-          <span className={styles.dateTill}>до 20 сентября</span>
+          <span className={styles.dateTill}>до 20 cентября </span>
         </div>
         <div className={styles.textBottom}>
           <p className={styles.textDescription}>
@@ -21,9 +22,7 @@ export const BurnoutTestBanner = ({id}: BurnoutTestProps): JSX.Element => {
             подорвать здоровье и привести к депрессии.
           </p>
           <Link to={`/tests/${id}`} className={styles.link}>
-            <button type="button" className={styles.button}>
-              Пройти тест
-            </button>
+            <Button mode="primary" title="Пройти тест" width="284px"/>
           </Link>
         </div>
       </div>

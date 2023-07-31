@@ -32,6 +32,14 @@ export const Main = ({events}: Props): ReactElement | null => {
   const [tagsOfPieChart, setTagsOfPieChart] = useState<TagsInterface[]>([]);
   const [widthsOfPieChart, setWidthsOfPieChart] = useState<number[]>([]);
   const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
+  const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
+
+  useEffect(() => {
+    if(currentUser.latest_condition) {
+      const result = isTenHoursPassed(currentUser.latest_condition.date);
+      setMoodButtonsVisible(result);
+    }
+  }, [currentUser.latest_condition])
 
   const articles: ArticleInterface[] = [
     {
@@ -53,15 +61,6 @@ export const Main = ({events}: Props): ReactElement | null => {
       banner: "/image.png",
     },
   ];
-
-  useEffect(() => {
-    if(currentUser.latest_condition) {
-      const result = isTenHoursPassed(currentUser.latest_condition.date);
-      setMoodButtonsVisible(result);
-    } else {
-      setMoodButtonsVisible(false);
-    }
-  }, [currentUser.latest_condition])
 
 
   const handleTagsOfPieChart = (data: TagsInterface[]) => {
@@ -85,14 +84,16 @@ export const Main = ({events}: Props): ReactElement | null => {
                 <PsychologistInfo/>
               </section>
               <section className={styles.moodTracker}>
-                <MoodButtonsSection isMoodButtonsVisible={isMoodButtonsVisible}/>
+                <MoodButtonsSection closeMoodButtons={() => setMoodButtonsVisible(false)} isMoodButtonsVisible={isMoodButtonsVisible}/>
               </section>
-              <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart}/>
+              { isRoutineSliderVisible &&
+                <RoutineSlider widths={widthsOfPieChart} handleWidths={handleWidthsOfPieChart} handleTags={handleTagsOfPieChart} data={activitiesData} tags={tagsOfPieChart} closeRoutineSlider={() => setIsRoutineSliderVisible(false)}/>
+              }
               <section className={styles.section}>
                 <MoodGraph />
                 <div className={styles.pieChartContainer}>
                   <h3 className={styles.pieChartTitle}>Деятельность</h3>
-                  <PieChart widths={widthsOfPieChart} data={tagsOfPieChart} id={currentUser.id} />
+                  <PieChart initialData={activitiesData} widths={widthsOfPieChart} data={tagsOfPieChart} id={currentUser.id} isRoutingSliderVisible={isRoutineSliderVisible}/>
                 </div>
               </section>
               <section className={styles.section}>

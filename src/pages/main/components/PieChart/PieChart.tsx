@@ -1,116 +1,148 @@
-import { ResponsivePie } from "@nivo/pie";
 import styles from "./PieChart.module.scss";
-import { TagsInterface, DateObject } from "@/types.ts";
-import { ReactElement, useEffect, useState } from "react";
+import {PieChartDataInterface, TagsInterface} from "@/types.ts";
+import {ReactElement, useEffect, useRef, useState} from "react";
 import { getActivities } from "@/shared/api/Api.ts";
-import { getCurrentDateAndFutureDate } from "@/pages/main/components/PieChart/PieChart.helpers.ts";
-import { PeriodPicker } from "@/pages/main/components/PieChart/components/PeriodPicker.tsx";
+import { PeriodPicker } from "@/pages/main/components/PieChart/components/PeriodPicker/PeriodPicker.tsx";
+import {useOutsideClick} from "@/shared/hooks/useOutsideClick.tsx";
+import {MyResponsivePie} from "@/pages/main/components/PieChart/components/MyResponsivePie(lib)/MyResponsivePie.tsx";
 
 interface Props {
   data: TagsInterface[];
   id: string | number;
   widths: number[];
+  isRoutingSliderVisible: boolean;
+  initialData: TagsInterface[];
 }
 
-interface PieChartDataInterface {
-  id: string;
-  label: string;
-  value: number;
+interface Activity {
+  type_name: string;
+  average_percentage: number;
 }
 
-interface PieDataProps {
-  data: PieChartDataInterface[];
-  colors: string[];
-}
-
-const MyResponsivePie = ({ data, colors }: PieDataProps): ReactElement => (
-  <ResponsivePie
-    data={data}
-    colors={colors}
-    arcLabelsTextColor="white"
-    margin={{ top: 0, right: 50, bottom: 90, left: 0 }}
-    innerRadius={0.55}
-    enableArcLinkLabels={false}
-    valueFormat={(value: number) => `${value}%`}
-    legends={[
-      {
-        anchor: "bottom",
-        direction: "column",
-        justify: false,
-        translateX: -86,
-        translateY: 70,
-        itemsSpacing: 0,
-        itemWidth: 100,
-        itemHeight: 18,
-        itemTextColor: "#000",
-        itemDirection: "left-to-right",
-        itemOpacity: 1,
-        symbolSize: 12,
-        symbolShape: "circle",
-      },
-    ]}
-  />
-);
-
-export const PieChart = ({ data, id, widths }: Props): ReactElement => {
-  const [activities, setActivities] = useState<any>([]);
+export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible }: Props): ReactElement => {
+  const [activities, setActivities] = useState<Activity[]>([]);
   const [pieChartData, setPieChartData] = useState<PieChartDataInterface[]>([]);
   const [colors, setColors] = useState<string[]>([]);
-  const [datesArray, setDatesArray] = useState<DateObject[]>([]);
-  const [valueOfDatePicker, setValueOfDatePicker] = useState("");
+  const [valueOfDatePicker, setValueOfDatePicker] = useState<string>('');
+  const [day, setDay] = useState<number>(0);
+  const [userSelectedPeriod, setUserSelectedPeriod] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [emptyMessageVisible, setEmptyMessageVisible] = useState<boolean>(false);
+  const ref = useRef<null>(null);
 
   useEffect(() => {
-    const dates = getCurrentDateAndFutureDate(valueOfDatePicker);
-    setDatesArray(dates);
-  }, [valueOfDatePicker]);
+    if(userSelectedPeriod && !isLoading && activities.length === 0) {
+      setEmptyMessageVisible(true);
+    } else {
+      setEmptyMessageVisible(false);
+    }
+  }, [userSelectedPeriod, isLoading, activities])
 
   useEffect(() => {
-    getPieChartActivities(id, datesArray);
-  }, [datesArray]);
+    getPieChartActivities(id, day, '', '');
+  }, [day]);
 
   useEffect(() => {
-    const colorsArr: string[] = [];
-    if (activities && activities.length > 0 && data) {
+    if(data) {
+      const colorsArr: string[] = [];
       setPieChartData(
-        data.map((item: TagsInterface, index: number) => ({
+        data.map((item, index: number) => ({
           id: item.name,
           label: item.name,
           value: Number(widths[index]),
         }))
-      );
-
+      )
       data.forEach((item) => {
         colorsArr.push(item.color);
       });
       setColors(colorsArr);
     }
-  }, [activities, data, widths, datesArray]);
+  }, [data, widths])
+
+  useEffect(() => {
+    const colorsArr: string[] = [];
+    if (activities && activities.length !== 0) {
+      const updatedPieChartData = activities.map((item: Activity) => ({
+        id: item.type_name,
+        label: item.type_name,
+        value: item.average_percentage,
+      }));
+
+      setPieChartData(updatedPieChartData);
+
+      activities.forEach((activity: Activity) => {
+        initialData.forEach((item: TagsInterface) => {
+          if (activity.type_name === item.name) {
+            colorsArr.push(item.color);
+          }
+        });
+      });
+
+      setColors(colorsArr);
+    }
+  }, [activities]);
+
 
   const handleChooseOption = (option: string) => {
     setValueOfDatePicker(option);
+    switch(option) {
+      case 'Сегодня':
+        setDay(1);
+        break;
+      case 'За неделю':
+        setDay(7);
+        break;
+      case 'За месяц':
+        setDay(30);
+        break;
+      case 'За все время':
+        setDay(365);
+        break;
+    }
+
+    setUserSelectedPeriod(true);
   };
+
+  useOutsideClick(() => setEmptyMessageVisible(false), ref);
 
   async function getPieChartActivities(
     id: string | number,
-    datesArray: DateObject[]
+    days: number,
+    after_date: string,
+    before_date: string
   ) {
+    setIsLoading(true);
     try {
-      const response = await getActivities(id, datesArray);
-      setActivities(response.data.results);
+      const response = await getActivities(id, days, after_date, before_date);
+      if(response) {
+        setActivities(response.data);
+      }
     } catch (err: any) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
+  console.log(activities);
+
   return (
-    <div className={styles.container}>
-      {pieChartData.length !== 0 && colors.length !== 0 && (
-        <MyResponsivePie data={pieChartData} colors={colors} />
-      )}
-      <PeriodPicker
-        handleChooseOption={handleChooseOption}
-        value={valueOfDatePicker}
-      />
+    <div ref={ref} onClick={() => setEmptyMessageVisible(false)} className={styles.container}>
+      {pieChartData.length !== 0 && colors.length !== 0 &&
+        <MyResponsivePie data={userSelectedPeriod && activities.length === 0 ? [] : pieChartData} colors={colors} />
+      }
+      {
+        !isRoutingSliderVisible &&
+        <PeriodPicker
+          handleChooseOption={handleChooseOption}
+          value={valueOfDatePicker}
+          getPieChartActivities={getPieChartActivities}
+        />
+      }
+      {userSelectedPeriod && isLoading && <div></div>}
+      {emptyMessageVisible &&
+        <p className={styles.emptyMessage}>Нет данных за указанный период.</p>
+      }
     </div>
   );
 };
