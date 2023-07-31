@@ -8,14 +8,13 @@ import { EventsHeader } from "./EventsHeader/EventsHeader";
 import { EventsFunctional } from "./EventsFunctional/EventsFunctional";
 import { EventsCard } from "./EventsCard/EventsCard";
 import { ButtonTelegramm } from "../ButtonTelegramm/ButtonTelegramm";
-import {
-  getNotifications,
-  makeEventNotificationUnactive,
-} from "@/shared/api/Api";
+import { makeEventNotificationUnactive } from "@/shared/api/Api";
+import { useAppSelector } from "@/store/hooks";
+import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
 
 interface Props {
   events: EventInterface[];
-  fetchEvents: ()=> void;
+  fetchEvents: () => void;
 }
 
 export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
@@ -29,6 +28,7 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
   const [eventsSortMonth, setEventsSortMonth] = useState<EventInterface[]>([]);
   const [eventsSortFind, setEventsSortFind] = useState<EventInterface[]>([]);
   const [textInput, setTextInput] = useState<string>(""); // поисковая строка
+  const notifications = useAppSelector(selectNotifications);
 
   // переключение месяца в хедере страницы
   const reduceMonth = () => {
@@ -67,19 +67,26 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
   }, [eventsSortMonth]);
 
   // уменьшение счетчика уведомлений при открытии страницы месяца
+  async function removeNotification(id: string) {
+    const result = await makeEventNotificationUnactive(id);
+    return result;
+  }
+
   useEffect(() => {
-    getNotifications().then((res) => {
-      eventsSortMonth.forEach((element) => {
-        res.data.results.forEach(
-          (n: { incident_id: number | undefined; id: number }) => {
-            if (n.incident_id === element.id) {
-              makeEventNotificationUnactive(String(n.id));
+    eventsSortMonth.forEach((element) => {
+      notifications && notifications.forEach(
+        ((n: { incident_id: number | undefined; id: number }) => {
+          if (n.incident_id === element.id) {
+            try {
+              removeNotification(String(n.id));
+            } catch (error) {
+              console.log(error);
             }
           }
-        );
-      });
-    });
-  }, [eventsSortMonth]);
+        })
+      )
+    })
+  }, [eventsSortMonth])
 
   const handleInputSort = (e: { target: { value: string } }) => {
     const value = e.target.value;
@@ -133,6 +140,5 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
         </ContainerContent>
       : <BadInternetConnection/>}
     </section>
-
   );
 }

@@ -16,7 +16,7 @@
 }
 .audienceCards {
   display: flex;
-  gap: 0;
+  row-gap: 20px;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
