@@ -12,7 +12,7 @@ export const AudienceSwiper: React.FC = () => {
           Кому будет полезен MoodBeat?
         </h2>
         <Swiper
-          style={{ padding: "4px" }}
+          style={{ padding: "4px", zIndex: 0 }}
           className={styles.audienceCards}
           spaceBetween={0}
           slidesPerView={1}

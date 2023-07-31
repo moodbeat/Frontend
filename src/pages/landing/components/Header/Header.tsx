@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "@/shared/styles/styles.css";
 import styles from "./Header.module.scss";
 import logoHeader from "@/assets/logo_MoodBeat_bl.svg";
+import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
 
 export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className={styles.header}>
       <a href="#">
@@ -31,7 +38,8 @@ export const Header: React.FC = () => {
       <a className={`${styles.button} ${styles.headerButton}`} href="/login">
         Войти
       </a>
-      <button className={styles.buttonMenu}></button>
+      <button onClick={handleMenuClick} className={styles.buttonMenu}></button>
+      {isMenuOpen && <BurgerMenu setIsMenuOpen={setIsMenuOpen} />}
     </header>
   );
 };
