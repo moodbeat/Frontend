@@ -373,3 +373,9 @@ export interface DateObject {
   before_date: string;
   after_date: string;
 }
+
+export interface PieChartDataInterface {
+  id: string;
+  label: string;
+  value: number;
+}

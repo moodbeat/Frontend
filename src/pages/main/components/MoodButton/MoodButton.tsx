@@ -9,9 +9,10 @@ type Moods = "bad" | "so-so" | "normal" | "good" | "perfect";
 interface MoodsProps {
   mood: Moods;
   index: number;
+  closeMoodButtons: () => void;
 }
 
-export const MoodButton: React.FC<MoodsProps> = ({ mood, index }) => {
+export const MoodButton: React.FC<MoodsProps> = ({ mood, index, closeMoodButtons }) => {
   const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -70,6 +71,7 @@ export const MoodButton: React.FC<MoodsProps> = ({ mood, index }) => {
         date: date
       }))
       dispatch(setSuccessMessage('Вы молодец!'))
+      closeMoodButtons();
   }
 
   return (

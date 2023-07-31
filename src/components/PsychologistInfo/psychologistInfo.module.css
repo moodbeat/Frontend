@@ -4,7 +4,7 @@
   /* max-width: 324px; */
   height: 148px;
   flex-direction: column;
-  padding: 12px 20px 16px;
+  padding: 12px 20px;
   border-radius: 20px;
   background-color: var(--color-white);
 }
@@ -12,7 +12,7 @@
 .container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -27,7 +27,7 @@
 }
 
 .name {
-  margin: 0;
+  margin: 0 0 4px;
   font: var(--font-h3);
 }
 

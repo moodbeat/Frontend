@@ -18,6 +18,6 @@ export const ProtectedRoutes = ({
       <Header handleSignOut={handleSignOut} events={events} /> <Outlet />
     </>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/landing" />
   );
 };
