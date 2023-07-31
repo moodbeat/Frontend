@@ -4,8 +4,8 @@ import React from "react";
 import AddIcon from "./ui/add_20.svg";
 interface ButtonProps {
   title: string;
-  mode: 'primary' | 'secondary' | 'outline' | 'empty';
-  type?: 'submit' | 'reset' | 'button' | undefined;
+  mode: "primary" | "secondary" | "outline" | "empty";
+  type?: "submit" | "reset" | "button" | undefined;
   width?: string;
   height?: string;
   padding?: string;
@@ -48,8 +48,16 @@ export const Button: React.FC<ButtonProps> = ({
       <button
         onClick={handleClick}
         disabled={disabled}
-        className={disabled && mode !== 'empty' ? `${className} ${classes.disabled}` : className}
-        style={{ width: width, height: height, padding: padding }}
+        className={
+          disabled && mode !== "empty"
+            ? `${className} ${classes.disabled}`
+            : className
+        }
+        style={{
+          width: width,
+          height: height,
+          padding: padding,
+        }}
         type={type}
       >
         {title}

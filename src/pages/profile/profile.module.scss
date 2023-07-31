@@ -18,18 +18,20 @@
 
 .contacts-section {
   width: 324px;
+  // width: 31.5%;
   @include flex-column;
   gap: 16px;
 }
 
 .analytics-section {
   width: 676px;
+  // width: 65.7%;
 }
 
 .statics {
   @include flex-column;
   &-title {
-    margin: 32px 0 -15px;
+    margin: 32px 0 15px;
     font: var(--font-h2);
     color: var(--color-black);
   }

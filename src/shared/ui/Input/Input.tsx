@@ -6,7 +6,9 @@ import { useState } from "react";
 
 interface OtherProps {
   label: string;
+  customStyle?: boolean;
 }
+
 export const Input = (props: OtherProps & FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
   const [passwordOpened, setPasswordOpened] = useState(false);
@@ -21,9 +23,12 @@ export const Input = (props: OtherProps & FieldHookConfig<string>) => {
 
   return (
     <div className={styles.inputArea}>
-      <label className={styles.label} htmlFor={props.name}>
-        {props.label}
-      </label>
+      {!props.customStyle && (
+        <label className={styles.label} htmlFor={props.name}>
+          {props.label}
+        </label>
+      )}
+
       {props.type === "password" ? (
         <div className={styles.inputContainer}>
           <input
@@ -42,15 +47,19 @@ export const Input = (props: OtherProps & FieldHookConfig<string>) => {
         </div>
       ) : (
         <input
+          placeholder={props.placeholder}
           className={
             meta.touched && meta.error
               ? `${styles.input} ${styles.inputError}`
+              : props.customStyle
+              ? `${styles.input} ${styles.customInputStyle}`
               : styles.input
           }
           {...field}
           type={props.type}
         />
       )}
+
       {meta.touched && meta.error ? (
         <ErrorMessage>{meta.error}</ErrorMessage>
       ) : null}

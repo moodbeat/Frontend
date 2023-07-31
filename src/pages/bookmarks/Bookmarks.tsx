@@ -1,5 +1,6 @@
 import styles from "./bookmarks.module.css";
 import {Navbar} from "@/components/Navbar/Navbar";
+import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import SearchUseful from "@/components/SearchUseful/SearchUseful";
@@ -8,6 +9,7 @@ import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Card} from "@/types";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 export const Bookmarks = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +89,8 @@ export const Bookmarks = () => {
     <div className="page-container">
       <Navbar/>
       {isOnline ?
-        <div className={styles.container}>
+        <ContainerContent>
+        {/* <div className={styles.container}> */}
           <div className={styles.useful}>
             <h2 className={styles.title}>Сохраненное</h2>
             <SearchUseful onSearch={handleSearchCards}/>
@@ -95,8 +98,10 @@ export const Bookmarks = () => {
               <>
                 <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
               </>}
+            <ButtonTelegramm />
           </div>
-        </div>
+        {/* </div> */}
+        </ContainerContent>
         : <BadInternetConnection/>}
     </div>
   );

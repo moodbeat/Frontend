@@ -3,6 +3,7 @@ import {ArticleInterface, EventInterface, TagsInterface} from "@/types";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { Navbar } from "@/components/Navbar/Navbar";
+// import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {RoutineSlider} from "@/pages/main/components/RoutineSlider/RoutineSlider.tsx";
 import {BurnoutTestBanner} from "@/components/BurnoutTestBanner/BurnoutTestBanner.tsx";
 import {MoodGraph} from "@/components/MoodGraph/MoodGraph.tsx";
@@ -19,6 +20,7 @@ import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts
 import {Report} from "@/pages/main/components/Report/Report.tsx";
 import {MoodButtonsSection} from "@/pages/main/components/MoodButtonsSection/MoodButtonsSection.tsx";
 import {isTenHoursPassed} from "@/pages/main/Main.helpers.ts";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   events: EventInterface[];
@@ -76,6 +78,7 @@ export const Main = ({events}: Props): ReactElement | null => {
       <div className="page-container">
         <Navbar />
         {isOnline ?
+          // <ContainerContent>
           <div className={styles.container}>
             <main className={styles.main}>
               <section className={styles.section}>
@@ -106,8 +109,10 @@ export const Main = ({events}: Props): ReactElement | null => {
                 />
                 <EventsMain  events={events}/>
               </section>
+              <ButtonTelegramm />
             </main>
           </div>
+          // </ContainerContent>
           : <BadInternetConnection/>}
       </div>
     )

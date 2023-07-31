@@ -1,8 +1,9 @@
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
 import { NavLink } from "react-router-dom";
 import { LogoImg } from "@/shared/ui/Logo/LogoImg";
 import { AccountPopup } from "@/components/AccountPopup/AccountPopup";
-import React, { useEffect, useState } from "react";
+import { NotificationPopup } from "../NotificationPopup/NotificationPopup";
 import { useAppSelector } from "@/store/hooks";
 import {
   selectAvatar,
@@ -10,15 +11,16 @@ import {
   selectLastName,
 } from "@/store/reducers/currentUser/currentUserReducer";
 import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
+import { EventInterface } from "@/types";
 
 const BASE_URL = "https://em-dev.usolcev.com";
 
 interface Props {
   handleSignOut: () => void;
+  events: EventInterface[];
 }
 
-export const Header: React.FC<Props> = ({ handleSignOut }) => {
-
+export const Header: React.FC<Props> = ({ handleSignOut, events }) => {
   const firstName = useAppSelector(selectFirstName);
   const lastName = useAppSelector(selectLastName);
   const allNotification = useAppSelector(selectNotifications);
@@ -27,13 +29,14 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
 
   const [photo, setPhoto] = useState(initialPhoto);
   const [isAccountPopupOpened, setIsAccountPopupOpened] = useState(false);
-
-  const handleNotificationClick = () => {
-    alert('Выполнен умопомрачительный переход на вкладку "События, люди, явления')
-  }
+  const [isNotificationPopupOpened, setIsNotificationPopupOpened] =
+    useState(false);
 
   const closeAccountPopup = () => {
     setIsAccountPopupOpened(false);
+  };
+  const closeNotificationPopup = () => {
+    setIsNotificationPopupOpened(false);
   };
 
   useEffect(() => {
@@ -51,12 +54,17 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
         placeholder="Поиск"
       />
       <div className={styles.profileAndNotify}>
-        <div onClick={handleNotificationClick} className={styles.notify}>
-          {(allNotification && allNotification?.length > 0) ?
+        <div
+          onClick={() =>
+            setIsNotificationPopupOpened(!isNotificationPopupOpened)
+          }
+          className={styles.notify}
+        >
+          {allNotification && allNotification?.length > 0 ? (
             <div className={styles.notificationNumber}>
               {allNotification?.length}
             </div>
-          : null}
+          ) : null}
         </div>
         <div
           onClick={() => setIsAccountPopupOpened(!isAccountPopupOpened)}
@@ -75,6 +83,11 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
         isAccountPopupOpened={isAccountPopupOpened}
         closeAccountPopup={closeAccountPopup}
         handleSignOut={handleSignOut}
+      />
+      <NotificationPopup
+        isNotificationPopupOpened={isNotificationPopupOpened}
+        closeNotificationPopup={closeNotificationPopup}
+        events={events}
       />
     </header>
   );

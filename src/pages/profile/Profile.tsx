@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar/Navbar.tsx";
+// import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import styles from "./profile.module.scss";
 import { useParams } from "react-router-dom";
 import { useRequest } from "@/shared/hooks/useRequest.tsx";
@@ -26,6 +27,7 @@ import * as Api from "@/shared/api/Api";
 import { MoodGraph } from "@/components/MoodGraph/MoodGraph";
 import { BurnoutLevel } from "@/components/BurnoutLevel/BurnoutLevel";
 import { BalanceWheelResult } from "@/pages/balancewheel/components/BalanceWheelResult/BalanceWheelResult";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   handleAddMeetingInfo: ({
@@ -116,6 +118,7 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
         <div className="page-container">
           <Navbar />
           <div className={styles.profile}>
+          {/* <ContainerContent> */}
             <div className={styles.profileContainer}>
               <h1 className={styles.profileTitle}>Профиль сотрудника</h1>
               <div className={styles.innerContainer}>
@@ -153,6 +156,7 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                   </div>
                 </div>
               </div>
+              <ButtonTelegramm />
             </div>
             <PopupWithBackground
               popupVisible={addPopupVisible}
@@ -165,6 +169,7 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                 handleAddMeetingInfo={handleAddMeetingInfo}
               />
             </PopupWithBackground>
+          {/* </ContainerContent> */}
           </div>
         </div>
       </>

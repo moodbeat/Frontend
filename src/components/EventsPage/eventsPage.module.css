@@ -1,28 +1,20 @@
 .eventsPage {
-  width: 100%;
-  padding: 40px 132px 162px 50px;
   background-color: var(--color-main-background);
 }
 
 .eventsContent {
   display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  gap: 28px;
   padding: 0;
   margin-top: 28px;
-  gap: 28px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   list-style: none;
 }
 
-@media screen and (width > 1440px) {
-  .eventsPage {
-    padding: 40px 0 0;
-  }
-
-  .eventsPageContainer {
-    display: flex;
-    max-width: 1015px;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-  }
+.eventsContentNull {
+  margin: 0;
+  margin-top: 4px;
+  font: var(--font-more);
+  line-height: 18px;
+  color: var(--color-black);
 }

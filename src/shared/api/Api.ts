@@ -6,6 +6,7 @@ import {
   UserConditionForSend,
   UserInfo,
   WheelResults,
+  FeedbackArguments
 } from "@/types";
 import { BASE_URL_REQUEST, BASE_URL_WSS } from "../constants";
 
@@ -100,6 +101,14 @@ export const sendTestResults = (results: SubmitArguments) => {
       },
     }
   );
+};
+
+export const sendFeedback = (values: FeedbackArguments) => {
+  return axios.post(`${BASE_URL_REQUEST}/socials/contact_form`, {
+    name: values.name,
+    email: values.email,
+    comment: values.comment,
+  });
 };
 
 export const sendInviteCode = (email: string) => {

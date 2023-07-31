@@ -2,10 +2,12 @@ import * as Api from "@/shared/api/Api";
 import { EventInterface } from "@/types";
 import styles from "./addEventPopup.module.css";
 import React, {useState, useEffect} from "react";
+import {CustomDatePicker} from "@/shared/ui/CustomDatePicker/CustomDatePicker.tsx";
 import {ClosePopup} from "../img/closePopup";
 import dash from "../img/dash.svg"
 import { useEscapeKeyEvent } from "@/shared/hooks/useEscapeKey";
 import { PopupRequest } from "../PopupRequest/PopupRequest";
+import {ErrorMessage} from "@/shared/ui/ErrorMessage/ErrorMessage";
 
 interface Props {
   closePopupAddEvent: (e: any) => void;
@@ -17,41 +19,69 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
 
   const [isPopupRequest, setIsPopupRequest] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
-  const [reviewPost, setReviewPost] = useState('');
+  const [valueData, setValueData] = useState<Date | null>(null);
   const [valueTimeStart, setValueTimeStart] = useState('00:00');
+  const [isEnterTimeStart, setIsEnterTimeStart] = useState(false);
   const [valueTimeEnd, setValueTimeEnd] = useState('00:00');
+  const [isEnterTimeEnd, setIsEnterTimeEnd] = useState(false);
+  const [valueTimeErr, setValueTimeErr] = useState('');
+  const [headingEvent, setHeadingEvent] = useState('');
+  const [headingEventErr, setHeadingEventErr] = useState('');
+  const [reviewPost, setReviewPost] = useState('');
+  const [reviewPostErr, setReviewPostErr] = useState('');
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [clickSubmit, setClickSubmit] = useState(false)
 
+  // закрытие попапов при клике по фону или Esc
   useEscapeKeyEvent(closePopupAddEvent);
+
+  useEffect(()=>{
+    !isPopupAddEvent && resetForm()
+  }, [isPopupAddEvent]);
+
   const handleCloseOutside = (
     event: React.MouseEvent<HTMLDivElement>
   ): void => {
     if (event.target === event.currentTarget) {
       closePopupAddEvent(event);
+      resetForm();
     }
   };
-  // const valuesStart = {
-  //   // date: new Date().getDate(),
-  //   start_time: new Date(),
-  //   end_time: new Date(),
-  //   // typeActivity: "",
-  //   name: "",
-  //   text: "",
-  //   // contact: "",
-  //   // expiration: "",
-  //   for_all: true,
-  // }
-  // const [values, setValues] = useState(valuesStart);
+  //
+
+  const setTime = (time: any) => {
+      const hour = time.slice(0,2);
+      const minute = time.slice(-2);
+    return {hour, minute}
+  }
+
+  const resetForm = () => {
+    setValueData(null);
+    setValueTimeStart('00:00');
+    setIsEnterTimeStart(false);
+    setValueTimeEnd('00:00');
+    setIsEnterTimeEnd(false);
+    setValueTimeErr('');
+    setHeadingEvent('');
+    setReviewPost('');
+    setReviewPostErr('');
+    setHeadingEventErr('');
+  }
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    if (!isValidForm) {
+      setClickSubmit(!clickSubmit);
+      return;
+    }
     setIsRequest(false);
-    const year = new Date(e.target.elements.date.value).getFullYear();
-    const month = new Date(e.target.elements.date.value).getMonth();
-    const day = new Date(e.target.elements.date.value).getDate();
-    const hourStart = e.target.elements.timeStart.value.slice(0,2);
-    const minuteStart = e.target.elements.timeStart.value.slice(-2);
-    const hourEnd = e.target.elements.timeEnd.value.slice(0,2);
-    const minuteEnd = e.target.elements.timeEnd.value.slice(-2);
+    const year = (valueData !== null) ? (valueData.getFullYear()) : new Date().getFullYear();
+    const month = (valueData !== null) ? (valueData.getMonth()) : new Date().getMonth();
+    const day = (valueData !== null) ? (valueData.getDate()) : new Date().getDate();
+    const hourStart = setTime(e.target.elements.timeStart.value).hour;
+    const minuteStart = setTime(e.target.elements.timeStart.value).minute;
+    const hourEnd = setTime(e.target.elements.timeEnd.value).hour;
+    const minuteEnd = setTime(e.target.elements.timeEnd.value).minute;
 
     const event = {
       start_time: new Date(year, month, day, hourStart, minuteStart),
@@ -63,20 +93,9 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
       // expiration: e.target.elements.expiration.value,
       for_all: true,
     }
-    // setValues({
-    //   // date: e.target.elements.date.value,
-    //   start_time: new Date(year, month, day, hourStart, minuteStart),
-    //   end_time: new Date(year, month, day, hourEnd, minuteEnd),
-    //   // typeActivity: e.target.elements.typeActivity.value,
-    //   name: e.target.elements.name.value,
-    //   text: e.target.elements.text.value,
-    //   // contact: e.target.elements.contact.value,
-    //   // expiration: e.target.elements.expiration.value,
-    //   for_all: true,
-    // });
-    e.target.reset();
-    setReviewPost('');
     submitEvent(event);
+    e.target.reset();
+    resetForm();
   }
 
   async function submitEvent(values: EventInterface) {
@@ -97,39 +116,108 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
       console.log(err);
     }
   }
+
+  // попап о результатах отправки сабмита (успешно/не успешно)
   const closePopupRequest = () => {
     setIsPopupRequest(false);
   }
   useEffect(()=>{
     setTimeout(closePopupRequest, 5000)
   },[isPopupRequest])
+  //
 
+  // валидация полей даты и времени
+  useEffect(() => {
+    setValueTimeErr('');
+    const hourStart = setTime(valueTimeStart).hour;
+    const minuteStart = setTime(valueTimeStart).minute;
+    const hourEnd = setTime(valueTimeEnd).hour;
+    const minuteEnd = setTime(valueTimeEnd).minute;
+    const duration = new Date().setHours(hourEnd, minuteEnd) - new Date().setHours(hourStart, minuteStart);
+
+    ((duration < 1800000 && (isEnterTimeEnd || isEnterTimeStart)) &&
+      setValueTimeErr('Продолжительность мероприятия не менее 30 минут'));
+    (valueData === null && (isEnterTimeEnd || isEnterTimeStart)) &&
+      setValueTimeErr('Обязательное поле');
+  },[valueTimeStart, valueTimeEnd, valueData, isEnterTimeStart]);
+  //
+
+  //  валидация формы
+  useEffect(() => {
+    (valueData !== null && valueTimeErr.length === 0 &&
+      headingEvent.length > 0 && headingEvent.length <= 64 &&
+      reviewPost.length > 8 && reviewPost.length <= 130
+    ) ? setIsValidForm(true) : setIsValidForm(false);
+  });
+  //
+
+  // подсвечиваем поля не прошедшие валидацию при попытке сабмита
+  useEffect(()=>{
+    if (isPopupAddEvent) {
+      setIsEnterTimeStart(true);
+      (headingEvent.length <= 0 || headingEvent.length > 64) && setHeadingEventErr('Обязательное поле');
+      (reviewPost.length <= 8 || reviewPost.length > 130) && setReviewPostErr('Обязательное поле');
+    }
+  }, [clickSubmit])
+  //
+
+  // управление полями формы
+  const handleValueData = (date: Date | null) => {
+    // valueData !== date && setIsEnterData(true);
+    setValueData(date);
+  }
   const handleValueTimeStart = (e: any) => {
-    // console.log(e);
+    valueTimeStart !== e.target.value && setIsEnterTimeStart(true);
     setValueTimeStart(e.target.value);
   }
   const handleValueTimeEnd = (e: any) => {
-    // console.log(e);
+    valueTimeEnd !== e.target.value && setIsEnterTimeEnd(true);
     setValueTimeEnd(e.target.value);
+  }
+  const handleValueHeading = (e: any) => {
+    // valueData !== date && setIsEnterData(true);
+    setHeadingEvent(e.target.value);
+    setHeadingEventErr(e.target.validationMessage);
+  }
+  const handleValueReviewPost = (e: any) => {
+    // valueData !== date && setIsEnterData(true);
+    setReviewPost(e.target.value);
+    setReviewPostErr(e.target.validationMessage);
   }
 
   return (
     <div className={isPopupAddEvent ? styles.formAddEvent__overlay : styles.formAddEvent__closed} onClick={(e) => handleCloseOutside(e)}>
       {isPopupRequest && <PopupRequest isRequest={isRequest} closePopupRequest={closePopupRequest}/>}
-      <form className={styles.formAddEvent} onSubmit={onSubmit}>
+      <form className={styles.formAddEvent} onSubmit={onSubmit} noValidate>
           <h2 className={styles.formAddEvent__heading}>
             Добавьте новое мероприятие
             <button className={styles.formAddEvent__buttonClose} onClick={closePopupAddEvent}><ClosePopup /></button>
           </h2>
           <fieldset className={styles.formAddEvent__fieldsDate}>
             <legend className={styles.formAddEvent__headingField}>Дата и время</legend>
-            <input className={`${styles.formAddEvent__date} ${styles.input}`} type="date" name="date" placeholder="data" required/>
+            <div className={`${styles.formAddEvent__containerDataPicker} ${valueTimeErr === 'Обязательное поле' && styles.formAddEvent__inputErr}`}>
+
+              <CustomDatePicker selectedDate={valueData} handleDateChange={handleValueData} isMaxDateToday={false}/>
+            </div>
+            {/* <input
+              className={`${styles.formAddEvent__input} ${styles.formAddEvent__date} ${!isEnterData && styles.formAddEvent__timeNoValue}`}
+              type="date"
+              name="date"
+              placeholder="data"
+              value={valueData}
+              onChange={handleValueData}
+              required
+            /> */}
             {/* <span className={styles.formAddEvent__separator}>с</span> */}
             <input
-              className={`${styles.formAddEvent__time} ${styles.input}`}
+              className={`
+                ${styles.formAddEvent__input}
+                ${styles.formAddEvent__time}
+                ${!isEnterTimeStart && styles.formAddEvent__timeNoValue}
+                ${valueTimeErr === 'Продолжительность мероприятия не менее 30 минут' && styles.formAddEvent__inputErr}
+              `}
               type="time"
               name="timeStart"
-              // placeholder="00:00"
               value={valueTimeStart}
               onChange={handleValueTimeStart}
               required
@@ -138,57 +226,86 @@ export const AddEventPopup: React.FC<Props> = ({closePopupAddEvent, isPopupAddEv
 
             <img  className={styles.formAddEvent__divider} src={dash} />
             <input
-              className={`${styles.formAddEvent__time} ${styles.input}`}
+              className={`
+                ${styles.formAddEvent__input}
+                ${styles.formAddEvent__time}
+                ${!isEnterTimeEnd && styles.formAddEvent__timeNoValue}
+                ${valueTimeErr === 'Продолжительность мероприятия не менее 30 минут' && styles.formAddEvent__inputErr}
+              `}
               type="time"
               name="timeEnd"
               value={valueTimeEnd}
               onChange={handleValueTimeEnd}
               required
             />
+            <ErrorMessage>{valueTimeErr}</ErrorMessage>
           </fieldset>
           {/* <label className={styles.formAddEvent__fields}>
             <h3 className={styles.formAddEvent__headingField}>Тип мероприятия</h3>
-            <select name="typeActivity" >
-              <option disabled selected hidden>Выбрать</option>
-              <option>Тимбилдинг</option>
-              <option>Тренинг</option>
-              <option>Воркшоп</option>
+            <select className={styles.formAddEvent__select} name="typeActivity" >
+              <option className={styles.formAddEvent__option} disabled selected hidden>Выбрать</option>
+              <option className={styles.formAddEvent__option}>Тимбилдинг</option>
+              <option className={styles.formAddEvent__option}>Тренинг</option>
+              <option className={styles.formAddEvent__option}>Воркшоп</option>
             </select>
           </label> */}
-          <label className={styles.formAddEvent__fields}>
+          <label className={`${styles.formAddEvent__fields} ${styles.formAddEvent__label}`}>
             <h3 className={styles.formAddEvent__headingField}>Название</h3>
-            <input  className={styles.input} name="name" placeholder="Введите название" required/>
-          </label>
-          <label className={styles.formAddEvent__fieldTextarea}>
-            <h3 className={styles.formAddEvent__headingField}>Описание</h3>
-            <textarea
-              className={`${styles.formAddEvent__description} ${styles.textarea}`}
-              name="text"
-              placeholder="Введите описание"
-              minLength={8}
-              maxLength={130}
+            <input
+              className={`
+                ${styles.formAddEvent__input}
+                ${headingEventErr.length !== 0 && styles.formAddEvent__inputErr}
+              `}
+              name="name"
+              placeholder="Введите название"
+              minLength={2}
+              maxLength={64}
+              value={headingEvent}
+              onChange={handleValueHeading}
               required
-              value={reviewPost}
-              onChange={e => setReviewPost(e.target.value)}
-              // onChange={setCountSymbol}
             />
-            <span
-              className={reviewPost.length !== 130 ? styles.formAddEvent__countSymbolTextarea : styles.formAddEvent__countSymbolTextareaRed}
-            >
-              {reviewPost.length}/130
-            </span>
+            <ErrorMessage>{headingEventErr}</ErrorMessage>
           </label>
-          {/* <label className={styles.formAddEvent__fields}>
+          <label className={`${styles.formAddEvent__fieldTextarea} ${styles.formAddEvent__label}`}>
+            <h3 className={styles.formAddEvent__headingField}>Описание</h3>
+            <div className={styles.formAddEvent__description}>
+              <textarea
+                className={`
+                  ${styles.formAddEvent__textarea}
+                  ${reviewPostErr.length !== 0 && styles.formAddEvent__inputErr}
+                `}
+                name="text"
+                placeholder="Введите описание"
+                minLength={8}
+                maxLength={130}
+                required
+                value={reviewPost}
+                onChange={handleValueReviewPost}
+              />
+              <span
+                className={reviewPost.length !== 130 ? styles.formAddEvent__countSymbolTextarea : styles.formAddEvent__countSymbolTextareaRed}
+              >
+                {reviewPost.length}/130
+              </span>
+            </div>
+            <ErrorMessage>{reviewPostErr}</ErrorMessage>
+          </label>
+          {/* <label className={`${styles.formAddEvent__fields} ${styles.formAddEvent__label}`}>
             <h3 className={styles.formAddEvent__headingField}>Контакты</h3>
-            <input  name="contact" placeholder="Введите почту организатора"/>
+            <input className={styles.formAddEvent__input} name="contact" placeholder="Введите почту организатора"/>
           </label> */}
-          {/* <label className={styles.formAddEvent__fields}>
+          {/* <label className={`${styles.formAddEvent__fields} ${styles.formAddEvent__label}`}>
             <h3 className={styles.formAddEvent__headingField}>Регистрация до</h3>
-            <input  name="expiration" placeholder="Например, 10 июня"/>
+            <input className={styles.formAddEvent__input} name="expiration" placeholder="Например, 10 июня"/>
           </label> */}
           <div className={styles.formAddEvent__buttonsForm}>
             <button className={styles.formAddEvent__buttonExit}  onClick={closePopupAddEvent}>Отмена</button>
-            <button className={styles.formAddEvent__buttonSubmit} onSubmit={onSubmit}>Добавить</button>
+            <button
+              className={`${styles.formAddEvent__buttonSubmit} ${!isValidForm && styles.formAddEvent__buttonSubmitDisabled}`}
+              onSubmit={onSubmit}
+            >
+              Добавить
+            </button>
           </div>
       </form>
     </div>

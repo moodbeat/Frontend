@@ -1,5 +1,6 @@
 import styles from "./useful.module.scss";
 import {Navbar} from "@/components/Navbar/Navbar";
+// import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import SearchUseful from "@/components/SearchUseful/SearchUseful";
 import TagsList from "@/components/TagsList/TagsList";
@@ -10,6 +11,7 @@ import axios from 'axios';
 import UsefulCardList from "@/components/UsefulCardList/UsefulCardList";
 import Loading from "@/components/Loading/Loading";
 import {fetchData} from "@/shared/api/Api";
+import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 export const Useful = () => {
   const [entries, setEntries] = useState<Card[]>([]);
@@ -125,6 +127,7 @@ export const Useful = () => {
     <div className="page-container">
       <Navbar/>
       {isOnline ?
+        // <ContainerContent>
         <div className={styles.container}>
           <div className={styles.useful}>
             <h2 className={styles.title}>Полезные статьи и видео</h2>
@@ -137,8 +140,10 @@ export const Useful = () => {
 
                 <UsefulCardList cards={chosenCardList} searchValue={searchValue} allEntries={entries}/>
               </>}
+              <ButtonTelegramm />
           </div>
         </div>
+        // </ContainerContent>
         : <BadInternetConnection/>}
     </div>
   );
