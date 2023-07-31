@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <a href="#">
-        <img src={logoHeader} alt="Логотип" />
+        <img src={logoHeader} alt="Логотип" className={styles.headerLogo} />
       </a>
       <nav className={styles.headerNav}>
         <li className={styles.headerList}>
@@ -31,6 +31,7 @@ export const Header: React.FC = () => {
       <a className={`${styles.button} ${styles.headerButton}`} href="/login">
         Войти
       </a>
+      <button className={styles.buttonMenu}></button>
     </header>
   );
 };

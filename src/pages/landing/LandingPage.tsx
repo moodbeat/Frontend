@@ -6,13 +6,13 @@ import articleQueries from "@/assets/article_queries.png";
 import articleProfile from "@/assets/article_profile.png";
 import articleBookmarks from "@/assets/article_bookmarks.png";
 import articleTelegram from "@/assets/article_telegram.png";
-import heroScreenshot from "@/assets/hero_screenshot.png";
-import heroWheel from "@/assets/hero_wheel.png";
 import { Accordion } from "@/components/Accordion/Accordion";
 import { FeedbackForm } from "./components/FeedbackForm/FeedbackForm";
 import { faqItems } from "@/shared/constants";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
+import { Hero } from "./components/Hero/Hero";
+import { Audience } from "./components/Audience/Audience";
 
 export const LandingPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -21,103 +21,8 @@ export const LandingPage: React.FC = () => {
     <div className={styles.landing}>
       <Header />
       <main className={styles.main}>
-        <section className={styles.sectionHero}>
-          <div className={styles.sectionHeroContainer}>
-            <div className={styles.heroCol}>
-              <h1 className={styles.heroTitle}>
-                Держите руку на&nbsp;пульсе эффективности
-              </h1>
-              <p className={styles.heroText}>
-                Поможем HR и руководителям установить&nbsp;эмоциональный контакт
-                с&nbsp;командой, вовремя заметить тревожные сигналы
-                и&nbsp;остановить выгорание.
-              </p>
-              <a
-                className={`${styles.button} ${styles.heroButton}`}
-                href="#form"
-              >
-                Заказать демо
-              </a>
-            </div>
-            <div className={styles.heroImages}>
-              <img
-                className={styles.heroImage}
-                src={heroScreenshot}
-                alt="Скриншот главного экрана приложения"
-              />
-              <img
-                className={styles.heroImage}
-                src={heroWheel}
-                alt="Скриншот колеса баланса"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section id="audience" className={styles.sectionAudience}>
-          <div className={styles.sectionAudienceContainer}>
-            <h2 className={styles.sectionAudienceTitle}>
-              Кому будет полезен MoodBeat?
-            </h2>
-            <div className={styles.audienceCards}>
-              <article className={styles.audienceCard}>
-                <div>
-                  <span className={styles.audienceCardLabel}>01</span>
-                </div>
-                <h3 className={styles.audienceCardTitle}>
-                  Работодателям и&nbsp;HR&nbsp;специалистам
-                </h3>
-                <div>
-                  <p className={styles.audienceCardText}>
-                    Для отслеживания уровня выгорания, выявления проблемных
-                    областей и профилактики выгорания среди сотрудников.
-                  </p>
-                </div>
-              </article>
-
-              <article className={styles.audienceCard}>
-                <div>
-                  <span className={styles.audienceCardLabel}>02</span>
-                </div>
-                <h3 className={styles.audienceCardTitle}>
-                  Руководителям и&nbsp;менеджерам
-                </h3>
-                <div>
-                  <p className={styles.audienceCardText}>
-                    Для оценки состояния выгорания участников&nbsp;своей команды
-                    и&nbsp;предоставления&nbsp;необходимой
-                    <br />
-                    поддержки.
-                  </p>
-                  <p className={styles.audienceCardText}>
-                    Для получения информации о&nbsp;состоянии&nbsp;сотрудников,
-                    правильного распределения задач и&nbsp;нагрузки
-                    и&nbsp;улучшению рабочей
-                    <br />
-                    среды
-                  </p>
-                </div>
-              </article>
-
-              <article className={styles.audienceCard}>
-                <div>
-                  <span className={styles.audienceCardLabel}>03</span>
-                </div>
-                <h3 className={styles.audienceCardTitle}>Сотрудникам</h3>
-                <div>
-                  <p className={styles.audienceCardText}>
-                    Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
-                    эмоционального состояния
-                  </p>
-                  <p className={styles.audienceCardText}>
-                    Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                    поддержке своего&nbsp;психического здоровья
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
+        <Hero />
+        <Audience />
 
         <section id="features" className={styles.sectionFeatures}>
           <div className={styles.sectionFeaturesContainer}>

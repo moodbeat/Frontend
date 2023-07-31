@@ -42,3 +42,32 @@
   background-color: var(--color-background-white);
   color: var(--color-accent-purple);
 }
+.buttonMenu {
+  display: none;
+}
+@media screen and (width < 900px) {
+  .headerLogo {
+    width: 168px;
+    height: 60px;
+  }
+  .headerList {
+    display: none;
+  }
+  .headerButton {
+    display: none;
+  }
+  .buttonMenu {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    background-image: url("../../../../assets/hamburger_menu.svg");
+  }
+}
+
+@media screen and (width < 768px) {
+  .header {
+    padding: 0 16px 0 0;
+  }
+}
