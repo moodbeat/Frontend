@@ -3,6 +3,7 @@ import "@/shared/styles/styles.css";
 import styles from "./Audience.module.scss";
 
 export const Audience: React.FC = () => {
+  // TODO: Add Swiper for width < 786px
   return (
     <section id="audience" className={styles.sectionAudience}>
       <div className={styles.sectionAudienceContainer}>

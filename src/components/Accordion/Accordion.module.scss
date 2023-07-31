@@ -34,3 +34,16 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media screen and (width < 768px) {
+  .element {
+    padding: 20px 40px 20px 16px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .text {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

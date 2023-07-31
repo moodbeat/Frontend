@@ -71,6 +71,9 @@
 }
 
 @media screen and (width < 768px) {
+  .sectionAudience {
+    background-color: #fbfbfb;
+  }
   .sectionAudienceContainer {
     padding: 40px 16px 32px;
   }
@@ -82,9 +85,6 @@
     width: 288px;
     min-height: 440px;
     padding: 24px 20px;
-  }
-  .audienceCard:not(:first-of-type) {
-    display: none;
   }
   .audienceCardLabel {
     height: 80px;
