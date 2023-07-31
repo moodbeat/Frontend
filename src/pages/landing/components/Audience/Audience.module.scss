@@ -16,16 +16,16 @@
 }
 .audienceCards {
   display: flex;
-  gap: 38px;
+  gap: 0;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .audienceCard {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 467px;
+  width: 430px;
   min-height: 550px;
   border-radius: 20px;
   padding: 40px 36px;
