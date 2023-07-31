@@ -12,7 +12,6 @@ import articleTelegram from "@/assets/article_telegram.png";
 import articleTelegramMobile from "@/assets/article_telegram_mobile.png";
 
 export const Features: React.FC = () => {
-  // TODO: Add slider to feature screenshots gallery
   return (
     <section id="features" className={styles.sectionFeatures}>
       <div className={styles.sectionFeaturesContainer}>
@@ -29,7 +28,7 @@ export const Features: React.FC = () => {
             </p>
           </div>
           <img
-            className={`${styles.featureImage} ${styles.featureImageDesktop} ${styles.featureImageMobile}`}
+            className={`${styles.featureImage}`}
             src={articleTests}
             alt="Скриншот приложения со страницей тестирования"
           />

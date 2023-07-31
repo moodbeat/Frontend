@@ -1,16 +1,23 @@
 import React from "react";
 import "@/shared/styles/styles.css";
-import styles from "./Audience.module.scss";
+import styles from "./AudienceSwiper.module.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
-export const Audience: React.FC = () => {
+export const AudienceSwiper: React.FC = () => {
   return (
     <section id="audience" className={styles.sectionAudience}>
       <div className={styles.sectionAudienceContainer}>
         <h2 className={styles.sectionAudienceTitle}>
           Кому будет полезен MoodBeat?
         </h2>
-        <div className={styles.audienceCards}>
-          <article className={styles.audienceCard}>
+        <Swiper
+          style={{ padding: "4px" }}
+          className={styles.audienceCards}
+          spaceBetween={0}
+          slidesPerView={1}
+        >
+          <SwiperSlide className={styles.audienceCard}>
             <div>
               <span className={styles.audienceCardLabel}>01</span>
             </div>
@@ -23,9 +30,9 @@ export const Audience: React.FC = () => {
                 и профилактики выгорания среди сотрудников.
               </p>
             </div>
-          </article>
+          </SwiperSlide>
 
-          <article className={styles.audienceCard}>
+          <SwiperSlide className={styles.audienceCard}>
             <div>
               <span className={styles.audienceCardLabel}>02</span>
             </div>
@@ -35,7 +42,7 @@ export const Audience: React.FC = () => {
             <div>
               <p className={styles.audienceCardText}>
                 Для оценки состояния выгорания участников&nbsp;своей команды
-                и&nbsp;предоставления&nbsp;необходимой
+                и&nbsp;предоставления необходимой
                 <br />
                 поддержки.
               </p>
@@ -47,9 +54,9 @@ export const Audience: React.FC = () => {
                 среды
               </p>
             </div>
-          </article>
+          </SwiperSlide>
 
-          <article className={styles.audienceCard}>
+          <SwiperSlide className={styles.audienceCard}>
             <div>
               <span className={styles.audienceCardLabel}>03</span>
             </div>
@@ -61,11 +68,11 @@ export const Audience: React.FC = () => {
               </p>
               <p className={styles.audienceCardText}>
                 Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                поддержке своего&nbsp;психического здоровья
+                поддержке своего психического здоровья
               </p>
             </div>
-          </article>
-        </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </section>
   );

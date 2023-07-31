@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import "@/shared/styles/styles.css";
 import styles from "./LandingPage.module.scss";
 import { Accordion } from "@/components/Accordion/Accordion";
@@ -9,16 +10,18 @@ import { Footer } from "./components/Footer/Footer";
 import { Hero } from "./components/Hero/Hero";
 import { Audience } from "./components/Audience/Audience";
 import { Features } from "./components/Features/Features";
+import { AudienceSwiper } from "./components/AudienceSwiper/AudienceSwiper";
 
 export const LandingPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <div className={styles.landing}>
       <Header />
       <main className={styles.main}>
         <Hero />
-        <Audience />
+        {isMobile ? <AudienceSwiper /> : <Audience />}
         <Features />
 
         <section id="faq" className={styles.sectionFaq}>
