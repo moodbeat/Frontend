@@ -1,0 +1,40 @@
+.burgerMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+}
+.closeButton {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+  background-image: url("../../../../assets/closeButton_mobile.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.headerList {
+  padding: 104px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.headerListItem {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.headerLink {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-decoration: none;
+  color: var(--color-black);
+}

@@ -31,194 +31,10 @@
   background-size: contain;
 }
 
-// HERO
-
-.sectionHero {
-  width: 100%;
-  background: var(--color-accent-lightpink);
-}
-.sectionHeroContainer {
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 183px 60px 133px;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-}
-.heroCol {
-  max-width: 705px;
-}
-.heroTitle {
-  margin: 47px 0 0;
-  font-weight: 600;
-  font-size: 60px;
-  line-height: 60px;
-  letter-spacing: 0.5px;
-  color: var(--color-accent-secondary);
-}
-.heroText {
-  max-width: 720px;
-  margin: 20px 0;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: --font-line-l;
-  letter-spacing: 0.3px;
-  color: var(--color-black);
-}
-.heroButton {
-  align-self: flex-start;
-  background-color: var(--color-accent-purple);
-  color: var(--color-white);
-}
-.heroImages {
-  position: relative;
-}
-.heroImage {
-  display: block;
-  object-fit: cover;
-  max-width: 740px;
-}
-.heroImage:last-of-type {
-  position: absolute;
-  bottom: -82px;
-  right: -25px;
-  width: 290px;
-}
-
-// AUDIENCE
-
-.sectionAudience {
-  width: 100%;
-  color: var(--color-black);
-}
-.sectionAudienceContainer {
-  padding: 82px 60px 0;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-.sectionAudienceTitle {
-  margin: 0 0 60px;
-  font-weight: 600;
-  font-size: 50px;
-  line-height: 60px;
-}
-.audienceCards {
-  display: flex;
-  gap: 40px;
-}
-.audienceCard {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 467px;
-  min-height: 550px;
-  border-radius: 20px;
-  padding: 40px 36px;
-  border: 1px solid transparent;
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-small);
-}
-.audienceCardLabel {
-  display: flex;
-  align-items: flex-end;
-  width: 100%;
-  height: 160px;
-  font-weight: 400;
-  font-size: 60px;
-  line-height: 60px;
-  color: var(--color-accent-purple);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right;
-}
-.audienceCard:nth-of-type(1) .audienceCardLabel {
-  background-image: url("../../assets/audience_hr.png");
-}
-.audienceCard:nth-of-type(2) .audienceCardLabel {
-  background-image: url("../../assets/audience_chef.png");
-}
-.audienceCard:nth-of-type(3) .audienceCardLabel {
-  background-image: url("../../assets/audience_employee.png");
-}
-.audienceCardTitle {
-  margin: 0;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 36px;
-}
-.audienceCardText {
-  margin: 0;
-  max-width: 378px;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  margin-bottom: 13px;
-}
-
-// FEATURES
-
-.sectionFeatures {
-  width: 100%;
-}
-.sectionFeaturesContainer {
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 140px 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 140px;
-}
-.feature {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-.feature:nth-of-type(1),
-.feature:nth-of-type(4) {
-  flex-direction: row-reverse;
-}
-.featureImage {
-  display: block;
-  max-width: 740px;
-  object-fit: contain;
-  border-radius: 12px;
-  transition: all 0.3s ease-in;
-}
-.featureImage:nth-of-type(1) {
-  max-width: 680px;
-}
-.featureTextCol {
-  max-width: 590px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.featureLabel {
-  width: fit-content;
-  padding: 12px 32px;
-  border-radius: 40px;
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-small);
-  font-weight: 400;
-  font-size: var(--font-size-l);
-  line-height: var--font-line-l;
-}
-.featureTitle {
-  margin: 60px 0 30px;
-  font-weight: 600;
-  font-size: 38px;
-  line-height: 44px;
-  color: var(--color-black);
-}
-.featureText {
-  margin: 0 0 26px;
-  font-weight: 400;
-  font-size: var(--font-size-l);
-  line-height: 26px;
-  color: var(--color-black);
+@media screen and (max-width: 767px) {
+  .main {
+    background: none;
+  }
 }
 
 // FAQ
@@ -237,6 +53,15 @@
   font-weight: 600;
   font-size: 50px;
   line-height: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .sectionFaqContainer {
+    padding: 40px 16px 32px;
+  }
+  .sectionFaqTitle {
+    display: none;
+  }
 }
 
 // FORM
@@ -260,7 +85,8 @@
   line-height: 60px;
   color: var(--color-accent-secondary);
 }
-@media screen and (width < 768px) {
+
+@media screen and (max-width: 767px) {
   .sectionForm {
     padding: 40px 16px 16px;
     background-color: #fbfbfb;
