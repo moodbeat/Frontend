@@ -70,7 +70,6 @@ export const Routing: React.FC<Props> = ({
           <ProtectedRoutes
             loggedIn={loggedIn}
             handleSignOut={handleSignOut}
-            events={events}
           />
         }
       >
