@@ -14,7 +14,6 @@ export const BurnoutTestBanner = ({id}: BurnoutTestProps): JSX.Element => {
       <div className={styles.textContainer}>
         <div className={styles.textTop}>
           <h1 className={styles.textHeading}>Пройдите тест о выгорании</h1>
-          <span className={styles.dateTill}>до 20 cентября </span>
         </div>
         <div className={styles.textBottom}>
           <p className={styles.textDescription}>

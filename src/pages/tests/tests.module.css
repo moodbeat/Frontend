@@ -8,26 +8,19 @@
 } */
 
 .title {
-  margin: 0 0 20px;
-  font-family: Montserrat, sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 28px;
+  margin: 0 0 34px;
+  font: var(--font-h1);
 }
 
 .banerblock {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 38px;
   gap: 28px;
 }
 
-.records {
-  margin: 60px 0 0;
-}
-
 .subtitle {
-  margin: 20px 0 34px;
+  margin: 0;
   font-family: Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 600;

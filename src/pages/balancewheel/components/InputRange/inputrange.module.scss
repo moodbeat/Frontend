@@ -38,10 +38,6 @@
   cursor: pointer;
 }
 
-.slider-blue::-webkit-slider-thumb {
-  background: #325EE0;
-}
-
 .slider::-moz-range-thumb {
   border-radius: 5px;
   width: 15px;
@@ -51,7 +47,13 @@
   border: none;
 }
 
+.slider-yellow::-webkit-slider-thumb {
+  background: #FCF202;
+  border: none;
+}
+
 .slider-yellow::-moz-range-thumb {
   background: #FCF202;
   border: none;
 }
+

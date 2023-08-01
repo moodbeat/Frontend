@@ -53,6 +53,8 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
     []
   );
 
+  console.log(data);
+
   useEffect(() => {
     if (userId) {
       getData(userId);
@@ -150,24 +152,22 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                   {testResults && <TestResults results={testResults.results} />}
                   <div className={styles.statics}>
                     <h2 className={styles.staticsTitle}>Статистика</h2>
+                    <BurnoutLevel burnOutData={burnOutData && burnOutData} />
                     <MoodGraph
                       conditionsData={conditionsData && conditionsData}
                     />
-                    <BurnoutLevel burnOutData={burnOutData && burnOutData} />
-                    {data.length !== 0 && (
-                      <BalanceWheelResult step={2} data={data} />
-                    )}
                     <div className={styles.circleChartsSection}>
                       <div className={styles.pieChartContainer}>
                         <h3 className={styles.pieChartTitle}>Деятельность</h3>
                         {
-                          userInfo.latest_activity !== null
+                          userId && userInfo.latest_activity !== null
                             ?
-                            <PieChart initialData={activitiesData} id={userId && userId} isRoutingSliderVisible={false}/>
+                            <PieChart initialData={activitiesData} id={userId} isRoutingSliderVisible={false}/>
                             :
                             <p className={styles.noDataMessage}>Нет данных</p>
                         }
                       </div>
+                      <BalanceWheelResult step={2} data={data} location="profile"/>
                     </div>
                   </div>
                 </div>

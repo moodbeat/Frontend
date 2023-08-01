@@ -1,7 +1,11 @@
-export function formatDateToDdMmYy(date: Date) {
+export function formatDateToDdMmYy(date: Date, fullYear: boolean) {
   const day: number = date.getDate();
   const month: number = date.getMonth() + 1;
-  const year: string = date.getFullYear().toString().slice(2);
+  let year: string = date.getFullYear().toString().slice(2);
+
+  if(fullYear) {
+    year = date.getFullYear().toString();
+  }
 
   const formattedDay: string | number = day < 10 ? `0${day}` : day;
   const formattedMonth: string | number = month < 10 ? `0${month}` : month;

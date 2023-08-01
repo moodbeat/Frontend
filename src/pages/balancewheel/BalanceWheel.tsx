@@ -83,7 +83,7 @@ const BalanceWheel = () => {
                 ?
                   <ControlBalanceWheel color="blue" data={data && data.find(item => item.set_priority === false)} step={step} sendResults={sendResults} isPriority={false} goToPreviousQuestion={goToPreviousQuestion} goToNextQuestion={goToNextQuestion} instruction="Укажите на шкале, как вы оцениваете текущее состояние каждой из этих сфер"/>
                 :
-                  <BalanceWheelResult step={step} data={data && data} goToFirstQuestion={goToFirstQuestion}/>
+                  <BalanceWheelResult step={step} data={data && data} goToFirstQuestion={goToFirstQuestion} location={'balance-wheel'}/>
               )
             }
           </div>
