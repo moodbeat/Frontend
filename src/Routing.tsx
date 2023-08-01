@@ -73,7 +73,7 @@ export const Routing: React.FC<Props> = ({
           />
         }
       >
-        <Route path="/" element={<Main events={events} fetchEvents={fetchEvents}/>} />
+        <Route path="main" element={<Main events={events} fetchEvents={fetchEvents}/>} />
 
         <Route
           path="tests"
@@ -141,7 +141,7 @@ export const Routing: React.FC<Props> = ({
 
         <Route path="*" element={<Pagenotfound />} />
       </Route>
-      <Route path="landing" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="login" element={<LoginPage handleLogin={handleLogin} />} />
       <Route
         path="register"

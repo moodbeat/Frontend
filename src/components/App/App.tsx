@@ -104,7 +104,7 @@ export const App = () => {
       if (response.status === 200) {
         setLoggedIn(true);
         ["/login", "/register"].includes(pathname)
-          ? navigate("/")
+          ? navigate("/main")
           : navigate(pathname);
       }
       await getUserInfo();

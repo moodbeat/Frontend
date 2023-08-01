@@ -43,7 +43,7 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
 
   return (
     <header className={styles.header}>
-      <NavLink className={styles.logo} to="/">
+      <NavLink className={styles.logo} to="/main">
         <LogoImg />
       </NavLink>
       <input
