@@ -6,7 +6,7 @@
 
 .content {
   margin: 0 auto;
-  height: 90%;
+  //height: 90%;
   display: flex;
   width: 852px;
   padding: 20px 20px 40px 20px;
@@ -46,6 +46,7 @@
   font: var(--font-h1);
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 56px;
 }
 
 .text {
@@ -64,7 +65,7 @@
   position: absolute;
   width: 34px;
   height: 34px;
-  top: 70px;
+  top: 100px;
   right: 30px;
 
   z-index: 3;
