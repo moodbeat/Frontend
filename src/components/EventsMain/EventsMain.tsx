@@ -1,26 +1,33 @@
 import styles from "./eventsMain.module.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { EventInterface } from "@/types";
 import { EventsMainCard } from "./EventsMainCard/EventsMainCard";
 
 interface Props {
   events: EventInterface[];
+  fetchEvents: ()=> void;
 }
 
-export const EventsMain: React.FC<Props> = ({events}) => {
-  const [eventsSort, setEventsSort] = useState<EventInterface[]>([]);
+export const EventsMain: React.FC<Props> = ({events, fetchEvents}) => {
+  // const [eventsSort, setEventsSort] = useState<EventInterface[]>([]);
 
-  useEffect(()=>{
-    setEventsSort(events.slice(0,2))
-  },[events]);
+  // console.log(events);
+  // useEffect(()=>{
+  //   setEventsSort(events.slice(0,3))
+  // },[events]);
 
   return (
     <div className={styles.events}>
       <h3 className={styles.title}>Предстоящие мероприятия</h3>
       <ul className={styles.list}>
-        {eventsSort.length > 0 && eventsSort.map((item) =>
-          <EventsMainCard key={item.id} item={item}/>
-        )}
+        {events.length > 0 ?
+          events.map((item) =>
+            <EventsMainCard key={item.id} item={item}  fetchEvents={fetchEvents}/>
+          ) :
+          <li className={styles.pointNoEvents}>
+            <p>Пока нет запланированных мероприятий</p>
+          </li>
+        }
       </ul>
     </div>
   );

@@ -74,7 +74,7 @@ export const Routing: React.FC<Props> = ({
           />
         }
       >
-        <Route path="main" element={<Main events={events} />} />
+        <Route path="main" element={<Main events={events} fetchEvents={fetchEvents}/>} />
 
         <Route
           path="tests"
