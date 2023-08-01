@@ -82,7 +82,7 @@ export const EventsCard: React.FC<Props> = ({item, fetchEvents}) => {
   return (
     <li className={styles.eventsCard}>
       <div className={styles.eventsCard__header}>
-        <p className={styles.eventsCard__day}>{dataStart.getDate()}</p>
+        <p className={styles.eventsCard__day}>{dataStart.getDate() < 10  ? ("0" + dataStart.getDate()) : dataStart.getDate()}</p>
         <p className={styles.eventsCard__month}>{monthNames[dataStart.getMonth()]}</p>
         <p className={styles.eventsCard__time}>
           <span className={styles.eventsCard__timeStart}>{`${hoursStart}:${minutesStart}`}&mdash;</span>
