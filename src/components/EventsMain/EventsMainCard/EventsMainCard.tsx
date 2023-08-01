@@ -39,7 +39,7 @@ export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
     <li  className={styles.point}>
       <div className={styles.eventMainCard} onMouseOver={handleHoverCard} onMouseOut={handleHoverCardOff}>
         <div className={styles.leftBlock}>
-          <p className={styles.day}>{dataStart.getDate()}</p>
+          <p className={styles.day}>{dataStart.getDate() < 10  ? ("0" + dataStart.getDate()) : dataStart.getDate()}</p>
           <p className={styles.month}>{monthNames[dataStart.getMonth()]}</p>
         </div>
         <div className={styles.rightBlock}>
