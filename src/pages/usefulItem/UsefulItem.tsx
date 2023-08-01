@@ -3,8 +3,8 @@ import styles from "@/pages/usefulItem/usefulItem.module.scss";
 import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
 import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
 import {useParams} from "react-router-dom";
-import bookmark from "/../public/bookmark.svg";
-import bookmarkSaved from "/../public/bookmark_saved.svg";
+import bookmark from "../../assets/bookmark.svg"
+import bookmarkSaved from "../../assets/bookmark_saved.svg";
 import {useEffect, useState} from "react";
 import {Card, Category} from "@/types";
 import axios from "axios";
