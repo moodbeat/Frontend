@@ -23,22 +23,18 @@ export const Tests: React.FC<Tests> = ({allTestsResults}) => {
       <Navbar/>
       {isOnline ?
         <ContainerContent>
-          {/* <div className={styles.container}> */}
           <div className={styles.tests}>
             <h2 className={styles.title}>Тесты</h2>
             <div className={styles.banerblock}>
               <BurnoutTestBanner id='burnout'/>
               <WheelBanner/>
             </div>
-            {/*<Button width="250px" mode="primary" title="Заполнить колесо баланса"*/}
-            {/*        handleClick={() => navigate("/balance-wheel")}/>*/}
             <div className={styles.records}>
               <h3 className={styles.subtitle}>Пройденные тесты</h3>
               <Records allTestsResults={allTestsResults}/>
             </div>
             <ButtonTelegramm/>
           </div>
-          {/* </div> */}
         </ContainerContent>
         : <BadInternetConnection/>}
     </div>
