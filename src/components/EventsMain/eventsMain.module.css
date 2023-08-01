@@ -18,3 +18,9 @@
 .list::-webkit-scrollbar {
   width: 0;
 }
+
+.pointNoEvents {
+  color: var(--color-icon-secondary);
+  font: var(--font-body);
+
+}

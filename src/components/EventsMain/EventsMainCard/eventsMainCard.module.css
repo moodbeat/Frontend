@@ -11,6 +11,11 @@
   margin-bottom: 12px;
   background: #fff;
   gap: 12px;
+  cursor: pointer;
+}
+
+.eventMainCard:hover {
+  background-color: var(--color-card-hover);
 }
 
 .leftBlock {
