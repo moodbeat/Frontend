@@ -1,5 +1,5 @@
 import styles from "./eventsMain.module.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { EventInterface } from "@/types";
 import { EventsMainCard } from "./EventsMainCard/EventsMainCard";
 
