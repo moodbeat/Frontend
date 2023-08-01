@@ -304,7 +304,7 @@ export const App = () => {
     );
   }
 
-  // запрос мероприятий для вкладки мероприятия
+  // запрос мероприятий
   async function fetchEvents() {
     try {
       if (role === "hr" || role === "chief" || role === "employee") {

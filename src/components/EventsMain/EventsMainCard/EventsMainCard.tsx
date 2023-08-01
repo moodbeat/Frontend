@@ -1,11 +1,14 @@
 import styles from "./eventsMainCard.module.css";
 import { EventInterface } from "@/types";
-import React from "react";
+import React, { useState } from "react";
+import { EventsMainPopup } from "../EventsMainPopup/EventsMainPopup";
 
 interface Props {
   item: EventInterface;
+  fetchEvents: ()=> void;
 }
-export const EventsMainCard: React.FC<Props> = ({item}) => {
+export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
+  const [isPopupEventMain, setIsPopupEventMain] = useState(false);
   const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
   const dataStart = new Date(item.start_time);
   const dataEnd = new Date(item.end_time);
@@ -14,21 +17,41 @@ export const EventsMainCard: React.FC<Props> = ({item}) => {
   const hoursEnd = dataEnd.getHours() < 10 ? `0${dataEnd.getHours()}` : `${dataEnd.getHours()}`;
   const minutesEnd = dataEnd.getMinutes() < 10 ? `0${dataEnd.getMinutes()}` : `${dataEnd.getMinutes()}`;
 
-  console.log()
+  // let moveMouse = 0;
+  const handleHoverCard = () => {
+    // if (moveMouse === 0) {
+      setIsPopupEventMain(true);
+      // console.log(e);
+      console.log('yes');
+    // }
+
+    // moveMouse ++;
+  }
+  const handleHoverCardOff = () => {
+    // moveMouse === 0 && console.log(e);
+    // moveMouse = 0;
+    setIsPopupEventMain(false);
+    console.log('no')
+  }
+
 
   return (
-    <li className={styles.point}>
-      <div className={styles.leftBlock}>
-        <p className={styles.count}>{dataStart.getDate()}</p>
-        <p className={styles.month}>{monthNames[dataStart.getMonth()]}</p>
+    <li  className={styles.point}>
+      <div className={styles.eventMainCard} onMouseOver={handleHoverCard} onMouseOut={handleHoverCardOff}>
+        <div className={styles.leftBlock}>
+          <p className={styles.day}>{dataStart.getDate()}</p>
+          <p className={styles.month}>{monthNames[dataStart.getMonth()]}</p>
+        </div>
+        <div className={styles.rightBlock}>
+          <p className={styles.name}>{item.name}</p>
+          <p className={styles.time}>
+            <span>{`${hoursStart}:${minutesStart}`}&mdash;</span>
+            <span>{`${hoursEnd}:${minutesEnd}`}</span>
+          </p>
+        </div>
       </div>
-      <div className={styles.rightBlock}>
-        <p className={styles.typeActivity}>{item.name}</p>
-        <p className={styles.time}>
-          <span>{`${hoursStart}:${minutesStart}`}&mdash;</span>
-          <span>{`${hoursEnd}:${minutesEnd}`}</span>
-        </p>
-      </div>
+      <EventsMainPopup item={item} fetchEvents={fetchEvents} isPopupEventMain={isPopupEventMain}/>
     </li>
+
   );
 }

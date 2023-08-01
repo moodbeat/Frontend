@@ -1,0 +1,19 @@
+.popupEvent {
+  /* display: none; */
+  opacity: 0;
+  position: absolute;
+  right: 350px;
+  bottom: 100px;
+  transition: opacity 1s linear;
+}
+
+.popupEvent_active {
+  /* display: block; */
+  opacity: 1;
+  transition: opacity 1s linear;
+  position: absolute;
+  right: 350px;
+  bottom: 100px;
+  /* top: -64px; */
+}
+

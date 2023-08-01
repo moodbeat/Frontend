@@ -9,6 +9,12 @@
 }
 
 .list {
+  max-height: 226px;
+  overflow: hidden scroll;
   padding: 0;
   list-style: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 0;
 }
