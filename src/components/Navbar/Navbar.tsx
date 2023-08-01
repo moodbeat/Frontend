@@ -12,7 +12,7 @@ import {
   eventsIcon,
   bookmarkIcon,
   questionIcon,
-  myTeamIcon
+  myTeamIcon,
 } from "@/assets";
 
 export const Navbar = () => {
@@ -23,7 +23,7 @@ export const Navbar = () => {
   const user = useAppSelector(selectRole);
   const notifications = useAppSelector(selectNotifications);
 
-  const notificationClassname = cn(styles.logoContainer, styles.notification )
+  const notificationClassname = cn(styles.logoContainer, styles.notification);
 
   const linkClassName = (isActive: boolean) => {
     if (isActive) {
@@ -31,74 +31,63 @@ export const Navbar = () => {
     } else return `${styles.commonLink} ${styles.inactiveLink}`;
   };
 
-  useEffect (() => {
-    setIsChief(user !== 'employee')
-  }, [user])
+  useEffect(() => {
+    setIsChief(user !== "employee");
+  }, [user]);
 
   useEffect(() => {
     let evt = 0;
     let tst = 0;
-    notifications?.forEach(notification => {
-      if (notification.incident_type === 'Событие') evt++;
-      if (notification.incident_type === 'Опрос') tst++;
-    })
+    notifications?.forEach((notification) => {
+      if (notification.incident_type === "Событие") evt++;
+      if (notification.incident_type === "Опрос") tst++;
+    });
     setEventsNumber(evt);
     setTestsNumber(tst);
-  }, [notifications])
+  }, [notifications]);
 
   return (
     <aside className={styles.aside}>
       <div className={styles.navLinks}>
-        <NavLink className={({ isActive }) => linkClassName(isActive)} to="/">
-          <div className={styles.logoContainer}>
-            {homeIcon}
-          </div>
+        <NavLink
+          className={({ isActive }) => linkClassName(isActive)}
+          to="/main"
+        >
+          <div className={styles.logoContainer}>{homeIcon}</div>
           Главная
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
           to="/tests"
         >
-          <div className={styles.logoContainer}>
-            {questionIcon}
-          </div>
+          <div className={styles.logoContainer}>{questionIcon}</div>
           Тесты
-          {(testsNumber > 0) ?
-            <div className={notificationClassname}>
-              {testsNumber}
-            </div>
-          : null}
+          {testsNumber > 0 ? (
+            <div className={notificationClassname}>{testsNumber}</div>
+          ) : null}
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
           to="/entries"
         >
-          <div className={styles.logoContainer}>
-            {advicesIcon}
-          </div>
+          <div className={styles.logoContainer}>{advicesIcon}</div>
           Полезное
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
           to="/events"
         >
-          <div className={styles.logoContainer}>
-            {eventsIcon}
-          </div>
+          <div className={styles.logoContainer}>{eventsIcon}</div>
           Мероприятия
-          {(eventsNumber > 0) ?
-            <div className={notificationClassname}>
-              {eventsNumber}
-            </div>
-          : null}
+          {eventsNumber > 0 ? (
+            <div className={notificationClassname}>{eventsNumber}</div>
+          ) : null}
         </NavLink>
         <NavLink
           className={({ isActive }) => linkClassName(isActive)}
           to="/bookmarks"
         >
-          <div className={styles.logoContainer}>
-            {bookmarkIcon}
-          </div>
+          <div className={styles.logoContainer}>{bookmarkIcon}</div>
           Сохранённое
         </NavLink>
 
@@ -107,9 +96,7 @@ export const Navbar = () => {
             className={({ isActive }) => linkClassName(isActive)}
             to="/myteam"
           >
-            <div className={styles.logoContainer}>
-              {myTeamIcon}
-            </div>
+            <div className={styles.logoContainer}>{myTeamIcon}</div>
             Моя команда
           </NavLink>
         )}
