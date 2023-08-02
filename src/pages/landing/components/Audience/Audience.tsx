@@ -44,7 +44,7 @@ export const Audience: React.FC = () => {
                 правильного распределения задач и&nbsp;нагрузки и&nbsp;улучшению
                 рабочей
                 <br />
-                среды
+                среды.
               </p>
             </div>
           </article>
@@ -57,11 +57,11 @@ export const Audience: React.FC = () => {
             <div>
               <p className={styles.audienceCardText}>
                 Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
-                эмоционального состояния
+                эмоционального состояния.
               </p>
               <p className={styles.audienceCardText}>
                 Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                поддержке своего&nbsp;психического здоровья
+                поддержке своего&nbsp;психического здоровья.
               </p>
             </div>
           </article>

@@ -11,6 +11,7 @@ import { Hero } from "./components/Hero/Hero";
 import { Audience } from "./components/Audience/Audience";
 import { Features } from "./components/Features/Features";
 import { AudienceSwiper } from "./components/AudienceSwiper/AudienceSwiper";
+import BackToTopButton from "@/shared/ui/BackToTopButton/BackToTopButton";
 
 export const LandingPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -44,6 +45,7 @@ export const LandingPage: React.FC = () => {
             )}
           </div>
         </section>
+        <BackToTopButton />
       </main>
       <Footer />
     </div>
