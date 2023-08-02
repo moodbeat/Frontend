@@ -126,7 +126,7 @@ export const sendInviteCode = (email: string) => {
 };
 
 export const getUsers = () => {
-  return axios.get(`${BASE_URL_REQUEST}/users/?limit=100`, {
+  return axios.get(`${BASE_URL_REQUEST}/users/?limit=990`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
@@ -142,7 +142,7 @@ export const connectToWebSocketNotifications = () => {
 };
 
 export const getEvents = () => {
-  return axios.get(`${BASE_URL_REQUEST}/events/?limit=100`, {
+  return axios.get(`${BASE_URL_REQUEST}/events/?limit=990`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },

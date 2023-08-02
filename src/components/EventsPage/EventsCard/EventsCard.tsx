@@ -80,7 +80,7 @@ export const EventsCard: React.FC<Props> = ({item, fetchEvents}) => {
   }
 
   return (
-    <li className={styles.eventsCard}>
+    <div className={styles.eventsCard}>
       <div className={styles.eventsCard__header}>
         <p className={styles.eventsCard__day}>{dataStart.getDate() < 10  ? ("0" + dataStart.getDate()) : dataStart.getDate()}</p>
         <p className={styles.eventsCard__month}>{monthNames[dataStart.getMonth()]}</p>
@@ -103,6 +103,6 @@ export const EventsCard: React.FC<Props> = ({item, fetchEvents}) => {
         <p className={styles.eventsCard__nameAuthor}><EmailIcon /> {item.author?.first_name} {item.author?.last_name}</p>
         {/* <p className={styles.eventsCard__expiration}>Регистрация до -------</p> */}
       </div>
-    </li>
+    </div>
   );
 }

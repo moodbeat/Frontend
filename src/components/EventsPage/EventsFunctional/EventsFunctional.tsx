@@ -72,7 +72,7 @@ export const EventsFunctional: React.FC<Props> = ({textInput, handleInputSort, f
 
   return (
     <>
-      <div  className={styles.eventsFunctional__main}>
+      <div  className={`${styles.eventsFunctional__main} ${role === "employee" && styles.eventsFunctional__main_employee}`}>
         <input className={styles.eventsFunctional__find} placeholder="Поиск" value={textInput} onChange={handleInputSort}/>
         {(role === "hr" || role === "chief") &&
           <button  className={styles.eventsFunctional__add} onClick={openPopupAddEvent}>+ Добавить мероприятие</button>

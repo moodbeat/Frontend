@@ -21,9 +21,7 @@ export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
   const handleHoverCard = () => {
     // if (moveMouse === 0) {
       setIsPopupEventMain(true);
-      // console.log(e);
     // }
-
     // moveMouse ++;
   }
   const handleHoverCardOff = () => {
@@ -31,7 +29,6 @@ export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
     // moveMouse = 0;
     setIsPopupEventMain(false);
   }
-
 
   return (
     <li  className={styles.point}>

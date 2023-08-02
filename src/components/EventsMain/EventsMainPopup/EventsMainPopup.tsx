@@ -7,7 +7,6 @@ interface Props {
   isPopupEventMain: boolean;
 }
 export const EventsMainPopup: React.FC<Props> = ({item, fetchEvents, isPopupEventMain}) => {
-  console.log(isPopupEventMain);
   return (
     <div className={isPopupEventMain ? styles.popupEvent_active : styles.popupEvent}>
       <EventsCard item={item} fetchEvents={fetchEvents}/>
