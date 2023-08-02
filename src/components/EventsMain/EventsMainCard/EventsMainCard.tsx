@@ -21,8 +21,6 @@ export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
   const handleHoverCard = () => {
     // if (moveMouse === 0) {
       setIsPopupEventMain(true);
-      // console.log(e);
-      console.log('yes');
     // }
 
     // moveMouse ++;
@@ -31,7 +29,6 @@ export const EventsMainCard: React.FC<Props> = ({item, fetchEvents}) => {
     // moveMouse === 0 && console.log(e);
     // moveMouse = 0;
     setIsPopupEventMain(false);
-    console.log('no')
   }
 
 

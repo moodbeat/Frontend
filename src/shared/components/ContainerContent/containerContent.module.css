@@ -9,9 +9,11 @@
   padding: 40px 52px 90px 52px;
 }
 
-@media screen and (width > 1440px) {
+@media screen and (width > 1439px) {
   .containerContent__content {
     max-width: 1212px;
+    padding: 40px 132px 90px 52px;
+
     /* margin: 0 auto; */
   }
 }

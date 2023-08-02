@@ -118,6 +118,7 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
           <ul className={styles.eventsContent}>
             {eventsSortFind.length > 0 ?
               eventsSortFind.map((item)=>
+              <li className={styles.eventsContent__point} key={item.id}>
                 <EventsCard
                   key={item.id}
                   item={item}
@@ -125,6 +126,8 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
                   // isRenderEventPage={isRenderEventPage}
                   // setIsRenderEventPage={setIsRenderEventPage}
                 />
+              </li>
+
               ) :
               <p className={styles.eventsContentNull}>В этом месяце пока ничего не запланировано...</p>
             }
