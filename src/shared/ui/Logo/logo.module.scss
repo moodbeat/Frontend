@@ -2,4 +2,5 @@
 
 .logo {
   @include size(191px, 51px);
+  cursor: pointer;
 }

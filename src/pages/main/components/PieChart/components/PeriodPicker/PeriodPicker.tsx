@@ -41,7 +41,7 @@ export const PeriodPicker = ({handleChooseOption, value, getPieChartActivities}:
     setIsCalendarOpen(false);
     setOptionsOpened(false);
     if(startDate && endDate) {
-      setDateRangeValue(`${formatDateToDdMmYy(startDate)} - ${formatDateToDdMmYy(endDate)}`);
+      setDateRangeValue(`${formatDateToDdMmYy(startDate, false)} - ${formatDateToDdMmYy(endDate, false)}`);
       getPieChartActivities(2, 0, formatDateToYyyyMmDd(startDate), formatDateToYyyyMmDd(endDate))
     }
   }

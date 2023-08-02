@@ -136,9 +136,13 @@ export const MoodGraph = ({conditionsData}: Props) => {
         data={data}
         margin={{ top: 50, right: 0, bottom: 40, left: 30 }}
         padding={0.35}
+        // xScale={{ type: "point" }}
         keys={["y"]}
         indexBy={"x"}
+        // curve="basis"
+        // lineWidth={1.5}
         borderRadius={5}
+        // enablePoints={false}
         enableGridX={false}
         enableGridY={false}
         enableLabel={false}

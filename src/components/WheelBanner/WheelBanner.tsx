@@ -1,6 +1,7 @@
 import styles from "./wheelBanner.module.scss";
-import Wheel from "@/assets/wheel_banner.png";
+import Wheel from "./assets/BalanceWheel-img.png";
 import {useNavigate} from "react-router-dom";
+import {Button} from "@/shared/ui/Button/Button.tsx";
 
 
 export const WheelBanner = () => {
@@ -15,9 +16,7 @@ export const WheelBanner = () => {
           <p className={styles.text}>Это поможет правильно направить внимание на важные сферы жизни</p>
         </div>
       </div>
-      <button onClick={() => navigate("/balance-wheel")} type="button" className={styles.button}>
-        Составить колесо
-      </button>
+      <Button mode="outline" title="Составить колесо" handleClick={() => navigate("/balance-wheel")}/>
     </div>
   );
 };

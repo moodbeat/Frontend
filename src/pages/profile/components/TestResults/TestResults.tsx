@@ -4,6 +4,8 @@ import {ReactElement} from "react";
 import {WarningBall} from "@/pages/profile/components/WarningBall/WarningBall.tsx";
 import {Button} from "@/shared/ui/Button/Button";
 import {usePagination} from "@/shared/constants";
+import {formatDateToDdMmYy} from "@/shared/helpers.ts";
+import {parseISO} from "date-fns";
 
 interface Props {
   results: ExpressDiagnoseResponse[];
@@ -11,8 +13,6 @@ interface Props {
 export const TestResults = ({results}: Props): ReactElement => {
   const { countCardPage, addCard } = usePagination(2);
 
-  console.log(countCardPage);
-  console.log(results.length);
   return (
     <div>
       <h2 className={styles.title}>Пройденные опросы за последние 12 месяцев</h2>
@@ -24,7 +24,7 @@ export const TestResults = ({results}: Props): ReactElement => {
                 index < countCardPage ?
                   <li key={index} className={styles.testsListItem}>
                     <h4 className={styles.testsListItemName}>{result.survey.title}</h4>
-                    <p className={styles.testsListItemDate}>{result.completion_date}</p>
+                    <p className={styles.testsListItemDate}>{formatDateToDdMmYy(parseISO(result.completion_date), true)}</p>
                     <div className={styles.testsListItemMental}><WarningBall level={result.mental_state.level} title={result.mental_state.name} /></div>
                   </li>
                   : null
