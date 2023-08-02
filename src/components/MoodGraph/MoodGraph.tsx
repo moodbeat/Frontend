@@ -23,7 +23,6 @@ export const MoodGraph = ({conditionsData}: Props) => {
   const [conditionValues, setConditionValues] = useState<UserConditionRecieved[]>([]);
   const [monthVisible, setMonthVisible] = useState <number>(0);
   const [currentYear, setCurrentYear] = useState<number>(2023);
-  const [numberOfDays, setNumberOfDays] = useState<number>(30);
 
   const conditionsRecieved = useAppSelector(selectConditions);
   const buttonConditions = useAppSelector(selectButtonConditions);
@@ -50,13 +49,10 @@ export const MoodGraph = ({conditionsData}: Props) => {
         })
       }
 
-      // console.log(renderData) - длинный, всегда по количеству дней в месяце
-      // console.log(monthFilteredArray) - короткий, столько сколько пришло
-    if (monthFilteredArray) {
+      if (monthFilteredArray) {
 
      monthFilteredArray.forEach((item) => {
         const day = new Date(item.date).getUTCDate();
-        // console.log(day)
 
         //если на эту дату есть оценка настроения - подменяем её в результирующем массиве
         if (renderData[day - 1] && renderData[day - 1].x === day) {
@@ -95,12 +91,10 @@ export const MoodGraph = ({conditionsData}: Props) => {
       setConditionValues(conditionsRecieved.slice(0));
     }
 
-    // setData(generateData(numberOfDays));
   }, [buttonConditions, pathname, conditionsData, conditionsRecieved]);
 
   useEffect(() => {
     const newNumberOfDays = getNumberOfVisibleMonth(currentYear, monthVisible + 1);
-    setNumberOfDays(newNumberOfDays);
     setData(generateData(newNumberOfDays));
   }, [monthVisible, currentYear]);
 
@@ -111,7 +105,6 @@ export const MoodGraph = ({conditionsData}: Props) => {
     const numberOfDays = getNumberOfVisibleMonth(year, month + 1);
     setMonthVisible(month);
     setCurrentYear(year);
-    setNumberOfDays(numberOfDays)
     setData(generateData(numberOfDays));
   }, []);
 
