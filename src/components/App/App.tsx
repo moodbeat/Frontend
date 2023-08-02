@@ -104,7 +104,7 @@ export const App = () => {
       if (response.status === 200) {
         setLoggedIn(true);
         ["/login", "/register"].includes(pathname)
-          ? navigate("/")
+          ? navigate("/main")
           : navigate(pathname);
       }
       await getUserInfo();
@@ -304,7 +304,7 @@ export const App = () => {
     );
   }
 
-  // запрос мероприятий для вкладки мероприятия
+  // запрос мероприятий
   async function fetchEvents() {
     try {
       if (role === "hr" || role === "chief" || role === "employee") {

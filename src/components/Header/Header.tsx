@@ -11,16 +11,14 @@ import {
   selectLastName,
 } from "@/store/reducers/currentUser/currentUserReducer";
 import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
-import { EventInterface } from "@/types";
 
 const BASE_URL = "https://em-dev.usolcev.com";
 
 interface Props {
   handleSignOut: () => void;
-  events: EventInterface[];
 }
 
-export const Header: React.FC<Props> = ({ handleSignOut, events }) => {
+export const Header: React.FC<Props> = ({ handleSignOut }) => {
   const firstName = useAppSelector(selectFirstName);
   const lastName = useAppSelector(selectLastName);
   const allNotification = useAppSelector(selectNotifications);
@@ -45,7 +43,7 @@ export const Header: React.FC<Props> = ({ handleSignOut, events }) => {
 
   return (
     <header className={styles.header}>
-      <NavLink className={styles.logo} to="/">
+      <NavLink className={styles.logo} to="/main">
         <LogoImg />
       </NavLink>
       <input
@@ -87,7 +85,6 @@ export const Header: React.FC<Props> = ({ handleSignOut, events }) => {
       <NotificationPopup
         isNotificationPopupOpened={isNotificationPopupOpened}
         closeNotificationPopup={closeNotificationPopup}
-        events={events}
       />
     </header>
   );

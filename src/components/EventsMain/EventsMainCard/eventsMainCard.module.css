@@ -1,48 +1,60 @@
-.point {
+/* .point {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 324px;
+} */
+.eventMainCard {
   display: flex;
   width: 324px;
-  justify-content: space-between;
   padding: 12px 16px;
   border-radius: 20px;
   margin-bottom: 12px;
   background: #fff;
-  gap: 20px;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.eventMainCard:hover {
+  background-color: var(--color-card-hover);
 }
 
 .leftBlock {
   display:flex;
   flex-direction: column;
+  min-width: 52px;
 }
 
 .right-block {
   display:flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
   gap: 8px;
 }
 
-.count {
+.day {
   margin: 0;
   margin-bottom: 4px;
   color: var(--color-black);
   font-family: Montserrat;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 22px;
 }
 
 .month {
   margin: 0;
   color: var(--color-black);
-  font: var(--font-body);
+  font: var(--font-caption);
 }
 
-.typeActivity {
+.name {
   margin: 0;
+  max-width: 228px;
+  white-space : nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--color-accent-purple);
   font: var(--font-body);
-  text-align: right;
 }
 
 .time {
@@ -50,18 +62,3 @@
   color: var(--color-icon-secondary);
   font: var(--font-caption);
 }
-
-/* .point-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-}
-
-.text {
-  margin: 0;
-  color: var(--color-black);
-  font: var(--font-body);
-} */
-
-

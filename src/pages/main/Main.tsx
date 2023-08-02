@@ -24,8 +24,9 @@ import { ButtonTelegramm } from "@/components/ButtonTelegramm/ButtonTelegramm";
 
 interface Props {
   events: EventInterface[];
+  fetchEvents: ()=> void;
 }
-export const Main = ({events}: Props): ReactElement | null => {
+export const Main = ({events, fetchEvents}: Props): ReactElement | null => {
   const isOnline = useOnlineCheck();
   const [activitiesData] = useRequest(getActivityTypes);
   const currentUser = useAppSelector(selectUserInfo);
@@ -105,7 +106,7 @@ export const Main = ({events}: Props): ReactElement | null => {
                   articles={articles}
                   title={'Как улучшить ментальное здоровье'}
                 />
-                <EventsMain  events={events}/>
+                <EventsMain  events={events} fetchEvents={fetchEvents} />
               </section>
               <ButtonTelegramm />
             </main>
