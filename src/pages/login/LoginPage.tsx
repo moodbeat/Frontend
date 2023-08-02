@@ -19,7 +19,7 @@ export const LoginPage: React.FC<LoginProps> = ({ handleLogin }) => {
   return (
     <div className={classes.loginPage}>
       <div className={classes.logoContainer}>
-        <LogoImg />
+        <LogoImg link="/"/>
       </div>
       <Formik
         initialValues={initialValues}

@@ -15,3 +15,20 @@
   color: var(--color-black);
   font: var(--font-h3);
 }
+
+.button {
+  width: 156px;
+  height: 234px;
+  padding-bottom: 68px;
+  border: 12px solid #fff;
+  border-radius: 20px;
+  background-image: url('./assets/articles-arrow-bg.svg'), url('./assets/articles-btn.jpg');
+  background-position: top 92px right 10px, center;
+  background-repeat: no-repeat no-repeat;
+  background-size: auto, cover;
+  color: #fff;
+  cursor: pointer;
+  font: var(--font-h4-alert);
+  text-align: left;
+}
+

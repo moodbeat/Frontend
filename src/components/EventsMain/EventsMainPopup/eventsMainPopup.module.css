@@ -1,22 +1,23 @@
 .popupEvent {
-  /* display: none; */
-  opacity: 0;
   position: absolute;
   right: 350px;
   bottom: 100px;
-  transition: opacity 0.5s linear;
+  display: none;
+  opacity: 0;
+
+  /* transition: opacity 0.2s linear; */
 }
 
 .popupEvent_active {
-  /* display: block; */
-  opacity: 1;
-  transition: opacity 0.5s linear;
   position: absolute;
   right: 350px;
   bottom: 100px;
+  display: block;
+  border: 1px solid #e9eff2;
   border-radius: 20px;
   box-shadow: var(--shadow-medium);
-  border: 1px solid #e9eff2;
+  opacity: 1;
+  transition: opacity 0.2s linear;
 
   /* top: -64px; */
 }

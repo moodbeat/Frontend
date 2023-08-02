@@ -29,7 +29,7 @@ export const RefreshPasswordPage: React.FC<Props> = ({
   return (
     <div className={classes.refreshPasswordPage}>
       <div className={classes.logoContainer}>
-        <LogoImg />
+        <LogoImg link="/"/>
       </div>
       {!resetCode ? (
         <EmailFormRefresh handleSendResetCode={handleSendResetCode} />
