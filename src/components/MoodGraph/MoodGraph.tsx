@@ -1,4 +1,4 @@
-import { ResponsiveBar } from "@nivo/bar";
+import { ResponsiveBar, BarDatum} from "@nivo/bar";
 import { useState, useEffect } from "react";
 import { selectConditions, selectButtonConditions } from "@/store/reducers/conditionsBurnout/conditionsBurnoutReducer.ts";
 import { useAppSelector } from "@/store/hooks.ts";
@@ -14,17 +14,12 @@ import {useLocation} from "react-router";
 
 const shamefulMonthsArray = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
 
-interface renderData {
-  x: number | string,
-  y: number | string
-}
-
 interface Props {
   conditionsData?: UserConditionRecieved[];
 }
 
 export const MoodGraph = ({conditionsData}: Props) => {
-  const [data, setData] = useState <renderData[]>([{ x: 0, y: 0 }]);
+  const [data, setData] = useState <BarDatum[]>([{ x: 0, y: 0 }]);
   const [conditionValues, setConditionValues] = useState<UserConditionRecieved[]>([]);
   const [monthVisible, setMonthVisible] = useState <number>(0);
   const [currentYear, setCurrentYear] = useState<number>(2023);
@@ -34,10 +29,10 @@ export const MoodGraph = ({conditionsData}: Props) => {
   const buttonConditions = useAppSelector(selectButtonConditions);
   const { pathname } = useLocation();
 
-  function generateData (numberOfDays: number) {
+  function generateData (numberOfDays: number): BarDatum[] {
 
     //conditionsRecieved currentYear monthVisible numberOfDays входящие переменные, функцию можно вынести
-    const renderData: renderData[] = [];
+    const renderData: BarDatum[] = [];
 
     const yearFilteredArray = conditionValues?.filter(item => {
      const conditionYear = new Date(item.date).getFullYear();
@@ -148,13 +143,13 @@ export const MoodGraph = ({conditionsData}: Props) => {
         keys={["y"]}
         indexBy={"x"}
         // curve="basis"
-        lineWidth={1.5}
+        // lineWidth={1.5}
         borderRadius={5}
-        enablePoints={false}
+        // enablePoints={false}
         enableGridX={false}
         enableGridY={false}
         enableLabel={false}
-        areaOpacity={0.1}
+        // areaOpacity={0.1}
         animate={true}
         defs={[
           {
