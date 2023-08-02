@@ -22,7 +22,7 @@ const BalanceWheel = (): ReactElement | null => {
     if(dataCopy.length !== 0) {
       setStep(2);
     }
-  }, [])
+  }, [dataCopy])
 
   useEffect( () => {
     handleGetBalanceWheelValues(currentUserInfo.id);
