@@ -4,13 +4,13 @@
   position: absolute;
   right: 350px;
   bottom: 100px;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.2s linear;
 }
 
 .popupEvent_active {
   /* display: block; */
   opacity: 1;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.2s linear;
   position: absolute;
   right: 350px;
   bottom: 100px;

@@ -87,7 +87,7 @@ export const MoodGraph = ({conditionsData}: Props) => {
   useEffect(() => {
     if (conditionsData) {
       setConditionValues(conditionsData.slice(0));
-    } else if (pathname === "/" && conditionsRecieved) {
+    } else if (pathname === "/main" && conditionsRecieved) {
       setConditionValues(conditionsRecieved.slice(0));
     }
 
