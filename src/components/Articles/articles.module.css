@@ -19,16 +19,16 @@
 .button {
   width: 156px;
   height: 234px;
-  border-radius: 20px;
+  padding-bottom: 68px;
   border: 12px solid #fff;
+  border-radius: 20px;
   background-image: url('./assets/articles-arrow-bg.svg'), url('./assets/articles-btn.jpg');
-  background-size: auto, cover;
   background-position: top 92px right 10px, center;
   background-repeat: no-repeat no-repeat;
-  font: var(--font-h4-alert);
+  background-size: auto, cover;
   color: #fff;
-  text-align: left;
-  padding-bottom: 68px;
   cursor: pointer;
+  font: var(--font-h4-alert);
+  text-align: left;
 }
 
