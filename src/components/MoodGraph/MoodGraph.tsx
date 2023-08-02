@@ -23,7 +23,6 @@ export const MoodGraph = ({conditionsData}: Props) => {
   const [conditionValues, setConditionValues] = useState<UserConditionRecieved[]>([]);
   const [monthVisible, setMonthVisible] = useState <number>(0);
   const [currentYear, setCurrentYear] = useState<number>(2023);
-  const [numberOfDays, setNumberOfDays] = useState<number>(30);
 
   const conditionsRecieved = useAppSelector(selectConditions);
   const buttonConditions = useAppSelector(selectButtonConditions);
@@ -31,12 +30,11 @@ export const MoodGraph = ({conditionsData}: Props) => {
 
   function generateData (numberOfDays: number): BarDatum[] {
 
-    //conditionsRecieved currentYear monthVisible numberOfDays входящие переменные, функцию можно вынести
     const renderData: BarDatum[] = [];
 
     const yearFilteredArray = conditionValues?.filter(item => {
-      const conditionYear = new Date(item.date).getFullYear();
-      return conditionYear === currentYear;
+     const conditionYear = new Date(item.date).getFullYear();
+     return conditionYear === currentYear;
     })
 
     const monthFilteredArray = yearFilteredArray?.filter(item => {
@@ -44,20 +42,22 @@ export const MoodGraph = ({conditionsData}: Props) => {
       return conditionMonth === monthVisible;
     })
 
-    for (let i = 1; i <= numberOfDays; i++) {
-      renderData.push({
-        x: i,
-        y: 0,
-      })
-    }
+      for (let i = 1; i <= numberOfDays; i++) {
+        renderData.push({
+          x: i,
+          y: 0,
+        })
+      }
 
-    if (monthFilteredArray) {
+      if (monthFilteredArray) {
 
-      monthFilteredArray?.reverse().forEach((item) => {
+     monthFilteredArray.forEach((item) => {
         const day = new Date(item.date).getUTCDate();
 
         //если на эту дату есть оценка настроения - подменяем её в результирующем массиве
-        if (renderData[day - 1].x === day) renderData[day - 1].y = item.mood;
+        if (renderData[day - 1] && renderData[day - 1].x === day) {
+          renderData[day - 1].y = item.mood;
+        }
       })
     }
 
@@ -91,12 +91,10 @@ export const MoodGraph = ({conditionsData}: Props) => {
       setConditionValues(conditionsRecieved.slice(0));
     }
 
-    setData(generateData(numberOfDays));
   }, [buttonConditions, pathname, conditionsData, conditionsRecieved]);
 
   useEffect(() => {
     const newNumberOfDays = getNumberOfVisibleMonth(currentYear, monthVisible + 1);
-    setNumberOfDays(newNumberOfDays);
     setData(generateData(newNumberOfDays));
   }, [monthVisible, currentYear]);
 
@@ -107,7 +105,6 @@ export const MoodGraph = ({conditionsData}: Props) => {
     const numberOfDays = getNumberOfVisibleMonth(year, month + 1);
     setMonthVisible(month);
     setCurrentYear(year);
-    setNumberOfDays(numberOfDays)
     setData(generateData(numberOfDays));
   }, []);
 
@@ -119,7 +116,7 @@ export const MoodGraph = ({conditionsData}: Props) => {
           <button className={styles.month} onClick={decrease}>
             <div className={styles.buttonContainer}>{arrowLeft}{getMonthName(monthVisible - 1)}</div>
           </button>
-          <strong className={styles.monthVisible}>{getMonthName(monthVisible).toUpperCase()}</strong>
+            <strong className={styles.monthVisible}>{getMonthName(monthVisible).toUpperCase()}</strong>
           <button className={styles.month} onClick={increase}>
             <div className={styles.buttonContainer}>{getMonthName(monthVisible + 1)}{arrowRight}</div>
           </button>
@@ -149,15 +146,14 @@ export const MoodGraph = ({conditionsData}: Props) => {
         enableGridX={false}
         enableGridY={false}
         enableLabel={false}
-        // areaOpacity={0.1}
         animate={true}
         defs={[
           {
             id: 'gradient',
             type: 'linearGradient',
             colors: [
-              { offset: 0, color: '#BA99FF' },
-              { offset: 100, color: '#DCCDFC' },
+                { offset: 0, color: '#BA99FF' },
+                { offset: 100, color: '#DCCDFC' },
             ],
           },
         ]}
@@ -167,7 +163,7 @@ export const MoodGraph = ({conditionsData}: Props) => {
         axisLeft={null}
         axisBottom={{
           tickSize: 0,
-        }}
+         }}
       />
     </div>
   );
