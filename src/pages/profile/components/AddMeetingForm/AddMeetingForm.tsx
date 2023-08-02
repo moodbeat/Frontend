@@ -30,7 +30,7 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
   const [moodStates] = useRequest(() => getMentalStates());
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
 
-  const regex = /^[\w\s\d\x20-\x7EА-Яа-яЁё]{2,256}$/;
+  const regex = /^[а-яА-Яa-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$/;
 
   useEffect(() => {
     if(value && selectedDate && comment && !commentError) {
@@ -81,7 +81,7 @@ export const AddMeetingForm = ({closePopup, userId, handleAddMeetingInfo, update
       setCommentError("Максимальное количество символов: 256");
       setDisabledButton(true);
     } else if (!regex.test(value)) {
-      setCommentError("");
+      setCommentError("Можно вводить только заглавные и строчные буквы русского и английского алфавита, цифры, символы и пробелы.");
       setDisabledButton(true);
     } else {
       setCommentError("");

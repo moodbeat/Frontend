@@ -149,9 +149,12 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
                   <div className={styles.statics}>
                     <h2 className={styles.staticsTitle}>Статистика</h2>
                     <BurnoutLevel burnOutData={burnOutData && burnOutData} />
-                    <MoodGraph
-                      conditionsData={conditionsData && conditionsData}
-                    />
+                    {
+                      conditionsData && conditionsData.length !== 0 &&
+                      <MoodGraph
+                        conditionsData={conditionsData}
+                      />
+                    }
                     <div className={styles.circleChartsSection}>
                       <div className={styles.pieChartContainer}>
                         <h3 className={styles.pieChartTitle}>Деятельность</h3>

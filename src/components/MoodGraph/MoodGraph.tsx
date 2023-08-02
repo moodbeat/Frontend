@@ -18,6 +18,7 @@ interface Props {
   conditionsData?: UserConditionRecieved[];
 }
 
+
 export const MoodGraph = ({conditionsData}: Props) => {
   const [data, setData] = useState <BarDatum[]>([{ x: 0, y: 0 }]);
   const [conditionValues, setConditionValues] = useState<UserConditionRecieved[]>([]);
@@ -49,7 +50,7 @@ export const MoodGraph = ({conditionsData}: Props) => {
         })
       }
 
-      if (monthFilteredArray) {
+      if (monthFilteredArray.length !== 0) {
 
      monthFilteredArray.forEach((item) => {
         const day = new Date(item.date).getUTCDate();
@@ -85,7 +86,7 @@ export const MoodGraph = ({conditionsData}: Props) => {
   }
 
   useEffect(() => {
-    if (conditionsData) {
+    if (conditionsData && conditionsData.length !== 0) {
       setConditionValues(conditionsData.slice(0));
     } else if (pathname === "/main" && conditionsRecieved) {
       setConditionValues(conditionsRecieved.slice(0));
@@ -132,8 +133,9 @@ export const MoodGraph = ({conditionsData}: Props) => {
         <img src={worriedIcon} alt="смайлик плохого настроения"/>
       </div>
 
+      { data.length !== 0 &&
       <ResponsiveBar
-        data={data}
+        data={ data}
         margin={{ top: 50, right: 0, bottom: 40, left: 30 }}
         padding={0.35}
         // xScale={{ type: "point" }}
@@ -152,8 +154,8 @@ export const MoodGraph = ({conditionsData}: Props) => {
             id: 'gradient',
             type: 'linearGradient',
             colors: [
-                { offset: 0, color: '#BA99FF' },
-                { offset: 100, color: '#DCCDFC' },
+              { offset: 0, color: '#BA99FF' },
+              { offset: 100, color: '#DCCDFC' },
             ],
           },
         ]}
@@ -163,8 +165,9 @@ export const MoodGraph = ({conditionsData}: Props) => {
         axisLeft={null}
         axisBottom={{
           tickSize: 0,
-         }}
+        }}
       />
+      }
     </div>
   );
 };
