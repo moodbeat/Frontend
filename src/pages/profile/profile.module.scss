@@ -2,7 +2,7 @@
 
 .profile {
   position: relative;
-  padding: 50px 0 44px 52px;
+  padding: 50px 0 52px;
   background-color: var(--color-background);
   &-title {
     font: var(--font-h1);
@@ -14,6 +14,7 @@
 .inner-container {
   display: flex;
   gap: 28px;
+  padding-bottom: 52px;
 }
 
 .contacts-section {
@@ -30,11 +31,37 @@
 
 .statics {
   @include flex-column;
+  gap: 16px;
   &-title {
-    margin: 32px 0 15px;
+    margin: 32px 0 -16px;
     font: var(--font-h2);
     color: var(--color-black);
   }
+}
+
+.pie-chart {
+  &-container {
+    @include size(324px, 328px);
+    border-radius: 20px;
+    background-color: white;
+    padding: 14px 10px 16px 20px;
+  }
+  &-title {
+    margin: 0 0 25px 0;
+    font: var(--font-h3);
+  }
+}
+
+.no-data-message {
+  font: var(--font-body);
+  color: var(--color-icon-secondary);
+  text-align: center;
+  margin: 45% 0 0;
+}
+
+.circle-charts-section {
+  display: flex;
+  gap: 28px;
 }
 
 @media screen and (width > 1440px) {

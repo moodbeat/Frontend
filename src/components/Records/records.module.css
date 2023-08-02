@@ -10,18 +10,22 @@
   /* gap: 132px; */
 
   display: grid;
+  max-width: 1027px;
+  justify-content: space-between;
+  padding-left: 15px;
 
   /* align-items: center; */
 
   /* padding: 9px 20px; */
 
   /* border-radius: 20px; */
-  margin: 20px 0 0 20px;
+
+  margin: 26px 0 18px;
+  grid-template-columns: 34% 19% 17% 15%;
 
   /* background-color: #FFF; */
 
-  grid-template-columns: 31% 23% 15% 16%;
-  /*grid-template-columns: repeat(4, 1fr);*/
+  /* grid-template-columns: 30% 21% 16% 16%; */
 }
 
 .plug {
@@ -47,12 +51,12 @@
 
 .sort-button:nth-child(2) {
   position: relative;
-  left: 20px;
 }
 
 .text {
-  text-align: left;
   overflow: hidden;
+  font: var(--font-body);
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -66,30 +70,14 @@
   border-radius: 20px;
   margin: 8px 0 0;
   background-color: #fff;
-  grid-template-columns: 25% 12% 16% 12%;
-}
-
-.record-button {
-  width: 120px;
-  height: 44px;
-  padding: 0;
-  margin: 0;
-  border: 1px solid var(--color-accent-purple);
-  border-radius: 16px;
-  background: none;
-  color: var(--color-accent-purple);
-  font: var(--font-button);
-}
-
-.record-button:hover {
-  cursor: pointer;
+  grid-template-columns: 35% 19% 17% 12%;
 }
 
 .add-button {
   display: flex;
+  padding: 10px 32px;
   border: 0;
   margin-top: 16px;
-  padding: 10px 32px;
   background-color: var(--color-main-background);
   color: var(--color-accent-purple);
   cursor: pointer;
