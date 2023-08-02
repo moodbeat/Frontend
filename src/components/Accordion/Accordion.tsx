@@ -12,7 +12,7 @@ interface AccordionProps {
 
 export const Accordion: React.FC<AccordionProps> = ({ faqItems }) => {
   // Если установить setActiveIndex = null, все элементы будут collapsed
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
     if (activeIndex === index) {

@@ -51,7 +51,7 @@ export const AudienceSwiper: React.FC = () => {
                 правильного распределения задач и&nbsp;нагрузки и&nbsp;улучшению
                 рабочей
                 <br />
-                среды
+                среды.
               </p>
             </div>
           </SwiperSlide>
@@ -64,11 +64,11 @@ export const AudienceSwiper: React.FC = () => {
             <div>
               <p className={styles.audienceCardText}>
                 Как инструмент для оценки и&nbsp;мониторинга&nbsp;своего
-                эмоционального состояния
+                эмоционального состояния.
               </p>
               <p className={styles.audienceCardText}>
                 Ресурс с рекомендациями по&nbsp;управлению&nbsp;стрессом и
-                поддержке своего психического здоровья
+                поддержке своего психического здоровья.
               </p>
             </div>
           </SwiperSlide>

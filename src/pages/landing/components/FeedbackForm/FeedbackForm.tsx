@@ -79,7 +79,14 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
               customStyle={true}
             />
           </div>
-          <Textarea label="" placeholder="Оставьте ваш вопрос" name="comment" />
+          <div className={styles.divTextarea}>
+            <Textarea
+              label=""
+              placeholder="Оставьте ваш вопрос"
+              name="comment"
+            />
+          </div>
+
           <div className={styles.buttonBox}>
             <div style={{ alignSelf: getAlignSelf() }}>
               <Button

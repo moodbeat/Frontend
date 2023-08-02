@@ -4,8 +4,12 @@ const passwordRules =
   /^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])[A-Za-zА-Яа-яЁё\d@$!%*#?&]+$/;
 const emailRules = /^([A-Za-z0-9\-_@.]+)$/;
 const nameRules = /^[а-яА-ЯЁё]+(-[а-яА-ЯЁё]+)?$/;
+const commentRules = /^[a-zA-Zа-яА-Я0-9 ,.!?;:-]*$/;
+const commentMessage = "Некорректный комментарий";
 const errorMessage = "Пожалуйста, проверьте, правильно ли указан адрес";
 const emailMessage = "Некорректный e-mail";
+const emailMessageFeedbackForm =
+  "Пожалуйста, проверьте, правильно ли указан адрес";
 const passwordErrorMessage = "Пароль не соответствует требованиям";
 const nameErrorMessage = "Некорректное имя или есть лишние пробелы";
 const lastNameErrorMessage = "Некорректная фамилия или есть лишние пробелы";
@@ -115,9 +119,11 @@ export const feedbackSchema = yup.object().shape({
     .min(8, minLengthPassword)
     .max(254, maxLengthPassword)
     .matches(emailRules, {
-      message: emailMessage,
+      message: emailMessageFeedbackForm,
     })
-    .email(emailMessage)
-    .required(emailMessage),
-  comment: yup.string().max(500, maxLengthComment),
+    .email(emailMessageFeedbackForm)
+    .required(requiredMessage),
+  comment: yup.string().max(500, maxLengthComment).matches(commentRules, {
+    message: commentMessage,
+  }),
 });

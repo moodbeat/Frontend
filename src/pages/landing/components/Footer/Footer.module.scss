@@ -7,6 +7,9 @@
   display: flex;
   justify-content: space-between;
 }
+.footerLogo {
+  cursor: pointer;
+}
 .footerText {
   max-width: 305px;
   text-align: right;
@@ -21,7 +24,7 @@
     width: 100%;
     margin: 0 auto;
     max-width: 1600px;
-    padding: 44px 16px 25px;
+    padding: 44px 16px 76px;
     display: flex;
     flex-direction: column;
     justify-content: center;
