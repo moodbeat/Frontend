@@ -14,14 +14,15 @@ const BalanceWheel = (): ReactElement | null => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
   const [data, setData] = useState<Data[]>([]);
+  const dataCopy = data.slice();
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const currentUserInfo = useAppSelector(selectUserInfo);
 
   useEffect(() => {
-    if(data.length !== 0) {
+    if(dataCopy.length !== 0) {
       setStep(2);
     }
-  }, [data])
+  }, [])
 
   useEffect( () => {
     handleGetBalanceWheelValues(currentUserInfo.id);
@@ -71,7 +72,6 @@ const BalanceWheel = (): ReactElement | null => {
         <div className="page-container">
           <Navbar />
           <div className={styles.balanceWheel}>
-            {data.length !== 0 &&
               <div className={styles.balanceWheelContainer}>
                 <CloseButton handleClick={handleClose}/>
                 <h1 className={styles.title}>Колесо жизненного баланса</h1>
@@ -93,7 +93,6 @@ const BalanceWheel = (): ReactElement | null => {
                   )
                 }
               </div>
-            }
           </div>
         </div>
       </>

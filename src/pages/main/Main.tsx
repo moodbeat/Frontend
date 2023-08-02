@@ -33,7 +33,7 @@ export const Main = ({events, fetchEvents}: Props): ReactElement | null => {
   const currentUser = useAppSelector(selectUserInfo);
   const [tagsOfPieChart, setTagsOfPieChart] = useState<TagsInterface[]>([]);
   const [widthsOfPieChart, setWidthsOfPieChart] = useState<number[]>([]);
-  const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
+  const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(true);
   const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
 
   useEffect(() => {
