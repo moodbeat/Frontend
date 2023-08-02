@@ -5,6 +5,7 @@ import { TestResultPopup } from "../TestResultPopup/TestResultPopup";
 import { WarningWithBall } from "../WarningWithBall/WarningWithBall";
 import { COUNT_EMPLOYEES_PAGE, usePagination } from "@/shared/constants";
 import { ExpressDiagnoseResponse } from "@/types";
+import {Button} from "@/shared/ui/Button/Button.tsx";
 
 interface Records {
   allTestsResults?: ExpressDiagnoseResponse[],
@@ -112,13 +113,13 @@ export const Records: React.FC<Records> = ({allTestsResults}) => {
         index < countCardPage ?
           <section key={index} className={styles.record}>
             <p className={styles.text}>{arrSurvey[record.survey.id]}</p>
-            {record.completion_date && resultDate(record.completion_date)}
+            <p className={styles.text}>{record.completion_date && resultDate(record.completion_date)}</p>
             <WarningWithBall resultOfPsychoTest={record}/>
-            <button type="button" onClick={() => handleOpenPopup(record)} disabled={isOpen} className={styles.recordButton}>Подробнее</button>
+            <Button mode="outline" title="Подробнее" width="119px" handleClick={() => handleOpenPopup(record)} disabled={isOpen}/>
           </section> :
         null
       ))}
-      {testResultsSort && countCardPage <= testResultsSort.length &&
+      {testResultsSort && countCardPage < testResultsSort.length &&
       <button className={styles.addButton} onClick={addCard}>Загрузить ещё</button>}
       <TestResultPopup isTestsReulstLocated={true} isVisible={isOpen} resultOfPsychoTest={result} onClose={handleClosePopup}/>
     </div>

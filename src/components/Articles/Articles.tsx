@@ -1,31 +1,30 @@
-import {FC} from "react";
+import {ReactElement} from "react";
 import styles from "./articles.module.css";
 import {Article} from "./Article/Article.tsx";
-import {ArticleInterface} from "@/types.ts";
-import vector from "@/assets/Vector.svg"
+import {Card} from "@/types.ts";
+import {useNavigate} from "react-router";
 
 interface ArticlesListProps {
-  articles: ArticleInterface[];
+  articles: Card[];
   title: string;
 }
 
-export const Articles: FC<ArticlesListProps> = ({articles, title}) => {
-  return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>{title}</h3>
-      <div className={styles.articles}>
-        {articles.map((article, index) => (
-          <Article key={index} article={article}/>
-        ))}
-        <Article
-          article={{
-            type: "",
-            title: "Смотреть все статьи и видео",
-            banner: vector,
-            length: "",
-          }}
-        />
+export const Articles = ({articles, title}: ArticlesListProps): ReactElement | null => {
+  const navigate = useNavigate();
+
+  if(articles && articles.length !== 0) {
+    return (
+      <div className={styles.container}>
+        <h3 className={styles.title}>{title}</h3>
+        <div className={styles.articles}>
+          {articles.slice(0, 3).map((article, index) => (
+            <Article key={index} article={article}/>
+          ))}
+          <button onClick={() => navigate('/entries')} className={styles.button}>Смотреть все статьи и видео</button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };

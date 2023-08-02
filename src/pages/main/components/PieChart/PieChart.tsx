@@ -5,11 +5,12 @@ import { getActivities } from "@/shared/api/Api.ts";
 import { PeriodPicker } from "@/pages/main/components/PieChart/components/PeriodPicker/PeriodPicker.tsx";
 import {useOutsideClick} from "@/shared/hooks/useOutsideClick.tsx";
 import {MyResponsivePie} from "@/pages/main/components/PieChart/components/MyResponsivePie(lib)/MyResponsivePie.tsx";
+import {useLocation} from "react-router";
 
 interface Props {
-  data: TagsInterface[];
+  data?: TagsInterface[];
   id: string | number;
-  widths: number[];
+  widths?: number[];
   isRoutingSliderVisible: boolean;
   initialData: TagsInterface[];
 }
@@ -29,9 +30,10 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [emptyMessageVisible, setEmptyMessageVisible] = useState<boolean>(false);
   const ref = useRef<null>(null);
+  const {pathname} = useLocation();
 
   useEffect(() => {
-    if(userSelectedPeriod && !isLoading && activities.length === 0) {
+    if (userSelectedPeriod && !isLoading && activities.length === 0) {
       setEmptyMessageVisible(true);
     } else {
       setEmptyMessageVisible(false);
@@ -43,13 +45,20 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
   }, [day]);
 
   useEffect(() => {
-    if(data) {
+    if(pathname !== '/') {
+      getPieChartActivities(id, 365, '', '');
+      setValueOfDatePicker('За месяц');
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    if (data) {
       const colorsArr: string[] = [];
       setPieChartData(
         data.map((item, index: number) => ({
           id: item.name,
           label: item.name,
-          value: Number(widths[index]),
+          value: Number(widths && widths[index]),
         }))
       )
       data.forEach((item) => {
@@ -85,7 +94,7 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
 
   const handleChooseOption = (option: string) => {
     setValueOfDatePicker(option);
-    switch(option) {
+    switch (option) {
       case 'Сегодня':
         setDay(1);
         break;
@@ -114,7 +123,7 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
     setIsLoading(true);
     try {
       const response = await getActivities(id, days, after_date, before_date);
-      if(response) {
+      if (response) {
         setActivities(response.data);
       }
     } catch (err: any) {
@@ -123,8 +132,6 @@ export const PieChart = ({ data, initialData, id, widths, isRoutingSliderVisible
       setIsLoading(false);
     }
   }
-
-  console.log(activities);
 
   return (
     <div ref={ref} onClick={() => setEmptyMessageVisible(false)} className={styles.container}>

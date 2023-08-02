@@ -1,5 +1,5 @@
 import styles from "./main.module.scss";
-import {ArticleInterface, EventInterface, TagsInterface} from "@/types";
+import {EventInterface, TagsInterface} from "@/types";
 import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
 import { Navbar } from "@/components/Navbar/Navbar";
@@ -13,7 +13,7 @@ import {Articles} from "@/components/Articles/Articles.tsx";
 import {EventsMain} from "@/components/EventsMain/EventsMain.tsx";
 import {PieChart} from "@/pages/main/components/PieChart/PieChart.tsx";
 import {useRequest} from "@/shared/hooks/useRequest.tsx";
-import {getActivityTypes} from "@/shared/api/Api.ts";
+import {getActivityTypes, getEntries} from "@/shared/api/Api.ts";
 import {ReactElement, useEffect, useState} from "react";
 import {useAppSelector} from "@/store/hooks.ts";
 import {selectUserInfo} from "@/store/reducers/currentUser/currentUserReducer.ts";
@@ -29,10 +29,11 @@ interface Props {
 export const Main = ({events, fetchEvents}: Props): ReactElement | null => {
   const isOnline = useOnlineCheck();
   const [activitiesData] = useRequest(getActivityTypes);
+  const [entries] = useRequest(getEntries);
   const currentUser = useAppSelector(selectUserInfo);
   const [tagsOfPieChart, setTagsOfPieChart] = useState<TagsInterface[]>([]);
   const [widthsOfPieChart, setWidthsOfPieChart] = useState<number[]>([]);
-  const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
+  const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(true);
   const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
 
   useEffect(() => {
@@ -41,27 +42,6 @@ export const Main = ({events, fetchEvents}: Props): ReactElement | null => {
       setMoodButtonsVisible(result);
     }
   }, [currentUser.latest_condition])
-
-  const articles: ArticleInterface[] = [
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "статья",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-    {
-      type: "видео",
-      title: "Как понять, что у вас профессиональное выгорание",
-      length: "5 минут",
-      banner: "/image.png",
-    },
-  ];
 
 
   const handleTagsOfPieChart = (data: TagsInterface[]) => {
@@ -103,7 +83,7 @@ export const Main = ({events, fetchEvents}: Props): ReactElement | null => {
               </section>
               <section className={styles.section}>
                 <Articles
-                  articles={articles}
+                  articles={entries && entries.results}
                   title={'Как улучшить ментальное здоровье'}
                 />
                 <EventsMain  events={events} fetchEvents={fetchEvents} />

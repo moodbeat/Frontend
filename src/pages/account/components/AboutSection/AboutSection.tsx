@@ -33,7 +33,7 @@ export const AboutSection = ({
         <PseudoInput label="Фамилия" placeholder={currentUser.last_name} />
       </li>
       <li className={styles.contentAboutItem}>
-        <PseudoInput label="Телефон" placeholder={currentUser.phone} />
+        <PseudoInput label="Телефон" placeholder={currentUser.phone || "-"} />
         <PseudoInput label="Почта" placeholder={currentUser.email} />
       </li>
       <li className={styles.contentAboutItem}>

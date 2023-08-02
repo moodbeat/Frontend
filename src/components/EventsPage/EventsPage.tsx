@@ -1,24 +1,23 @@
 import styles from "./eventsPage.module.css";
 import React, { useState, useEffect } from "react";
 import { ContainerContent } from "@/shared/components/ContainerContent/ContainerContent";
-import {BadInternetConnection} from "@/components/BadInternetConnection/BadInternetConnection";
-import {useOnlineCheck} from "@/shared/hooks/useOnlineCheck";
+import { BadInternetConnection } from "@/components/BadInternetConnection/BadInternetConnection";
+import { useOnlineCheck } from "@/shared/hooks/useOnlineCheck";
 import { EventInterface } from "@/types";
 import { EventsHeader } from "./EventsHeader/EventsHeader";
 import { EventsFunctional } from "./EventsFunctional/EventsFunctional";
 import { EventsCard } from "./EventsCard/EventsCard";
 import { ButtonTelegramm } from "../ButtonTelegramm/ButtonTelegramm";
-import {
-  getNotifications,
-  makeEventNotificationUnactive,
-} from "@/shared/api/Api";
+import { makeEventNotificationUnactive } from "@/shared/api/Api";
+import { useAppSelector } from "@/store/hooks";
+import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
 
 interface Props {
   events: EventInterface[];
-  fetchEvents: ()=> void;
+  fetchEvents: () => void;
 }
 
-export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
+export const EventsPage: React.FC<Props> = ({ events, fetchEvents }) => {
   const isOnline = useOnlineCheck();
   const date = new Date();
   const monthToday = date.getMonth();
@@ -29,29 +28,34 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
   const [eventsSortMonth, setEventsSortMonth] = useState<EventInterface[]>([]);
   const [eventsSortFind, setEventsSortFind] = useState<EventInterface[]>([]);
   const [textInput, setTextInput] = useState<string>(""); // поисковая строка
+  const [isRemovingNotification, setIsRemovingNotification] = useState(false);
+  const notifications = useAppSelector(selectNotifications);
 
   // переключение месяца в хедере страницы
   const reduceMonth = () => {
     if (month === 0) {
       setMonth(11);
-      setYear(year-1);
+      setYear(year - 1);
     } else {
-      setMonth(month - 1)
+      setMonth(month - 1);
     }
-    (month <= (monthToday+1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
+    month <= monthToday + 1 && year <= yearToday
+      ? setIsArrowBack(false)
+      : setIsArrowBack(true);
     setTextInput("");
   };
   const increaseMonth = () => {
     if (month === 11) {
       setMonth(0);
-      setYear(year+1);
+      setYear(year + 1);
     } else {
-      setMonth(month + 1)
+      setMonth(month + 1);
     }
-    (month <= (monthToday-1) && year <= yearToday) ? setIsArrowBack(false) : setIsArrowBack(true);
+    month <= monthToday - 1 && year <= yearToday
+      ? setIsArrowBack(false)
+      : setIsArrowBack(true);
     setTextInput("");
-   };
-
+  };
 
   // сортировка мероприятий по месяцу
   useEffect(() => {
@@ -60,24 +64,36 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
     );
   }, [month, events]);
 
-
   // сортировка мероприятий по поисковой строке
   useEffect(() => {
     setEventsSortFind(eventsSortMonth);
   }, [eventsSortMonth]);
 
   // уменьшение счетчика уведомлений при открытии страницы месяца
+  async function removeNotification(id: string) {
+    if (isRemovingNotification) {
+      return;
+    }
+    setIsRemovingNotification(true);
+    const result = await makeEventNotificationUnactive(id);
+    setIsRemovingNotification(false);
+    return result;
+  }
+
   useEffect(() => {
-    getNotifications().then((res) => {
-      eventsSortMonth.forEach((element) => {
-        res.data.results.forEach(
+    eventsSortMonth.forEach((element) => {
+      notifications &&
+        notifications.forEach(
           (n: { incident_id: number | undefined; id: number }) => {
             if (n.incident_id === element.id) {
-              makeEventNotificationUnactive(String(n.id));
+              try {
+                removeNotification(String(n.id));
+              } catch (error) {
+                console.log(error);
+              }
             }
           }
         );
-      });
     });
   }, [eventsSortMonth]);
 
@@ -98,7 +114,7 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
 
   return (
     <section className={styles.eventsPage}>
-      {isOnline ?
+      {isOnline ? (
         <ContainerContent>
           <EventsHeader
             month={month}
@@ -118,24 +134,25 @@ export const EventsPage: React.FC<Props> = ({events, fetchEvents}) => {
           <ul className={styles.eventsContent}>
             {eventsSortFind.length > 0 ?
               eventsSortFind.map((item)=>
-              <li className={styles.eventsContent__point} key={item.id}>
-                <EventsCard
-                  key={item.id}
-                  item={item}
-                  fetchEvents={fetchEvents}
-                  // isRenderEventPage={isRenderEventPage}
-                  // setIsRenderEventPage={setIsRenderEventPage}
-                />
-              </li>
+                <li className={styles.eventsContent__point} key={item.id}>
 
+                  <EventsCard
+                    key={item.id}
+                    item={item}
+                    fetchEvents={fetchEvents}
+                    // isRenderEventPage={isRenderEventPage}
+                    // setIsRenderEventPage={setIsRenderEventPage}
+                  />
+                </li>
               ) :
               <p className={styles.eventsContentNull}>В этом месяце пока ничего не запланировано...</p>
             }
           </ul>
           <ButtonTelegramm />
         </ContainerContent>
-      : <BadInternetConnection/>}
+      ) : (
+        <BadInternetConnection />
+      )}
     </section>
-
   );
-}
+};

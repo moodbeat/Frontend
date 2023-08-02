@@ -30,7 +30,7 @@ export const BurnoutLevel = ({ burnOutData }: Props) => {
   useEffect(() => {
     if (burnOutData) {
       setBurnoutValues(burnOutData.slice(0));
-    } else if (pathname === "/" && burnoutLevel) {
+    } else if (pathname === "/main" && burnoutLevel) {
       setBurnoutValues(burnoutLevel.slice(0));
     }
   }, [pathname, burnOutData, burnoutLevel]);

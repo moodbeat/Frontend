@@ -400,6 +400,14 @@ export const fetchData = async () => {
   }
 };
 
+export const getEntries = () => {
+  return axios.get(`${BASE_URL_REQUEST}/entries`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  });
+};
+
 export const getActivityTypes = () => {
   return axios.get(`${BASE_URL_REQUEST}/metrics/activity_types`, {
     headers: {
