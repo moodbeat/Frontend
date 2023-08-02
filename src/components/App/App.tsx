@@ -56,8 +56,6 @@ export const App = () => {
     (state) => state.currentUserSlice.currentUser.role
   );
 
-  console.log(currentUserInfo);
-
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();

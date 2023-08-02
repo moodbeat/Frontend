@@ -23,7 +23,6 @@ export const Useful = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const isOnline = useOnlineCheck();
-  console.log(entries);
 
   useEffect(() => {
       fetchData().then(r => {

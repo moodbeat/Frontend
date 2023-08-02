@@ -53,8 +53,6 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
     []
   );
 
-  console.log(data);
-
   useEffect(() => {
     if (userId) {
       getData(userId);
@@ -93,8 +91,6 @@ export const Profile = ({ handleAddMeetingInfo }: Props): ReactElement => {
       console.log(err);
     }
   }
-
-  console.log(userInfo);
 
   const openAddPopup = () => {
     setAddPopupVisible(true);

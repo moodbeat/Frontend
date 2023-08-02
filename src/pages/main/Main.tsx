@@ -35,8 +35,6 @@ export const Main = ({events}: Props): ReactElement | null => {
   const [isMoodButtonsVisible, setMoodButtonsVisible] = useState<boolean>(false);
   const [isRoutineSliderVisible, setIsRoutineSliderVisible] = useState(true);
 
-  console.log(entries);
-
   useEffect(() => {
     if(currentUser.latest_condition) {
       const result = isTenHoursPassed(currentUser.latest_condition.date);

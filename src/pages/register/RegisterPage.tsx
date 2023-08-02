@@ -82,7 +82,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({ handleRegister }) => {
   return (
     <div className={classes.registerPage}>
       <div className={classes.logoContainer}>
-        <LogoImg />
+        <LogoImg link="/"/>
       </div>
       {!departments ? (
         <div>Ссылка недействительна!</div>
