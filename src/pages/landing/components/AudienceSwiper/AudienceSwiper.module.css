@@ -9,7 +9,7 @@
 .sectionAudienceContainer {
   padding: 82px 60px 0;
   width: 100%;
-  max-width: 1600px;
+  max-width: 430px;
   margin: 0 auto;
 }
 .sectionAudienceTitle {
@@ -30,7 +30,7 @@
   flex-direction: column;
   gap: 20px;
   width: 467px;
-  min-height: 550px;
+  min-height: 467px;
   border-radius: 20px;
   padding: 40px 36px;
   border: 1px solid transparent;
