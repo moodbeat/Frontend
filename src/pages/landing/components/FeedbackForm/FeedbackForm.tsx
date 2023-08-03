@@ -99,8 +99,8 @@ export const FeedbackForm = ({ setIsSubmitted }: FeedbackFormProps) => {
             </div>
 
             <p className={styles.p}>
-              Нажимая на кнопку, я соглашаюсь на&nbsp;
-              <a className={styles.a}>обработку персональных данных.</a>
+              Нажимая на кнопку, я соглашаюсь на&nbsp;обработку персональных
+              данных.
             </p>
           </div>
         </Form>
