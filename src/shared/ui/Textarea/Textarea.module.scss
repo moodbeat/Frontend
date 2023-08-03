@@ -2,7 +2,7 @@
 
 .textarea {
   @include size(100%, 186px);
-  padding: 16px 12px;
+  padding: 16px 12px 26px;
   border-radius: 8px;
   border: 0.5px solid var(--color-icon-secondary);
   background-color: var(--color-white);
@@ -45,12 +45,12 @@
 .charCount {
   position: absolute;
   bottom: 8px;
-  right: 8px;
+  right: 16px;
   color: var(--color-accent-gray);
 }
 .charCountErrored {
   position: absolute;
   bottom: 34px;
-  right: 8px;
+  right: 20px;
   color: var(--color-accent-gray);
 }

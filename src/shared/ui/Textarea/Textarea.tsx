@@ -32,7 +32,7 @@ export const Textarea = (props: OtherProps & FieldHookConfig<string>) => {
       />
       <span
         className={`${styles.charCount} ${
-          meta.error ? styles.charCountErrored : ""
+          meta.touched && meta.error ? styles.charCountErrored : ""
         }`}
       >
         {charCount}/{500}
