@@ -41,3 +41,14 @@
     }
   }
 }
+
+.charCount {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.charCountErrored {
+  position: absolute;
+  bottom: 34px;
+  right: 8px;
+}
