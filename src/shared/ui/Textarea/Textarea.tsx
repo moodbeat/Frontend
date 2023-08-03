@@ -10,9 +10,17 @@ interface OtherProps {
 export const Textarea = (props: OtherProps & FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
 
+  const preventInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > 500) {
+      e.preventDefault();
+      e.target.value = e.target.value.substring(0, 500);
+    }
+  };
+
   return (
     <>
       <textarea
+        onInput={preventInput}
         placeholder={props.placeholder}
         className={
           meta.touched && meta.error
