@@ -14,7 +14,7 @@ export const AudienceSwiper: React.FC = () => {
         <Swiper
           style={{ padding: "4px", zIndex: 0 }}
           className={styles.audienceCards}
-          spaceBetween={0}
+          spaceBetween={8}
           slidesPerView={1}
         >
           <SwiperSlide className={styles.audienceCard}>
