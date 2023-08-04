@@ -14,15 +14,9 @@ const BalanceWheel = (): ReactElement | null => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
   const [data, setData] = useState<Data[]>([]);
-  const dataCopy = data.slice();
+  //const dataCopy = data.slice();
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const currentUserInfo = useAppSelector(selectUserInfo);
-
-  useEffect(() => {
-    if(dataCopy.length !== 0) {
-      setStep(2);
-    }
-  }, [dataCopy])
 
   useEffect( () => {
     handleGetBalanceWheelValues(currentUserInfo.id);
