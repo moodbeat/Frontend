@@ -4,7 +4,7 @@ const passwordRules =
   /^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])[A-Za-zА-Яа-яЁё\d@$!%*#?&]+$/;
 const emailRules = /^([A-Za-z0-9\-_@.]+)$/;
 const nameRules = /^[а-яА-ЯЁё]+(-[а-яА-ЯЁё]+)?$/;
-const commentRules = /^[a-zA-Zа-яА-Я0-9 ,.!?;:-]*$/;
+const commentRules = /^[\na-zA-Zа-яА-Я0-9 ,.!?;:@%$#*()-]*$/;
 const commentMessage = "Некорректный комментарий";
 const errorMessage = "Пожалуйста, проверьте, правильно ли указан адрес";
 const emailMessage = "Некорректный e-mail";
