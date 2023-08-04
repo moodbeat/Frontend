@@ -35,6 +35,8 @@ export const ControlBalanceWheel = ({color, instruction, sendResults, isPriority
   const [healthValue, setHealthValue] = useState<number>(1);
   const [results, setResults] = useState<{ num: number, result: number }[]>([]);
 
+  //console.log(results);
+
 
   useEffect(() => {
     if(data) {
