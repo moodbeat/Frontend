@@ -67,13 +67,13 @@ export const Routing: React.FC<Props> = ({
     <Routes>
       <Route
         element={
-          <ProtectedRoutes
-            loggedIn={loggedIn}
-            handleSignOut={handleSignOut}
-          />
+          <ProtectedRoutes loggedIn={loggedIn} handleSignOut={handleSignOut} />
         }
       >
-        <Route path="main" element={<Main events={events} fetchEvents={fetchEvents}/>} />
+        <Route
+          path="main"
+          element={<Main events={events} fetchEvents={fetchEvents} />}
+        />
 
         <Route
           path="tests"
@@ -88,7 +88,6 @@ export const Routing: React.FC<Props> = ({
               onSendTestResult={handleSendTestResult}
               resultOfPsychoTest={resultOfPsychoTest}
               openTestAlertPopup={openTestAlertPopup}
-              // takeNewEmployeesList={takeNewEmployeesList}
             />
           }
         />
@@ -101,7 +100,6 @@ export const Routing: React.FC<Props> = ({
               onSendTestResult={handleSendTestResult}
               resultOfPsychoTest={resultOfPsychoTest}
               openTestAlertPopup={openTestAlertPopup}
-              // takeNewEmployeesList={takeNewEmployeesList}
             />
           }
         />

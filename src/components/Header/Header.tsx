@@ -11,8 +11,7 @@ import {
   selectLastName,
 } from "@/store/reducers/currentUser/currentUserReducer";
 import { selectNotifications } from "@/store/reducers/notifications/notificationsReducer";
-
-const BASE_URL = "https://em-dev.usolcev.com";
+import { BASE_URL_MEDIA } from "@/shared/constants";
 
 interface Props {
   handleSignOut: () => void;
@@ -23,7 +22,8 @@ export const Header: React.FC<Props> = ({ handleSignOut }) => {
   const lastName = useAppSelector(selectLastName);
   const allNotification = useAppSelector(selectNotifications);
   const photoLink = useAppSelector(selectAvatar);
-  const initialPhoto = photoLink !== null ? `${BASE_URL}${photoLink}` : "";
+  const initialPhoto =
+    photoLink !== null ? `${BASE_URL_MEDIA}${photoLink}` : "";
 
   const [photo, setPhoto] = useState(initialPhoto);
   const [isAccountPopupOpened, setIsAccountPopupOpened] = useState(false);
