@@ -6,7 +6,7 @@ import {
   UserConditionForSend,
   UserInfo,
   WheelResults,
-  FeedbackArguments
+  FeedbackArguments,
 } from "@/types";
 import { BASE_URL_REQUEST, BASE_URL_WSS } from "../constants";
 
@@ -169,12 +169,6 @@ export const postEvent = (event: EventInterface) => {
       text: event.text,
       start_time: event.start_time,
       end_time: event.end_time,
-      // "departments": [
-      //   0
-      // ],
-      // "employees": [
-      //   0
-      // ]
     },
     {
       headers: {
@@ -385,18 +379,14 @@ export const fetchData = async () => {
   try {
     const token = localStorage.getItem("jwt");
     const headers = { Authorization: `Bearer ${token}` };
-    const response = await axios.get(
-      "https://em-dev.usolcev.com/api/v1/entries/",
-      { headers }
-    );
+    const response = await axios.get(`${BASE_URL_REQUEST}/entries/`, {
+      headers,
+    });
 
     console.log(response.data.results);
-    // console.log(chosenCardList)
     return response;
   } catch (error) {
     console.error("Error fetching data:", error);
-  } finally {
-    // setIsLoading(false);
   }
 };
 
@@ -422,7 +412,7 @@ export const getActivities = (
   after_date: string,
   before_date: string
 ) => {
-  if(days !== 0) {
+  if (days !== 0) {
     return axios.get(
       `${BASE_URL_REQUEST}/metrics/activities/average/?employee=${id}&days=${days}`,
       {

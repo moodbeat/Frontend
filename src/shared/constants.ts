@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-export const BASE_URL_MEDIA = "https://em-dev.usolcev.com/";
+import { API_ENDPOINT } from "@/apiConfig";
+
+export const BASE_URL_MEDIA = `https://${API_ENDPOINT}/`;
 
 export const BASE_URL_REQUEST = `${BASE_URL_MEDIA}api/v1`;
 
-export const BASE_URL_WSS = "wss://em-dev.usolcev.com/ws";
+export const BASE_URL_WSS = `wss://${API_ENDPOINT}/ws`;
 
 export const COUNT_EMPLOYEES_PAGE = 6;
 
